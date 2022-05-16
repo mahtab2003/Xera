@@ -22,9 +22,10 @@ Installation of Xera is much eaiser then you think!
 - Download the ```Xera-dev.zip``` file. 
 - Extract the .zip file and upload them to your web hosting account. 
 - Create an new database for web host.
+- Import ```db.sql``` file into your database.
 - Edit ```app/config/config.php``` file and replace base url ```http://localhost/xera/``` with your site url ```http://your-domain.com/``` or ```http://your-domain.com/directory/```(Remember HTTPS is recommended).
 - Edit ```app/config/database.php``` file and replace database credantials.
-- Open your browser and type ```http://yourdomain.com/i/``` to begin Instalation. 
+- Open your browser and type ```http://yourdomain.com/a/``` to create an admin account. 
 - Register an admin account and login to your admin panel. 
 - Replace logo and favicon from ```assets/img/```.
 - All done! 
