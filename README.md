@@ -23,7 +23,7 @@ Installation of Xera is much eaiser then you think!
 - Download the ```Xera-dev.zip``` file. 
 - Extract the .zip file and upload the contents to your web hosting account. 
 - Create an new database for Xera.
-- Import the ```db.sql``` file into your database.
+- Modify then import the ```db.sql``` file into your database.
 - Edit the ```app/config/config.php``` file and replace the base url ```http://localhost/xera/``` with your site url ```https://your-domain.com/``` or ```https://your-domain.com/directory/```(The URL must end in a backslash, and HTTPS is recomened for all installations).
 - Edit the ```app/config/database.php``` file and replace database credantials with your own.
 - Open your browser and enter ```https://yourdomain.com/a/``` to create an admin account. 
