@@ -37,4 +37,4 @@ Here are some widely used SMTP services. They have a free plan with some limitat
 - [SendGrid](https://sendgrid.com/free/).
 
 ## Copyright
-This build is created by Mehtab Hassan](https://github.com/mahtab2003). Code released under the GPL-2.0 license.
+This build is created by [Mehtab Hassan](https://github.com/mahtab2003). Code released under the GPL-2.0 license.
