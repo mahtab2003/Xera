@@ -1,0 +1,207 @@
+<?php 
+
+class Account extends CI_Model
+{
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model('mofh');
+	}
+
+	function get_accounts()
+	{
+		$res = $this->fetch();
+		if($res !== false)
+		{
+			return $res;
+		}
+		return false;
+	}
+
+	function get_user_accounts()
+	{
+		$res = $this->fetch(['for' => $this->user->get_key()]);
+		if($res !== false)
+		{
+			return $res;
+		}
+		return false;
+	}
+
+	function get_account($username)
+	{
+		$res = $this->fetch(['username' => $username]);
+		if($res !== false)
+		{
+			return $res[0];
+		}
+		return false;
+	}
+
+	function set_label($username, $label)
+	{
+		$res = $this->update(['label' => $label], ['username' => $username]);
+		if($res !== false)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	function change_account_password($username, $password, $old_password)
+	{
+		$res = $this->get_account($username);
+		if($res !== false)
+		{
+			if($res['account_password'] === $old_password)
+			{
+				$res = $this->mofh->change_password($res['account_key'], $password);
+				if($res !== false)
+				{
+					$res = $this->update(['password' => $password], ['username' => $username]);
+					if($res !== false)
+					{
+						return true;
+					}
+					return false;
+				}
+				return false;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	function get_user_account($username)
+	{
+		$res = $this->fetch(['username' => $username,'for' => $this->user->get_key()]);
+		if(count($res)>0)
+		{
+			return $res[0];
+		}
+		return false;
+	}
+
+	function get_domains($username, $password, $reg)
+	{
+		$res = $this->mofh->get_domains($username);
+		if($res !== false)
+		{
+			$domains = [];
+			if(count($res) > 0)
+			{
+				foreach ($res as $domain) {
+					if($domain === $reg)
+					{
+						$dir = "/htdocs/";
+					}
+					else
+					{
+						$dir = "/$domain/htdocs/";
+					}
+					$link = $this->create_fm_link($username, $password, $dir);
+					$domains[] = ['domain' => $domain, 'file_manager' => $link];
+				}
+				return $domains;
+			}
+			return [];
+		}
+		return [];
+	}
+
+	function create_fm_link($username, $password, $dir = '/htdocs/')
+	{
+		$config = base64_encode(json_encode([
+			't' => 'ftp',
+			'c' => [
+				'v' => 1,
+				'p' => $password,
+				'i' => $dir
+			]
+		]));
+		$link = "https://filemanager.ai/new/#/c/ftpupload.net/$username/$config";
+		return $link;
+	}
+
+	function set_sql_server($username, $server)
+	{
+		$data = ['sql' => $server];
+		$where = ['username' => $username];
+		$res = $this->update($data, $where);
+		if($res !== false)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	function change_status($username, $status)
+	{
+		$data = ['status' => $status];
+		$where = ['username' => $username];
+		$res = $this->update($data, $where);
+		if($res !== false)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	function delete_account($username)
+	{
+		$res = $this->mofh->delete_account($username);
+		if($res !== false)
+		{
+			$this->db->where(['account_username' => $username]);
+			$res = $this->db->delete('is_account');
+			if($res !== false)
+			{
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	function remove_account($username)
+	{
+		$this->db->where(['account_username' => $username]);
+		$res = $this->db->delete('is_account');
+		if($res !== false)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	private function update($data, $where)
+	{
+		$res = $this->base->update(
+			$data,
+			$where,
+			'is_account',
+			'account_'
+		);
+		if(count($res) > 0)
+		{
+			return $res;
+		}
+		return false;
+	}
+
+	private function fetch($where = [])
+	{
+		$res = $this->base->fetch(
+			'is_account',
+			$where,
+			'account_'
+		);
+		if($res !== false)
+		{
+			return $res;
+		}
+		return false;
+	}
+}
+
+?>

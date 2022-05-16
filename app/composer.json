@@ -1,0 +1,5 @@
+{
+    "require": {
+        "infinityfree/mofh-client": "^0.7.1"
+    }
+}
