@@ -1,0 +1,12 @@
+.ck.ck-content {
+	font-size: 1em;
+	line-height: 1.6em;
+	margin-bottom: 0.8em;
+	min-height: 200px;
+	padding: 1.5em 2em;
+}
+
+.alert p
+{
+	margin: 0;
+}
