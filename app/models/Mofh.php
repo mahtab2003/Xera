@@ -440,7 +440,7 @@ class Mofh extends CI_Model
 		{
 			return $res[0];
 		}
-		return $false;
+		return false;
 	}
 }
 
