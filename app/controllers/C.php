@@ -148,10 +148,6 @@ class C extends CI_Controller
 							$comment = $parse[1];
 						}
 					}
-					else
-					{
-						$comment = $comment;
-					}
 					$res = $this->account->change_status($username, 'suspended');
 					if($res !== false)
 					{
