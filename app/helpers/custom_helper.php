@@ -6,10 +6,11 @@ if(!function_exists('char64'))
 {
 	function char64($string)
 	{
+		$hash = $string;
 		for ($i = 0; $i < 20; $i++) {
-			$hash = hash('sha256', $string.':'.HASH_SALT);
-			return $hash;
+			$hash = hash('sha256', $hash.':'.HASH_SALT)
 		}
+		return $hash;
 	}
 }
 
@@ -17,10 +18,11 @@ if(!function_exists('char32'))
 {
 	function char32($string)
 	{
+		$hash = $string;
 		for ($i = 0; $i < 20; $i++) {
-			$hash = hash('haval128,3', $string.':'.HASH_SALT);
-			return $hash;
+			$hash = hash('haval128,3', $hash.':'.HASH_SALT);
 		}
+		return $hash;
 	}
 }
 
@@ -28,10 +30,11 @@ if(!function_exists('char16'))
 {
 	function char16($string)
 	{
+		$hash = $string;
 		for ($i = 0; $i < 20; $i++) {
-			$hash = hash('fnv1a64', $string.':'.HASH_SALT);
-			return $hash;
+			$hash = hash('fnv1a64', $hash.':'.HASH_SALT);
 		}
+		return $hash;
 	}
 }
 
@@ -39,10 +42,11 @@ if(!function_exists('char8'))
 {
 	function char8($string)
 	{
+		$hash = $string;
 		for ($i=0; $i < 20; $i++) {
-			$hash = hash('crc32', $string.':'.HASH_SALT);
-			return $hash;
+			$hash = hash('crc32', $hash.':'.HASH_SALT);
 		}
+		return $hash;
 	}
 }
 
