@@ -1,6 +1,6 @@
 <?php 
 
-define("HASH_SALT", "");
+define("HASH_SALT", "xera_salts");
 
 if(!function_exists('char64'))
 {
@@ -8,7 +8,7 @@ if(!function_exists('char64'))
 	{
 		$hash = $string;
 		for ($i = 0; $i < 20; $i++) {
-			$hash = hash('sha256', $hash.':'.HASH_SALT)
+			$hash = hash('sha256', $hash.':'.HASH_SALT);
 		}
 		return $hash;
 	}
