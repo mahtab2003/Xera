@@ -165,7 +165,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<strong>FTP Username</strong>
+										<strong>Username</strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>
@@ -177,7 +177,7 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>FTP Password</strong>
+										<strong>Password</strong>
 									</td>
 									<td class="d-flex justify-content-between">
 										<code id="passwordHide2" class="">***************</code>
@@ -195,7 +195,7 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>FTP Hostname</strong>
+										<strong>Hostname</strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>
@@ -207,7 +207,7 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>FTP Port</strong>
+										<strong>Port</strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>
@@ -230,7 +230,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<strong>MySQL Username</strong>
+										<strong>Username</strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>
@@ -242,7 +242,7 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>MySQL Password</strong>
+										<strong>Password</strong>
 									</td>
 									<td class="d-flex justify-content-between">
 										<code id="passwordHide3" class="">***************</code>
@@ -260,7 +260,7 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>MySQL Hostname</strong>
+										<strong>Hostname</strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>
@@ -272,7 +272,7 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>MySQL Port</strong>
+										<strong>Port</strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>

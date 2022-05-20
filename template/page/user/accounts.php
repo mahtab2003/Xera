@@ -24,8 +24,9 @@
 			<table class="table card-table table-transparent text-nowrap table-nowrap">
 				<thead>
 					<tr>
+						<th width="5%">ID</th>
 						<th width="15%">Username</th>
-						<th width="75%">Label</th>
+						<th width="70%">Label</th>
 						<th width="10%">Status</th>
 						<th width="10%" class="text-center">Action</th>
 					</tr>
@@ -34,11 +35,13 @@
 					<?php if (count($list) > 0): ?>
 						<?php foreach ($list as $item): ?>
 							<tr>
+								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['account_username'] ?></td>
 								<td><?= $item['account_label'] ?></td>
 								<td><?= strtoupper($item['account_status']) ?></td>
 								<td><a href="<?= base_url().'u/view_account/'.$item['account_username'] ?>" class="btn btn-sm">Manage</a></td>
 							</tr>
+							<?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
