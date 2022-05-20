@@ -66,6 +66,18 @@
 							</span>
 						</a>
 					</li>
+					<li class="nav-item <?php if (isset($active) and $active == 'domain'): ?>
+						active
+					<?php endif ?>">
+						<a class="nav-link" href="<?= base_url() ?>u/domain_checker">
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="fa fa-globe"></i>
+							</span>
+							<span class="nav-link-title">
+								Domain Checker
+							</span>
+						</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<?= $this->base->get_fourm() ?>">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
