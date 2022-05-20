@@ -1102,6 +1102,35 @@ class U extends CI_Controller
 			redirect('u/login');
 		}
 	}
+
+	function domain_checker($domain = false)
+	{
+		$domain = $this->security->xss_clean($domain);
+		$domain = strtolower($domain);
+		if($this->user->is_logged())
+		{
+			$data['title'] = 'Domain Checker';
+			$data['active'] = 'domain';
+			if($domain !== false)
+			{
+				$data['data'] = $this->mofh->get_domain_user($domain);
+			}
+			else
+			{
+				$data['data'] = false;
+			}
+			$data['domain'] = $domain;
+
+			$this->load->view('page/includes/user/header', $data);
+			$this->load->view('page/includes/user/navbar');
+			$this->load->view('page/user/domain_checker');
+			$this->load->view('page/includes/user/footer');
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
 }
 
 ?>
