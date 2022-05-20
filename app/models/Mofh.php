@@ -329,6 +329,28 @@ class Mofh extends CI_Model
 		}
 	}
 
+	function get_domain_user($domain)
+	{
+		try{
+			$req = $this->m->getDomainUser([
+				'domain' => $domain
+			]);
+			$res = $req->send();
+			if($res->isSuccessful() == 0)
+			{
+				return false;
+			}
+			elseif($res->isSuccessful() == 1)
+			{
+				return $res->getData();
+			}
+			return false;
+		}
+		catch(Exception $e){
+			return false;
+		}
+	}
+
 	function list_exts(){
 		$res = $this->fetch('is_domain', [], 'domain_');
 		return $res;
