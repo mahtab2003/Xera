@@ -2,22 +2,35 @@
 
 class C extends CI_Controller
 {
-	function __construct()
+	function mofh()
 	{
-		parent::__construct();
 		$this->load->model('account');
 		$this->load->model('ticket');
 		$this->load->model('mofh');
 		$this->load->model('mailer');
-	}
 
-	function mofh()
-	{
-		if($this->input->post('submit'))
+		if($this->input->post('username'))
 		{
 			$username = $this->input->post('username');
 			$status = $this->input->post('status');
 			$comment = $this->input->post('comment');
+			if(file_exists(APPPATH.'logs/mofh_callback.json'))
+			{
+				$logs = file_get_contents(APPPATH.'logs/mofh_callback.json');
+				$logs = json_decode($logs, true);
+			}
+			else
+			{
+				$logs = [];
+			}
+			$callback = [
+				'username' => $username,
+				'status' => $status,
+				'comment' => $comment,
+				'time' => date('d-m-Y h:i:s A')
+			];
+			$logs[] = $callback;
+			file_put_contents(APPPATH.'logs/mofh_callback.json', json_encode($logs));
 			if(substr($status, 0, 3) === 'sql')
 			{
 				$this->account->set_sql_server($username, $status);

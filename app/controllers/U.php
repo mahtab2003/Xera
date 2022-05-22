@@ -466,7 +466,6 @@ class U extends CI_Controller
 					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					if($this->fv->run() === true)
 					{
-						$token = $this->input->post('g-recaptcha-response');
 						$subject = $this->input->post('subject');
 						$content = $this->input->post('content');
 						if($this->grc->is_valid($token))
@@ -1049,7 +1048,7 @@ class U extends CI_Controller
 					redirect("u/account_settings/$id");
 				}
 			}
-			elseif($this->input->get('deactivate'))
+			elseif($this->input->post('deactivate'))
 			{
 				$res = $this->account->get_user_account($id);
 				if($res !== false)

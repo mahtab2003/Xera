@@ -1104,7 +1104,7 @@ class A extends CI_Controller
 					redirect("a/account_settings/$id");
 				}
 			}
-			elseif($this->input->get('deactivate'))
+			elseif($this->input->post('deactivate'))
 			{
 				$res = $this->account->get_account($id);
 				if($res !== false)
