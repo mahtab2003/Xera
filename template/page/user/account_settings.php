@@ -43,7 +43,7 @@
 			<div class="card-title">Deactivation</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/account_settings') ?>
+			<?= form_open('u/account_settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="alert alert-danger">
