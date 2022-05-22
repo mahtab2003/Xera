@@ -734,6 +734,7 @@ class A extends CI_Controller
 					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					if($this->fv->run() === true)
 					{
+						$token = $this->input->post('g-recaptcha-response')
 						$content = $this->input->post('content');
 						if($this->grc->is_valid($token))
 						{
