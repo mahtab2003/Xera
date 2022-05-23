@@ -941,7 +941,12 @@ class U extends CI_Controller
 					if($res['account_status'] === 'suspended' OR $res['account_status'] === 'deactivated')
 					{
 						$res = $this->mofh->reactivate_account($res['account_key']);
-						if($res !== false)
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect("u/account_settings/$id");
+						}
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account reactivated successfully.']));
 							redirect("u/view_account/$id");
@@ -1055,10 +1060,10 @@ class U extends CI_Controller
 				{
 					if($res['account_status'] === 'active')
 					{
-						$res = $this->mofh->deactivate_account($id, $this->input->post('reason'));
+						$res = $this->mofh->deactivate_account($res['account_key'], $this->input->post('reason'));
 						if(!is_bool($res))
 						{
-							$this->session->set_flashdata('msg', json_encode([1, $res]));
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
 							redirect("u/account_settings/$id");
 						}
 						elseif($res !== false)
