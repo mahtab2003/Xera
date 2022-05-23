@@ -386,7 +386,7 @@ class A extends CI_Controller
 		{
 			if($this->input->post('update_host'))
 			{
-				$this->fv->set_rules('hostname', 'Host Name', ['trim', 'required', 'valid_name']);
+				$this->fv->set_rules('hostname', 'Host Name', ['trim', 'required']);
 				$this->fv->set_rules('email', 'Alert Email', ['trim', 'required', 'valid_email']);
 				$this->fv->set_rules('fourm', 'Fourm URL', ['trim', 'required', 'valid_url']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
@@ -420,7 +420,7 @@ class A extends CI_Controller
 			elseif($this->input->post('update_smtp'))
 			{
 				$this->fv->set_rules('hostname', 'Hostname', ['trim', 'required']);
-				$this->fv->set_rules('name', 'From Name', ['trim', 'required', 'valid_name']);
+				$this->fv->set_rules('name', 'From Name', ['trim', 'required']);
 				$this->fv->set_rules('from', 'From Email', ['trim', 'required', 'valid_email']);
 				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
