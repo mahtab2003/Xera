@@ -1056,7 +1056,12 @@ class U extends CI_Controller
 					if($res['account_status'] === 'active')
 					{
 						$res = $this->mofh->deactivate_account($id, $this->input->post('reason'));
-						if($res !== false)
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([1, $res]));
+							redirect("u/account_settings/$id");
+						}
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
 							redirect("u/account_settings/$id");
