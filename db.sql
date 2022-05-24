@@ -394,7 +394,7 @@ CREATE TABLE `is_account` (
   `account_label` varchar(250) NOT NULL,
   `account_username` varchar(20) NOT NULL,
   `account_password` varchar(20) NOT NULL,
-  `account_status` varchar(10) NOT NULL,
+  `account_status` varchar(20) NOT NULL,
   `account_sql` varchar(6) NOT NULL DEFAULT 'sqlxxx',
   `account_key` varchar(8) NOT NULL,
   `account_for` varchar(16) NOT NULL,
