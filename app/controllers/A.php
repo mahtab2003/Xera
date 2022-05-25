@@ -997,7 +997,12 @@ class A extends CI_Controller
 					if($res['account_status'] === 'suspended' OR $res['account_status'] === 'deactivated')
 					{
 						$res = $this->mofh->reactivate_account($res['account_key']);
-						if($res !== false)
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect("a/view_account/$id");
+						}
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account reactivated successfully.']));
 							redirect("a/view_account/$id");
@@ -1073,7 +1078,7 @@ class A extends CI_Controller
 					redirect("a/account_settings/$id");
 				}
 			}
-			elseif($this->input->get('update_password'))
+			elseif($this->input->post('update_password'))
 			{
 				$res = $this->account->get_account($id);
 				if($res !== false)
@@ -1081,7 +1086,12 @@ class A extends CI_Controller
 					if(strlen($this->input->post('password')) > 4 AND strlen($this->input->post('old_password')) > 4)
 					{
 						$res = $this->account->change_account_password($id, $this->input->post('password'), $this->input->post('old_password'));
-						if($res !== false)
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect("a/view_account/$id");
+						}
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account password updated successfully.']));
 							redirect("a/account_settings/$id");
@@ -1111,11 +1121,16 @@ class A extends CI_Controller
 				{
 					if($res['account_status'] === 'active')
 					{
-						$res = $this->mofh->deactivate_account($id, $this->input->post('reason'));
+						$res = $this->mofh->deactivate_account($res['account_key'], $this->input->post('reason'));
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect("a/account_settings/$id");
+						}
 						if($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
-							redirect("a/account_settings/$id");
+							redirect("a/accounts");
 						}
 						else
 						{

@@ -466,6 +466,7 @@ class U extends CI_Controller
 					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					if($this->fv->run() === true)
 					{
+						$token = $this->input->post('g-recaptcha-response');
 						$subject = $this->input->post('subject');
 						$content = $this->input->post('content');
 						if($this->grc->is_valid($token))
@@ -738,7 +739,7 @@ class U extends CI_Controller
 						if($res === true)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Domain selected successfully.']));
-							$this->session->set_userdata('domain', $domain);
+							$this->session->set_userdata('domain', strtolower($domain));
 							redirect('u/create_account#configure');
 						}
 						elseif($res === false){
@@ -768,7 +769,7 @@ class U extends CI_Controller
 						if($res === true)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Domain selected successfully.']));
-							$this->session->set_userdata('domain', $subdomain);
+							$this->session->set_userdata('domain', strtolower($subdomain));
 							redirect('u/create_account#configure');
 						}
 						elseif($res === false){
@@ -944,7 +945,7 @@ class U extends CI_Controller
 						if(!is_bool($res))
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect("u/account_settings/$id");
+							redirect("u/view_account/$id");
 						}
 						elseif($res !== false)
 						{
@@ -1022,7 +1023,7 @@ class U extends CI_Controller
 					redirect("u/account_settings/$id");
 				}
 			}
-			elseif($this->input->get('update_password'))
+			elseif($this->input->post('update_password'))
 			{
 				$res = $this->account->get_user_account($id);
 				if($res !== false)
@@ -1030,10 +1031,15 @@ class U extends CI_Controller
 					if(strlen($this->input->post('password')) > 4 AND strlen($this->input->post('old_password')) > 4)
 					{
 						$res = $this->account->change_account_password($id, $this->input->post('password'), $this->input->post('old_password'));
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect("u/account_settings/$id");
+						}
 						if($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account password updated successfully.']));
-							redirect("u/account_settings/$id");
+							redirect("u/view_account/$id");
 						}
 						else
 						{
@@ -1060,16 +1066,11 @@ class U extends CI_Controller
 				{
 					if($res['account_status'] === 'active')
 					{
-						$res = $this->mofh->deactivate_account($res['account_key'], $this->input->post('reason'));
-						if(!is_bool($res))
-						{
-							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect("u/account_settings/$id");
-						}
-						elseif($res !== false)
+						$res = $this->mofh->deactivate_account($id, $this->input->post('reason'));
+						if($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
-							redirect("u/account_settings/$id");
+							redirect("u/accounts");
 						}
 						else
 						{

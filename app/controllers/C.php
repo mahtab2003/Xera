@@ -13,7 +13,7 @@ class C extends CI_Controller
 		{
 			$username = $this->input->post('username');
 			$status = $this->input->post('status');
-			$comment = $this->input->post('comment');
+			$comment = $this->input->post('comments');
 			if(file_exists(APPPATH.'logs/mofh_callback.json'))
 			{
 				$logs = file_get_contents(APPPATH.'logs/mofh_callback.json');
@@ -42,8 +42,8 @@ class C extends CI_Controller
 				{
 					$name = $this->ticket->get_user_name($res['account_for']);
 					$email = $this->ticket->get_user_email($res['account_for']);
-					$res = $this->account->change_status($username, 'active');
-					if($res !== false)
+					$res1 = $this->account->change_status($username, 'active');
+					if($res1 !== false)
 					{
 						if($this->mailer->is_active())
 						{
