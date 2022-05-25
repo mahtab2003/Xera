@@ -1,4 +1,5 @@
-.ck.ck-content {
+.ck.ck-content
+{
 	font-size: 1em;
 	line-height: 1.6em;
 	margin-bottom: 0.8em;
@@ -9,4 +10,12 @@
 .alert p
 {
 	margin: 0;
+}
+
+.hidden-area
+{
+	position: fixed;
+	bottom: 1;
+	right: 1;
+	max-width: 350px;
 }
