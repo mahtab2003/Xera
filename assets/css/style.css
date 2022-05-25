@@ -15,7 +15,7 @@
 .hidden-area
 {
 	position: fixed;
-	bottom: 1;
-	right: 1;
+	bottom: 1px;
+	right: 1px;
 	max-width: 350px;
 }
