@@ -12,7 +12,7 @@
 						<a <?php if ($data['account_status'] === 'active'): ?>href="<?= base_url() ?>a/view_account/<?= $id ?>?login=true" target="_blank"<?php else: ?> href="#" disabled  class="btn btn-primary rounded disabled"<?php endif ?> class="btn btn-primary rounded"><i class="fa fa-globe me-2"></i> Control Panel</a>
 					</div>
 					<div class="d-grid mb-2">
-						<a <?php if ($data['account_status'] === 'active'): ?>href="<?= $this->account->create_fm_link($data['account_username'], $data['account_password']) ?>" target="_blank"<?php else: ?> class="disabled btn btn-green rounded" href="#" disabled <?php endif ?> class="btn btn-green rounded"><i class="fa fa-file me-2"></i> File Manager</a>
+						<a <?php if ($data['account_status'] === 'active'): ?>href="<?= $this->account->create_fm_link($data['account_username'], $data['account_password']) ?>" target="_blank"<?php else: ?> class="disabled btn btn-yellow rounded" href="#" disabled <?php endif ?> class="btn btn-green rounded"><i class="fa fa-file me-2"></i> File Manager</a>
 					</div>
 					<?php if ($data['account_status'] === 'active'): ?>
 						<div class="d-grid mb-2">
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="col-md-8 mb-2">
-			<?php $time = $data['account_time'] + 86400; ?>
+			<?php $time = $data['account_time'] + 3600; ?>
 			<?php if($time > time()): ?>
 				<div class="alert alert-success">
 					Some of the features may not work. It can take upto 72 hours for the account to work correctly...
@@ -74,7 +74,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= $data['account_username'] ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -112,7 +112,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= $data['account_main'] ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -124,7 +124,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= $this->mofh->get_cpanel() ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -136,7 +136,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											185.27.134.124
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -148,7 +148,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= date('d-m-Y', $data['account_time']) ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -171,7 +171,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= $data['account_username'] ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -201,7 +201,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											ftpupload.net
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -213,7 +213,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											21
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -236,7 +236,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= $data['account_username'] ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -266,7 +266,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= str_replace('cpanel', $data['account_sql'], $this->mofh->get_cpanel()) ?>
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -278,7 +278,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											3306
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -290,7 +290,7 @@
 										<?php if ($data['account_status'] === 'active'): ?>
 											<?= $data['account_username'] ?>_xxx
 										<?php else: ?>
-											NaN
+											Loading
 										<?php endif ?>
 									</td>
 								</tr>
@@ -320,7 +320,7 @@
 												<strong><?= $domain['domain'] ?></strong>
 											</td>
 											<td>
-												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm"><i class="fa fa-file me-2"></i>File</a>
+												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm" target="_blank"><i class="fa fa-file me-2"></i>File</a>
 											</td>
 										</tr>
 									<?php endforeach ?>
