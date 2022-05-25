@@ -161,7 +161,7 @@ CREATE TABLE `is_email` (
   `email_subject` varchar(200) NOT NULL,
   `email_content` varchar(10000) NOT NULL,
   `email_for` varchar(8) NOT NULL,
-  `email_doc` varchar(100) NOT NULL
+  `email_doc` varchar(500) NOT NULL
 );
 
 -- Insert default records for `is_email`
