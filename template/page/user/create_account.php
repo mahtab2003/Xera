@@ -65,7 +65,7 @@
 					<?= form_open('u/create_account') ?>
 						<div class="mb-2">
 							<label class="form-label">Domain name</label>
-							<input type="text" name="domain" value="<?php if(isset($_SESSION['domain'])): echo($_SESSION['domain']); endif ?>" class="form-control">
+							<input type="text" name="domain" value="<?php if(isset($_SESSION['domain'])): echo($_SESSION['domain']); endif ?>" class="form-control" readonly="true">
 						</div>
 						<div class="mb-2">
 							<label class="form-label">Label</label>
@@ -100,4 +100,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="<?= base_url() ?>assets/ckeditor/ckeditor.js"></script>
