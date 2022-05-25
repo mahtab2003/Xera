@@ -56,9 +56,15 @@ class Account extends CI_Model
 			if($res['account_password'] === $old_password)
 			{
 				$res = $this->mofh->change_password($res['account_key'], $password);
-				if($res !== false)
+				if(!is_bool($res))
 				{
-					$res = $this->update(['password' => $password], ['username' => $username]);
+				       return $res;
+				} 
+				elseif($res !== false)
+				{
+					$data = ['password' => $password];
+					$where = ['username' => $username];
+					$res = $this->update($data, $where);
 					if($res !== false)
 					{
 						return true;
@@ -67,7 +73,7 @@ class Account extends CI_Model
 				}
 				return false;
 			}
-			return false;
+			return 'Password does not match.';
 		}
 		return false;
 	}

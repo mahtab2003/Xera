@@ -214,11 +214,16 @@ class Mofh extends CI_Model
 				'enabledigest' => 1
 			]);
 			$res = $req->send();
-			if($res->isSuccessful() == 0 AND strlen($res->getMessage()) > 1)
+			$data = $res->getData();
+			$param = [
+			        'status' => $data['passwd']['status'],
+			        'message' => $data['passwd']['statusmsg']
+			    ];
+			if($param['status'] == 0 AND strlen($param['message']) > 1)
 			{
-				return trim($res->getMessage());
+				return trim($param['message']);
 			}
-			elseif($res->isSuccessful() == 1 AND strlen($res->getMessage()) > 1)
+			elseif($param['status'] == 1 AND strlen($param['message']) > 1)
 			{
 				$data = ['password' => $password];
 				$where = ['key' => $username];
@@ -229,7 +234,7 @@ class Mofh extends CI_Model
 				}
 				return false;
 			}
-			elseif($res->isSuccessful() == 0 AND strlen($res->getMessage()) > 0)
+			else
 			{
 				return false;
 			}
@@ -248,11 +253,16 @@ class Mofh extends CI_Model
 				'reason' => $reason
 			]);
 			$res = $req->send();
-			if($res->isSuccessful() == 0 AND !is_array($res->getMessage()))
+			$data = $res->getData();
+			$param = [
+			        'status' => $data['result']['status'],
+			        'message' => $data['result']['statusmsg']
+			    ];
+			if($param['status'] == 0 AND !is_array($param['message']))
 			{
-				return trim($res->getMessage());
+				return trim($param['message']);
 			}
-			elseif($res->isSuccessful() == 1 AND is_array($res->getMessage()))
+			elseif($param['status'] == 1 AND is_array($param['message']))
 			{
 				$data = ['status' => 'deactivating'];
 				$where = ['key' => $username];
@@ -263,7 +273,7 @@ class Mofh extends CI_Model
 				}
 				return false;
 			}
-			elseif($res->isSuccessful() == 0 AND $res->getMessage() == 0)
+			elseif($param['status'] == 0 AND $param['message'] == 0)
 			{
 				return false;
 			}
@@ -281,11 +291,16 @@ class Mofh extends CI_Model
 				'username' => $username
 			]);
 			$res = $req->send();
-			if($res->isSuccessful() == 0 AND !is_array($res->getMessage()))
+			$data = $res->getData();
+			$param = [
+			        'status' => $data['result']['status'],
+			        'message' => $data['result']['statusmsg']
+			    ];
+			if($param['status'] == 0 AND !is_array($param['message']))
 			{
-				return trim($res->getMessage());
+				return trim($param['message']);
 			}
-			elseif($res->isSuccessful() == 1 AND is_array($res->getMessage()))
+			elseif($param['status'] == 1 AND is_array($param['message']))
 			{
 				$data = ['status' => 'reactivating'];
 				$where = ['key' => $username];
@@ -296,7 +311,7 @@ class Mofh extends CI_Model
 				}
 				return false;
 			}
-			elseif($res->isSuccessful() == 0 AND $res->getMessage() == 0)
+			elseif($param['status'] == 0 AND $param['message'] == 0)
 			{
 				return false;
 			}
