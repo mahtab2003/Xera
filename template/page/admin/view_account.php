@@ -67,7 +67,7 @@
 						<table class="table card-table">
 							<tbody>
 								<tr>
-									<td>
+									<td width="30%">
 										<strong>Username</strong>
 									</td>
 									<td>
@@ -164,7 +164,7 @@
 						<table class="table card-table">
 							<tbody>
 								<tr>
-									<td>
+									<td width="30%">
 										<strong>Username</strong>
 									</td>
 									<td>
@@ -229,7 +229,7 @@
 						<table class="table card-table">
 							<tbody>
 								<tr>
-									<td>
+									<td width="30%">
 										<strong>Username</strong>
 									</td>
 									<td>
