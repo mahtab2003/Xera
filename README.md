@@ -1,6 +1,3 @@
-## Warning 
-This is a beta version of Xera. Use it for testing purpose only. You are be responsible for any loss or damages that may occor from using this code. Please create PRs with security and overall fixes.
-
 ## Introduction
 Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of feature which are listed below:
 - User Management
