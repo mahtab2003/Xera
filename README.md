@@ -17,7 +17,7 @@ Your server needs to meet the following minimal requirements to run Xera:
 
 ## Installation 
 Installation of Xera is much eaiser then you think!
-- Download the ```Xera-dev.zip``` file. 
+- Download the ```Xera-1.1.zip``` file. 
 - Extract the .zip file and upload the contents to your web hosting account. 
 - Create an new database for Xera.
 - Modify then import the ```db.sql``` file into your database.
@@ -34,6 +34,9 @@ Here are some widely used SMTP services. They have a free plan with some limitat
 - [Mailgun](https://www.mailgun.com/).
 - [Mailjet](https://mailjet.com/).
 - [SendGrid](https://sendgrid.com/free/).
+
+## Help
+If you require assistance, please proceed to https://fourm.xera.eu.org/
 
 ## Copyright
 This build is created and maintaned by [Mehtab Hassan](https://github.com/mahtab2003). Code released under the GPL-2.0 license.
