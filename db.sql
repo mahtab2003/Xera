@@ -413,3 +413,27 @@ CREATE TABLE `is_domain` (
 );
 
 INSERT INTO `is_domain` (`domain_name`) VALUES ('.example.com');
+
+-- Create new table `is_builder`
+
+DROP TABLE IF EXISTS `is_builder`;
+
+CREATE TABLE `is_builder` (
+  `builder_id` varchar(12) NOT NULL DEFAULT 'xera_builder',
+  `builder_hostname` varchar(100) NOT NULL,
+  `builder_username` varchar(100) NOT NULL,
+  `builder_password` varchar(100) NOT NULL,
+  `builder_status` varchar(8) NOT NULL
+);
+
+INSERT INTO `is_builder` (
+	`builder_hostname`,
+	`builder_username`,
+	`builder_password`,
+	`builder_status`
+) VALUES (
+	'https://site.pro',
+	'username',
+	'password',
+	'inactive'
+);
