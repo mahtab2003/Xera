@@ -192,4 +192,48 @@
 			</form>
 		</div>
 	</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			<div class="card-title">SitePro Builder</div>
+		</div>
+		<div class="card-body">
+			<?= form_open('a/api_settings') ?>
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label">Hostname</label>
+						<input type="text" name="hostname" class="form-control mb-2" value="<?= $this->sp->get_hostname() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Username</label>
+						<input type="text" name="username" class="form-control mb-2" value="<?= $this->sp->get_username() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Password</label>
+						<input type="text" name="password" class="form-control mb-2" value="<?= $this->sp->get_password() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Status</label>
+						<select class="form-control mb-2" name="status">
+							<?php 
+							if($this->sp->get_status() === 'active'):
+							?>
+								<option value="1" selected="true">Active</option>
+								<option value="0">Inactive</option>
+							<?php
+							else:
+							?>
+								<option value="1">Active</option>
+								<option value="0" selected="true">Inactive</option>
+							<?php
+							endif;
+							?>
+						</select>
+					</div>
+					<div class="col-sm-12">
+						<input type="submit" name="update_sp" value="Change" class="btn btn-primary btn-pill">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

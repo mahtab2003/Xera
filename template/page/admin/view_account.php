@@ -320,7 +320,10 @@
 												<strong><?= $domain['domain'] ?></strong>
 											</td>
 											<td>
-												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm" target="_blank"><i class="fa fa-file me-2"></i>File</a>
+												<td class="row align-items-center">
+												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-file"></i></a>
+												<a href="<?= base_url().'a/view_account/'.$data['account_username'].'/?builder=true&domain='.$domain['domain'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
+											</td>
 											</td>
 										</tr>
 									<?php endforeach ?>
