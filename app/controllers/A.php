@@ -9,6 +9,7 @@ class A extends CI_Controller
 		$this->load->model('admin');
 		$this->load->model('ticket');
 		$this->load->model('account');
+		$this->load->model(['sitepro' => 'sp']);
 		$this->load->model('mofh');
 		$this->load->library(['form_validation' => 'fv']);
 		$this->load->model(['recaptcha' => 'grc']);
@@ -528,6 +529,39 @@ class A extends CI_Controller
 					redirect('a/api_settings');
 				}
 			}
+			elseif($this->input->post('update_sp'))
+			{
+				$this->fv->set_rules('hostname', 'Hostname', ['trim', 'required']);
+				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
+				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
+				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
+				if($this->fv->run() === true)
+				{
+					$hostname = $this->input->post('hostname');
+					$username = $this->input->post('username');
+					$status = $this->input->post('status');
+					$password = $this->input->post('password');
+					$res = $this->sp->set_hostname($hostname);
+					$res = $this->sp->set_username($username);
+					$res = $this->sp->set_status($status);
+					$res = $this->sp->set_password($password);
+					if($res !== false)
+					{
+						$this->session->set_flashdata('msg', json_encode([1, 'SitePro settings updated successfully.']));
+						redirect('a/api_settings');
+					}
+					else
+					{
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						redirect('a/api_settings');
+					}
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+					redirect('a/api_settings');
+				}
+			}
 			elseif($this->input->get('test_mail'))
 			{
 				$res = $this->mailer->test_mail();
@@ -982,6 +1016,44 @@ class A extends CI_Controller
 					$data['username'] = $res['account_username'];
 					$data['password'] = $res['account_password'];
 					$this->load->view('page/admin/cpanel_login', $data);
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					redirect("a/view_account/$id");
+				}
+			}
+			elseif($this->input->get('builder') AND $this->input->get('domain'))
+			{
+				$res = $this->account->get_user_account($id);
+				if($res !== false)
+				{
+					$username = $res['account_username'];
+					$password = $res['account_password'];
+					$domain = $this->input->get('domain');
+					if($domain !== $res['account_domain'])
+					{
+						$dir = '/htdocs/'.$domain;
+					}
+					else
+					{
+						$dir = '/htdocs/';
+					}
+					$link = $this->sp->load_builder_url($username, $password, $domain, $dir);
+					if($link === false)
+					{
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						redirect("a/view_account/$id");
+					}
+					elseif($link['success'] == true)
+					{
+						location('header: '.$link['url']);
+					}
+					else
+					{
+						$this->session->set_flashdata('msg', json_encode([0, $link['msg']]));
+						redirect("a/view_account/$id");
+					}
 				}
 				else
 				{

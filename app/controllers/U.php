@@ -9,6 +9,7 @@ class U extends CI_Controller
 		$this->load->model('ticket');
 		$this->load->model('account');
 		$this->load->model('mofh');
+		$this->load->model(['sitepro' => 'sp']);
 		$this->load->library(['form_validation' => 'fv']);
 		$this->load->model(['recaptcha' => 'grc']);
 		if(!$this->base->is_active())
@@ -927,6 +928,44 @@ class U extends CI_Controller
 					$data['username'] = $res['account_username'];
 					$data['password'] = $res['account_password'];
 					$this->load->view('page/user/cpanel_login', $data);
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					redirect("u/view_account/$id");
+				}
+			}
+			elseif($this->input->get('builder') AND $this->input->get('domain'))
+			{
+				$res = $this->account->get_user_account($id);
+				if($res !== false)
+				{
+					$username = $res['account_username'];
+					$password = $res['account_password'];
+					$domain = $this->input->get('domain');
+					if($domain !== $res['account_domain'])
+					{
+						$dir = '/htdocs/'.$domain;
+					}
+					else
+					{
+						$dir = '/htdocs/';
+					}
+					$link = $this->sp->load_builder_url($username, $password, $domain, $dir);
+					if($link === false)
+					{
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						redirect("u/view_account/$id");
+					}
+					elseif($link['success'] == true)
+					{
+						location('header: '.$link['url']);
+					}
+					else
+					{
+						$this->session->set_flashdata('msg', json_encode([0, $link['msg']]));
+						redirect("u/view_account/$id");
+					}
 				}
 				else
 				{
