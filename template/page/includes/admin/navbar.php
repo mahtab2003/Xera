@@ -66,6 +66,18 @@
 							</span>
 						</a>
 					</li>
+					<li class="nav-item <?php if (isset($active) and $active == 'ssl'): ?>
+						active
+					<?php endif ?>">
+						<a class="nav-link" href="<?= base_url() ?>a/ssl">
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="fa fa-server"></i>
+							</span>
+							<span class="nav-link-title">
+								SSL Certificates
+							</span>
+						</a>
+					</li>
 					<li class="nav-item <?php if (isset($active) and $active == 'ticket'): ?>
 						active
 					<?php endif ?>">
