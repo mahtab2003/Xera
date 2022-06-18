@@ -7,6 +7,7 @@ Xera is a hosting account and support management system especially designed to w
 - Integration With:
 	- MOFH (MyOwnFreeHost)
 	- Google Recaptcha
+	- GoGetSSL
 	- SitePro
 	- SMTP
 
