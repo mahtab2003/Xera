@@ -9,6 +9,7 @@ class A extends CI_Controller
 		$this->load->model('admin');
 		$this->load->model('ticket');
 		$this->load->model('account');
+		$this->load->model(['gogetssl' => 'ssl']);
 		$this->load->model(['sitepro' => 'sp']);
 		$this->load->model('mofh');
 		$this->load->library(['form_validation' => 'fv']);
@@ -476,6 +477,36 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'Google recaptcha settings updated successfully.']));
+						redirect('a/api_settings');
+					}
+					else
+					{
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						redirect('a/api_settings');
+					}
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+					redirect('a/api_settings');
+				}
+			}
+			elseif($this->input->post('update_ssl'))
+			{
+				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
+				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
+				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
+				if($this->fv->run() === true)
+				{
+					$username = $this->input->post('username');
+					$password = $this->input->post('password');
+					$status = $this->input->post('status');
+					$res = $this->ssl->set_username($username);
+					$res = $this->ssl->set_password($password);
+					$res = $this->ssl->set_status($status);
+					if($res !== false)
+					{
+						$this->session->set_flashdata('msg', json_encode([1, 'GoGetSSL settings updated successfully.']));
 						redirect('a/api_settings');
 					}
 					else
@@ -1233,6 +1264,89 @@ class A extends CI_Controller
 					$this->load->view('page/includes/admin/header', $data);
 					$this->load->view('page/includes/admin/navbar');
 					$this->load->view('page/admin/account_settings');
+					$this->load->view('page/includes/admin/footer');
+				}
+				else
+				{
+					redirect('e/error_404');
+				}
+			}
+		}
+		else
+		{
+			redirect('a/login');
+		}
+	}
+	
+	function ssl()
+	{
+		if($this->admin->is_logged())
+		{
+			$data['title'] = 'SSL Certitcates';
+			$data['active'] = 'ssl';
+			$data['list'] = $this->ssl->get_ssl_list_all();
+			
+			$this->load->view('page/includes/admin/header', $data);
+			$this->load->view('page/includes/admin/navbar');
+			$this->load->view('page/admin/ssl');
+			$this->load->view('page/includes/admin/footer');
+		}
+		else
+		{
+			redirect('a/login');
+		}
+	}
+
+	function view_ssl($id)
+	{
+		if($this->admin->is_logged())
+		{
+			$id = $this->security->xss_clean($id);
+			if($this->input->get('delete'))
+			{
+				$this->db->where(['key' => $id]);
+				$res = $this->db->delete('is_ssl');
+				if($res !== false)
+				{
+					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate deleted successfully.']));
+					redirect("a/view_ssl/$id");
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					redirect("a/view_ssl/$id");
+				}
+			}
+			elseif($this->input->get('cancel'))
+			{
+				$res = $this->ssl->cancel_ssl($id, 'Some Reason');
+				if(!is_bool($res))
+				{
+					$this->session->set_flashdata('msg', json_encode([0, $res]));
+					redirect("a/view_ssl/$id");
+				}
+				if(is_bool($res) AND $res == true)
+				{
+					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate cancelled successfully.']));
+					redirect("a/view_ssl/$id");
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					redirect("a/view_ssl/$id");
+				}
+			}
+			else
+			{
+				$data['title'] = 'View SSL';
+				$data['active'] = 'ssl';
+				$data['id'] = $id;
+				$data['data'] = $this->ssl->get_ssl_info($id);
+				if($data['data'] !== false)
+				{
+					$this->load->view('page/includes/admin/header', $data);
+					$this->load->view('page/includes/admin/navbar');
+					$this->load->view('page/admin/view_ssl');
 					$this->load->view('page/includes/admin/footer');
 				}
 				else

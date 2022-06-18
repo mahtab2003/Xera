@@ -8,6 +8,7 @@ class U extends CI_Controller
 		$this->load->model('user');
 		$this->load->model('ticket');
 		$this->load->model('account');
+		$this->load->model(['gogetssl' => 'ssl']);
 		$this->load->model('mofh');
 		$this->load->model(['sitepro' => 'sp']);
 		$this->load->library(['form_validation' => 'fv']);
@@ -1176,6 +1177,194 @@ class U extends CI_Controller
 			$this->load->view('page/includes/user/navbar');
 			$this->load->view('page/user/domain_checker');
 			$this->load->view('page/includes/user/footer');
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
+
+	function ssl()
+	{
+		if($this->user->is_logged())
+		{
+			$data['title'] = 'SSL Certitcates';
+			$data['active'] = 'ssl';
+			$data['list'] = $this->ssl->get_ssl_list();
+			
+			$this->load->view('page/includes/user/header', $data);
+			$this->load->view('page/includes/user/navbar');
+			$this->load->view('page/user/ssl');
+			$this->load->view('page/includes/user/footer');
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
+
+	function create_ssl()
+	{
+		if($this->user->is_logged())
+		{
+			if($this->input->post('create'))
+			{
+				$this->fv->set_rules('csr', 'CSR Code', ['trim', 'required']);
+				if($this->grc->is_active())
+				{
+					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->fv->run() === true)
+					{
+						$token = $this->input->post('g-recaptcha-response');
+						$csr = $this->input->post('content');
+						if($this->grc->is_valid($token))
+						{
+							$res = $this->ssl->create_ssl($csr);
+							if(!is_bool($res))
+							{
+								$this->session->set_flashdata('msg', json_encode([0, $res]));
+								redirect('u/ssl');
+							}
+							elseif(is_bool($res) AND $res == true)
+							{
+								$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate created successfully.']));
+								redirect('u/ssl');
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								redirect('u/create_ssl');
+							}
+						}
+						else
+						{
+							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							redirect('u/create_ssl');
+						}
+					}
+					else
+					{
+						if(validation_errors() !== '')
+						{
+							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+						}
+						else
+						{
+							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+						}
+						redirect('u/create_ssl');
+					}
+				}
+				else
+				{
+					if($this->fv->run() === true)
+					{
+						$csr = $this->input->post('csr');
+						$res = $this->ticket->create_ssl($csr);
+						if(!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect('u/ssl');
+						}
+						if(is_bool($res) AND $res == true)
+						{
+							$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate created successfully.']));
+							redirect('u/ssl');
+						}
+						else
+						{
+							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							redirect('u/create_ssl');
+						}
+					}
+					else
+					{
+						if(validation_errors() !== '')
+						{
+								$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+						}
+						else
+						{
+							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+						}
+						redirect('u/create_ssl');
+					}
+				}
+			}
+			else
+			{
+				$data['title'] = 'Create SSL';
+				$data['active'] = 'ssl';
+
+				$this->load->view('page/includes/user/header', $data);
+				$this->load->view('page/includes/user/navbar');
+				$this->load->view('page/user/create_ssl');
+				$this->load->view('page/includes/user/footer');
+			}
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
+
+	function view_ssl($id)
+	{
+		if($this->user->is_logged())
+		{
+			$id = $this->security->xss_clean($id);
+			if($this->input->get('delete'))
+			{
+				$this->db->where(['key' => $id]);
+				$res = $this->db->delete('is_ssl');
+				if($res !== false)
+				{
+					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate deleted successfully.']));
+					redirect("u/view_ssl/$id");
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					redirect("u/view_ssl/$id");
+				}
+			}
+			elseif($this->input->get('cancel'))
+			{
+				$res = $this->ssl->cancel_ssl($id, 'Some Reason');
+				if(!is_bool($res))
+				{
+					$this->session->set_flashdata('msg', json_encode([0, $res]));
+					redirect("u/view_ssl/$id");
+				}
+				if(is_bool($res) AND $res == true)
+				{
+					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate cancelled successfully.']));
+					redirect("u/view_ssl/$id");
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					redirect("u/view_ssl/$id");
+				}
+			}
+			else
+			{
+				$data['title'] = 'View SSL';
+				$data['active'] = 'ssl';
+				$data['id'] = $id;
+				$data['data'] = $this->ssl->get_ssl_info($id);
+				if($data['data'] !== false)
+				{
+					$this->load->view('page/includes/user/header', $data);
+					$this->load->view('page/includes/user/navbar');
+					$this->load->view('page/user/view_ssl');
+					$this->load->view('page/includes/user/footer');
+				}
+				else
+				{
+					redirect('e/error_404');
+				}
+			}
 		}
 		else
 		{
