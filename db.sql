@@ -437,3 +437,35 @@ INSERT INTO `is_builder` (
 	'password',
 	'inactive'
 );
+
+-- Create new table `is_ssl`
+
+DROP TABLE IF EXISTS `is_gogetssl`;
+
+CREATE TABLE `is_gogetssl` (
+  `gogetssl_id` varchar(13) NOT NULL DEFAULT 'xera_gogetssl',
+  `gogetssl_username` varchar(100) NOT NULL,
+  `gogetssl_password` varchar(100) NOT NULL,
+  `gogetssl_status` varchar(8) NOT NULL
+);
+
+INSERT INTO `is_gogetssl` (
+	`gogetssl_username`,
+	`gogetssl_password`,
+	`gogetssl_status`
+) VALUES (
+	'username',
+	'password',
+	'inactive'
+);
+
+-- Create new table `is_ssl`
+
+DROP TABLE IF EXISTS `is_ssl`;
+
+CREATE TABLE `is_ssl` (
+  `ssl_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `ssl_pid` varchar(250) NOT NULL,
+  `ssl_key` varchar(20) NOT NULL,
+  `ssl_for` varchar(20) NOT NULL
+);
