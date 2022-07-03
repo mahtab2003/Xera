@@ -92,7 +92,21 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | These constants define the build information of Xera
 |
 */
-defined('XERA_VERSION')		OR define('XERA_VERSION', '1.0.2'); // build version
-defined('XERA_TAG')			OR define('XERA_TAG', 'Stable'); // build tag
-defined('XERA_DATE')		OR define('XERA_DATE', '16-05-2022'); // build date
+defined('XERA_VERSION')		OR define('XERA_VERSION', '1.0.3'); // build version
+defined('XERA_TAG')		OR define('XERA_TAG', 'LTS'); // build tag
+defined('XERA_DATE')		OR define('XERA_DATE', '16/05/2022'); // build date
 defined('HASH_SALT')		OR define('HASH_SALT', 'xera_salt'); // Hash salting string
+
+/*
+|--------------------------------------------------------------------------
+| Hashing Algorithms
+|--------------------------------------------------------------------------
+|
+| These constants define for hashing algorithms
+|
+*/
+defined('HASH_CHAR_64')		OR define('HASH_CHAR_64', 'sha256'); // Hashing Algorithm for 64 characters
+defined('HASH_CHAR_32')		OR define('HASH_CHAR_32', 'haval128,3'); // Hashing Algorithm for 32 characters
+defined('HASH_CHAR_16')		OR define('HASH_CHAR_16', 'fnv1a64'); // Hashing Algorithm for 16 characters
+defined('HASH_CHAR_8')		OR define('HASH_CHAR_8', 'crc32'); // Hashing Algorithm for 8 characters
+
