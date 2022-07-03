@@ -92,6 +92,6 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | These constants define the build information of Xera
 |
 */
-defined('XERA_VERSION')		OR define('XERA_VERSION', '1.0'); // build version
-defined('XERA_TAG')			OR define('XERA_TAG', 'beta'); // build tag
+defined('XERA_VERSION')		OR define('XERA_VERSION', '1.0.2'); // build version
+defined('XERA_TAG')			OR define('XERA_TAG', 'Stable'); // build tag
 defined('XERA_DATE')		OR define('XERA_DATE', '16-05-2022'); // build date
