@@ -1188,14 +1188,21 @@ class U extends CI_Controller
 	{
 		if($this->user->is_logged())
 		{
-			$data['title'] = 'SSL Certitcates';
-			$data['active'] = 'ssl';
-			$data['list'] = $this->ssl->get_ssl_list();
-			
-			$this->load->view('page/includes/user/header', $data);
-			$this->load->view('page/includes/user/navbar');
-			$this->load->view('page/user/ssl');
-			$this->load->view('page/includes/user/footer');
+			if($this->ssl->is_active())
+			{
+				$data['title'] = 'SSL Certitcates';
+				$data['active'] = 'ssl';
+				$data['list'] = $this->ssl->get_ssl_list();
+				
+				$this->load->view('page/includes/user/header', $data);
+				$this->load->view('page/includes/user/navbar');
+				$this->load->view('page/user/ssl');
+				$this->load->view('page/includes/user/footer');
+			}
+			else
+			{
+				redirect('u/');
+			}
 		}
 		else
 		{
@@ -1293,13 +1300,20 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Create SSL';
-				$data['active'] = 'ssl';
+				if($this->ssl->is_active())
+				{
+					$data['title'] = 'Create SSL';
+					$data['active'] = 'ssl';
 
-				$this->load->view('page/includes/user/header', $data);
-				$this->load->view('page/includes/user/navbar');
-				$this->load->view('page/user/create_ssl');
-				$this->load->view('page/includes/user/footer');
+					$this->load->view('page/includes/user/header', $data);
+					$this->load->view('page/includes/user/navbar');
+					$this->load->view('page/user/create_ssl');
+					$this->load->view('page/includes/user/footer');
+				}
+				else
+				{
+					redirect('u/');
+				}
 			}
 		}
 		else
@@ -1349,20 +1363,27 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'View SSL';
-				$data['active'] = 'ssl';
-				$data['id'] = $id;
-				$data['data'] = $this->ssl->get_ssl_info($id);
-				if($data['data'] !== false)
+				if($this->ssl->is_active())
 				{
-					$this->load->view('page/includes/user/header', $data);
-					$this->load->view('page/includes/user/navbar');
-					$this->load->view('page/user/view_ssl');
-					$this->load->view('page/includes/user/footer');
+					$data['title'] = 'View SSL';
+					$data['active'] = 'ssl';
+					$data['id'] = $id;
+					$data['data'] = $this->ssl->get_ssl_info($id);
+					if($data['data'] !== false)
+					{
+						$this->load->view('page/includes/user/header', $data);
+						$this->load->view('page/includes/user/navbar');
+						$this->load->view('page/user/view_ssl');
+						$this->load->view('page/includes/user/footer');
+					}
+					else
+					{
+						redirect('e/error_404');
+					}
 				}
 				else
 				{
-					redirect('e/error_404');
+					redirect('u/');
 				}
 			}
 		}
