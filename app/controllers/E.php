@@ -29,6 +29,11 @@ class E extends CI_Controller
 		$this->load->view('errors/custom/error_503');
 	}
 
+	function about()
+	{
+		$this->load->view('errors/custom/about');
+	}
+
 	function error_400()
 	{
 		$this->load->model('user');
