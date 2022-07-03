@@ -92,7 +92,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | These constants define the build information of Xera
 |
 */
-defined('XERA_VERSION')		OR define('XERA_VERSION', '1.0.3'); // build version
+defined('XERA_VERSION')		OR define('XERA_VERSION', '1.2.1'); // build version
 defined('XERA_TAG')		OR define('XERA_TAG', 'LTS'); // build tag
 defined('XERA_DATE')		OR define('XERA_DATE', '16/05/2022'); // build date
 defined('HASH_SALT')		OR define('HASH_SALT', 'xera_salt'); // Hash salting string
