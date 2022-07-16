@@ -19,7 +19,7 @@ Your server needs to meet the following minimal requirements to run Xera:
 
 ## Installation 
 Installation of Xera is much eaiser then you think!
-- Download the ```Xera-1.2.1.zip``` file. 
+- Download the ```Xera-1.2.2.zip``` file. 
 - Extract the .zip file and upload the contents to your web hosting account. 
 - Create an new database for Xera.
 - Modify then import the ```db.sql``` file into your database.
