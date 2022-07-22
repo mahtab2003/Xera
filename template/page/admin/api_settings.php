@@ -154,6 +154,46 @@
 	</div>
 	<div class="card mb-3">
 		<div class="card-header">
+			<div class="card-title">GoGetSSL</div>
+		</div>
+		<div class="card-body">
+			<?= form_open('a/api_settings') ?>
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label">Api Email</label>
+						<input type="text" name="site_key" class="form-control mb-2" value="<?= $this->grc->get_site_key() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Api Password</label>
+						<input type="text" name="secret_key" class="form-control mb-2" value="<?= $this->grc->get_secret_key() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Status</label>
+						<select class="form-control mb-2" name="status">
+							<?php 
+							if($this->ssl->get_status() === 'active'):
+							?>
+								<option value="1" selected="true">Active</option>
+								<option value="0">Inactive</option>
+							<?php
+							else:
+							?>
+								<option value="1">Active</option>
+								<option value="0" selected="true">Inactive</option>
+							<?php
+							endif;
+							?>
+						</select>
+					</div>
+					<div class="col-sm-12">
+						<input type="submit" name="update_ssl" value="Change" class="btn btn-primary btn-pill">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="card mb-3">
+		<div class="card-header">
 			<div class="card-title">Recaptcha</div>
 		</div>
 		<div class="card-body">
