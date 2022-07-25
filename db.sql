@@ -34,7 +34,8 @@ CREATE TABLE `is_recaptcha` (
   `recaptcha_id` varchar(89) NOT NULL DEFAULT 'xera_recaptcha',
   `recaptcha_site` varchar(100) NOT NULL,
   `recaptcha_key` varchar(100) NOT NULL,
-  `recaptcha_status` varchar(8) NOT NULL
+  `recaptcha_status` varchar(8) NOT NULL,
+  `recaptcha_type` varchar(6) NOT NULL
 );
 
 -- Insert default record for `is_recaptcha`
