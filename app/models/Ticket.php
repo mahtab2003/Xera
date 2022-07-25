@@ -82,6 +82,7 @@ class Ticket extends CI_Model
 		$data['reply_time'] = time();
 		$data['reply_by'] = $by;
 		$res = $this->db->insert('is_reply', $data);
+		$data['ticket_key'] = $id;
 		if($res !== false)
 		{
 			$res = $this->change_ticket_status($id, $status);
@@ -91,17 +92,18 @@ class Ticket extends CI_Model
 				{
 					if($this->get_user_name($by) !== false)
 					{
+						$param['admin_name'] = $this->base->get_hostname();
+						$email = $this->base->get_email();
+						$tpl = 'admin';
+						$param['ticket_url'] = base_url().'a/view_ticket/'.$data['ticket_key'];
+					}
+					else
+					{
+						$except_key = $this->fetch_user_except($by, $id);
 						$param['user_name'] = $this->get_user_name($by);
 						$email = $this->get_user_email($by);
 						$tpl = 'user';
 						$param['ticket_url'] = base_url().'u/view_ticket/'.$data['ticket_key'];
-					}
-					else
-					{
-						$param['admin_name'] = $this->get_admin_name($by);
-						$email = $this->get_admin_email($by);
-						$tpl = 'admin';
-						$param['ticket_url'] = base_url().'a/view_ticket/'.$data['ticket_key'];
 					}
 					$param['ticket_id'] = $data['ticket_key'];
 					$this->mailer->send('reply_ticket', $email, $param, $tpl);
@@ -190,6 +192,22 @@ class Ticket extends CI_Model
 		if($res)
 		{
 			return true;
+		}
+		return false;
+	}
+
+	function fetch_user_except($key, $id)
+	{
+		$res = $this->get_ticket_reply($id);
+		if(count($res)>0)
+		{
+			foreach ($res as $value) {
+				if($value['reply_by'] !== $key)
+				{
+					return $value['reply_by'];
+				}
+			}
+			return false;
 		}
 		return false;
 	}

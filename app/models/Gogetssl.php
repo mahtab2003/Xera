@@ -1,6 +1,6 @@
 <?php 
 
-class GoGetSSL extends CI_Model
+class Gogetssl extends CI_Model
 {
 	function __construct()
 	{
@@ -71,7 +71,7 @@ class GoGetSSL extends CI_Model
 		$res = $this->fetch(['key' => $key]);
 		if($res !== [])
 		{
-			$data = $this->s->getOrderStatus($res['ssl_pid']);
+			$data = $this->s->getOrderStatus($res[0]['ssl_pid']);
 			if(count($data) > 4)
 			{
 				return $data;
@@ -134,7 +134,7 @@ class GoGetSSL extends CI_Model
 		$res = $this->fetch(['key' => $key]);
 		if($res !== false)
 		{
-			$data = $this->s->cancelSSLOrder($res['ssl_pid'], $reason);
+			$data = $this->s->cancelSSLOrder($res[0]['ssl_pid'], $reason);
 			if(isset($data['success']))
 			{
 				return true;

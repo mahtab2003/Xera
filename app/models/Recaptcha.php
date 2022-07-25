@@ -42,6 +42,26 @@ class Recaptcha extends CI_Model
 		return false;
 	}
 	
+	function get_type()
+	{
+		$res = $this->fetch();
+		if($res !== false)
+		{
+			return $res['recaptcha_type'];
+		}
+		return false;
+	}
+	
+	function set_type($key)
+	{
+		$res = $this->update('type', $key);
+		if($res)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	function is_active()
 	{
 		$res = $this->fetch();
@@ -84,14 +104,35 @@ class Recaptcha extends CI_Model
 		return false;
 	}
 
-	function is_valid($token)
+	function is_valid($token, $type = "google")
 	{
-		$secret_key = $this->get_secret_key();
-        $res = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$token");
-        $res = json_decode($res);
-        if($res->success){
-        	return true;
-        }
+		if($type == "google")
+		{
+			$secret_key = $this->get_secret_key();
+	        $res = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$token");
+	        $res = json_decode($res);
+	        if($res->success){
+	        	return true;
+	        }
+	        return false;
+		}
+		elseif($type == "human")
+		{
+			$secret_key = $this->get_secret_key();
+			$param = http_build_query(["secret" => $secret_key, "response" => $token]);
+
+			$ch = curl_init("https://hcaptcha.com/siteverify");
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$result = curl_exec($ch);
+
+	        $res = json_decode($result);
+	        if($res->success){
+	        	return true;
+	        }
+	        return false;
+		}
         return false;
 	}
 
