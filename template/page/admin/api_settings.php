@@ -154,51 +154,29 @@
 	</div>
 	<div class="card mb-3">
 		<div class="card-header">
-			<div class="card-title">GoGetSSL</div>
-		</div>
-		<div class="card-body">
-			<?= form_open('a/api_settings') ?>
-				<div class="row">
-					<div class="col-sm-6">
-						<label class="form-label">Api Email</label>
-						<input type="text" name="site_key" class="form-control mb-2" value="<?= $this->grc->get_site_key() ?>">
-					</div>
-					<div class="col-sm-6">
-						<label class="form-label">Api Password</label>
-						<input type="text" name="secret_key" class="form-control mb-2" value="<?= $this->grc->get_secret_key() ?>">
-					</div>
-					<div class="col-sm-6">
-						<label class="form-label">Status</label>
-						<select class="form-control mb-2" name="status">
-							<?php 
-							if($this->ssl->get_status() === 'active'):
-							?>
-								<option value="1" selected="true">Active</option>
-								<option value="0">Inactive</option>
-							<?php
-							else:
-							?>
-								<option value="1">Active</option>
-								<option value="0" selected="true">Inactive</option>
-							<?php
-							endif;
-							?>
-						</select>
-					</div>
-					<div class="col-sm-12">
-						<input type="submit" name="update_ssl" value="Change" class="btn btn-primary btn-pill">
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="card mb-3">
-		<div class="card-header">
 			<div class="card-title">Recaptcha</div>
 		</div>
 		<div class="card-body">
 			<?= form_open('a/api_settings') ?>
 				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label">Recaptcha Type</label>
+						<select class="form-control mb-2" name="type">
+							<?php 
+							if($this->grc->get_type() === 'google'):
+							?>
+								<option value="google" selected="true">Google Recaptcha</option>
+								<option value="human">hCaptcha</option>
+							<?php
+							else:
+							?>
+								<option value="google">Google Recaptcha</option>
+								<option value="human" selected="true">hCaptcha</option>
+							<?php
+							endif;
+							?>
+						</select>
+					</div>
 					<div class="col-sm-6">
 						<label class="form-label">Site Key</label>
 						<input type="text" name="site_key" class="form-control mb-2" value="<?= $this->grc->get_site_key() ?>">
@@ -227,6 +205,52 @@
 					</div>
 					<div class="col-sm-12">
 						<input type="submit" name="update_grc" value="Change" class="btn btn-primary btn-pill">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			<div class="card-title">SSL Certificate</div>
+		</div>
+		<div class="card-body">
+			<?= form_open('a/api_settings') ?>
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label">SSL Type</label>
+						<select class="form-control mb-2" name="type">
+								<option value="1" selected="true">GoGetSSL</option>
+						</select>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Username</label>
+						<input type="text" name="username" class="form-control mb-2" value="<?= $this->ssl->get_username() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Password</label>
+						<input type="text" name="password" class="form-control mb-2" value="<?= $this->ssl->get_password() ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Status</label>
+						<select class="form-control mb-2" name="status">
+							<?php 
+							if($this->ssl->get_status() === 'active'):
+							?>
+								<option value="1" selected="true">Active</option>
+								<option value="0">Inactive</option>
+							<?php
+							else:
+							?>
+								<option value="1">Active</option>
+								<option value="0" selected="true">Inactive</option>
+							<?php
+							endif;
+							?>
+						</select>
+					</div>
+					<div class="col-sm-12">
+						<input type="submit" name="update_ssl" value="Change" class="btn btn-primary btn-pill">
 					</div>
 				</div>
 			</form>
