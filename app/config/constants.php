@@ -92,21 +92,19 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | These constants define the build information of Xera
 |
 */
-defined('XERA_VERSION')		OR define('XERA_VERSION', '1.2.1'); // build version
-defined('XERA_TAG')		OR define('XERA_TAG', 'LTS'); // build tag
-defined('XERA_DATE')		OR define('XERA_DATE', '16/05/2022'); // build date
-defined('HASH_SALT')		OR define('HASH_SALT', 'xera_salt'); // Hash salting string
+defined('XERA_VERSION')		OR define('XERA_VERSION', '1.2.2'); // build version
+defined('XERA_TAG')			OR define('XERA_TAG', 'Candy'); // build tag
+defined('XERA_DATE')		OR define('XERA_DATE', '16-05-2022'); // build date
 
 /*
 |--------------------------------------------------------------------------
-| Hashing Algorithms
+| Hashing Algorithum
 |--------------------------------------------------------------------------
 |
-| These constants define for hashing algorithms
+| These constants define the hashing algos fors Xera
 |
 */
-defined('HASH_CHAR_64')		OR define('HASH_CHAR_64', 'sha256'); // Hashing Algorithm for 64 characters
-defined('HASH_CHAR_32')		OR define('HASH_CHAR_32', 'haval128,3'); // Hashing Algorithm for 32 characters
-defined('HASH_CHAR_16')		OR define('HASH_CHAR_16', 'fnv1a64'); // Hashing Algorithm for 16 characters
-defined('HASH_CHAR_8')		OR define('HASH_CHAR_8', 'crc32'); // Hashing Algorithm for 8 characters
-
+defined("HASH_ALGO_64")		OR define('HASH_ALGO_64', 'sha256'); // 64 charatchers hashing algo
+defined("HASH_ALGO_32")		OR define('HASH_ALGO_32', 'haval128,3'); // 32 charatchers hashing algo
+defined("HASH_ALGO_16")		OR define('HASH_ALGO_16', 'fnv1a64'); // 16 charatchers hashing algo
+defined("HASH_ALGO_8")		OR define('HASH_ALGO_8', 'crc32'); // 8 charatchers hashing algo
