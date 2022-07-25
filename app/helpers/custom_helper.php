@@ -1,12 +1,14 @@
 <?php 
 
+define("HASH_SALT", "xera_salt");
+
 if(!function_exists('char64'))
 {
 	function char64($string)
 	{
 		$hash = $string;
-		for ($i = 0; $i < 20; $i++) {
-			$hash = hash(HASH_CHAR_64, $hash.':'.HASH_SALT);
+		for ($i = 0; $i < 25; $i++) {
+			$hash = hash(HASH_ALGO_64, $hash.':'.HASH_SALT);
 		}
 		return $hash;
 	}
@@ -17,8 +19,8 @@ if(!function_exists('char32'))
 	function char32($string)
 	{
 		$hash = $string;
-		for ($i = 0; $i < 20; $i++) {
-			$hash = hash(HASH_CHAR_32, $hash.':'.HASH_SALT);
+		for ($i = 0; $i < 25; $i++) {
+			$hash = hash(HASH_ALGO_32, $hash.':'.HASH_SALT);
 		}
 		return $hash;
 	}
@@ -29,8 +31,8 @@ if(!function_exists('char16'))
 	function char16($string)
 	{
 		$hash = $string;
-		for ($i = 0; $i < 20; $i++) {
-			$hash = hash(HASH_CHAR_16, $hash.':'.HASH_SALT);
+		for ($i = 0; $i < 25; $i++) {
+			$hash = hash(HASH_ALGO_16, $hash.':'.HASH_SALT);
 		}
 		return $hash;
 	}
@@ -41,8 +43,8 @@ if(!function_exists('char8'))
 	function char8($string)
 	{
 		$hash = $string;
-		for ($i=0; $i < 20; $i++) {
-			$hash = hash(HASH_CHAR_8, $hash.':'.HASH_SALT);
+		for ($i=0; $i < 25; $i++) {
+			$hash = hash(HASH_ALGO_8, $hash.':'.HASH_SALT);
 		}
 		return $hash;
 	}
