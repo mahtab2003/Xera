@@ -44,14 +44,30 @@ class A extends CI_Controller
 				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required','matches[password]']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
 						$name = $this->input->post('name');
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
-						$token = $this->input->post('g-recaptcha-response');
-						if($this->grc->is_valid($token))
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							if(!$this->admin->is_register($email))
 							{
@@ -157,13 +173,29 @@ class A extends CI_Controller
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
-						$token = $this->input->post('g-recaptcha-response');
-						if($this->grc->is_valid($token))
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							$res = $this->admin->login($email, $password);
 							if($res)
@@ -466,17 +498,20 @@ class A extends CI_Controller
 				$this->fv->set_rules('site_key', 'Site key', ['trim', 'required']);
 				$this->fv->set_rules('secret_key', 'Secret key', ['trim', 'required']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
+				$this->fv->set_rules('type', 'Type', ['trim', 'required']);
 				if($this->fv->run() === true)
 				{
 					$site_key = $this->input->post('site_key');
 					$secret_key = $this->input->post('secret_key');
 					$status = $this->input->post('status');
+					$type = $this->input->post('type');
 					$res = $this->grc->set_site_key($site_key);
 					$res = $this->grc->set_secret_key($secret_key);
 					$res = $this->grc->set_status($status);
+					$res = $this->grc->set_type($type);
 					if($res !== false)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'Google recaptcha settings updated successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, 'Recaptcha settings updated successfully.']));
 						redirect('a/api_settings');
 					}
 					else
@@ -796,12 +831,28 @@ class A extends CI_Controller
 				$this->fv->set_rules('content', 'Content', ['trim', 'required']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
-						$token = $this->input->post('g-recaptcha-response');
 						$content = $this->input->post('content');
-						if($this->grc->is_valid($token))
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							$res = $this->ticket->add_reply($id, $content, $this->admin->get_key(), 'support');
 							if($res)
@@ -869,7 +920,7 @@ class A extends CI_Controller
 			{
 				$data['title'] = 'View Ticket '.$id;
 				$data['active'] = 'ticket';
-				$data['ticket'] = $this->ticket->view_user_ticket($id);
+				$data['ticket'] = $this->ticket->view_ticket($id);
 				if($data['ticket'] !== false)
 				{
 					$data['replies'] = $this->ticket->get_ticket_reply($id);

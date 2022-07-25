@@ -47,14 +47,30 @@ class U extends CI_Controller
 				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required','matches[password]']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
 						$name = $this->input->post('name');
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
-						$token = $this->input->post('g-recaptcha-response');
-						if($this->grc->is_valid($token))
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							if(!$this->user->is_register($email))
 							{
@@ -160,14 +176,30 @@ class U extends CI_Controller
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
 						$checkbox = $this->input->post('checkbox');
-						$token = $this->input->post('g-recaptcha-response');
-						if($this->grc->is_valid($token))
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							if(!$checkbox)
 							{
@@ -465,13 +497,29 @@ class U extends CI_Controller
 				$this->fv->set_rules('content', 'Content', ['trim', 'required']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
-						$token = $this->input->post('g-recaptcha-response');
 						$subject = $this->input->post('subject');
 						$content = $this->input->post('content');
-						if($this->grc->is_valid($token))
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							$res = $this->ticket->create_ticket($subject, $content);
 							if($res)
@@ -606,11 +654,18 @@ class U extends CI_Controller
 					$this->fv->set_rules('content', 'Content', ['trim', 'required']);
 					if($this->grc->is_active())
 					{
+						if($this->grc->get_type() == "google")
+					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 						if($this->fv->run() === true)
 						{
-							$token = $this->input->post('g-recaptcha-response');
 							$content = $this->input->post('content');
+							$token = $this->input->post('g-recaptcha-response');
 							if($this->grc->is_valid($token))
 							{
 								$res = $this->ticket->add_reply($id, $content, $this->user->get_key(), 'customer');
@@ -795,7 +850,14 @@ class U extends CI_Controller
 					$this->fv->set_rules('label', 'Label', ['trim', 'required']);
 					if($this->grc->is_active())
 					{
+						if($this->grc->get_type() == "google")
+					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 						if($this->fv->run() === true)
 						{
 							$label = $this->input->post('label');
@@ -1219,12 +1281,28 @@ class U extends CI_Controller
 				$this->fv->set_rules('csr', 'CSR Code', ['trim', 'required']);
 				if($this->grc->is_active())
 				{
-					$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					if($this->grc->get_type() == "google")
+					{
+						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+					}
+					else
+					{
+						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+					}
 					if($this->fv->run() === true)
 					{
-						$token = $this->input->post('g-recaptcha-response');
-						$csr = $this->input->post('content');
-						if($this->grc->is_valid($token))
+						$csr = $this->input->post('csr');
+						if($this->grc->get_type() == "google")
+						{
+							$token = $this->input->post('g-recaptcha-response');
+							$type = "google";
+						}
+						else
+						{
+							$token = $this->input->post('h-captcha-response');
+							$type = "human";
+						}
+						if($this->grc->is_valid($token, $type))
 						{
 							$res = $this->ssl->create_ssl($csr);
 							if(!is_bool($res))
@@ -1267,7 +1345,7 @@ class U extends CI_Controller
 					if($this->fv->run() === true)
 					{
 						$csr = $this->input->post('csr');
-						$res = $this->ticket->create_ssl($csr);
+						$res = $this->ssl->create_ssl($csr);
 						if(!is_bool($res))
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
@@ -1350,7 +1428,7 @@ class U extends CI_Controller
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
 					redirect("u/view_ssl/$id");
 				}
-				if(is_bool($res) AND $res == true)
+				elseif(is_bool($res) AND $res == true)
 				{
 					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate cancelled successfully.']));
 					redirect("u/view_ssl/$id");
