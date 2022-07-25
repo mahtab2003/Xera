@@ -81,8 +81,13 @@
 						</div>
 						<?php if($this->grc->is_active()):?>
 							<div class="mb-2">
-								<div class="g-recaptcha" data-sitekey="<?= $this->grc->get_site_key();?>"></div>
-								<script src='https://www.google.com/recaptcha/api.js' async defer ></script>
+								<?php if($this->grc->get_type() == "google"):?>
+									<div class="g-recaptcha" data-sitekey="<?= $this->grc->get_site_key();?>"></div>
+									<script src='https://www.google.com/recaptcha/api.js' async defer ></script>
+								<?php else: ?>
+									<div id='captcha' class='h-captcha' data-sitekey="<?= $this->grc->get_site_key();?>"></div>
+									<script src='https://hcaptcha.com/1/api.js' async defer ></script>
+								<?php endif ?>
 							</div>
 						<?php endif ?>
 						<div class="mb-2">
