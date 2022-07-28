@@ -39,14 +39,14 @@ class E extends CI_Controller
 		$this->load->model('admin');
 		if($this->admin->is_logged())
 		{
-			$file = file_get_contents('http://builds.local/check.json');
+			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/updates/check.json');
 			$data = json_decode($file, true);
 			$version = $data['version'];
 			if($version > get_version())
 			{
 				if($this->input->get("update"))
 				{
-					$update = file_get_contents('http://builds.local/'.$version.'.json');
+					$update = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/updates/'.$version.'.json');
 					$data = json_decode($update, true);
 					if(count($data['files']) > 0)
 					{
