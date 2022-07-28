@@ -34,6 +34,66 @@ class E extends CI_Controller
 		$this->load->view('errors/custom/about');
 	}
 
+	function update()
+	{
+		$this->load->model('admin');
+		if($this->admin->is_logged())
+		{
+			$file = file_get_contents('http://builds.local/check.json');
+			$data = json_decode($file, true);
+			$version = $data['version'];
+			if($version > get_version())
+			{
+				if($this->input->get("update"))
+				{
+					$update = file_get_contents('http://builds.local/'.$version.'.json');
+					$data = json_decode($update, true);
+					if(count($data['files']) > 0)
+					{
+						foreach ($data['files'] as $name => $value) {
+							file_put_contents(APPPATH.$name, base64_decode($value));
+						}
+					}
+					if(count($data['db']) > 0)
+					{
+						foreach ($data['db'] as $value) {
+							$query = $this->db->query($value);
+						}
+					}
+					redirect("e/about");
+				}
+				else
+				{
+					$this->load->view('errors/custom/update_now', $data);
+				}
+			}
+			else
+			{
+				$this->load->view('errors/custom/latest_version');
+			}
+		}
+		else
+		{
+			redirect('e/error_404');
+		}
+	}
+
+	function activate($token)
+	{
+		$this->load->model('user');
+		$token = $this->security->xss_clean($token);
+		$res = $this->user->activate($token);
+		if($res !== false)
+		{
+			$this->session->set_flashdata('msg', json_encode([1, 'User activated successfully.']));
+		}
+		else
+		{
+			$this->session->set_flashdata('msg', json_encode([0, 'Invalid activation token.']));
+		}
+		redirect('u/login');
+	}
+
 	function error_400()
 	{
 		$this->load->model('user');

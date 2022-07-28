@@ -51,6 +51,10 @@ class U extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -64,6 +68,11 @@ class U extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{
@@ -180,6 +189,10 @@ class U extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -193,6 +206,11 @@ class U extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{
@@ -334,21 +352,6 @@ class U extends CI_Controller
 		{
 			redirect('u/dashboard');
 		}
-	}
-
-	function activate($token)
-	{
-		$token = $this->security->xss_clean($token);
-		$res = $this->user->activate($token);
-		if($res !== false)
-		{
-			$this->session->set_flashdata('msg', json_encode([1, 'User activated successfully.']));
-		}
-		else
-		{
-			$this->session->set_flashdata('msg', json_encode([0, 'Invalid activation token.']));
-		}
-		redirect('u/login');
 	}
 
 	function logout($status = 1, $msg = '')
@@ -501,6 +504,10 @@ class U extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -513,6 +520,11 @@ class U extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{
@@ -658,6 +670,10 @@ class U extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -665,8 +681,22 @@ class U extends CI_Controller
 						if($this->fv->run() === true)
 						{
 							$content = $this->input->post('content');
-							$token = $this->input->post('g-recaptcha-response');
-							if($this->grc->is_valid($token))
+							if($this->grc->get_type() == "google")
+							{
+								$token = $this->input->post('g-recaptcha-response');
+								$type = "google";
+							}
+							elseif($this->grc->get_type() == "crypto")
+							{
+								$token = $this->input->post('CRLT-captcha-token');
+								$type = "crypto";
+							}
+							else
+							{
+								$token = $this->input->post('h-captcha-response');
+								$type = "human";
+							}
+							if($this->grc->is_valid($token, $type))
 							{
 								$res = $this->ticket->add_reply($id, $content, $this->user->get_key(), 'customer');
 								if($res)
@@ -854,6 +884,10 @@ class U extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -862,8 +896,22 @@ class U extends CI_Controller
 						{
 							$label = $this->input->post('label');
 							$domain = $this->input->post('domain');
-							$token = $this->input->post('g-recaptcha-response');
-							if($this->grc->is_valid($token))
+							if($this->grc->get_type() == "google")
+							{
+								$token = $this->input->post('g-recaptcha-response');
+								$type = "google";
+							}
+							elseif($this->grc->get_type() == "crypto")
+							{
+								$token = $this->input->post('CRLT-captcha-token');
+								$type = "crypto";
+							}
+							else
+							{
+								$token = $this->input->post('h-captcha-response');
+								$type = "human";
+							}
+							if($this->grc->is_valid($token, $type))
 							{
 								$res = $this->mofh->create_account($label, $domain);
 								if($res === true)
@@ -1160,7 +1208,7 @@ class U extends CI_Controller
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("u/account_settings/$id");
 				}
-			}
+			} 
 			elseif($this->input->post('deactivate'))
 			{
 				$res = $this->account->get_user_account($id);
@@ -1168,8 +1216,12 @@ class U extends CI_Controller
 				{
 					if($res['account_status'] === 'active')
 					{
-						$res = $this->mofh->deactivate_account($id, $this->input->post('reason'));
-						if($res !== false)
+						$res = $this->mofh->deactivate_account($res['account_key'], $this->input->post('reason'));
+						if(!is_bool($res)){
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect("u/account_settings/$id");
+						}
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
 							redirect("u/accounts");
@@ -1182,7 +1234,7 @@ class U extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'Unable to delete account.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'Unable to deactivate account.']));
 							redirect("u/account_settings/$id");
 					}
 				}
@@ -1285,6 +1337,10 @@ class U extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -1296,6 +1352,11 @@ class U extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{

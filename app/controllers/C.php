@@ -2,7 +2,7 @@
 
 class C extends CI_Controller
 {
-	function mofh()
+	public function mofh()
 	{
 		$this->load->model('account');
 		$this->load->model('ticket');
@@ -111,12 +111,15 @@ class C extends CI_Controller
 					$name = $this->ticket->get_user_name($res['account_for']);
 					$email = $this->ticket->get_user_email($res['account_for']);
 					$parse = explode(':', $comment);
+					$account_status = 'suspended';
+					$comment = 'some reason';
 					if(trim($parse[0]) == 'AUTO_IDLE')
 					{
 						$comment = 'due to inactivity.';
 					}
 					elseif(trim($parse[0]) == 'RES_CLOSE')
 					{
+						$account_status = 'deactivated';
 						$comment = $parse[1];
 					}
 					elseif(trim($parse[0]) == 'ADMIN_CLOSE')
@@ -161,7 +164,7 @@ class C extends CI_Controller
 							$comment = $parse[1];
 						}
 					}
-					$res = $this->account->change_status($username, 'suspended');
+					$res = $this->account->change_status($username, $account_status);
 					if($res !== false)
 					{
 						if($this->mailer->is_active())

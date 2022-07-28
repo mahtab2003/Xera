@@ -48,6 +48,10 @@ class A extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -61,6 +65,11 @@ class A extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{
@@ -177,6 +186,10 @@ class A extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -189,6 +202,11 @@ class A extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{
@@ -835,6 +853,10 @@ class A extends CI_Controller
 					{
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
 					}
+					elseif($this->grc->get_type() == "crypto")
+					{
+						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+					}
 					else
 					{
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
@@ -846,6 +868,11 @@ class A extends CI_Controller
 						{
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
+						}
+						elseif($this->grc->get_type() == "crypto")
+						{
+							$token = $this->input->post('CRLT-captcha-token');
+							$type = "crypto";
 						}
 						else
 						{
@@ -1281,7 +1308,7 @@ class A extends CI_Controller
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 							redirect("a/account_settings/$id");
 						}
-						if($res !== false)
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
 							redirect("a/accounts");
