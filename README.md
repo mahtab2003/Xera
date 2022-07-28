@@ -13,16 +13,18 @@ Xera is a hosting account and support management system especially designed to w
 - Integration With:
 	- MOFH (MyOwnFreeHost)
 	- Google Recaptcha
+	- CryptoLoot
 	- hCaptcha
 	- GoGetSSL
 	- SitePro
 	- SMTP
+- Update Manager
 
 ## Requirements
 Your server needs to meet the following minimal requirements to run Xera:
-- PHP v7.2 or above
-- MySQL v5.7 or above
-- Valid Trusted SSL Certificate
+- PHP v7.2 or above.
+- MySQL v5.7 or above.
+- Valid Trusted SSL Certificate.
 
 ## Installation 
 Installation of Xera is much eaiser then you think!
