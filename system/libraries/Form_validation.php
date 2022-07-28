@@ -1262,15 +1262,17 @@ class CI_Form_validation {
 
 	public function valid_name($name)
 	{
-		if (preg_match("/^[a-z0-9:_\/|-]+$/i", $name))
-		{
-			 $this->set_message('valid_name', 'The {field} field can not use illegal charachters.');
-			return FALSE;
+		$array = [
+			',', '\\', '/', '@', '[', ']', '(', ')', '{', '}', '.'
+		];
+		foreach ($array as $symbol) {
+			if (strpos($name, $symbol) !== FALSE)
+			{
+				 $this->set_message('valid_name', 'The {field} field can not use illegal charachters.');
+				return FALSE;
+			}
 		}
-		else
-		{
-			return TRUE;
-		}
+		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
