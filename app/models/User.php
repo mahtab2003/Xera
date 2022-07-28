@@ -31,7 +31,7 @@ class User extends CI_Model
 			{
 				$param['user_name'] = $name;
 				$param['user_email'] = $email;
-				$param['activation_link'] = base_url().'u/activate/'.$data['user_rec'];
+				$param['activation_link'] = base_url().'e/activate/'.$data['user_rec'];
 				$this->mailer->send('new_user', $email, $param);
 				return true;
 			}
@@ -47,7 +47,7 @@ class User extends CI_Model
 		{
 			$param['user_name'] = $res['user_name'];
 			$param['user_email'] = $res['user_email'];
-			$param['activation_link'] = base_url().'u/activate/'.$res['user_rec'];
+			$param['activation_link'] = base_url().'e/activate/'.$res['user_rec'];
 			$res = $this->mailer->send('new_user', $param['user_email'], $param);
 			if($res !== false)
 			{

@@ -133,6 +133,23 @@ class Recaptcha extends CI_Model
 	        }
 	        return false;
 		}
+		elseif($type == "crypto")
+		{
+			$secret_key = $this->get_secret_key();
+			$param = http_build_query(["CRLT-captcha-token" => $token, 'hashes' => 256, "secret" => $secret_key]);
+
+			$ch = curl_init("https://api.crypto-loot.org/token/verify");
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$result = curl_exec($ch);
+
+	        $res = json_decode($result);
+	        if($res->success){
+	        	return true;
+	        }
+	        return false;
+		}
         return false;
 	}
 

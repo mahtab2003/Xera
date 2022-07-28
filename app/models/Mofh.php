@@ -225,14 +225,7 @@ class Mofh extends CI_Model
 			}
 			elseif($param['status'] == 1 AND strlen($param['message']) > 1)
 			{
-				$data = ['password' => $password];
-				$where = ['key' => $username];
-				$res = $this->base->update($data, $where, 'is_account', 'account_');
-				if($res !== false)
-				{
-					return true;
-				}
-				return false;
+				return true;
 			}
 			else
 			{

@@ -58,13 +58,13 @@ class Account extends CI_Model
 				$res = $this->mofh->change_password($res['account_key'], $password);
 				if(!is_bool($res))
 				{
-				       return $res;
-				} 
+					return $res;
+				}
 				elseif($res !== false)
-				{
-					$data = ['password' => $password];
-					$where = ['username' => $username];
-					$res = $this->update($data, $where);
+				{;
+					$this->load->database();
+                                        $this->db->reconnect();
+					$res = $this->db->query("UPDATE `is_account` SET `account_password` = '$password' WHERE `account_username` = '$username'");
 					if($res !== false)
 					{
 						return true;
