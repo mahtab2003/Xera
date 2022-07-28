@@ -92,9 +92,9 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | These constants define the build information of Xera
 |
 */
-defined('XERA_VERSION')		OR define('XERA_VERSION', '1.2.3'); // build version
-defined('XERA_TAG')			OR define('XERA_TAG', 'Candy'); // build tag
-defined('XERA_DATE')		OR define('XERA_DATE', '16-05-2022'); // build date
+defined('XERA_VERSION')		OR define('XERA_VERSION', '1.2.4'); // build version
+defined('XERA_TAG')			OR define('XERA_TAG', 'Snow'); // build tag
+defined('XERA_DATE')		OR define('XERA_DATE', '26-07-2022'); // build date
 
 /*
 |--------------------------------------------------------------------------
