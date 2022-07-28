@@ -85,7 +85,7 @@
 					</div>
 					<div class="col-sm-6">
 						<label class="form-label">Callback URL</label>
-						<input type="text" name="callback" class="form-control mb-2" value="<?= base_url() ?>c/mofh" readonly>
+						<input type="text" name="callback" class="form-control mb-2" value="<?= str_replace('https', 'http', base_url()) ?>c/mofh" readonly>
 					</div>
 					<div class="col-sm-12">
 						<input type="submit" name="update_mofh" value="Change" class="btn btn-primary btn-pill">
@@ -167,11 +167,17 @@
 							?>
 								<option value="google" selected="true">Google Recaptcha</option>
 								<option value="human">hCaptcha</option>
+								<option value="crypto">CryptoLoot</option>
 							<?php
-							else:
+							elseif($this->grc->get_type() === 'human'):
 							?>
 								<option value="google">Google Recaptcha</option>
 								<option value="human" selected="true">hCaptcha</option>
+								<option value="crypto">CryptoLoot</option>
+							<?php else: ?>
+								<option value="google">Google Recaptcha</option>
+								<option value="human">hCaptcha</option>
+								<option value="crypto" selected="true">CryptoLoot</option>
 							<?php
 							endif;
 							?>

@@ -119,7 +119,14 @@
 							<?php if($this->grc->get_type() == "google"):?>
 								<div class="g-recaptcha" data-sitekey="<?= $this->grc->get_site_key();?>"></div>
 								<script src='https://www.google.com/recaptcha/api.js' async defer ></script>
-							<?php else: ?>
+							<?php elseif($this->grc->get_type() == "crypto"): ?>
+								<script src='https://verifypow.com/lib/captcha.js' async></script>
+				            	<div class='CRLT-captcha' data-hashes='256' data-key='<?= $this->grc->get_site_key();?>'>
+				                    <em>Loading PoW Captcha...
+				                    <br>
+				                    If it doesn't load, please disable AdBlocker!</em>
+				                </div>
+							<?php elseif($this->grc->get_type() == "human"): ?>
 								<div id='captcha' class='h-captcha' data-sitekey="<?= $this->grc->get_site_key();?>"></div>
 								<script src='https://hcaptcha.com/1/api.js' async defer ></script>
 							<?php endif ?>
