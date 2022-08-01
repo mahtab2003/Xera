@@ -39,25 +39,34 @@ class E extends CI_Controller
 		$this->load->model('admin');
 		if($this->admin->is_logged())
 		{
-			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/updates/check.json');
+			$file = file_get_contents('http://builds.local/update/check.json');
 			$data = json_decode($file, true);
 			$version = $data['version'];
-			if($version > get_version())
+			$current = get_version();
+			if($version > $current)
 			{
 				if($this->input->get("update"))
 				{
-					$update = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/updates/'.$version.'.json');
-					$data = json_decode($update, true);
-					if(count($data['files']) > 0)
+					if($version > $current)
 					{
-						foreach ($data['files'] as $name => $value) {
-							file_put_contents(APPPATH.$name, base64_decode($value));
-						}
-					}
-					if(count($data['db']) > 0)
-					{
-						foreach ($data['db'] as $value) {
-							$query = $this->db->query($value);
+						$c_version = explode('.', $current);
+						while ($current !== $version) {
+							$c_version[2] += 1;
+							$current = implode('.', $c_version);
+							$update = file_get_contents('http://builds.local/update/'.$current.'.json');
+							$data = json_decode($update, true);
+							if(count($data['files']) > 0)
+							{
+								foreach ($data['files'] as $name => $value) {
+									file_put_contents(APPPATH.$name, base64_decode($value));
+								}
+							}
+							if(count($data['db']) > 0)
+							{
+								foreach ($data['db'] as $value) {
+									$query = $this->db->query($value);
+								}
+							}
 						}
 					}
 					redirect("e/about");
