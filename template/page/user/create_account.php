@@ -7,7 +7,7 @@
 	<div class="card">
 		<ul class="nav nav-tabs nav-fill">
 			<li class="nav-item">
-				<a class="nav-link active"  data-bs-toggle="tab" href="#checkdomain"><i class="fa fa-globe me-2"></i> Check Availiability</a>
+				<a class="nav-link active"  data-bs-toggle="tab" href="#checkdomain"><i class="fa fa-globe me-2"></i> Check Domain</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link"  data-bs-toggle="tab" <?php if(isset($_SESSION['domain'])): ?>href="#configure"<?php else: ?>href="#" disabled<?php endif; ?>><i class="fa fa-cogs me-2"></i> Configure</a>

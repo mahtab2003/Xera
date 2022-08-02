@@ -101,7 +101,19 @@
 										<strong>Status</strong>
 									</td>
 									<td>
-										<?= strtoupper($data['account_status']) ?>
+										<?php if ($data['account_status'] == 'pending' OR $data['account_status'] == 'deactivating' OR $data['account_status'] == 'reactivating'): ?>
+											<span class="badge bg-yellow">
+												<?= $data['account_status'] ?>
+											</span>
+										<?php elseif ($data['account_status'] == 'active'): ?>
+											<span class="badge bg-green">
+												<?= $data['account_status'] ?>
+											</span>
+										<?php elseif ($data['account_status'] == 'deactivated' OR $data['account_status'] == 'suspended'): ?>
+											<span class="badge bg-red">
+												<?= $data['account_status'] ?>
+											</span>
+										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
@@ -317,7 +329,7 @@
 									<?php foreach ($domains as $domain): ?>
 										<tr>
 											<td>
-												<strong><?= $domain['domain'] ?></strong>
+												<span><?= $domain['domain'] ?></span>
 											</td>
 											<td class="row align-items-center">
 												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-file"></i></a>

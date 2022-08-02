@@ -38,14 +38,39 @@
 								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['account_username'] ?></td>
 								<td><?= $item['account_label'] ?></td>
-								<td><?= strtoupper($item['account_status']) ?></td>
-								<td><a href="<?= base_url().'u/view_account/'.$item['account_username'] ?>" class="btn btn-sm">Manage</a></td>
+								<td>
+									<?php if ($item['account_status'] == 'pending' OR $item['account_status'] == 'deactivating' OR $item['account_status'] == 'reactivating'): ?>
+										<span class="badge bg-yellow">
+											<?= $item['account_status'] ?>
+											<?php $btn = ['fa-cogs', 'btn-yellow'] ?>
+										</span>
+									<?php elseif ($item['account_status'] == 'active'): ?>
+										<span class="badge bg-green">
+											<?= $item['account_status'] ?>
+											<?php $btn = ['fa-globe', 'btn-green'] ?>
+										</span>
+									<?php elseif ($item['account_status'] == 'deactivated' OR $item['account_status'] == 'suspended'): ?>
+										<span class="badge bg-red">
+											<?= $item['account_status'] ?>
+											<?php $btn = ['fa-lock', 'btn-red'] ?>
+										</span>
+									<?php endif ?>
+								</td>
+								<td><a href="<?= base_url().'u/view_account/'.$item['account_username'] ?>" class="btn <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="5" class="text-center">Nothing to show</td>
+							<td colspan="5" class="text-center">
+								<div class="py-5">
+									<i class="fa fa-box-open" style="font-size: 80px;"></i>
+									<div class="mb-2">
+										No hosting accounts yet?
+									</div>
+									<a href="<?= base_url() ?>u/create_account" class="btn btn-primary">Create Now</a>
+								</div>
+							</td>
 						</tr>
 					<?php endif ?>
 				</tbody>
