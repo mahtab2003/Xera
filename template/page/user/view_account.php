@@ -34,7 +34,7 @@
 			<?php $time = $data['account_time'] + 3600; ?>
 			<?php if($time > time()): ?>
 				<div class="alert alert-success">
-					Some of the features may not work. It can take upto 72 hours for the account to work correctly...
+					Some features may not work correctly. It can take up to 72 hours for this account to work properly...
 				</div>
 			<?php endif; ?>
 			<?php if($data['account_status'] === 'pending'): ?>
@@ -51,11 +51,11 @@
 				</div>
 			<?php elseif($data['account_status'] === 'suspended'): ?>
 				<div class="alert alert-danger">
-					This account is suspended due to some reason and will be completely removed with in 60 days...
+					This account is suspended for an unknown reason and will be completely removed within 60 days...
 				</div>
 			<?php elseif($data['account_status'] === 'deactivated'): ?>
 				<div class="alert alert-success">
-					This account is deactivated and will be completely removed with in 60 days...
+					This account is deactivated and will be completely removed within 60 days...
 				</div>
 			<?php endif; ?>
 			<div class="row row-cards">
