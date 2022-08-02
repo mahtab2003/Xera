@@ -81,6 +81,14 @@ if(!function_exists('get_tag'))
 	}
 }
 
+if(!function_exists('get_aff_id'))
+{
+	function get_aff_id()
+	{
+		return XERA_AFFL;
+	}
+}
+
 if(!function_exists('build_date'))
 {
 	function build_date()
