@@ -58,6 +58,12 @@ class User extends CI_Model
 		return false;
 	}
 
+	function get_count($status = 'active')
+	{
+		$res = $this->base->fetch('is_user', ['status' => $status], 'user_');
+		return count($res);
+	}
+
 	function login($email, $password, $days)
 	{
 		$data = $this->fetch_where('email', $email);

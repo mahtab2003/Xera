@@ -33,6 +33,12 @@ class Ticket extends CI_Model
 		return false;
 	}
 
+	function get_count($status = 'open')
+	{
+		$res = $this->base->fetch('is_ticket', ['status' => $status], 'ticket_');
+		return count($res);
+	}
+
 	function get_tickets()
 	{
 		$this->db->where('ticket_status', 'open');

@@ -48,6 +48,12 @@ class Account extends CI_Model
 		return false;
 	}
 
+	function get_count($status = 'active')
+	{
+		$res = $this->base->fetch('is_account', ['status' => $status], 'account_');
+		return count($res);
+	}
+
 	function change_account_password($username, $password, $old_password)
 	{
 		$res = $this->get_account($username);
@@ -61,10 +67,10 @@ class Account extends CI_Model
 					return $res;
 				}
 				elseif($res !== false)
-				{;
-					$this->load->database();
-                                        $this->db->reconnect();
-					$res = $this->db->query("UPDATE `is_account` SET `account_password` = '$password' WHERE `account_username` = '$username'");
+				{
+				    $data = ['password' => $password];
+					$where = ['key' => $username];
+					$res = $this->base->update($data, $where, 'is_account', 'account_');
 					if($res !== false)
 					{
 						return true;
