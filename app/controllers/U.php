@@ -1186,7 +1186,7 @@ class U extends CI_Controller
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 							redirect("u/account_settings/$id");
 						}
-						if($res !== false)
+						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Account password updated successfully.']));
 							redirect("u/view_account/$id");
@@ -1525,6 +1525,18 @@ class U extends CI_Controller
 					redirect('u/');
 				}
 			}
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
+
+	function upgrade()
+	{
+		if($this->user->is_logged())
+		{
+			$this->load->view('page/user/upgrade');
 		}
 		else
 		{
