@@ -9,6 +9,11 @@
 			</a>
 		</h1>
 		<div class="navbar-nav flex-row order-md-last">
+			<div class="nav-item">
+				<div class="d-none d-md-flex me-2">
+					<a href="<?= base_url() ?>u/upgrade" class="btn btn-yellow"><i class="fa fa-upload me-md-2"></i> Upgrade</a>
+				</div>
+			</div>
 			<div class="nav-item dropdown">
 				<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
 					<span class="avatar avatar-sm" style="background-image: url(<?= $this->user->get_avatar() ?>);"></span>
@@ -80,6 +85,16 @@
 							</span>
 						</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<?= $this->base->get_fourm() ?>">
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="fa fa-book"></i>
+							</span>
+							<span class="nav-link-title">
+								Community Fourm
+							</span>
+						</a>
+					</li>
 					<li class="nav-item <?php if (isset($active) and $active == 'domain'): ?>
 						active
 					<?php endif ?>">
@@ -89,16 +104,6 @@
 							</span>
 							<span class="nav-link-title">
 								Domain Checker
-							</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="<?= $this->base->get_fourm() ?>">
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-book"></i>
-							</span>
-							<span class="nav-link-title">
-								Community Fourm
 							</span>
 						</a>
 					</li>
