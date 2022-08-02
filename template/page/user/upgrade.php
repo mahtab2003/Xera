@@ -14,7 +14,7 @@
 			<div class="empty">
 	        <div class="empty-header"><i class="fa fa-sync"></i></div>
 		        <p class="empty-title">Redirecting</p>
-		        <button onclick="location.href = 'https://ifastnet.com/portal/afhp?aff=' + <?= get_aff_id() ?>" hidden="true" id="button"></button>
+		        <button onclick="location.href = 'https://ifastnet.com/portal/?aff=' + <?= get_aff_id() ?>" hidden="true" id="button"></button>
 	        </div>
 		</div>
 	</div>
