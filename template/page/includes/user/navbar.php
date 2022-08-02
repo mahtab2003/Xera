@@ -11,7 +11,7 @@
 		<div class="navbar-nav flex-row order-md-last">
 			<div class="nav-item">
 				<div class="d-none d-md-flex me-2">
-					<a href="<?= base_url() ?>u/upgrade" class="btn btn-yellow"><i class="fa fa-upload me-md-2"></i> Upgrade</a>
+					<a href="<?= base_url() ?>u/upgrade" class="btn btn-yellow"><i class="fa fa-arrow-circle-up me-md-2"></i> Go Premium</a>
 				</div>
 			</div>
 			<div class="nav-item dropdown">
