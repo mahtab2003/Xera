@@ -30,7 +30,21 @@
 				<div class="col-sm-6">
 					<div class="row align-items-center">
 						<span class="col">Status:</span>
-						<span class="col-auto ms-auto"><?= strtoupper($data['status']) ?></span>
+						<span class="col-auto ms-auto">
+							<?php if ($data['status'] == 'processing'): ?>
+								<span class="badge bg-yellow">
+									<?= $data['status'] ?>
+								</span>
+							<?php elseif ($data['status'] == 'active'): ?>
+								<span class="badge bg-green">
+									<?= $data['status'] ?>
+								</span>
+							<?php elseif ($data['status'] == 'cancelled' OR $data['status'] == 'expired'): ?>
+								<span class="badge bg-danger">
+									<?= $data['status'] ?>
+								</span>
+							<?php endif ?>
+						</span>
 					</div>
 				</div>
 				<div class="col-sm-6">

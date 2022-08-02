@@ -13,7 +13,21 @@
 				<div class="col-sm-6">
 					<div class="row align-items-center">
 						<span class="col">Status:</span>
-						<span class="col-auto ms-auto"><?= strtoupper($ticket['ticket_status']) ?></span>
+						<span class="col-auto ms-auto">
+							<?php if ($ticket['ticket_status'] == 'open'): ?>
+								<span class="badge bg-orange">
+									<?= $ticket['ticket_status'] ?>
+								</span>
+							<?php elseif ($ticket['ticket_status'] == 'support' OR $ticket['ticket_status'] == 'customer'): ?>
+								<span class="badge bg-green">
+									<?= $ticket['ticket_status'] ?>
+								</span>
+							<?php elseif ($ticket['ticket_status'] == 'closed'): ?>
+								<span class="badge bg-red">
+									<?= $ticket['ticket_status'] ?>
+								</span>
+							<?php endif ?>
+						</span>
 					</div>
 				</div>
 				<div class="col-sm-6">

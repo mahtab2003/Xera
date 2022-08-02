@@ -30,14 +30,31 @@
 								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['user_name'] ?></td>
 								<td><?= $item['user_email'] ?></td>
-								<td><?= strtoupper($item['user_status']) ?></td>
+								<td>
+									<?php if ($item['user_status'] == 'inactive'): ?>
+										<span class="badge bg-yellow">
+											<?= $item['user_status'] ?>
+										</span>
+									<?php elseif ($item['user_status'] == 'active'): ?>
+										<span class="badge bg-green">
+											<?= $item['user_status'] ?>
+										</span>
+									<?php endif ?>
+								</td>
 								<td><a href="<?= base_url().'a/view_client/'.$item['user_key'] ?>" class="btn btn-sm">Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="5" class="text-center">Nothing to show</td>
+							<td colspan="5" class="text-center">
+								<div class="py-5">
+									<i class="fa fa-box-open" style="font-size: 80px;"></i>
+									<div>
+										No clients yet?
+									</div>
+								</div>
+							</td>
 						</tr>
 					<?php endif ?>
 				</tbody>

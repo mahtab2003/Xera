@@ -25,8 +25,15 @@
 							Secret Key: <?= $info['user_key'] ?>
 						</p>
 						<p class="col-md-6">
-							Status: <?= strtoupper($info['user_status']) ?>
-						</p>
+							Status: <?php if ($info['user_status'] == 'inactive'): ?>
+										<span class="badge bg-yellow">
+											<?= $info['user_status'] ?>
+										</span>
+									<?php elseif ($info['user_status'] == 'active'): ?>
+										<span class="badge bg-green">
+											<?= $info['user_status'] ?>
+										</span>
+									<?php endif ?>						</p>
 						<p class="col-md-6">
 							Registered: <?= date('d-m-Y', $info['user_date']) ?>
 						</p>
