@@ -14,7 +14,7 @@
 		}
 	</style>
 </head>
-<body class="border-top-wide border-primary d-flex flex-column">
+<body class="border-top-wide border-primary d-flex flex-column theme-<?= get_cookie('theme') ?? 'light' ?>">
 	<div class="page page-center">
 		<div class="container-tight py-4">
 			<div class="text-center mb-4">
