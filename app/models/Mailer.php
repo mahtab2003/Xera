@@ -85,7 +85,7 @@ class Mailer extends CI_Model
 
 	function set_template($data, $id)
 	{
-		$res = $this->update($data, ['id' => $id]);
+		$res = $this->update($data, ['id' => $id, 'for' => 'user']);
 		if($res !== false)
 		{
 			return true;
