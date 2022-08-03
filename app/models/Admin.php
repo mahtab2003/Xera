@@ -86,22 +86,33 @@ class Admin extends CI_Model
 		$res = $this->fetch_where('email', $email);
 		if($res !== false)
 		{
-			$password = char8($res['admin_name'].':'.$res['admin_email'].':'.$res['admin_password'].':'.time());
-			$hash = char64($password);
-			$token = char32($password.':'.$hash.':'.$res['admin_key']);
-			$data = ['password' => $hash, 'rec' => $token];
-			$where = ['email' => $email];
-			$res = $this->update($data, $where);
-			if($res)
+			$time = time();
+			$token = char32($email.':'.$res['admin_rec'].':'.$time.':'.$res['admin_key']);
+			$json = json_encode(['email' => $email, 'token' => $token, 'time' => $time]);
+			$base64 = base64_encode($json);
+			if($this->mailer->is_active())
 			{
-				if($this->mailer->is_active())
-				{
-					$param['user_name'] = $res['admin_name'];
-					$param['user_email'] = $email;
-					$param['new_password'] = $password;
-					$this->mailer->send('forget_password', $email, $param);
-					return true;
-				}
+				$param['user_name'] = $res['admin_name'];
+				$param['user_email'] = $email;
+				$param['new_password'] = base_url().'a/reset_password/'.$base64;
+				$this->mailer->send('forget_password', $email, $param, 'admin');
+				return true;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	function reset_admin_password($password, $email)
+	{
+		$res = $this->fetch_where('email', $email);
+		if($res !== false)
+		{
+			$rec = char64($res['admin_rec'].':'.$password.':'.time().':'.$res['admin_key']);
+			$password = char64($password);
+			$res = $this->update(['password' => $password, 'rec' => $rec], ['email' => $email]);
+			if($res !== false)
+			{
 				return true;
 			}
 			return false;
@@ -252,7 +263,7 @@ class Admin extends CI_Model
 		return false;
 	}
 
-	private function fetch_where($index, $field)
+	function fetch_where($index, $field)
 	{
 		$res = $this->base->fetch(
 			'is_admin',

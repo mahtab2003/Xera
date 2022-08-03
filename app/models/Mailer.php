@@ -36,7 +36,7 @@ class Mailer extends CI_Model
 		$res = $this->get_template($id, $for);
 		if($res !== false)
 		{
-			$subject = $res['email_subject'];
+			$subject = $res['email_subject'].' - '.$this->base->get_hostname();
 			$content = $res['email_content'];
 			$content = str_replace("{site_name}", $this->base->get_hostname(), $content);
 			$content = str_replace("{site_url}", base_url(), $content);
@@ -62,7 +62,7 @@ class Mailer extends CI_Model
 	function test_mail()
 	{
 		$this->email->from($this->smtp->get_from(), $this->smtp->get_name());
-		$this->email->to($this->base->get_email());
+		$this->email->to($this->base->get_hostname());
 		$this->email->subject('Test Email');
 		$this->email->message('If you have received this email thats mean smtp config is setup correctly.');
 		$res = $this->email->send();
