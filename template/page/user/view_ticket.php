@@ -32,13 +32,13 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Open by:</span>
+						<span class="col">Opened by:</span>
 						<span class="col-auto ms-auto"><?= $this->user->get_name() ?></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Open at:</span>
+						<span class="col">Opened at:</span>
 						<span class="col-auto ms-auto"><?= date('d-m-Y', $ticket['ticket_time']) ?></span>
 					</div>
 				</div>
