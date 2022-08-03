@@ -333,6 +333,85 @@ class A extends CI_Controller
 		}
 	}
 
+	function reset_password($token)
+	{
+		if(!$this->admin->is_logged())
+		{
+			$json = base64_decode($token);
+			$arr = json_decode($json, true);
+			$email = $arr['email'];
+			$key = $arr['token'];
+			$time = $arr['time'];
+			$admin = $this->admin->fetch_where('email', $email);
+			if(time() > $time + 3600)
+			{
+				$this->session->set_flashdata('msg', json_encode([0, 'Password reset token expired.']));
+				redirect('a/login');
+			}
+			elseif($admin !== false)
+			{
+				$verify = char32($email.':'.$admin['admin_rec'].':'.$time.':'.$admin['admin_key']);
+				if($verify == $key)
+				{
+					if($this->input->post('reset'))
+					{
+						$this->fv->set_rules('password', 'Password', ['trim', 'required']);
+						$this->fv->set_rules('password1', 'Confirm Password', ['trim', 'required', 'matches[password]']);
+						if($this->fv->run() === true)
+						{
+							$password = $this->input->post('password');
+							$res = $this->admin->reset_admin_password($password, $email);
+							if($res !== false)
+							{
+								$this->session->set_flashdata('msg', json_encode([1, 'Password reset successfully.']));
+								redirect('a/login');
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								redirect('a/login');
+							}
+						}
+						else
+						{
+							if(validation_errors() !== '')
+							{
+								$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							}
+							redirect('a/login');
+						}
+					}
+					else
+					{
+						$data['title'] = 'Reset Password';
+						$data['token'] = $token;
+						$this->load->view('form/includes/header.php', $data);
+						$this->load->view('form/admin/reset_password.php');
+						$this->load->view('form/includes/footer.php');	
+					}
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
+					redirect('a/login');
+				}
+			}
+			else
+			{
+				$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
+				redirect('a/login');
+			}
+		}
+		else
+		{
+			redirect('a/dashboard');
+		}
+	}
+
 	function logout($status = 1, $msg = '')
 	{
 		if($this->admin->logout())
@@ -1270,7 +1349,7 @@ class A extends CI_Controller
 						if(!is_bool($res))
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect("a/view_account/$id");
+							redirect("a/view_settings/$id");
 						}
 						elseif($res !== false)
 						{

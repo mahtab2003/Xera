@@ -342,10 +342,89 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Login';
+				$data['title'] = 'Forget Password';
 				$this->load->view('form/includes/header.php', $data);
 				$this->load->view('form/user/forget.php');
 				$this->load->view('form/includes/footer.php');
+			}
+		}
+		else
+		{
+			redirect('u/dashboard');
+		}
+	}
+
+	function reset_password($token)
+	{
+		if(!$this->user->is_logged())
+		{
+			$json = base64_decode($token);
+			$arr = json_decode($json, true);
+			$email = $arr['email'];
+			$key = $arr['token'];
+			$time = $arr['time'];
+			$user = $this->user->fetch_where('email', $email);
+			if(time() > $time + 3600)
+			{
+				$this->session->set_flashdata('msg', json_encode([0, 'Password reset token expired.']));
+				redirect('u/login');
+			}
+			elseif($user !== false)
+			{
+				$verify = char32($email.':'.$user['user_rec'].':'.$time.':'.$user['user_key']);
+				if($verify == $key)
+				{
+					if($this->input->post('reset'))
+					{
+						$this->fv->set_rules('password', 'Password', ['trim', 'required']);
+						$this->fv->set_rules('password1', 'Confirm Password', ['trim', 'required', 'matches[password]']);
+						if($this->fv->run() === true)
+						{
+							$password = $this->input->post('password');
+							$res = $this->user->reset_user_password($password, $email);
+							if($res !== false)
+							{
+								$this->session->set_flashdata('msg', json_encode([1, 'Password reset successfully.']));
+								redirect('u/login');
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								redirect('u/login');
+							}
+						}
+						else
+						{
+							if(validation_errors() !== '')
+							{
+								$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							}
+							redirect('u/login');
+						}
+					}
+					else
+					{
+						$data['title'] = 'Reset Password';
+						$data['token'] = $token;
+						$this->load->view('form/includes/header.php', $data);
+						$this->load->view('form/user/reset_password.php');
+						$this->load->view('form/includes/footer.php');	
+					}
+				}
+				else
+				{
+					$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
+					redirect('u/login');
+				}
+			}
+			else
+			{
+				$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
+				redirect('u/login');
 			}
 		}
 		else
