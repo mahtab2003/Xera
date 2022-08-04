@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost', // replace with your database host
-	'username' => 'root', // replace with your database username
-	'password' => '', // replace with your database password
-	'database' => 'xera', // replace with your database name
+	'hostname' => 'DB_HOSTNAME', // replace with your database host
+	'username' => 'DB_USERNAME', // replace with your database username
+	'password' => 'DB_PASSWORD', // replace with your database password
+	'database' => 'DB_NAME', // replace with your database name
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
