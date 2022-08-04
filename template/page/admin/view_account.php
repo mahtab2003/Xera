@@ -146,7 +146,7 @@
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active'): ?>
-											185.27.134.124
+											<?= gethostbyname($data['account_main']) ?>
 										<?php else: ?>
 											Loading
 										<?php endif ?>
