@@ -155,11 +155,11 @@ if(isset($_GET['step']) AND $_GET['step'] == 1 AND isset($_POST['submit']))
 	{
 		$csrf_value = 'TRUE';
 	}
-	$file = file_get_contents(__DIR__.'/app/config/config2.php');
+	$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/config.php');
 	$data = str_replace('BASE_URL_VALUE', $base_url_value, $file);
 	$data = str_replace('COOKIE_PREFIX_VALUE', $cookie_prefix, $data);
 	$data = str_replace('CSRF_PROTECTION_MODE', $csrf_value, $data);
-	$res = file_put_contents(__DIR__.'/app/config/config2.php', $data);
+	$res = file_put_contents(__DIR__.'/app/config/config.php', $data);
 	$_SESSION['msg'] = json_encode(['success', 'Basic settings changed successfully.']);
 	header('location: '.$base_url.'install.php?step=2');
 }
@@ -317,12 +317,12 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		);");
 		if($sql)
 		{
-			$file = file_get_contents(__DIR__.'/app/config/database2.php');
+			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/config.php');
 			$data = str_replace('DB_HOSTNAME', $hostname, $file);
 			$data = str_replace('DB_USERNAME', $username, $data);
 			$data = str_replace('DB_PASSWORD', $password, $data);
 			$data = str_replace('DB_NAME', $database, $data);
-			$res = file_put_contents(__DIR__.'/app/config/database2.php', $data);
+			$res = file_put_contents(__DIR__.'/app/config/database.php', $data);
 			$json = json_encode(['installed' => true, 'time' => date('d-m-Y h:i:s A')]);
 			file_put_contents(__DIR__.'/app/logs/install.json', $json);
 			$_SESSION['msg'] = json_encode(['success', 'Database connection established successfully.']);
