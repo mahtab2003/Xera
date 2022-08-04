@@ -1,5 +1,14 @@
 <?php 
 
+if(!file_exists(APPPATH.'logs/install.json'))
+{
+	header('location: ../install.php');
+}
+elseif(file_exists(APPPATH.'logs/install.json') AND file_exists(APPPATH.'../install.php'))
+{
+	unlink(APPPATH.'../install.php');
+}
+
 class Base extends CI_Model
 {
 	function get_hostname()
