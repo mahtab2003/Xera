@@ -126,7 +126,7 @@ class SitePro extends CI_Model
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 		$result = curl_exec($ch);
 		$json = json_decode($result, true);
-		if($json['error'] !== NULL)
+		if(isset($json['error']))
 		{
 			return ['success' => false, 'msg' => $json['error']['message']];
 		}
