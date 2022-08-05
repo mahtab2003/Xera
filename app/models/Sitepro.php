@@ -131,7 +131,7 @@ class SitePro extends CI_Model
 			return ['success' => false, 'msg' => $json['error']['message']];
 		}
 		elseif(isset($json['url'])) {
-			return ['success' => true, 'url' => $url];
+			return ['success' => true, 'url' => $json['url']];
 		}
 		return false;
 	}
