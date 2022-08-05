@@ -1149,7 +1149,7 @@ class U extends CI_Controller
 					}
 					elseif($link['success'] == true)
 					{
-						location('header: '.$link['url']);
+						header('location: '.$link['url']);
 					}
 					else
 					{
