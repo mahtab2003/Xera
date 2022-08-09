@@ -9,7 +9,7 @@
 			<label class="form-label">
 				Password
 				<span class="form-label-description">
-					<a href="<?= base_url();?>u/forget">I forgot password</a>
+					<a href="<?= base_url();?>a/forget">I forgot password</a>
 				</span>
 			</label>
 			<div class="input-group input-group-flat">
@@ -20,6 +20,12 @@
 					</a>
 				</span>
 			</div>
+		</div>
+		<div class="mb-3">
+			<label class="form-check">
+				<input type="checkbox" name="checkbox" value="1" class="form-check-input"/>
+				<span class="form-check-label">Remember me on this device</span>
+			</label>
 		</div>
 		<?php if($this->grc->is_active()):?>
 			<div class="mb-2">
