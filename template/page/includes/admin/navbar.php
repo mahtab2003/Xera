@@ -50,7 +50,7 @@
 								<i class="fa fa-users"></i>
 							</span>
 							<span class="nav-link-title">
-								Clients
+								My Clients
 							</span>
 						</a>
 					</li>
@@ -62,7 +62,31 @@
 								<i class="fa fa-server"></i>
 							</span>
 							<span class="nav-link-title">
-								Accounts
+								Mofh Accounts
+							</span>
+						</a>
+					</li>
+					<li class="nav-item <?php if (isset($active) and $active == 'domain'): ?>
+						active
+					<?php endif ?>">
+						<a class="nav-link" href="<?= base_url() ?>a/domains">
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="fa fa-globe"></i>
+							</span>
+							<span class="nav-link-title">
+								Domain Extensions
+							</span>
+						</a>
+					</li>
+					<li class="nav-item <?php if (isset($active) and $active == 'email'): ?>
+						active
+					<?php endif ?>">
+						<a class="nav-link" href="<?= base_url() ?>a/email_templates">
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="fa fa-envelope"></i>
+							</span>
+							<span class="nav-link-title">
+								Email Templates
 							</span>
 						</a>
 					</li>
@@ -71,7 +95,7 @@
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/ssl">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-server"></i>
+								<i class="fa fa-shield-alt"></i>
 							</span>
 							<span class="nav-link-title">
 								SSL Certificates
@@ -99,30 +123,6 @@
 							</span>
 							<span class="nav-link-title">
 								Api Settings
-							</span>
-						</a>
-					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'email'): ?>
-						active
-					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/email_templates">
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-envelope"></i>
-							</span>
-							<span class="nav-link-title">
-								Email Templates
-							</span>
-						</a>
-					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'domain'): ?>
-						active
-					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/domains">
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-globe"></i>
-							</span>
-							<span class="nav-link-title">
-								Domain Extensions
 							</span>
 						</a>
 					</li>
