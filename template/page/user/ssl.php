@@ -51,7 +51,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'u/view_ssl/'.$item['key'] ?>" class="btn <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> Manage</a></td>
+								<td><a href="<?= base_url().'u/view_ssl/'.$item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>

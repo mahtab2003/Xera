@@ -18,7 +18,11 @@
 						<div class="d-grid mb-2">
 							<a href="<?= base_url() ?>u/account_settings/<?= $id ?>" target="_blank" class="btn btn-yellow rounded"><i class="fa fa-cogs me-2"></i> Settings</a>
 						</div>
-					<?php elseif ($data['account_status'] === 'suspended' OR $data['account_status'] === 'deactivated'): ?>
+					<?php elseif ($data['account_status'] === 'suspended'): ?>
+						<div class="d-grid mb-2">
+							<a href="<?= base_url() ?>u/create_ticket" class="btn btn-green rounded"><i class="fa fa-cog me-2"></i> Open Ticket</a>
+						</div>
+					<?php elseif ($data['account_status'] === 'deactivated'): ?>
 						<div class="d-grid mb-2">
 							<a href="<?= base_url() ?>u/view_account/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><i class="fa fa-cog me-2"></i> Reactivate</a>
 						</div>
@@ -34,28 +38,28 @@
 			<?php $time = $data['account_time'] + 3600; ?>
 			<?php if($time > time()): ?>
 				<div class="alert alert-success">
-					Some features may not work correctly. It can take up to 72 hours for this account to work properly...
+					Some of the hosting features may not work. It may take up to 72 hours for the hosting account to work properly...
 				</div>
 			<?php endif; ?>
 			<?php if($data['account_status'] === 'pending'): ?>
 				<div class="alert alert-info">
-					This account is pending and will be activated soon...
+					This hosting account is pending and will be activated soon...
 				</div>
 			<?php elseif($data['account_status'] === 'reactivating'): ?>
 				<div class="alert alert-warning">
-					This account is reactivating and will be activated soon...
+					This hosting account is reactivating and will be activated soon...
 				</div>
 			<?php elseif($data['account_status'] === 'deactivating'): ?>
 				<div class="alert alert-warning">
-					This account is deactivating and will be deactivated soon...
+					This hosting account is deactivating and will be deactivated soon...
 				</div>
 			<?php elseif($data['account_status'] === 'suspended'): ?>
 				<div class="alert alert-danger">
-					This account is suspended for an unknown reason and will be completely removed within 60 days...
+					This hosting account is suspended due to some reason and will be completely removed with in 30 days...
 				</div>
 			<?php elseif($data['account_status'] === 'deactivated'): ?>
 				<div class="alert alert-success">
-					This account is deactivated and will be completely removed within 60 days...
+					This hosting account is deactivated and will be completely removed with in 30 days...
 				</div>
 			<?php endif; ?>
 			<div class="row row-cards">
@@ -91,7 +95,7 @@
 												***************
 											<?php endif ?>
 										</code>
-										<a class="btn btn-outline-primary btn-sm trigger" data-hide="passwordHide1" data-show="passwordShow1">
+										<a class="btn btn-outline-primary btn-sm rounded trigger" data-hide="passwordHide1" data-show="passwordShow1">
 											Show/Hide
 										</a>
 									</td>
@@ -200,7 +204,7 @@
 												***************
 											<?php endif ?>
 										</code>
-										<a class="btn btn-outline-primary btn-sm trigger" data-hide="passwordHide2" data-show="passwordShow2">
+										<a class="btn btn-outline-primary btn-sm rounded trigger" data-hide="passwordHide2" data-show="passwordShow2">
 											Show/Hide
 										</a>
 									</td>
@@ -265,7 +269,7 @@
 												***************
 											<?php endif ?>
 										</code>
-										<a class="btn btn-outline-primary btn-sm trigger" data-hide="passwordHide3" data-show="passwordShow3">
+										<a class="btn btn-outline-primary btn-sm rounded trigger" data-hide="passwordHide3" data-show="passwordShow3">
 											Show/Hide
 										</a>
 									</td>
@@ -332,9 +336,9 @@
 												<span><?= $domain['domain'] ?></span>
 											</td>
 											<td class="row align-items-center">
-												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-file"></i></a>
+												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm rounded btn-yellow col me-2" target="_blank"><i class="fa fa-file"></i></a>
 												<?php if ($this->sp->is_active()): ?>
-													<a href="<?= base_url().'u/view_account/'.$data['account_username'].'/?builder=true&domain='.$domain['domain'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
+													<a href="<?= base_url().'u/view_account/'.$data['account_username'].'/?builder=true&domain='.$domain['domain'] ?>" class="btn btn-red btn-sm rounded col" target="_blank"><i class="fa fa-upload"></i></a>
 												<?php endif ?>
 											</td>
 										</tr>

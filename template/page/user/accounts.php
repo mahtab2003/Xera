@@ -56,7 +56,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'u/view_account/'.$item['account_username'] ?>" class="btn <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> Manage</a></td>
+								<td><a href="<?= base_url().'u/view_account/'.$item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
@@ -68,7 +68,7 @@
 									<div class="mb-2">
 										No hosting accounts yet?
 									</div>
-									<a href="<?= base_url() ?>u/create_account" class="btn btn-primary">Create Now</a>
+									<a href="<?= base_url() ?>u/create_account" class="btn btn-primary">Create an account</a>
 								</div>
 							</td>
 						</tr>
