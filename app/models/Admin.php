@@ -29,7 +29,7 @@ class Admin extends CI_Model
 		return false;
 	}
 
-	function login($email, $password)
+	function login($email, $password, $days = 1)
 	{
 		$data = $this->fetch_where('email', $email);
 		if($data !== false)
@@ -41,8 +41,8 @@ class Admin extends CI_Model
 				$json = json_encode([$data['admin_rec'], time()]);
 				$gz = gzcompress($json);
 				$token = base64_encode($gz);
-				set_cookie('logged_admin', true, 86400);
-				set_cookie('token_admin', $token, 86400);
+				set_cookie('logged_admin', true, $days * 86400);
+				set_cookie('token_admin', $token, $days * 86400);
 				return true;
 			}
 			return false;
