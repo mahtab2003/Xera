@@ -34,6 +34,16 @@ class E extends CI_Controller
 		$this->load->view('errors/custom/about');
 	}
 
+	function license()
+	{
+		$this->load->view('errors/custom/license');
+	}
+
+	function tos()
+	{
+		$this->load->view('errors/custom/tos');
+	}
+
 	function update()
 	{
 		$this->load->model('admin');

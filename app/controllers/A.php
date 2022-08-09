@@ -198,6 +198,15 @@ class A extends CI_Controller
 					{
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
+						$checkbox = $this->input->post('checkbox');
+						if(!$checkbox)
+						{
+							$days = 1;
+						}
+						else
+						{
+							$days = 30;
+						}
 						if($this->grc->get_type() == "google")
 						{
 							$token = $this->input->post('g-recaptcha-response');
@@ -215,7 +224,7 @@ class A extends CI_Controller
 						}
 						if($this->grc->is_valid($token, $type))
 						{
-							$res = $this->admin->login($email, $password);
+							$res = $this->admin->login($email, $password, $days);
 							if($res)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
@@ -252,7 +261,16 @@ class A extends CI_Controller
 					{
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
-						$res = $this->admin->login($email, $password);
+						$checkbox = $this->input->post('checkbox');
+						if(!$checkbox)
+						{
+							$days = 1;
+						}
+						else
+						{
+							$days = 30;
+						}
+						$res = $this->admin->login($email, $password, $days);
 						if($res)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
@@ -828,7 +846,7 @@ class A extends CI_Controller
 				if($this->fv->run() === true)
 				{
 					$subject = $this->input->post('subject');
-					$content = $this->input->post('content');
+					$content = $this->input->post('content', false);
 					$res = $this->mailer->set_template(['subject' => $subject, 'content' => $content], $id);
 					if($res)
 					{
@@ -1235,7 +1253,7 @@ class A extends CI_Controller
 					}
 					elseif($link['success'] == true)
 					{
-						header('location: '.$link['url']);
+						 header('location: '.$link['url']); 
 					}
 					else
 					{
