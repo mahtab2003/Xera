@@ -31,6 +31,12 @@
 				</span>
 			</div>
 		</div>
+		<div class="mb-3">
+			<label class="form-check">
+				<input type="checkbox" name="checkbox" value="1" class="form-check-input" required="true" />
+				<span class="form-check-label">I agree to <a href="<?= base_url() ?>e/tos">Term of Services(TOS)</a></span>
+			</label>
+		</div>
 		<?php if($this->grc->is_active()):?>
 			<div class="mb-2">
 				<?php if($this->grc->get_type() == "google"):?>
