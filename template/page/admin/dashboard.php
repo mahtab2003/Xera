@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="row row-cards">
-		<div class="col-md-6 col-lg-4">
+		<div class="col-md-4">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4">
+		<div class="col-md-4">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -53,7 +53,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4">
+		<div class="col-md-4">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -85,7 +85,7 @@
 		</div>
 	</div>
 	<div class="row row-cards">
-		<div class="col-md-6 col-lg-4 pb-2">
+		<div class="col-md-4 col-lg-3 pb-2">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -106,7 +106,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
+		<div class="col-md-4 col-lg-3 pb-2">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -127,7 +127,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
+		<div class="col-md-4 col-lg-3 pb-2">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -148,7 +148,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
+		<div class="col-md-4 col-lg-3 pb-2">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -169,7 +169,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
+		<div class="col-md-4 col-lg-3 pb-2">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -190,7 +190,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-4 pb-2">
+		<div class="col-md-4 col-lg-3 pb-2">
 			<div class="card card-sm">
 				<div class="card-body">
 					<div class="row align-items-center">
@@ -204,7 +204,49 @@
 								Like Xera?
 							</div>
 							<div class="text-muted">
-								<a href="https://xera.eu.org/#donate" class="text-muted" target="_blank">Donate here.</a>
+								<a href="https://getmofhy.eu.org/#donate" class="text-muted" target="_blank">Donate here.</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-lg-3 pb-2">
+			<div class="card card-sm">
+				<div class="card-body">
+					<div class="row align-items-center">
+						<div class="col-auto">
+							<span class="text-white bg-cyan avatar">
+								<i class="fa fa-file-alt"></i>
+							</span>
+						</div>
+						<div class="col">
+							<div class="font-weight-medium">
+								Term of Services
+							</div>
+							<div class="text-muted">
+								<a href="<?= base_url() ?>e/tos" class="text-muted" target="_blank">View here.</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-lg-3 pb-2">
+			<div class="card card-sm">
+				<div class="card-body">
+					<div class="row align-items-center">
+						<div class="col-auto">
+							<span class="text-white bg-teal avatar">
+								<i class="fa fa-file"></i>
+							</span>
+						</div>
+						<div class="col">
+							<div class="font-weight-medium">
+								License
+							</div>
+							<div class="text-muted">
+								<a href="<?= base_url() ?>e/license" class="text-muted" target="_blank">View here.</a>
 							</div>
 						</div>
 					</div>
@@ -216,11 +258,11 @@
 <script type="text/javascript" src="<?= base_url() ?>assets/js/apexcharts.min.js"></script>
 <script type="text/javascript">
 	var options = {
-		series: [<?= $this->user->get_count('active'); ?>, <?= $this->user->get_count('inactive'); ?>, 1],
+		series: [<?= $this->user->get_count('active'); ?>, <?= $this->user->get_count('inactive'); ?>],
 		chart: {
 			type: 'donut'
 		},
-		labels: ['Active', 'Inactive', 'None'],
+		labels: ['Active', 'Inactive'],
 		responsive: [{
 			breakpoint: 480,
 			options: {
@@ -234,11 +276,11 @@
 		}]
 	};
 	var options1 = {
-		series: [<?= $this->account->get_count('active'); ?>, <?= $this->user->get_count('suspended') + $this->user->get_count('deactivated'); ?>, 1],
+		series: [<?= $this->account->get_count('active'); ?>, <?= $this->user->get_count('suspended') + $this->user->get_count('deactivated'); ?>],
 		chart: {
 			type: 'donut'
 		},
-		labels: ['Active', 'Inactive', 'None'],
+		labels: ['Active', 'Inactive'],
 		responsive: [{
 			breakpoint: 480,
 			options: {
@@ -252,11 +294,11 @@
 		}]
 	};
 	var options2 = {
-		series: [<?= $this->ticket->get_count('open'); ?>, <?= $this->ticket->get_count('customer') + $this->ticket->get_count('support'); ?>, <?= $this->ticket->get_count('closed'); ?>, 1],
+		series: [<?= $this->ticket->get_count('open'); ?>, <?= $this->ticket->get_count('customer') + $this->ticket->get_count('support'); ?>, <?= $this->ticket->get_count('closed'); ?>],
 		chart: {
 			type: 'donut'
 		},
-		labels: ['Open', 'Replied', 'Closed', 'None'],
+		labels: ['Open', 'Replied', 'Closed'],
 		responsive: [{
 			breakpoint: 480,
 			options: {

@@ -34,28 +34,28 @@
 			<?php $time = $data['account_time'] + 3600; ?>
 			<?php if($time > time()): ?>
 				<div class="alert alert-success">
-					Some of the features may not work. It can take upto 72 hours for the account to work correctly...
+					Some of the hosting features may not work. It may take up to 72 hours for the account to work properly...
 				</div>
 			<?php endif; ?>
 			<?php if($data['account_status'] === 'pending'): ?>
 				<div class="alert alert-info">
-					This account is pending and will be activated soon...
+					This hosting account is pending and will be activated soon...
 				</div>
 			<?php elseif($data['account_status'] === 'reactivating'): ?>
 				<div class="alert alert-warning">
-					This account is reactivating and will be activated soon...
+					This hosting account is reactivating and will be activated soon...
 				</div>
 			<?php elseif($data['account_status'] === 'deactivating'): ?>
 				<div class="alert alert-warning">
-					This account is deactivating and will be deactivated soon...
+					This hosting account is deactivating and will be deactivated soon...
 				</div>
 			<?php elseif($data['account_status'] === 'suspended'): ?>
 				<div class="alert alert-danger">
-					This account is suspended due to some reason and will be completely removed with in 60 days...
+					This hosting account is suspended due to some reason and will be completely removed with in 30 days...
 				</div>
 			<?php elseif($data['account_status'] === 'deactivated'): ?>
 				<div class="alert alert-success">
-					This account is deactivated and will be completely removed with in 60 days...
+					This hosting account is deactivated and will be completely removed with in 30 days...
 				</div>
 			<?php endif; ?>
 			<div class="row row-cards">
@@ -333,8 +333,10 @@
 											</td>
 											<td>
 												<td class="row align-items-center">
-												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-file"></i></a>
-												<a href="<?= base_url().'a/view_account/'.$data['account_username'].'/?builder=true&domain='.$domain['domain'] ?>" class="btn btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
+												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm btn-yellow col" target="_blank"><i class="fa fa-file"></i></a>
+												<?php if ($this->sp->is_active()): ?>
+													<a href="<?= base_url().'a/view_account/'.$data['account_username'].'/?builder=true&domain='.$domain['domain'] ?>" class="btn btn-red btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
+												<?php endif ?>
 											</td>
 											</td>
 										</tr>

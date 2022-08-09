@@ -41,7 +41,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'a/view_client/'.$item['user_key'] ?>" class="btn btn-sm">Manage</a></td>
+								<td><a href="<?= base_url().'a/view_client/'.$item['user_key'] ?>" class="btn rounded btn-green btn-sm"><i class="fa fa-user me-2"></i> Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>

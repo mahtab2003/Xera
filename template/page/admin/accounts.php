@@ -46,7 +46,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'a/view_account/'.$item['account_username'] ?>" class="btn <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> Manage</a></td>
+								<td><a href="<?= base_url().'a/view_account/'.$item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> Manage</a></td>
 							</tr>
 						<?php endforeach; ?>
 					<?php else: ?>

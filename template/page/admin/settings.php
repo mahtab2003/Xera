@@ -59,11 +59,11 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label">New password</label>
-						<input type="password" name="password" class="form-control mb-2">
+						<input type="password" name="password" class="form-control mb-2" placeholder="New password...">
 						<label class="form-label">Confirm password</label>
-						<input type="password" name="password1" class="form-control mb-2">
+						<input type="password" name="password1" class="form-control mb-2" placeholder="Confirm password...">
 						<label class="form-label">Old password</label>
-						<input type="password" name="old_password" class="form-control mb-2">
+						<input type="password" name="old_password" class="form-control mb-2" placeholder="Old password...">
 						<input type="submit" name="update_password" value="Change" class="btn btn-primary btn-pill">
 					</div>
 				</div>

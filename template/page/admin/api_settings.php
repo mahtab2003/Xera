@@ -50,7 +50,7 @@
 	</div>
 	<div class="card mb-3">
 		<div class="card-header">
-			<div class="card-title">MOFH</div>
+			<div class="card-title">MyOwnFreeHost</div>
 		</div>
 		<div class="card-body">
 			<?= form_open('a/api_settings') ?>
@@ -89,7 +89,7 @@
 					</div>
 					<div class="col-sm-12">
 						<input type="submit" name="update_mofh" value="Change" class="btn btn-primary btn-pill">
-						<a href="?test_mofh=true" class="btn btn-success btn-pill">Test MOFH</a>
+						<a href="?test_mofh=true" class="btn btn-success btn-pill">Test Connection</a>
 					</div>
 				</div>
 			</form>
@@ -97,11 +97,17 @@
 	</div>
 	<div class="card mb-3">
 		<div class="card-header">
-			<div class="card-title">SMTP</div>
+			<div class="card-title">Simple Mailer</div>
 		</div>
 		<div class="card-body">
 			<?= form_open('a/api_settings') ?>
 				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label">Service Type</label>
+						<select class="form-control" name="type">
+							<option selected="true">SMTP</option>
+						</select>
+					</div>
 					<div class="col-sm-6">
 						<label class="form-label">Hostname</label>
 						<input type="text" name="hostname" class="form-control mb-2" value="<?= $this->smtp->get_hostname() ?>">
@@ -146,7 +152,7 @@
 					</div>
 					<div class="col-sm-12">
 						<input type="submit" name="update_smtp" value="Change" class="btn btn-primary btn-pill">
-						<a href="?test_mail=true" class="btn btn-success btn-pill">Test SMTP</a>
+						<a href="?test_mail=true" class="btn btn-success btn-pill">Test Connection</a>
 					</div>
 				</div>
 			</form>
@@ -154,7 +160,7 @@
 	</div>
 	<div class="card mb-3">
 		<div class="card-header">
-			<div class="card-title">Recaptcha</div>
+			<div class="card-title">Bot Protection</div>
 		</div>
 		<div class="card-body">
 			<?= form_open('a/api_settings') ?>
