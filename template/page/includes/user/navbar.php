@@ -11,7 +11,7 @@
 		<div class="navbar-nav flex-row order-md-last">
 			<div class="nav-item">
 				<div class="d-none d-md-flex me-2">
-					<a href="<?= base_url() ?>u/upgrade" class="btn btn-yellow"><i class="fa fa-arrow-circle-up me-md-2"></i> Go Premium</a>
+					<a href="<?= base_url() ?>u/upgrade" class="btn btn-yellow"><i class="fa fa-arrow-circle-up me-md-2"></i> <?= $this->base->text('go_premium', 'heading') ?></a>
 				</div>
 			</div>
 			<div class="nav-item dropdown">
@@ -23,8 +23,8 @@
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a href="<?= base_url() ?>u/settings" class="dropdown-item">Settings</a>
-					<a href="<?= base_url() ?>u/logout" class="dropdown-item">Logout</a>
+					<a href="<?= base_url() ?>u/settings" class="dropdown-item"><?= $this->base->text('settings', 'button') ?></a>
+					<a href="<?= base_url() ?>u/logout" class="dropdown-item"><?= $this->base->text('logout', 'button') ?></a>
 				</div>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 								<i class="fa fa-home"></i>
 							</span>
 							<span class="nav-link-title">
-								Home
+								<?= $this->base->text('home', 'heading') ?>
 							</span>
 						</a>
 					</li>
@@ -55,7 +55,7 @@
 								<i class="fa fa-server"></i>
 							</span>
 							<span class="nav-link-title">
-								Accounts
+								<?= $this->base->text('accounts', 'heading') ?>
 							</span>
 						</a>
 					</li>
@@ -68,7 +68,7 @@
 									<i class="fa fa-shield-alt"></i>
 								</span>
 								<span class="nav-link-title">
-									SSL Certificates
+									<?= $this->base->text('ssl_certificates', 'heading') ?>
 								</span>
 							</a>
 						</li>
@@ -81,7 +81,7 @@
 								<i class="fa fa-bullhorn"></i>
 							</span>
 							<span class="nav-link-title">
-								Support Tickets
+								<?= $this->base->text('support_tickets', 'heading') ?>
 							</span>
 						</a>
 					</li>
@@ -91,7 +91,7 @@
 								<i class="fa fa-book"></i>
 							</span>
 							<span class="nav-link-title">
-								Community Fourm
+								<?= $this->base->text('community_forum', 'heading') ?>
 							</span>
 						</a>
 					</li>
@@ -103,7 +103,7 @@
 								<i class="fa fa-globe"></i>
 							</span>
 							<span class="nav-link-title">
-								Domain Checker
+								<?= $this->base->text('domain_checker', 'heading') ?>
 							</span>
 						</a>
 					</li>
