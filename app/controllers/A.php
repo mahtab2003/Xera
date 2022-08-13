@@ -334,7 +334,7 @@ class A extends CI_Controller
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 					}
-					redirect('a/login');
+					redirect('a/forget');
 				}
 			}
 			else

@@ -41,23 +41,23 @@ class U extends CI_Controller
 		{
 			if($this->input->post('register'))
 			{
-				$this->fv->set_rules('name', 'Name', ['trim', 'required', 'valid_name']);
-				$this->fv->set_rules('email', 'Email address', ['trim', 'required', 'valid_email']);
-				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
-				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required','matches[password]']);
+				$this->fv->set_rules('name', $this->base->text('your_name', 'label'), ['trim', 'required', 'valid_name']);
+				$this->fv->set_rules('email', $this->base->text('email_address', 'label'), ['trim', 'required', 'valid_email']);
+				$this->fv->set_rules('password', $this->base->text('password', 'label'), ['trim', 'required']);
+				$this->fv->set_rules('password1', $this->base->text('confirm_password', 'label'), ['trim', 'required','matches[password]']);
 				if($this->grc->is_active())
 				{
 					if($this->grc->get_type() == "google")
 					{
-						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('g-recaptcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					elseif($this->grc->get_type() == "crypto")
 					{
-						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('CRLT-captcha-token', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					else
 					{
-						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('h-captcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					if($this->fv->run() === true)
 					{
@@ -86,24 +86,24 @@ class U extends CI_Controller
 								$res = $this->user->register($name, $email, $password);
 								if($res)
 								{
-									$this->session->set_flashdata('msg', json_encode([1, 'User have been registered successfully.']));
+									$this->session->set_flashdata('msg', json_encode([1, $this->base->text('register_msg', 'success')]));
 									redirect('u/login');
 								}
 								else
 								{
-									$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 									redirect('u/register');
 								}
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'User already exists with this email address.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'success')]));
 								redirect('u/register');
 							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
 							redirect('u/register');
 						}
 					}
@@ -115,7 +115,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/register');
 					}
@@ -132,18 +132,18 @@ class U extends CI_Controller
 							$res = $this->user->register($name, $email, $password);
 							if($res)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'User have been registered successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('register_msg', 'success')]));
 									redirect('u/login');
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							}
 							redirect('u/register');
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'User already exists with this email address.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'success')]));
 							redirect('u/register');
 						}
 					}
@@ -155,7 +155,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/register');
 					}
@@ -163,7 +163,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Register';
+				$data['title'] = 'register';
 				$this->load->view('form/includes/header.php', $data);
 				$this->load->view('form/user/register.php');
 				$this->load->view('form/includes/footer.php');
@@ -181,21 +181,21 @@ class U extends CI_Controller
 		{
 			if($this->input->post('login'))
 			{
-				$this->fv->set_rules('email', 'Email address', ['trim', 'required', 'valid_email']);
-				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
+				$this->fv->set_rules('email', $this->base->text('email_address', 'label'), ['trim', 'required', 'valid_email']);
+				$this->fv->set_rules('password', $this->base->text('password', 'label'), ['trim', 'required']);
 				if($this->grc->is_active())
 				{
 					if($this->grc->get_type() == "google")
 					{
-						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('g-recaptcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					elseif($this->grc->get_type() == "crypto")
 					{
-						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('CRLT-captcha-token', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					else
 					{
-						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('h-captcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					if($this->fv->run() === true)
 					{
@@ -230,18 +230,18 @@ class U extends CI_Controller
 							$res = $this->user->login($email, $password, $days);
 							if($res)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
 								redirect('u/dashboard');
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Invalid email address or password.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
 								redirect('u/login');
 							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
 							redirect('u/login');
 						}
 					}
@@ -253,7 +253,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/login');
 					}
@@ -276,12 +276,12 @@ class U extends CI_Controller
 						$res = $this->user->login($email, $password, $days);
 						if($res)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
 							redirect('u/dashboard');
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid email address or password.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
 							redirect('u/login');
 						}
 					}
@@ -293,7 +293,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/login');
 					}
@@ -301,7 +301,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Login';
+				$data['title'] = 'login';
 				$this->load->view('form/includes/header.php', $data);
 				$this->load->view('form/user/login.php');
 				$this->load->view('form/includes/footer.php');
@@ -319,12 +319,12 @@ class U extends CI_Controller
 		{
 			if($this->input->post('forget'))
 			{
-				$this->fv->set_rules('email', 'Email address', ['trim', 'required', 'valid_email']);
+				$this->fv->set_rules('email', $this->base->text('email_address', 'label'), ['trim', 'required', 'valid_email']);
 				if($this->fv->run() === true)
 				{
 					$email = $this->input->post('email');
 					$data = $this->user->reset_password($email);
-					$this->session->set_flashdata('msg', json_encode([1, 'Password reset successfully. check your inbox.']));
+					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('forget_msg', 'success')]));
 					redirect('u/login');
 				}
 				else
@@ -335,14 +335,14 @@ class U extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 					}
-					redirect('u/login');
+					redirect('u/forget');
 				}
 			}
 			else
 			{
-				$data['title'] = 'Forget Password';
+				$data['title'] = 'forget_password';
 				$this->load->view('form/includes/header.php', $data);
 				$this->load->view('form/user/forget.php');
 				$this->load->view('form/includes/footer.php');
@@ -366,7 +366,7 @@ class U extends CI_Controller
 			$user = $this->user->fetch_where('email', $email);
 			if(time() > $time + 3600)
 			{
-				$this->session->set_flashdata('msg', json_encode([0, 'Password reset token expired.']));
+				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('reset_token_expired', 'error')]));
 				redirect('u/login');
 			}
 			elseif($user !== false)
@@ -376,20 +376,20 @@ class U extends CI_Controller
 				{
 					if($this->input->post('reset'))
 					{
-						$this->fv->set_rules('password', 'Password', ['trim', 'required']);
-						$this->fv->set_rules('password1', 'Confirm Password', ['trim', 'required', 'matches[password]']);
+						$this->fv->set_rules('password', $this->base->text('password', 'label'), ['trim', 'required']);
+						$this->fv->set_rules('password1', $this->base->text('confirm_password', 'label'), ['trim', 'required', 'matches[password]']);
 						if($this->fv->run() === true)
 						{
 							$password = $this->input->post('password');
 							$res = $this->user->reset_user_password($password, $email);
 							if($res !== false)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'Password reset successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('reset_msg', 'success')]));
 								redirect('u/login');
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 								redirect('u/login');
 							}
 						}
@@ -401,14 +401,14 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
 							redirect('u/login');
 						}
 					}
 					else
 					{
-						$data['title'] = 'Reset Password';
+						$data['title'] = 'reset_password';
 						$data['token'] = $token;
 						$this->load->view('form/includes/header.php', $data);
 						$this->load->view('form/user/reset_password.php');
@@ -417,13 +417,13 @@ class U extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_token', 'error')]));
 					redirect('u/login');
 				}
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
+				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_token', 'error')]));
 				redirect('u/login');
 			}
 		}
@@ -443,13 +443,13 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', json_encode([1, 'Logged out successfully.']));
+				$this->session->set_flashdata('msg', json_encode([1, $this->base->text('logout_msg', 'success')]));
 			}
 			redirect('u/login');
 		}
 		else
 		{
-			$this->session->set_flashdata('msg', json_encode([0, 'Login to continue.']));
+			$this->session->set_flashdata('msg', json_encode([0, $this->base->text('login_to_continue', 'error')]));
 			redirect('u/login');
 		}
 	}
@@ -460,25 +460,26 @@ class U extends CI_Controller
 		{
 			if($this->input->post('update_theme'))
 			{
-				set_cookie('theme', $this->input->post('theme'), 30*86400);
-				$this->session->set_flashdata('msg', json_encode([1, 'Theme changed successfully.']));
+				set_cookie('theme', $this->input->post('theme'), 30 * 86400);
+				set_cookie('lang', $this->input->post('language'), 30 * 86400);
+				$this->session->set_flashdata('msg', json_encode([1, $this->base->text('theme_msg', 'success')]));
 				redirect('u/settings');
 			}
 			elseif($this->input->post('update_name'))
 			{
-				$this->fv->set_rules('name', 'Name', ['trim', 'required', 'valid_name']);
+				$this->fv->set_rules('name', $this->base->text('your_name', 'label'), ['trim', 'required', 'valid_name']);
 				if($this->fv->run() === true)
 				{
 					$name = $this->input->post('name');
 					$res = $this->user->set_name($name);
 					if($res !== false)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'User name updated successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('name_msg', 'success')]));
 						redirect('u/settings');
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect('u/settings');
 					}
 				}
@@ -490,9 +491,9 @@ class U extends CI_Controller
 			}
 			elseif($this->input->post('update_password'))
 			{
-				$this->fv->set_rules('password', 'New password', ['trim', 'required']);
-				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required', 'matches[password]']);
-				$this->fv->set_rules('old_password', 'Old password', ['trim', 'required']);
+				$this->fv->set_rules('password', $this->base->text('new_password', 'label'), ['trim', 'required']);
+				$this->fv->set_rules('password1', $this->base->text('confirm_password', 'label'), ['trim', 'required', 'matches[password]']);
+				$this->fv->set_rules('old_password', $this->base->text('old_password', 'label'), ['trim', 'required']);
 				if($this->fv->run() === true)
 				{
 					$password = $this->input->post('password');
@@ -500,11 +501,11 @@ class U extends CI_Controller
 					$res = $this->user->set_password($old_password, $password);
 					if($res !== false)
 					{
-						$this->logout(1, 'User password updated successfully.');
+						$this->logout(1, $this->base->text('user_pass_msg', 'success'));
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect('u/settings');
 					}
 				}
@@ -516,7 +517,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Settings';
+				$data['title'] = 'settings';
 
 				$this->load->view('page/includes/user/header', $data);
 				$this->load->view('page/includes/user/navbar');
@@ -535,7 +536,7 @@ class U extends CI_Controller
 	{
 		if($this->user->is_logged())
 		{
-			$data['title'] = 'Dashboard';
+			$data['title'] = 'dashboard';
 			$data['active'] = 'home';
 			$data['list'] = $this->account->get_user_accounts();
 			
@@ -554,7 +555,7 @@ class U extends CI_Controller
 	{
 		if($this->user->is_logged())
 		{
-			$data['title'] = 'Tickets';
+			$data['title'] = 'tickets';
 			$data['active'] = 'ticket';
 			$data['list'] = $this->ticket->get_user_tickets();
 
@@ -575,21 +576,21 @@ class U extends CI_Controller
 		{
 			if($this->input->post('create'))
 			{
-				$this->fv->set_rules('subject', 'Subject', ['trim', 'required']);
-				$this->fv->set_rules('content', 'Content', ['trim', 'required']);
+				$this->fv->set_rules('subject', $this->base->text('subject', 'label'), ['trim', 'required']);
+				$this->fv->set_rules('content', $this->base->text('content', 'label'), ['trim', 'required']);
 				if($this->grc->is_active())
 				{
 					if($this->grc->get_type() == "google")
 					{
-						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('g-recaptcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					elseif($this->grc->get_type() == "crypto")
 					{
-						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('CRLT-captcha-token', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					else
 					{
-						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('h-captcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					if($this->fv->run() === true)
 					{
@@ -615,18 +616,18 @@ class U extends CI_Controller
 							$res = $this->ticket->create_ticket($subject, $content);
 							if($res)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been created successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_msg', 'success')]));
 								redirect('u/tickets');
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 								redirect('u/create_ticket');
 							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
 							redirect('u/create_ticket');
 						}
 					}
@@ -638,7 +639,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/create_ticket');
 					}
@@ -652,12 +653,12 @@ class U extends CI_Controller
 						$res = $this->ticket->create_ticket($subject, $content);
 						if($res)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been created successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_msg', 'success')]));
 							redirect('u/tickets');
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							redirect('u/create_ticket');
 						}
 					}
@@ -669,7 +670,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/create_ticket');
 					}
@@ -677,7 +678,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Create Ticket';
+				$data['title'] = 'create_ticket';
 				$data['active'] = 'ticket';
 
 				$this->load->view('page/includes/user/header', $data);
@@ -703,12 +704,12 @@ class U extends CI_Controller
 					$res = $this->ticket->change_ticket_status($id, 'closed');
 					if($res)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been closed successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_closed_msg', 'success')]));
 						redirect("u/view_ticket/$id");
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect("u/view_ticket/$id");
 					}
 				}
@@ -724,12 +725,12 @@ class U extends CI_Controller
 					$res = $this->ticket->change_ticket_status($id, 'open');
 					if($res)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been opened successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_opened_msg', 'success')]));
 						redirect("u/view_ticket/$id");
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect("u/view_ticket/$id");
 					}
 				}
@@ -742,20 +743,20 @@ class U extends CI_Controller
 			{
 				if($this->ticket->view_user_ticket($id))
 				{
-					$this->fv->set_rules('content', 'Content', ['trim', 'required']);
+					$this->fv->set_rules('content', $this->base->text('content', 'label'), ['trim', 'required']);
 					if($this->grc->is_active())
 					{
 						if($this->grc->get_type() == "google")
 					{
-						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('g-recaptcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					elseif($this->grc->get_type() == "crypto")
 					{
-						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('CRLT-captcha-token', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					else
 					{
-						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('h-captcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 						if($this->fv->run() === true)
 						{
@@ -780,18 +781,18 @@ class U extends CI_Controller
 								$res = $this->ticket->add_reply($id, $content, $this->user->get_key(), 'customer');
 								if($res)
 								{
-									$this->session->set_flashdata('msg', json_encode([1, 'Ticket reply added successfully.']));
+									$this->session->set_flashdata('msg', json_encode([1, $this->base->text('reply_msg', 'success')]));
 									redirect("u/view_ticket/$id");
 								}
 								else
 								{
-									$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 									redirect("u/view_ticket/$id");
 								}
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
 								redirect("u/view_ticket/$id");
 							}
 						}
@@ -803,7 +804,7 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
 							redirect("u/view_ticket/$id");
 						}
@@ -816,12 +817,12 @@ class U extends CI_Controller
 							$res = $this->ticket->add_reply($id, $content, $this->user->get_key(), 'customer');
 							if($res)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'Ticket reply added successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('reply_msg', 'success')]));
 								redirect("u/view_ticket/$id");
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 								redirect("u/view_ticket/$id");
 							}
 						}
@@ -833,7 +834,7 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
 							redirect("u/view_ticket/$id");
 						}
@@ -846,7 +847,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'View Ticket '.$id;
+				$data['title'] = 'view_ticket';
 				$data['active'] = 'ticket';
 				$data['ticket'] = $this->ticket->view_user_ticket($id);
 				if($data['ticket'] !== false)
@@ -874,7 +875,7 @@ class U extends CI_Controller
 	{
 		if($this->user->is_logged())
 		{
-			$data['title'] = 'Accounts';
+			$data['title'] = 'accounts';
 			$data['active'] = 'account';
 			$data['list'] = $this->account->get_user_accounts();
 			
@@ -897,19 +898,19 @@ class U extends CI_Controller
 			if($count > 2)
 			{
 				if($this->input->post('check_domain')){
-					$this->fv->set_rules('domain', 'Domain', ['trim', 'required']);
+					$this->fv->set_rules('domain', $this->base->text('domain', 'label'), ['trim', 'required']);
 					if($this->fv->run() !== false)
 					{
 						$domain = $this->input->post('domain');
 						$res = $this->mofh->check_availablity($domain);
 						if($res === true)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Domain selected successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('domain_selected_msg', 'success')]));
 							$this->session->set_userdata('domain', strtolower($domain));
 							redirect('u/create_account#configure');
 						}
 						elseif($res === false){
-							$this->session->set_flashdata('msg', json_encode([0, 'Domain is not availiable.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('domain_not_available', 'error')]));
 						}
 						else
 						{
@@ -919,12 +920,12 @@ class U extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'Please fill up domain field.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('fill_domain_field', 'error')]));
 						redirect('u/create_account');
 					}
 				}
 				elseif($this->input->post('check_subdomain')){
-					$this->fv->set_rules('domain', 'Domain', ['trim', 'required']);
+					$this->fv->set_rules('domain', $this->base->text('domain', 'label'), ['trim', 'required']);
 					$this->fv->set_rules('ext', 'Extension', ['trim', 'required']);
 					if($this->fv->run() !== false)
 					{
@@ -934,12 +935,12 @@ class U extends CI_Controller
 						$res = $this->mofh->check_availablity($subdomain);
 						if($res === true)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Domain selected successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('domain_selected_msg', 'success')]));
 							$this->session->set_userdata('domain', strtolower($subdomain));
 							redirect('u/create_account#configure');
 						}
 						elseif($res === false){
-							$this->session->set_flashdata('msg', json_encode([0, 'Domain is not availiable.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('domain_not_available', 'error')]));
 						}
 						else
 						{
@@ -949,27 +950,27 @@ class U extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'Please fill up domain field.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('fill_domain_field', 'error')]));
 						redirect('u/create_account');
 					}
 				}
 				elseif($this->input->post('create'))
 				{
-					$this->fv->set_rules('domain', 'Domain', ['trim', 'required']);
-					$this->fv->set_rules('label', 'Label', ['trim', 'required']);
+					$this->fv->set_rules('domain', $this->base->text('domain', 'label'), ['trim', 'required']);
+					$this->fv->set_rules('label', $this->base->text('label', 'label'), ['trim', 'required']);
 					if($this->grc->is_active())
 					{
 						if($this->grc->get_type() == "google")
 					{
-						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('g-recaptcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					elseif($this->grc->get_type() == "crypto")
 					{
-						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('CRLT-captcha-token', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					else
 					{
-						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('h-captcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 						if($this->fv->run() === true)
 						{
@@ -995,7 +996,7 @@ class U extends CI_Controller
 								$res = $this->mofh->create_account($label, $domain);
 								if($res === true)
 								{
-									$this->session->set_flashdata('msg', json_encode([1, 'Account created successfully.']));
+									$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_msg', 'success')]));
 									if(isset($_SESSION['domain']))
 									{
 										unset($_SESSION['domain']);
@@ -1009,7 +1010,7 @@ class U extends CI_Controller
 								}
 								elseif($res === false)
 								{
-									$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 									redirect('u/create_account#configure');
 								}
 								else
@@ -1020,7 +1021,7 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
 								redirect('u/create_account#configure');
 							}
 						}
@@ -1032,7 +1033,7 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
 							redirect('u/create_account#configure');
 						}
@@ -1046,7 +1047,7 @@ class U extends CI_Controller
 							$res = $this->mofh->create_account($label, $domain);
 							if($res === true)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'Account created successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_msg', 'success')]));
 								if(isset($_SESSION['domain']))
 								{
 									unset($_SESSION['domain']);
@@ -1060,7 +1061,7 @@ class U extends CI_Controller
 							}
 							elseif($res === false)
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 								redirect('u/create_account#configure');
 							}
 							else
@@ -1077,7 +1078,7 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
 							redirect('u/create_account#configure');
 						}
@@ -1085,7 +1086,7 @@ class U extends CI_Controller
 				}
 				else
 				{
-					$data['title'] = 'Create Account';
+					$data['title'] = 'create_account';
 					$data['active'] = 'account';
 
 					$this->load->view('page/includes/user/header', $data);
@@ -1121,7 +1122,7 @@ class U extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/view_account/$id");
 				}
 			}
@@ -1144,7 +1145,7 @@ class U extends CI_Controller
 					$link = $this->sp->load_builder_url($username, $password, $domain, $dir);
 					if($link === false)
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect("u/view_account/$id");
 					}
 					elseif($link['success'] == true)
@@ -1159,7 +1160,7 @@ class U extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/view_account/$id");
 				}
 			}
@@ -1178,30 +1179,30 @@ class U extends CI_Controller
 						}
 						elseif($res !== false)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Account reactivated successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_reactivated_msg', 'success')]));
 							redirect("u/view_account/$id");
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							redirect("u/view_account/$id");
 						}
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'Unable to reactivate account.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('reactivation_error', 'error')]));
 						redirect("u/view_account/$id");
 					}
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/view_account/$id");
 				}
 			}
 			else
 			{
-				$data['title'] = 'View Account';
+				$data['title'] = 'view_account';
 				$data['active'] = 'account';
 				$data['id'] = $id;
 				$data['data'] = $this->account->get_user_account($id);
@@ -1237,18 +1238,18 @@ class U extends CI_Controller
 					$res = $this->account->set_label($id, $this->input->post('label'));
 					if($res !== false)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'Account label updated successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('label_updated_msg', 'success')]));
 						redirect("u/account_settings/$id");
 					}
 						else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect("u/account_settings/$id");
 					}
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/account_settings/$id");
 				}
 			}
@@ -1267,12 +1268,12 @@ class U extends CI_Controller
 						}
 						elseif($res !== false)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Account password updated successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_password_msg', 'success')]));
 							redirect("u/view_account/$id");
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							redirect("u/account_settings/$id");
 						}
 					}
@@ -1284,7 +1285,7 @@ class U extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/account_settings/$id");
 				}
 			} 
@@ -1302,30 +1303,30 @@ class U extends CI_Controller
 						}
 						elseif($res !== false)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_deactivated_msg', 'success')]));
 							redirect("u/accounts");
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							redirect("u/account_settings/$id");
 						}
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'Unable to deactivate account.']));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('deactivation_error', 'error')]));
 							redirect("u/account_settings/$id");
 					}
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/account_settings/$id");
 				}
 			}
 			else
 			{
-				$data['title'] = 'Account Settings';
+				$data['title'] = 'account_settings';
 				$data['active'] = 'account';
 				$data['id'] = $id;
 				$data['data'] = $this->account->get_user_account($id);
@@ -1354,7 +1355,7 @@ class U extends CI_Controller
 		$domain = strtolower($domain);
 		if($this->user->is_logged())
 		{
-			$data['title'] = 'Domain Checker';
+			$data['title'] = 'domain_checker';
 			$data['active'] = 'domain';
 			if($domain !== false)
 			{
@@ -1383,7 +1384,7 @@ class U extends CI_Controller
 		{
 			if($this->ssl->is_active())
 			{
-				$data['title'] = 'SSL Certitcates';
+				$data['title'] = 'ssl';
 				$data['active'] = 'ssl';
 				$data['list'] = $this->ssl->get_ssl_list();
 				
@@ -1409,20 +1410,20 @@ class U extends CI_Controller
 		{
 			if($this->input->post('create'))
 			{
-				$this->fv->set_rules('csr', 'CSR Code', ['trim', 'required']);
+				$this->fv->set_rules('csr', $this->base->text('csr_code', 'label'), ['trim', 'required']);
 				if($this->grc->is_active())
 				{
 					if($this->grc->get_type() == "google")
 					{
-						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('g-recaptcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					elseif($this->grc->get_type() == "crypto")
 					{
-						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('CRLT-captcha-token', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					else
 					{
-						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
+						$this->fv->set_rules('h-captcha-response', $this->base->text('recaptcha', 'label'), ['trim', 'required']);
 					}
 					if($this->fv->run() === true)
 					{
@@ -1452,18 +1453,18 @@ class U extends CI_Controller
 							}
 							elseif(is_bool($res) AND $res == true)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate created successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_created_msg', 'success')]));
 								redirect('u/ssl');
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 								redirect('u/create_ssl');
 							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
 							redirect('u/create_ssl');
 						}
 					}
@@ -1475,7 +1476,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/create_ssl');
 					}
@@ -1493,12 +1494,12 @@ class U extends CI_Controller
 						}
 						if(is_bool($res) AND $res == true)
 						{
-							$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate created successfully.']));
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_created_msg', 'success')]));
 							redirect('u/ssl');
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							redirect('u/create_ssl');
 						}
 					}
@@ -1510,7 +1511,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
 						redirect('u/create_ssl');
 					}
@@ -1520,7 +1521,7 @@ class U extends CI_Controller
 			{
 				if($this->ssl->is_active())
 				{
-					$data['title'] = 'Create SSL';
+					$data['title'] = 'create_ssl';
 					$data['active'] = 'ssl';
 
 					$this->load->view('page/includes/user/header', $data);
@@ -1551,12 +1552,12 @@ class U extends CI_Controller
 				$res = $this->db->delete('is_ssl');
 				if($res !== false)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate deleted successfully.']));
+					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_deleted_msg', 'success')]));
 					redirect("u/view_ssl/$id");
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/view_ssl/$id");
 				}
 			}
@@ -1570,12 +1571,12 @@ class U extends CI_Controller
 				}
 				elseif(is_bool($res) AND $res == true)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate cancelled successfully.']));
+					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_cancelled_msg', 'success')]));
 					redirect("u/view_ssl/$id");
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("u/view_ssl/$id");
 				}
 			}
@@ -1583,7 +1584,7 @@ class U extends CI_Controller
 			{
 				if($this->ssl->is_active())
 				{
-					$data['title'] = 'View SSL';
+					$data['title'] = 'view_ssl';
 					$data['active'] = 'ssl';
 					$data['id'] = $id;
 					$data['data'] = $this->ssl->get_ssl_info($id);
