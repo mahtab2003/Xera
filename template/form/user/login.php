@@ -1,19 +1,19 @@
 <?= form_open('u/login', ['class' => 'card card-md']) ?>
 	<div class="card-body">
-		<h2 class="card-title text-center mb-3">Login to your account</h2>
+		<h2 class="card-title text-center mb-3"><?= $this->base->text('login_to_account', 'heading') ?></h2>
 		<div class="mb-3">
-			<label class="form-label">Email address</label>
-			<input type="email" name="email" class="form-control" placeholder="Enter email">
+			<label class="form-label"><?= $this->base->text('email_address', 'label') ?></label>
+			<input type="email" name="email" class="form-control" placeholder="<?= $this->base->text('email_address', 'label') ?>">
 		</div>
 		<div class="mb-2">
 			<label class="form-label">
-				Password
+				<?= $this->base->text('password', 'label') ?>
 				<span class="form-label-description">
-					<a href="<?= base_url();?>u/forget">I forgot password</a>
+					<a href="<?= base_url();?>u/forget"><?= $this->base->text('i_forget_password', 'heading') ?></a>
 				</span>
 			</label>
 			<div class="input-group input-group-flat">
-				<input type="password" class="form-control" id="password" placeholder="Password" name="password">
+				<input type="password" class="form-control" id="password" placeholder="<?= $this->base->text('password', 'label') ?>" name="password">
 				<span class="input-group-text">
 					<a href="#" class="link-secondary trigger" data-toggle='password' title="Show password" data-bs-toggle="tooltip">
 						<i class="fa fa-eye"></i>
@@ -24,7 +24,7 @@
 		<div class="mb-3">
 			<label class="form-check">
 				<input type="checkbox" name="checkbox" value="1" class="form-check-input"/>
-				<span class="form-check-label">Remember me on this device</span>
+				<span class="form-check-label"><?= $this->base->text('remember_me_device', 'heading') ?></span>
 			</label>
 		</div>
 		<?php if($this->grc->is_active()):?>
@@ -46,10 +46,10 @@
 			</div>
 		<?php endif ?>
 		<div class="form-footer mt-1">
-			<input type="submit" class="btn btn-primary w-100" name="login" value="Sign in">
+			<input type="submit" class="btn btn-primary w-100" name="login" value="<?= $this->base->text('signin', 'button') ?>">
 		</div>
 	</div>
 </form>
 <div class="text-center text-muted mt-3">
-	Don't have account yet? <a href="<?= base_url();?>u/register" tabindex="-1">Register</a>
+	<?= $this->base->text('dont_have_account', 'heading') ?> <a href="<?= base_url();?>u/register" tabindex="-1"><?= $this->base->text('register', 'button') ?></a>
 </div>

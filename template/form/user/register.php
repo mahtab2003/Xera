@@ -1,18 +1,18 @@
 <?= form_open('u/register', ['class' => 'card card-md']) ?>
 	<div class="card-body">
-		<h2 class="card-title text-center mb-3">Create a new account</h2>
+		<h2 class="card-title text-center mb-3"><?= $this->base->text('create_an_account', 'label') ?></h2>
 		<div class="mb-2">
-			<label class="form-label">Full name</label>
-			<input type="text" name="name" class="form-control" placeholder="Enter name">
+			<label class="form-label"><?= $this->base->text('your_name', 'label') ?></label>
+			<input type="text" name="name" class="form-control" placeholder="<?= $this->base->text('your_name', 'label') ?>">
 		</div>
 		<div class="mb-2">
-			<label class="form-label">Email address</label>
-			<input type="email" name="email" class="form-control" placeholder="Enter email">
+			<label class="form-label"><?= $this->base->text('email_address', 'label') ?></label>
+			<input type="email" name="email" class="form-control" placeholder="<?= $this->base->text('email_address', 'label') ?>">
 		</div>
 		<div class="mb-2">
-			<label class="form-label">Password</label>
+			<label class="form-label"><?= $this->base->text('password', 'label') ?></label>
 			<div class="input-group input-group-flat">
-				<input type="password" class="form-control" id="password" placeholder="Password" name="password">
+				<input type="password" class="form-control" id="password" placeholder="<?= $this->base->text('password', 'label') ?>" name="password">
 				<span class="input-group-text">
 					<a href="#" class="link-secondary trigger" id="toggle-btn" data-toggle="password" title="Show password" data-bs-toggle="tooltip">
 						<i class="fa fa-eye"></i>
@@ -21,9 +21,9 @@
 			</div>
 		</div>
 		<div class="mb-3">
-			<label class="form-label">Confirm Password</label>
+			<label class="form-label"><?= $this->base->text('confirm_password', 'label') ?></label>
 			<div class="input-group input-group-flat">
-				<input type="password" class="form-control" id="password1" placeholder="Confirm Password" name="password1">
+				<input type="password" class="form-control" id="password1" placeholder="<?= $this->base->text('confirm_password', 'label') ?>" name="password1">
 				<span class="input-group-text">
 					<a href="#" class="link-secondary trigger" id="toggle-btn" data-toggle="password1" title="Show password" data-bs-toggle="tooltip">
 						<i class="fa fa-eye"></i>
@@ -34,7 +34,7 @@
 		<div class="mb-3">
 			<label class="form-check">
 				<input type="checkbox" name="checkbox" value="1" class="form-check-input" required="true" />
-				<span class="form-check-label">I agree to <a href="<?= base_url() ?>e/tos">Term of Services(TOS)</a></span>
+				<span class="form-check-label"><?= $this->base->text('i_agree_to', 'heading') ?> <a href="<?= base_url() ?>e/tos"><?= $this->base->text('tos', 'heading') ?></a></span>
 			</label>
 		</div>
 		<?php if($this->grc->is_active()):?>
@@ -56,10 +56,10 @@
 			</div>
 		<?php endif ?>
 		<div class="form-footer mt-1">
-			<input type="submit" class="btn btn-primary w-100" name="register" value="Register">
+			<input type="submit" class="btn btn-primary w-100" name="register" value="<?= $this->base->text('register', 'button') ?>">
 		</div>
 	</div>
 </form>
 <div class="text-center text-muted mt-3">
-	Already have an account? <a href="<?= base_url();?>u/login" tabindex="-1">Login</a>
+	<?= $this->base->text('have_an_account', 'heading') ?> <a href="<?= base_url();?>u/login" tabindex="-1"><?= $this->base->text('login', 'button') ?></a>
 </div>
