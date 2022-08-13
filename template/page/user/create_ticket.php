@@ -1,7 +1,7 @@
 <div class="container-xl">
 	<div class="page-header d-print-none">
 		<h2 class="page-title py-3">
-			Create Ticket
+			<?= $this->base->text($title, 'title') ?>
 		</h2>
 	</div>
 	<div class="card p-2 mb-3">
@@ -9,12 +9,12 @@
 			<?= form_open('u/create_ticket') ?>
 				<div class="row">
 					<div class="col-md-12">
-						<label class="form-label">Subject</label>
-						<input type="text" name="subject" placeholder="Subject" class="form-control mb-2">
+						<label class="form-label"><?= $this->base->text('subject', 'label') ?></label>
+						<input type="text" name="subject" placeholder="<?= $this->base->text('subject', 'label') ?>" class="form-control mb-2">
 					</div>
 					<div class="col-sm-12 mb-2">
-						<label class="form-label">Content</label>
-						<textarea id="editor" class="form-control" name="content"></textarea>
+						<label class="form-label"><?= $this->base->text('content', 'label') ?></label>
+						<textarea id="editor" class="form-control" name="content" placeholder="<?= $this->base->text('content', 'label') ?>"></textarea>
 					</div>
 					<?php if($this->grc->is_active()):?>
 						<div class="mb-2">
@@ -35,7 +35,7 @@
 						</div>
 					<?php endif ?>
 					<div class="col-sm-12">
-						<input type="submit" name="create" value="Create" class="btn btn-primary btn-pill">
+						<input type="submit" name="create" value="<?= $this->base->text('create', 'button') ?>" class="btn btn-primary btn-pill">
 					</div>
 				</div>
 			</form>

@@ -3,27 +3,27 @@
 		<div class="row align-items-center">
 			<div class="col">
 				<h2 class="page-title py-3">
-					Support Tickets
+					<?= $this->base->text($title, 'title') ?>
 				</h2>
 			</div>
 			<div class="col-auto ms-auto d-print-none">
-				<a class="btn btn-primary" href="<?= base_url() ?>u/create_ticket">Create</a>
+				<a class="btn btn-primary" href="<?= base_url() ?>u/create_ticket"><?= $this->base->text('create', 'button') ?></a>
 			</div>
 		</div>
 	</div>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
-			<div class="card-title">Your Tickets</div>
+			<div class="card-title"><?= $this->base->text('your_tickets', 'heading') ?></div>
 		</div>
 		<div class="table-responsive">
 			<table class="table card-table table-transparent text-nowrap table-nowrap">
 				<thead>
 					<tr>
-						<th width="5%">ID</th>
-						<th width="75%">Subject</th>
-						<th width="10%" class="text-center">Date</th>
-						<th width="10%">Status</th>
-						<th width="10%" class="text-center">Action</th>
+						<th width="5%"><?= $this->base->text('id', 'table') ?></th>
+						<th width="75%"><?= $this->base->text('subject', 'table') ?></th>
+						<th width="10%" class="text-center"><?= $this->base->text('date', 'table') ?></th>
+						<th width="10%"><?= $this->base->text('status', 'table') ?></th>
+						<th width="10%" class="text-center"><?= $this->base->text('action', 'table') ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,43 +36,35 @@
 								<td>
 									<?php if ($item['ticket_status'] == 'open'): ?>
 										<span class="badge bg-orange">
-											<?= $item['ticket_status'] ?>
+											<?= $this->base->text($item['ticket_status'], 'table') ?>
 											<?php $btn = ['fa-clock', 'btn-yellow'] ?>
 										</span>
 									<?php elseif ($item['ticket_status'] == 'support' OR $item['ticket_status'] == 'customer'): ?>
 										<span class="badge bg-green">
-											<?= $item['ticket_status'] ?>
+											<?= $this->base->text($item['ticket_status'], 'table') ?>
 											<?php $btn = ['fa-envelope-open', 'btn-green'] ?>
 										</span>
 									<?php elseif ($item['ticket_status'] == 'closed'): ?>
 										<span class="badge bg-red">
-											<?= $item['ticket_status'] ?>
+											<?= $this->base->text($item['ticket_status'], 'table') ?>
 											<?php $btn = ['fa-lock', 'btn-red'] ?>
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'u/view_ticket/'.$item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> Manage</a></td>
+								<td><a href="<?= base_url().'u/view_ticket/'.$item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="5" class="text-center">
-								<div class="py-5">
-									<i class="fa fa-box-open" style="font-size: 80px;"></i>
-									<div class="mb-2">
-										No support tickets yet?
-									</div>
-									<a href="<?= base_url() ?>u/create_ticket" class="btn btn-primary">Create Now</a>
-								</div>
-							</td>
+							<td colspan="5" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 						</tr>
 					<?php endif ?>
 				</tbody>
 			</table>
 		</div>
 		<div class="card-footer py-2">
-			<?= count($list) ?> Support Tickets
+			<?= count($list) ?> <?= $this->base->text('support_tickets', 'heading') ?>
 		</div>
 	</div>
 </div>

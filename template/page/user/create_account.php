@@ -1,19 +1,19 @@
 <div class="container-xl">
 	<div class="page-header d-print-none">
 		<h2 class="page-title py-3">
-			Create Account
+			<?= $this->base->text($title, 'title') ?>
 		</h2>
 	</div>
 	<div class="card">
 		<ul class="nav nav-tabs nav-fill">
 			<li class="nav-item">
-				<a class="nav-link active"  data-bs-toggle="tab" href="#checkdomain"><i class="fa fa-globe me-2"></i> Check Domain</a>
+				<a class="nav-link active"  data-bs-toggle="tab" href="#checkdomain"><i class="fa fa-globe me-2"></i> <?= $this->base->text('check_domain', 'button') ?></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link"  data-bs-toggle="tab" <?php if(isset($_SESSION['domain'])): ?>href="#configure"<?php else: ?>href="#" disabled<?php endif; ?>><i class="fa fa-cogs me-2"></i> Configure</a>
+				<a class="nav-link"  data-bs-toggle="tab" <?php if(isset($_SESSION['domain'])): ?>href="#configure"<?php else: ?>href="#" disabled<?php endif; ?>><i class="fa fa-cogs me-2"></i> <?= $this->base->text('configure', 'button') ?></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link"  data-bs-toggle="tab" <?php if(isset($_SESSION['done'])): ?>href="#done"<?php else: ?>href="#" disabled<?php endif; ?>><i class="fa fa-check-circle me-2"></i> Done</a>
+				<a class="nav-link"  data-bs-toggle="tab" <?php if(isset($_SESSION['done'])): ?>href="#done"<?php else: ?>href="#" disabled<?php endif; ?>><i class="fa fa-check-circle me-2"></i> <?= $this->base->text('done', 'button') ?></a>
 			</li>
 		</ul>
 		<div class="card-body">
@@ -21,10 +21,10 @@
 				<div class="tab-pane active show" id="checkdomain">
 					<ul class="nav nav-tabs mb-2">
 						<li class="nav-item">
-							<a class="nav-link active"  data-bs-toggle="tab" href="#subdomain">Subomain</a>
+							<a class="nav-link active"  data-bs-toggle="tab" href="#subdomain"><?= $this->base->text('subdomain', 'button') ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link"  data-bs-toggle="tab" href="#customdomain">Custom Domain</a>
+							<a class="nav-link"  data-bs-toggle="tab" href="#customdomain"><?= $this->base->text('custom_domain', 'button') ?></a>
 						</li>
 					</ul>
 					<div class="tab-content">
@@ -32,7 +32,7 @@
 							<?= form_open('u/create_account') ?>
 								<div class="">
 									<div class="mb-2">
-										<input type="text" name="domain" class="form-control" placeholder="domain name...">
+										<input type="text" name="domain" class="form-control" placeholder="<?= $this->base->text('domain_name', 'label') ?>">
 									</div>
 									<div class="mb-2">
 										<select name="ext" class="form-control">
@@ -42,7 +42,7 @@
 										</select>
 									</div>
 									<div class="mb-2 d-grid">
-										<input type="submit" name="check_subdomain" class="btn btn-primary" value="Check Availibilty">
+										<input type="submit" name="check_subdomain" class="btn btn-primary" value="<?= $this->base->text('check_availibilty', 'button') ?>">
 									</div>
 								</div>
 							</form>
@@ -51,10 +51,10 @@
 							<?= form_open('u/create_account') ?>
 								<div class="">
 									<div class="mb-2">
-										<input type="text" name="domain" class="form-control" placeholder="domain name...">
+										<input type="text" name="domain" class="form-control" placeholder="<?= $this->base->text('domain_name', 'label') ?>">
 									</div>
 									<div class="mb-2 d-grid">
-										<input type="submit" name="check_domain" class="btn btn-primary" value="Check Availibilty">
+										<input type="submit" name="check_domain" class="btn btn-primary" value="<?= $this->base->text('check_availibilty', 'button') ?>">
 									</div>
 								</div>
 							</form>
@@ -64,20 +64,20 @@
 				<div class="tab-pane" id="configure">
 					<?= form_open('u/create_account') ?>
 						<div class="mb-2">
-							<label class="form-label">Domain name</label>
+							<label class="form-label"><?= $this->base->text('domain_name', 'label') ?></label>
 							<input type="text" name="domain" value="<?php if(isset($_SESSION['domain'])): echo($_SESSION['domain']); endif ?>" class="form-control" readonly="true">
 						</div>
 						<div class="mb-2">
-							<label class="form-label">Label</label>
-							<input type="text" name="label" placeholder="Label for account..." class="form-control">
+							<label class="form-label"><?= $this->base->text('account_label', 'label') ?></label>
+							<input type="text" name="label" placeholder="<?= $this->base->text('account_label', 'label') ?>" class="form-control">
 						</div>
 						<div class="mb-2">
-							<label class="form-label">Username</label>
-							<input type="text" placeholder="Auto generated..." class="form-control" disabled="true">
+							<label class="form-label"><?= $this->base->text('username', 'label') ?></label>
+							<input type="text" placeholder="<?= $this->base->text('username', 'label') ?>" class="form-control" disabled="true">
 						</div>
 						<div class="mb-2">
-							<label class="form-label">Password</label>
-							<input type="text" placeholder="Password for account..." class="form-control">
+							<label class="form-label"><?= $this->base->text('password', 'label') ?></label>
+							<input type="text" placeholder="<?= $this->base->text('password', 'label') ?>" class="form-control">
 						</div>
 						<?php if($this->grc->is_active()):?>
 							<div class="mb-2">
@@ -98,14 +98,14 @@
 							</div>
 						<?php endif ?>
 						<div class="mb-2">
-							<input type="submit" name="create" value="Create Account" class="btn btn-primary">
+							<input type="submit" name="create" value="<?= $this->base->text('create_account', 'button') ?>" class="btn btn-primary">
 						</div>
 					</form>
 				</div>
 				<div class="tab-pane" id="done">
 					<div class="text-center">
-						<p>Everything have been setup correctly.</p>
-						<a href="<?= base_url().'u/accounts' ?>" class="btn btn-primary">View Acounts</a>
+						<p><?= $this->base->text('account_created', 'paragraph') ?></p>
+						<a href="<?= base_url().'u/accounts' ?>" class="btn btn-primary"><?= $this->base->text('view_accounts', 'button') ?></a>
 					</div>
 				</div>
 			</div>

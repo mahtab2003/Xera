@@ -1,30 +1,30 @@
 <div class="container-xl">
 	<div class="page-header d-print-none">
 		<h2 class="page-title py-3">
-			View Ticket
+			<?= $this->base->text($title, 'title') ?>
 		</h2>
 	</div>
 	<div class="card mb-3">
 		<div class="card-header">
-			<div class="card-title">Information</div>
+			<div class="card-title"><?= $this->base->text('information', 'heading') ?></div>
 		</div>
 		<div class="card-body">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Status:</span>
+						<span class="col"><?= $this->base->text('status', 'table') ?>:</span>
 						<span class="col-auto ms-auto">
 							<?php if ($ticket['ticket_status'] == 'open'): ?>
 								<span class="badge bg-orange">
-									<?= $ticket['ticket_status'] ?>
+									<?= $this->base->text($ticket['ticket_status'], 'table') ?>
 								</span>
 							<?php elseif ($ticket['ticket_status'] == 'support' OR $ticket['ticket_status'] == 'customer'): ?>
 								<span class="badge bg-green">
-									<?= $ticket['ticket_status'] ?>
+									<?= $this->base->text($ticket['ticket_status'], 'table') ?>
 								</span>
 							<?php elseif ($ticket['ticket_status'] == 'closed'): ?>
 								<span class="badge bg-red">
-									<?= $ticket['ticket_status'] ?>
+									<?= $this->base->text($ticket['ticket_status'], 'table') ?>
 								</span>
 							<?php endif ?>
 						</span>
@@ -32,19 +32,19 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Opened by:</span>
+						<span class="col"><?= $this->base->text('open_by', 'table') ?>:</span>
 						<span class="col-auto ms-auto"><?= $this->user->get_name() ?></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Opened at:</span>
+						<span class="col"><?= $this->base->text('open_at', 'table') ?>:</span>
 						<span class="col-auto ms-auto"><?= date('d-m-Y', $ticket['ticket_time']) ?></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Last Reply:</span>
+						<span class="col"><?= $this->base->text('last_reply', 'table') ?>:</span>
 						<span class="col-auto ms-auto"><?php if(count($replies)>0): ?>
 						<?= date('d-m-Y', $replies[count($replies)-1]['reply_time']); ?>
 						<?php else: ?>
@@ -57,7 +57,7 @@
 		</div>
 		<div class="card-footer">
 			<div class="row align-items-center">
-				<span class="col">Subject:</span>
+				<span class="col"><?= $this->base->text('subject', 'table') ?>:</span>
 				<span class="col-auto ms-auto"><?= $ticket['ticket_subject'] ?></span>
 			</div>
 		</div>
@@ -107,20 +107,20 @@
 	<?php else: ?>
 		<div class="card mb-3">
 			<div class="card-body">
-				No reply found.
+				<?= $this->base->text('no_reply_found', 'paragraph') ?>
 			</div>
 		</div>
 	<?php endif ?>
 	<?php if ($ticket['ticket_status'] == 'closed'): ?>
 		<div class="card mb-3">
 			<div class="card-body">
-				Ticket had been closed. Click <a href="<?= base_url().'u/view_ticket/'.$ticket['ticket_key'].'?open=true' ?>">here</a> to re-open.
+				<?= $this->base->text('ticket_closed', 'paragraph') ?> <a href="<?= base_url().'u/view_ticket/'.$ticket['ticket_key'].'?open=true' ?>"><?= $this->base->text('here', 'button') ?></a> <?= $this->base->text('to_reopen', 'paragraph') ?>
 			</div>
 		</div>
 	<?php else: ?>
 		<div class="card mb-3" id="box">
 			<div class="card-header">
-				<div class="card-title">Make a reply</div>
+				<div class="card-title"><?= $this->base->text('make_a_reply', 'heading') ?></div>
 			</div>
 			<div class="card-body">
 				<?= form_open('u/view_ticket/'.$ticket['ticket_key']) ?>
@@ -146,8 +146,8 @@
 						</div>
 					<?php endif ?>
 					<div>
-						<input type="submit" name="reply" value="Add reply" class="btn btn-primary btn-pill">
-						<a href="<?= base_url().'u/view_ticket/'.$ticket['ticket_key'].'?close=true' ?>" class="btn btn-pill btn-danger">Close Ticket</a>
+						<input type="submit" name="reply" value="<?= $this->base->text('add_reply', 'button') ?>" class="btn btn-primary btn-pill">
+						<a href="<?= base_url().'u/view_ticket/'.$ticket['ticket_key'].'?close=true' ?>" class="btn btn-pill btn-danger"><?= $this->base->text('close_ticket', 'button') ?></a>
 					</div>
 				</form>
 			</div>

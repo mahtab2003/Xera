@@ -1,7 +1,7 @@
 <div class="container-xl">
 	<div class="page-header d-print-none">
 		<h2 class="page-title py-3">
-			Create SSL
+			<?= $this->base->text($title, 'title') ?>
 		</h2>
 	</div>
 	<div class="card p-2 mb-3">
@@ -9,8 +9,8 @@
 			<?= form_open('u/create_ssl') ?>
 				<div class="row">
 					<div class="col-sm-12 mb-2">
-						<label class="form-label">CSR Code</label>
-						<textarea class="form-control" name="csr" placeholder="CSR code here...." style="min-height: 250px;"></textarea>
+						<label class="form-label"><?= $this->base->text('csr_code', 'label') ?></label>
+						<textarea class="form-control" name="csr" placeholder="<?= $this->base->text('csr_code', 'label') ?>" style="min-height: 250px;"></textarea>
 					</div>
 					<?php if($this->grc->is_active()):?>
 						<div class="mb-2">
@@ -31,7 +31,7 @@
 						</div>
 					<?php endif ?>
 					<div class="col-sm-12">
-						<input type="submit" name="create" value="Request" class="btn btn-primary btn-pill">
+						<input type="submit" name="create" value="<?= $this->base->text('request', 'button') ?>" class="btn btn-primary btn-pill">
 					</div>
 				</div>
 			</form>

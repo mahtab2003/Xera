@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Upgrade Hosting - <?= $this->base->get_hostname() ?></title>
+	<title><?= $this->base->text('upgrade_hosting', 'title') ?> - <?= $this->base->get_hostname() ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="icon" type="image/png" href="<?= base_url()?>assets/img/fav.png">
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/css/tabler.min.css">
@@ -12,8 +12,8 @@
 	<div class="page page-center">
 		<div class="container text-center">
 			<div class="empty">
-	        <div class="empty-header"><i class="fa fa-sync"></i></div>
-		        <p class="empty-title">Redirecting</p>
+	        <div class="empty-header"><i class="fa fa-sync fa-spin"></i></div>
+		        <p class="empty-title"><?= $this->base->text('redirecting', 'label') ?></p>
 		        <button onclick="location.href = 'https://ifastnet.com/portal/?aff=' + <?= get_aff_id() ?>" hidden="true" id="button"></button>
 	        </div>
 		</div>
