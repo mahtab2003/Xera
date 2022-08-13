@@ -12,5 +12,5 @@
 	</div>
 </form>
 <div class="text-center text-muted mt-3">
-	Forget it, <a href="<?= base_url();?>u/login" tabindex="-1">send me back</a> to the sign in screen.
+	Forget it, <a href="<?= base_url();?>a/login" tabindex="-1">send me back</a> to the sign in screen.
 </div>
