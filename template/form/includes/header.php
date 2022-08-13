@@ -2,6 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
+	<?php if ($this->base->text($title, 'title') !== '...'): ?>
+		<?php $title = $this->base->text($title, 'title'); ?>
+	<?php endif ?>
 	<title><?= $title.' - '.$this->base->get_hostname() ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="icon" type="image/png" href="<?= base_url()?>assets/img/fav.png">
