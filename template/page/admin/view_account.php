@@ -331,13 +331,11 @@
 											<td>
 												<span><?= $domain['domain'] ?></span>
 											</td>
-											<td>
-												<td class="row align-items-center">
+											<td class="row align-items-center">
 												<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm btn-yellow col" target="_blank"><i class="fa fa-file"></i></a>
 												<?php if ($this->sp->is_active()): ?>
 													<a href="<?= base_url().'a/view_account/'.$data['account_username'].'/?builder=true&domain='.$domain['domain'] ?>" class="btn btn-red btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
 												<?php endif ?>
-											</td>
 											</td>
 										</tr>
 									<?php endforeach ?>
