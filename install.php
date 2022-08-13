@@ -317,7 +317,7 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		);");
 		if($sql)
 		{
-			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/config.php');
+			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/database.php');
 			$data = str_replace('DB_HOSTNAME', $hostname, $file);
 			$data = str_replace('DB_USERNAME', $username, $data);
 			$data = str_replace('DB_PASSWORD', $password, $data);
