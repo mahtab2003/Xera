@@ -106,8 +106,8 @@ class Ticket extends CI_Model
 					else
 					{
 						$except_key = $this->fetch_user_except($by, $id);
-						$param['user_name'] = $this->get_user_name($by);
-						$email = $this->get_user_email($by);
+						$param['user_name'] = $this->get_user_name($except_key);
+						$email = $this->get_user_email($except_key);
 						$tpl = 'user';
 						$param['ticket_url'] = base_url().'u/view_ticket/'.$data['ticket_key'];
 					}

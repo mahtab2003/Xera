@@ -11,6 +11,26 @@ elseif(file_exists(APPPATH.'logs/install.json') AND file_exists(APPPATH.'../inst
 
 class Base extends CI_Model
 {
+
+	function __construct()
+	{
+		if(!get_cookie('lang'))
+		{
+			set_cookie('lang', 'english', 365 * 86400);
+		}
+	}
+
+	function text($line, $filename)
+	{
+		$this->lang->load($filename, get_cookie('lang'));
+		$res = $this->lang->line($line);
+		if($res !== false)
+		{
+			return $res;
+		}
+		return '...';
+	}
+
 	function get_hostname()
 	{
 		$res = $this->fetch_base();
