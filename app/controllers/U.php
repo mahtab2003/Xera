@@ -894,7 +894,7 @@ class U extends CI_Controller
 	{
 		if($this->user->is_logged())
 		{
-			$count = $this->account->get_user_accounts();
+			$count = $this->account->get_active_accounts($this->user->get_key());
 			if($count > 2)
 			{
 				if($this->input->post('check_domain')){
@@ -1166,38 +1166,47 @@ class U extends CI_Controller
 			}
 			elseif($this->input->get('reactivate'))
 			{
-				$res = $this->account->get_user_account($id);
-				if($res !== false)
+				$count = $this->account->get_active_accounts($this->user->get_key());
+				if($count > 2)
 				{
-					if($res['account_status'] === 'suspended' OR $res['account_status'] === 'deactivated')
+					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('cant_reactivate', 'error')]));
+					redirect("u/view_account/$id");
+				}
+				else
+				{
+					$res = $this->account->get_user_account($id);
+					if($res !== false)
 					{
-						$res = $this->mofh->reactivate_account($res['account_key']);
-						if(!is_bool($res))
+						if($res['account_status'] === 'suspended' OR $res['account_status'] === 'deactivated')
 						{
-							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect("u/view_account/$id");
-						}
-						elseif($res !== false)
-						{
-							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_reactivated_msg', 'success')]));
-							redirect("u/view_account/$id");
+							$res = $this->mofh->reactivate_account($res['account_key']);
+							if(!is_bool($res))
+							{
+								$this->session->set_flashdata('msg', json_encode([0, $res]));
+								redirect("u/view_account/$id");
+							}
+							elseif($res !== false)
+							{
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_reactivated_msg', 'success')]));
+								redirect("u/view_account/$id");
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
+								redirect("u/view_account/$id");
+							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('reactivation_error', 'error')]));
 							redirect("u/view_account/$id");
 						}
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('reactivation_error', 'error')]));
+						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 						redirect("u/view_account/$id");
 					}
-				}
-				else
-				{
-					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/view_account/$id");
 				}
 			}
 			else
