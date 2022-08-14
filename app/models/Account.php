@@ -28,6 +28,16 @@ class Account extends CI_Model
 		return false;
 	}
 
+	function get_active_accounts($for)
+	{
+		$res = $this->fetch(['for' => $for, 'status' => 'active']);
+		if($res !== false)
+		{
+			return $res;
+		}
+		return false;
+	}
+
 	function get_account($username)
 	{
 		$res = $this->fetch(['username' => $username]);
