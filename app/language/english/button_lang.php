@@ -29,6 +29,7 @@ $lang['open_ticket'] = 'Open Ticket';
 $lang['delete'] = 'Delete';
 $lang['cancel'] = 'Cancel';
 $lang['here'] = 'here';
+$lang['done'] = 'Done';
 $lang['close_ticket'] = 'Close Ticket';
 $lang['add_reply'] = 'Add Reply';
 
