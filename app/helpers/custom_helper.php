@@ -73,6 +73,23 @@ if(!function_exists('get_version'))
 	}
 }
 
+if(!function_exists('get_languages'))
+{
+	function get_languages()
+	{
+		$dir = scandir(APPPATH.'language');
+		$langs = [];
+		foreach($dir as $value)
+		{
+		     if($value !== '..' AND $value !=='.' AND $value !=='index.html')
+		     {
+		           $langs[] = ['name' => ucfirst($value), 'code' => $value];
+		     }
+		}
+		return $langs;
+	}
+}
+
 if(!function_exists('get_tag'))
 {
 	function get_tag()
