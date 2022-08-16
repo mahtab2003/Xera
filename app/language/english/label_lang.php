@@ -1,6 +1,7 @@
 <?php 
 
 $lang['email_address'] = 'Email Address';
+$lang['username'] = 'Username';
 $lang['password'] = 'Password';
 $lang['old_password'] = 'Old Password';
 $lang['new_password'] = 'New Password';
