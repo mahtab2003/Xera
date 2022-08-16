@@ -2,7 +2,7 @@
 
 if(!file_exists(APPPATH.'logs/install.json'))
 {
-	header('location: ../install.php');
+	header('location: install.php');
 }
 elseif(file_exists(APPPATH.'logs/install.json') AND file_exists(APPPATH.'../install.php'))
 {
