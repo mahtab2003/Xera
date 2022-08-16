@@ -9,6 +9,10 @@
 	transition: background 0.3s;
 }
 
+.nav-logo{
+	max-height: 2.5rem;
+}
+
 .navbar-toggler, .nav-link, .navbar-brand{
 	color: rgba(255, 255, 255, 1);
 	transition: color 0.3s;
@@ -24,13 +28,20 @@
 }
 
 .navbar.scrolled .navbar-toggler, .navbar.scrolled .nav-link, .navbar.scrolled .navbar-brand{
-	color: rgba(30, 30, 30, 0.95);
+	color: rgba(120, 20, 245, 0.95);
 	transition: color 0.3s;
 }
 
 .navbar.scrolled .navbar-toggler:hover, .navbar.scrolled .nav-link:hover, .navbar.scrolled .navbar-brand:hover{
-	color: rgba(120, 120, 120, 0.8);
+	color: rgba(230, 90, 150, 0.8);
 	transition: color 0.3s;
+}
+
+.navbar.scrolled .link-clientarea, .text-color{
+	background-image: linear-gradient(45deg, violet, brown);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: rgba(0, 0, 0, 0);
 }
 
 .input-group, .input-group>.form-control, .input-group .btn{
@@ -38,11 +49,11 @@
 }
 
 .header{
-	background-image: linear-gradient(45deg, rgba(5, 5, 5, 0.8), rgba(120, 120, 120, 0.8));
+	background-image: linear-gradient(45deg, rgba(120, 20, 245, 0.8), rgba(230, 90, 150, 0.8));
 }
 
 .btn.btn-primary{
-	background-image: linear-gradient(45deg, rgba(30, 30, 30, 0.95), rgba(120, 120, 120, 0.95));
+	background-image: linear-gradient(45deg, rgba(120, 20, 245, 0.95), rgba(230, 90, 150, 0.95));
 	border: none;
 	border-radius: 5px;
 }
@@ -68,7 +79,7 @@
 }
 
 .icon-color{
-	background-image: linear-gradient(45deg, rgba(5, 5, 5, 0.8), rgba(120, 120, 120, 0.8));
+	background-image: linear-gradient(45deg, rgba(120, 20, 245, 0.8), rgba(230, 90, 150, 0.8));
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: rgba(0, 0, 0, 0);
@@ -79,8 +90,8 @@
 }
 
 .accordion-button:not(.collapsed){
-	background: rgba(20, 20, 20, 0.05);
-	color: rgba(20, 20, 20, 0.9);
+	background: rgba(120, 20, 245, 0.05);
+	color: rgba(120, 20, 245, 0.9);
 }
 
 .accordion-button{
@@ -93,9 +104,9 @@
 
 .accordion-button:focus {
     z-index: 3;
-    border-color: rgba(20, 20, 20, 0.8);
+    border-color: rgba(120, 20, 245, 0.8);
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(20, 20, 20, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(120, 20, 245, 0.25);
 }
 
 .accordion-button:not(.collapsed)::after {
@@ -181,7 +192,7 @@ th{
 
 thead tr{
 
-	background: linear-gradient(45deg, rgba(5, 5, 5, 0.8), rgba(120, 120, 120, 0.8)) !important;
+	background: linear-gradient(45deg, rgba(120, 20, 245, 0.8), rgba(230, 90, 150, 0.8)) !important;
 }
 
 td{
@@ -190,7 +201,7 @@ td{
 
 .price-label{
 	font-size: 3rem !important;
-	background-image: linear-gradient(45deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.8));
+	background-image: linear-gradient(45deg, rgba(75, 245, 205, 0.8), rgba(120, 255, 74, 0.8));
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: rgba(0, 0, 0, 0);
@@ -205,14 +216,18 @@ sub, sup{
 	position: inherit;
 }
 
-.fadeout{
-	transition: box-shadow 0.5s;
-}
+@media only screen and (max-width: 992px){
+	.navbar .navbar-toggler, .navbar .nav-link, .navbar .navbar-brand{
+		color: rgba(255, 255, 255, 1);
+		transition: color 0.3s;
+	}
 
-.fadeout:hover{
-	box-shadow: 2px 2px 3px rgba(30, 30, 30, 0.3) !important;
-}
+	.navbar .navbar-toggler:hover, .navbar .nav-link:hover, .navbar .navbar-brand:hover{
+		color: rgba(255, 255, 255, 0.85);
+		transition: color 0.3s;
+	}
 
-.nav-logo{
-	height: 2.2rem;
+	.btn-search{
+		padding: 0.417rem 0.8rem !important;
+	}
 }
