@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 	<title>Xera - Free Web Hosting Managment System</title>
 	<meta name="robots" content="index, follow">
 	<meta name="description" content="Xera is a free of cost we hosting and SSL management software allow you to manage your clients and accounts from a single place!">
 	<meta name="keywords" content="xera, free hosting clientarea, web hosting clientarea, mofh clientarea, xera, Xera, nxts, nxtsdev, nxts developers" />
-	<link rel='shortcut icon' href="img/fav.png">
-	<link rel="apple-touch-icon" href="img/fav.png">
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+	<link rel='shortcut icon' href="images/fav.png">
+	<link rel="apple-touch-icon" href="images/fav.png">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -21,10 +21,10 @@
 		<div class="navbar-fixed">
 			<nav class="navbar navbar-expand-lg" id="navbar">
 			  <div class="container-fluid">
-			    <a class="navbar-brand" href="#">
-			    	<img src="img/logo.png" class="img-fluid nav-logo">
+			    <a class="navbar-brand" id="brand" href="#">
+			    	<img src="images/logo.png" class="img-fluid nav-logo" >
 			    </a>
-			    <button class="navbar-toggler" id="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			    <button class="navbar-toggler" id="toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			      <i class="fa fa-bars"></i>
 			    </button>
 			    <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -36,13 +36,13 @@
 			          <a class="nav-link" href="#feature">Features</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="https://github.com/mahtab2003/Xera/archive/refs/heads/dev.zip">Download</a>
+			          <a class="nav-link" href="https://github.com/mahtab2003/Xera/releases">Download</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="https://fourm.xera.eu.org" target='_blank'>Community</a>
+			          <a class="nav-link" href="https://github.com/mahtab2003/Xera">Contribute</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="https://getmofhy.eu.org/index.html#donate" target='_blank'>Donate</a>
+			          <a class="nav-link" href="DONATE.md">Donate</a>
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link" href="#faq">F.A.Q</a>
@@ -55,49 +55,44 @@
 		<!-- Navbar End -->
 		<div id="home">
 			<div class="container">
-				<div class="row">
+				<div class="row py-5">
 					<div class="col-md-6">
 						<div class="mt-3 mt-md-3 pt-md-3 mt-lg-5 pt-lg-5 mx-3 py-4 py-md-2">
 				            <h1 class="brand-title text-white">Web Hosting System</h1>
 				            <p class="brand-text text-white">
-				              Xera is a hosting account and support management system especially designed to work with MOFH Api(MyOwnFreeHost) to provide a good experience. 
+				              Xera is a Web Hosting Account and Support Management System designed to work with MyOwnFreeHost Api and GoGetSSL to provide a good user experience. Some people have been hosting their websites on Xera from long, without any risk and ever paying anything! 
 				            </p>
-				            <a href="https://github.com/mahtab2003/Xera/archive/refs/heads/dev.zip" class="btn-sm btn btn-primary"><i class="fa fa-download"></i> Download</a>
-				            <a href="https://github.com/mahtab2003/Xera/releases" class="btn-sm btn btn-primary"><i class="fa fa-book"></i> Releases</a>
+				            <a href="https://github.com/mahtab2003/Xera/releases" class="btn-sm btn btn-primary"><i class="fa fa-download me-1"></i> Download</a>
+				            <a href="https://github.com/mahtab2003/Xera" class="btn-sm btn btn-primary"><i class="fab fa-github me-1"></i> Contribute</a>
 				          </div>
 					</div>
-					<div class="col-md-6">
-						<img src="img/network.png" class="img-fluid py-3" alt="Freinds">
+					<div class="col-md-6 py-5">
+						<img src="images/network.png" class="img-fluid" alt="Freinds">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Header End -->
-	<!-- Sponser Ad Start -->
-	<div class="ad-view py-4 text-center" style="background: rgba(0, 0, 0, 0.15); color: rgb(30, 30, 30)">
-		SPONSER AD
-	</div>
-	<!-- Sponser Ad End -->
 	<!-- Features Start -->
 	<div id="feature" class="bg-light py-5">
-		<div class="container">
+		<div class="container py-2">
 			<div class="row">
 				<div class="col-12 text-center px-4">
-					<h3>Software Features</h3>
-					<p>Learn why so many host's choose Xera on there websites.</p>
+					<h3>Why Choose Xera?</h3>
+					<p>Learn why so many web host choose Xera on there websites.</p>
 				</div>
 				<div class="col-md-6 col-lg-4">
-					<div class="shadow-sm bg-white py-3 px-3 my-2 rounded text-center fadeout">
+					<div class="shadow-sm bg-white py-3 px-4 my-2 rounded text-center">
 						<i class="fa fa-feather-alt icon-lg icon-color mb-3"></i>
 						<h4>Fast Loading</h4>
 			            <p>
-			              Uses less resources to speed up clientarea performance.
+			             Uses less resources to speed up clientarea performance.
 			            </p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4">
-					<div class="shadow-sm bg-white py-3 px-3 my-2 rounded text-center fadeout">
+					<div class="shadow-sm bg-white py-3 px-4 my-2 rounded text-center">
 						<i class="fa fa-shield-alt icon-lg icon-color mb-3"></i>
 						<h4>Safe and Secured</h4>
 			            <p>
@@ -106,16 +101,16 @@
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4">
-					<div class="shadow-sm bg-white py-3 px-3 my-2 rounded text-center fadeout">
+					<div class="shadow-sm bg-white py-3 px-4 my-2 rounded text-center">
 						<i class="fa fa-sync icon-lg icon-color mb-3"></i>
 						<h4>Optimization</h4>
 			            <p>
-			              Uses optimized resources to keep the host upto date.
+			             Uses optimized resources to keep the host upto date.
 			            </p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4">
-					<div class="shadow-sm bg-white py-3 px-3 my-2 rounded text-center fadeout">
+					<div class="shadow-sm bg-white py-3 px-4 my-2 rounded text-center">
 						<i class="fa fa-desktop icon-lg icon-color mb-3"></i>
 						<h4>UI Design</h4>
 			            <p>
@@ -124,7 +119,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4">
-					<div class="shadow-sm bg-white py-3 px-3 my-2 rounded text-center fadeout">
+					<div class="shadow-sm bg-white py-3 px-4 my-2 rounded text-center">
 						<i class="fa fa-cog icon-lg icon-color mb-3"></i>
 						<h4>Complete Control</h4>
 			            <p>
@@ -133,7 +128,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-4">
-					<div class="shadow-sm bg-white py-3 px-3 my-2 rounded text-center fadeout">
+					<div class="shadow-sm bg-white py-3 px-4 my-2 rounded text-center">
 						<i class="fa fa-hands-helping icon-lg icon-color mb-3"></i>
 						<h4>Customer Support</h4>
 			            <p>
@@ -145,67 +140,90 @@
 		</div>
 	</div>
 	<!-- Features End -->
-	<!-- Offers Start -->
+	<!-- Plans Start -->
 	<div id="feature" class="header py-5">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 text-center px-4 text-white">
-					<h3>Software Specification</h3>
+					<h3>Software Features</h3>
 					<p>Everything you could possibly need for your clientarea.</p>
 				</div>
-				<div class="col-md-4 py-2 px-4 p-md-2">
+				<div class="col-md-4 py-3 px-4">
 					<ul class="list-unstyled text-white">
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
-							Signup / Login
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							 Signup / Login
 						</li>
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
-							Validation / Verification
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							 Validation / Verification
 						</li>
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							Forget / Reset Password
+						</li>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
 							Day / Night Modes
+						</li>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							Version Updates
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-4 py-2 px-4 p-md-2">
+				<div class="col-md-4 py-2 px-4">
 					<ul class="list-unstyled text-white">
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
 							MyOwnFreeHost Integration
 						</li>
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							GoGetSSL Integration
+						</li>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							SitePro Intergration
+						</li>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
 							Client Managment
 						</li>
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
 							Support System
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-4 py-2 px-4 p-md-2">
+				<div class="col-md-4 py-2 px-4">
 					<ul class="list-unstyled text-white">
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							Google Recaptcha
+						</li>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
 							Template Engine
 						</li>
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
-							Email template
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							Multi-Language
 						</li>
-						<li class="fs-6">
-							<i class="fa fa-check-square"></i>
-							Email Alerts
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							 Email template
+						</li>
+						<li class="fs-6 pb-1">
+							<i class="fa me-2 fa-check-circle"></i>
+							 Email Alerts
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Offers End -->
-	<!-- FAQ Start -->
+	<!-- Plans End -->
 	<div id="faq" class=" bg-light py-5">
 		<div class="container">
 			<div class="row">
@@ -218,7 +236,7 @@
 				        <div class="accordion-item">
 				            <h2 class="accordion-header" id="h1">
 				                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="false" aria-controls="q1">
-				                Is xera really secure?
+				                	Is xera really secure?
 				                </button>
 				            </h2>
 				            <div id="q1" class="accordion-collapse collapse" aria-labelledby="h1">
@@ -232,7 +250,7 @@
 				        <div class="accordion-item">
 				            <h2 class="accordion-header" id="h2">
 				                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-expanded="false" aria-controls="q2">
-				                Can i edit xera source code?
+				                	Can i edit xera source code?
 				                </button>
 				            </h2>
 				            <div id="q2" class="accordion-collapse collapse" aria-labelledby="h2">
@@ -246,7 +264,7 @@
 				        <div class="accordion-item">
 				            <h2 class="accordion-header" id="h3">
 				                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" aria-expanded="false" aria-controls="q3">
-				                Are there themes available for xera?
+				                	Are there themes available for xera?
 				                </button>
 				            </h2>
 				            <div id="q3" class="accordion-collapse collapse" aria-labelledby="h3">
@@ -262,7 +280,7 @@
 				        <div class="accordion-item">
 				            <h2 class="accordion-header" id="h4">
 				                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4" aria-expanded="false" aria-controls="q4">
-				                What are minimum requirements to use xera?
+				                	What are minimum requirements to use xera?
 				                </button>
 				            </h2>
 				            <div id="q4" class="accordion-collapse collapse" aria-labelledby="h4">
@@ -276,7 +294,7 @@
 				        <div class="accordion-item">
 				            <h2 class="accordion-header" id="h5">
 				                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5" aria-expanded="false" aria-controls="q5">
-				                Can i create my own version of xera?
+				                	Can i create my own version of xera?
 				                </button>
 				            </h2>
 				            <div id="q5" class="accordion-collapse collapse" aria-labelledby="h5">
@@ -290,7 +308,7 @@
 				        <div class="accordion-item">
 				            <h2 class="accordion-header" id="h6">
 				                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6" aria-expanded="false" aria-controls="q6">
-				                Are ads supported in xera?
+				                	Are ads supported in xera?
 				                </button>
 				            </h2>
 				            <div id="q6" class="accordion-collapse collapse" aria-labelledby="h6">
@@ -310,28 +328,23 @@
 		<div class="container">
 			<div class="text-white text-center">
 				<h3>No need to code for hours!</h3>
-				<a href="https://github.com/mahtab2003/Xera/archive/refs/heads/dev.zip" class="btn btn-primary">DOWNLOAD NOW</a>
+				<a href="https://github.com/mahtab2003/Xera/releases" class="btn btn-primary">DOWNLOAD NOW</a>
 			</div>
 		</div>
 	</div>
 	<!-- Banner End -->
-	<!-- Sponser Ad Start -->
-	<div class="ad-view py-4 text-center" style="background: rgba(0, 0, 0, 0.15); color: rgb(30, 30, 30)">
-		SPONSER AD
-	</div>
-	<!-- Sponser Ad End -->
-		<!-- Footer Start -->
-		<div class="footer bg-dark text-white pt-5">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 col-lg-5 px-4">
-						<ul class="list-unstyled">
-							<li>
-								<h3>NXTS Developer</h3>
-								<p class="text-muted">NXTS Developer is a private limited company which code web applications and websites.</p>
-								<ul class="list-unstyled">
+	<!-- Footer Start -->
+	<div class="footer bg-dark text-white pt-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-5 px-4 py-2">
+					<ul class="list-unstyled">
+						<li>
+							<h3>Xera Beta</h3>
+							<p class="text-muted">Xera is a web hosting account designed to work with MyOwnFreeHost and GoGetSSL Api.</p>
+							<ul class="list-unstyled">
 									<li class="d-inline-block">
-										<a href="https://github.com/NXTS-Developer/" class="fs-5 me-1 icon-github"><i class="fab fa-github"></i></a>
+										<a href="https://github.com/mahtab2003" class="fs-5 me-1 icon-github"><i class="fab fa-github"></i></a>
 									</li>
 									<li class="d-inline-block">
 										<a href="https://wa.me/+923094428355" class="fs-5 mx-1 icon-whatsapp"><i class="fab fa-whatsapp"></i></a>
@@ -343,27 +356,27 @@
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-5 col-lg-3 px-4">
+					<div class="col-md-5 col-lg-3 px-4 py-2">
 						<ul class="list-unstyled">
 							<li class="fs-5 mb-1">Useful links</li>
-							<li><a href="https://github.com/mahtab2003/Xera/archive/refs/heads/dev.zip" class="no-link">Download</a></li>
-							<li><a href="https://github.com/mahtab2003" class="no-link">Developer</a></li>
-							<li><a href="https://getmofhy.eu.org/index.html#donate" class="no-link">Donate</a></li>
+							<li><a href="https://github.com/mahtab2003/Xera" class="no-link">Contribute</a></li>
+							<li><a href="https://github.com/mahtab2003/Xera/releases" class="no-link">Download</a></li>
+							<li><a href="LICENSE.md" class="no-link">License</a></li>
 						</ul>
 					</div>
-					<div class="col-md-7 col-lg-4 px-4">
+					<div class="col-md-7 col-lg-4 px-4 py-2">
 						<ul class="list-unstyled">
 							<li class="fs-5 mb-1">Information</li>
 							<li class="text-muted">
-								<i class="fa fa-map"></i>
+								<i class="fa fa-map me-1"></i>
 								ST 45C GHAZI ABAD LHR
 							</li>
 							<li class="text-muted">
-								<i class="fa fa-phone"></i>
+								<i class="fa fa-phone me-2"></i>
 								+92 309 4428355
 							</li>
 							<li class="text-muted">
-								<i class="fa fa-envelope"></i>
+								<i class="fa fa-envelope me-2"></i>
 								mahtabhassan159@gmail.com
 							</li>
 						</ul>
@@ -371,32 +384,30 @@
 				</div>
 			</div>
 		     <div class="text-center">
-		        <p class="py-2 mb-0">&copy All copyrights reserved 2022.</p>
+		        <p class="py-2 mb-0 text-muted" style="font-size: 13.6px;">Made with <i class="fa fa-heart text-danger" style="font-size: 11.6px;"></i> Designed by <a href="https://github.com/mahtab2003/" class="text-color">Mehtab Hassan.</a></p>
 		     </div>
 		</div>
 		<!-- Footer END -->
 	</div>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 		$(window).scroll(function() {
 			if ($(this).scrollTop() > 60){
 			  $('#navbar').addClass('scrolled');
-			    } else {
-			        $('#navbar').removeClass('scrolled');
-			    }
-			});
-	</script>
-
-	<script type="text/javascript">
-		var navbar = document.getElementById('navbar');
-		var toggle = document.getElementById('navbar-toggler')
-		var navbar_collapse = document.getElementById('navbarNavDropdown');
-
-		toggle.onclick = function(){
-			navbar.classList.toggle('navbar-light');
-			navbar.classList.toggle('bg-light');
-		};
+			} else {
+			    $('#navbar').removeClass('scrolled');
+			}
+		});
+		$('.navbar-toggler').click(function(){
+			if(!document.getElementById('navbar').classList.contains("scrolled"))
+			{
+				document.getElementById('navbar').classList.toggle('navbar-light');
+				document.getElementById('navbar').classList.toggle('bg-light');
+				document.getElementById('brand').classList.toggle('text-dark');
+				document.getElementById('toggler').classList.toggle('text-dark');
+			}
+		});
 	</script>
 </body>
 </html>
