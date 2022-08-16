@@ -32,5 +32,6 @@ $lang['here'] = 'here';
 $lang['done'] = 'Done';
 $lang['close_ticket'] = 'Close Ticket';
 $lang['add_reply'] = 'Add Reply';
+$lang['redirect_now'] = 'Redirect Now';
 
 ?>
