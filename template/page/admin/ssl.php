@@ -58,7 +58,7 @@
 								<div class="py-5">
 									<i class="fa fa-box-open" style="font-size: 80px;"></i>
 									<div>
-										No ssl certificates yet?
+										No SSL certificates yet?
 									</div>
 								</div>
 							</td>

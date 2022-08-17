@@ -103,7 +103,7 @@ else
 				<?php elseif(isset($_GET['step']) AND $_GET['step'] == 3): ?>
 					<div class="card-body">
 						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
-						<p class="text-muted mb-3">Xera had been installed successfuully once you click on the button below you will be redirected to admin registration page and install.php file will be deleted automatically.</p>
+						<p class="text-muted mb-3">Xera has been installed successfully! Once you click on the button below, you will be redirected to the admin registration page and the install.php file will be deleted automatically.</p>
 						<div class="form-footer mt-1">
 							<a href="<?= $base_url ?>a/register" class="btn btn-primary w-100">Redirect</a>
 						</div>
@@ -111,7 +111,7 @@ else
 				<?php else: ?>
 					<div class="card-body">
 						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
-						<p class="text-muted mb-3">Xera is a hosting account and support management system especially designed to work with MyOwnFreeHost and GoGetSSL Api. Please click on the button below to continue installation.</p>
+						<p class="text-muted mb-3">Xera is a hosting account and support management system especially designed to work with MyOwnFreeHost and the GoGetSSL API. Please click on the button below to continue the installation.</p>
 						<div class="form-footer mt-1">
 							<a href="<?= $base_url ?>install.php?step=1" class="btn btn-primary w-100">Get Started</a>
 						</div>
@@ -232,7 +232,7 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		);");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('new_user','Verification required','Hi {user_name}!<br> Your account need to be verified in order to use our services.<br> <a href=\"{activation_link}\">click here</a><br> Regards {site_name}', 'user','{user_name} {user_email} {activation_link} {site_name} {site_url}'
+		) VALUES ('new_user','Verification required','Hi {user_name}!<br> Your account needs to be verified in order to use our services.<br> <a href=\"{activation_link}\">click here</a><br> Regards {site_name}', 'user','{user_name} {user_email} {activation_link} {site_name} {site_url}'
 		);");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
@@ -244,15 +244,15 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		); ");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('new_ticket','Ticket Created','Hi {site_name}!<br> A new ticket had been opened by {user_name}<br> <a href=\"{ticket_url}\">View Ticket</a> Regards {site_name}', 'admin','{site_name}, {site_url}, {ticket_url}, {ticket_id}, {user_name}'
+		) VALUES ('new_ticket','Ticket Created','Hi {site_name}!<br> A new ticket has been opened by {user_name}<br> <a href=\"{ticket_url}\">View Ticket</a> Regards {site_name}', 'admin','{site_name}, {site_url}, {ticket_url}, {ticket_id}, {user_name}'
 		);");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('reply_ticket','Ticket Reply Received','Hi {user_name}!<br> A new ticket reply had been received on ticket id {ticket_id}<br> <a href=\"{ticket_url}\">View Ticket</a> Regards {site_name}', 'user','{site_name}, {site_url}, {ticket_url}, {ticket_id}, {user_name}'
+		) VALUES ('reply_ticket','Ticket Reply Received','Hi {user_name}!<br> A new ticket reply has been received on ticket ID {ticket_id}<br> <a href=\"{ticket_url}\">View Ticket</a> Regards {site_name}', 'user','{site_name}, {site_url}, {ticket_url}, {ticket_id}, {user_name}'
 		);");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('reply_ticket','Ticket Reply Received','Hi {admin_name}!<br> A new ticket reply had been received on ticket id {ticket_id}<br> <a href=\"{ticket_url}\">View Ticket</a> Regards {site_name}', 'admin','{site_name}, {site_url}, {ticket_url}, {ticket_id}, {admin_name}'
+		) VALUES ('reply_ticket','Ticket Reply Received','Hi {admin_name}!<br> A new ticket reply has been received on ticket ID {ticket_id}<br> <a href=\"{ticket_url}\">View Ticket</a> Regards {site_name}', 'admin','{site_name}, {site_url}, {ticket_url}, {ticket_id}, {admin_name}'
 		);");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
@@ -260,15 +260,15 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		); ");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('account_suspended','Account Suspended','Hi {user_name}!<br> Account with the username {account_username} had been suspended due to {some_reason}. Please visit our clientarea for further inquiry.<br> Regards {site_name}', 'user','{site_name}, {site_url}, {account_username}, {user_name}, {user_email}, {some_reason}'
+		) VALUES ('account_suspended','Account Suspended','Hi {user_name}!<br> The account with the username {account_username} has been suspended due to {some_reason}. Please visit our client area for further inquiry.<br> Regards {site_name}', 'user','{site_name}, {site_url}, {account_username}, {user_name}, {user_email}, {some_reason}'
 		); ");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('account_reactivated','Account Reactivated','Hi {user_name}!<br> Account with the username {account_username} had been recativated. Please visit our clientarea for further inquiry.<br> Regards {site_name}', 'user','{site_name}, {site_url}, {account_username}, {user_name}, {user_email}'
+		) VALUES ('account_reactivated','Account Reactivated','Hi {user_name}!<br> The account with the username {account_username} has been reactivated. Please visit our client area for further inquiry.<br> Regards {site_name}', 'user','{site_name}, {site_url}, {account_username}, {user_name}, {user_email}'
 		); ");
 
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_email` (`email_id`,`email_subject`,`email_content`,`email_for`,`email_doc`
-		) VALUES ('delete_account','Account Deleted','Hi {user_name}!<br> Account with the username {account_username} had been deleted. Please visit our clientarea for creating new account.<br> Regards {site_name}', 'user','{site_name}, {site_url}, {account_username}, {user_name}, {user_email}'
+		) VALUES ('delete_account','Account Deleted','Hi {user_name}!<br> The account with the username {account_username} has been deleted. Please visit our client area to create a new account.<br> Regards {site_name}', 'user','{site_name}, {site_url}, {account_username}, {user_name}, {user_email}'
 		); ");
 
 		$sql = mysqli_query($mysqli, "DROP TABLE IF EXISTS `is_ticket`;");
@@ -330,7 +330,7 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		}
 		else
 		{
-			$_SESSION['msg'] = json_encode(['danger', 'An error occured. try again later.']);
+			$_SESSION['msg'] = json_encode(['danger', 'An error occured. Try again later.']);
 			header('location: '.$base_url.'install.php?step=2');
 		}
 	}

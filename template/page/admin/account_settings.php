@@ -47,10 +47,10 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="alert alert-danger">
-							Please remove all domains and subdomains before deactivating your account otherwise all domains and subdomains un this account will be locked forever.
+							Please remove all domains and subdomains before deactivating your account otherwise all domains and subdomains on this account will be locked forever.
 						</div>
 						<label class="form-label">Reason</label>
-						<textarea name="reason" class="form-control mb-2" placeholder="Reason for account deaxtivation..." value="Deactivate"></textarea>
+						<textarea name="reason" class="form-control mb-2" placeholder="Reason for account deactivation..." value="Deactivate"></textarea>
 						<input type="submit" name="deactivate" class="btn btn-danger btn-pill">
 					</div>
 				</div>

@@ -10,7 +10,7 @@
 	</div>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
-			<div class="card-title">Waiting Support Tickets</div>
+			<div class="card-title">Pending Support Tickets</div>
 		</div>
 		<div class="table-responsive">
 			<table class="table card-table table-vcenter table-transparent text-nowrap table-nowrap">
