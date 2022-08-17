@@ -40,8 +40,8 @@ Installation of Xera is much eaiser then you think!
 - Extract the .zip file and upload the contents to your web hosting account. 
 - Create an new database for Xera.
 - Go to ```https://{your.domain}/{xera-directory}/install.php``` and click on 'Get Started' button.
-- Set your website ```Website URL```،```Cookie Prefix``` and enable ```CSRF Protection``` and click 'Next Step' button.
-- Edit database credantials and click on 'Next Step' button(This will automatically import tables and records to desired database).
+- Set your website ```Website URL```، ```Cookie Prefix``` and enable ```CSRF Protection``` and click 'Next Step' button.
+- Edit database credentials and click on 'Next Step' button (This will automatically import tables and records to the database).
 - Register an admin account and login to your admin panel. 
 - Replace the logo and favicon located in ```assets/img/``` with your own.
 - Setup SMTP (See Below)
