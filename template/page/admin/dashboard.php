@@ -141,7 +141,7 @@
 								Documentation
 							</div>
 							<div class="text-muted">
-								<a href="https://fourm.xera.eu.org" class="text-muted" target="_blank">Read here.</a>
+								<a href="https://fourm.xera.eu.org/t/documentation" class="text-muted" target="_blank">Read here.</a>
 							</div>
 						</div>
 					</div>
@@ -222,7 +222,7 @@
 						</div>
 						<div class="col">
 							<div class="font-weight-medium">
-								Term of Services
+								Terms of Service
 							</div>
 							<div class="text-muted">
 								<a href="<?= base_url() ?>e/tos" class="text-muted" target="_blank">View here.</a>

@@ -2,23 +2,23 @@
     <img src="assets/img/xera.png">
 </div>
 
-## ❗ Consumer Warning
+## ❗ Warning
 
-While Xera is safer and more secure than its predecessor, MOFHY-Lite, it has not yet been fully cleared by the community, and is not yet recomended to be used in a production or public envirement. If you do decided to use this software publically, you claim full responsability, and release mahtab2003 and all maintainers from any legal action.
+While Xera is more safe and secure than its predecessor, [MOFHY-Lite](https://github.com/NXTS-Developers/MOFHY-Lite), it has not yet been fully cleared by the community, and is not yet recommended to be used in a production or public environment. If you do decide to use this software publicly, you claim full responsibility, and release mahtab2003 and all maintainers, contributors and any entity involved with the project from any liability and legal action.
 
-We invite you to search for vulnerabilities amd report them (Or better yet, fix them and make a pull request), so we can have a safe and secure MOFH client area for all!
+We invite you to search for vulnerabilities and report them (or better yet, fix them and make a pull request), so we can have a safe and secure MOFH client area for all!
 
 ## 👀 What is Xera ?
-Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of feature which are listed below
+Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features which are listed below:
 
 ### 🎮 Features
 - User Management
 - Theme Management
 - Support Management
-- Administative Access
+- Administrative Access
 - Integration With:
 	- MOFH (MyOwnFreeHost)
-	- Google Recaptcha
+	- Google reCAPTCHA 
 	- CryptoLoot
 	- hCaptcha
 	- GoGetSSL
@@ -29,32 +29,33 @@ Xera is a hosting account and support management system especially designed to w
 ## 🤸 Getting Started
 
 ### 🚅 Requirements
-Your server needs to meet the following minimal requirements to run Xera:
+Your server needs to meet the following minimum requirements to run Xera:
 - PHP v7.2 or above.
 - MySQL v5.7 or above.
-- Valid Trusted SSL Certificate.
+- A valid, trusted SSL certificate.
 
 ### 💾 Installation 
-Installation of Xera is much eaiser then you think!
+The installation of Xera is much easier than you think!
 - Download the latest Xera installation file [here](https://github.com/mahtab2003/Xera/releases/latest). 
-- Extract the .zip file and upload the contents to your web hosting account. 
-- Create an new database for Xera.
-- Go to ```https://{your.domain}/{xera-directory}/install.php``` and click on 'Get Started' button.
-- Set your website ```Website URL```، ```Cookie Prefix``` and enable ```CSRF Protection``` and click 'Next Step' button.
-- Edit database credentials and click on 'Next Step' button (This will automatically import tables and records to the database).
+- Extract the file and upload the contents to your web hosting account. 
+- Create a new database for Xera.
+- Go to ```https://{your.domain}/{xera-directory}/install.php``` and click on the 'Get Started' button.
+- Set your website's ```Website URL```, ```Cookie Prefix```, enable ```CSRF Protection``` and hit the 'Next Step' button.
+- Edit the database credentials and click on the 'Next Step' button (this will automatically import tables and records to the database).
 - Register an admin account and login to your admin panel. 
 - Replace the logo and favicon located in ```assets/img/``` with your own.
-- Setup SMTP (See Below)
+- Setup SMTP (see below for some services you can use).
 - All done! 
 
 ### 📧 SMTP
-Here are some widely used SMTP services. They have a free plan with some limitations, though most importantly, they are compatible with Xera.
-- [Mailgun](https://www.mailgun.com/).
+Here are some widely used SMTP services. They have free plans with some limitations, most importantly though, they are compatible with Xera.
+- [Mailgun](https://www.mailgun.com/). (**Important Note**: Mailgun seems to offer only a trial plan for a month, and without adding a credit card you are only authorized to send emails to 5 recipients. As such, you may want to choose another service.)
 - [Mailjet](https://mailjet.com/).
 - [SendGrid](https://sendgrid.com/free/).
 
 ### 🤔 Help
-If you require assistance, please proceed to https://fourm.xera.eu.org/
+If you require assistance, please proceed to [our forum](https://fourm.xera.eu.org/), where you can find the answers to many questions and also ask your own.  
+You can also [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue, although the forum is still the preferred way, especially for feature requests. In any way, please ensure your topic has not been previously discussed, and if it has contribute to that discussion instead of making a new one when you can.
 
-### ©️ Copyright
-This build is created and maintaned by [Mehtab Hassan](https://github.com/mahtab2003). Code released under the GPL-2.0 license.
+## ©️ Copyright
+This build is created and maintained by [Mehtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).

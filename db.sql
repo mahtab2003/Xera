@@ -179,7 +179,7 @@ INSERT INTO `is_email` (
 	'new_user',
 	'Verification required',
 	'Hi {user_name}!<br>
-	 Your account need to be verified in order to use our services.<br>
+	 Your account needs to be verified in order to use our services.<br>
 	 <a href="{activation_link}">click here</a><br>
 	 Regards {site_name}',
 	 'user',
@@ -240,7 +240,7 @@ INSERT INTO `is_email` (
 	'new_ticket',
 	'Ticket Created',
 	'Hi {site_name}!<br>
-	 A new ticket had been opened by {user_name}<br>
+	 A new ticket has been opened by {user_name}<br>
 	 <a href="{ticket_url}">View Ticket</a>
 	 Regards {site_name}',
 	 'admin',
@@ -261,7 +261,7 @@ INSERT INTO `is_email` (
 	'reply_ticket',
 	'Ticket Reply Received',
 	'Hi {user_name}!<br>
-	 A new ticket reply had been received on ticket id {ticket_id}<br>
+	 A new ticket reply has been received on ticket ID {ticket_id}<br>
 	 <a href="{ticket_url}">View Ticket</a>
 	 Regards {site_name}',
 	 'user',
@@ -280,7 +280,7 @@ INSERT INTO `is_email` (
 	'reply_ticket',
 	'Ticket Reply Received',
 	'Hi {admin_name}!<br>
-	 A new ticket reply had been received on ticket id {ticket_id}<br>
+	 A new ticket reply has been received on ticket ID {ticket_id}<br>
 	 <a href="{ticket_url}">View Ticket</a>
 	 Regards {site_name}',
 	 'admin',
@@ -318,7 +318,7 @@ INSERT INTO `is_email` (
 	'account_suspended',
 	'Account Suspended',
 	'Hi {user_name}!<br>
-	 Account with the username {account_username} had been suspended due to {some_reason}. Please visit our clientarea for further inquiry.<br>
+	 The account with the username {account_username} has been suspended due to {some_reason}. Please visit our client area for further inquiry.<br>
 	 Regards {site_name}',
 	 'user',
 	'{site_name}, {site_url}, {account_username}, {user_name}, {user_email}, {some_reason}'
@@ -336,7 +336,7 @@ INSERT INTO `is_email` (
 	'account_reactivated',
 	'Account Reactivated',
 	'Hi {user_name}!<br>
-	 Account with the username {account_username} had been recativated. Please visit our clientarea for further inquiry.<br>
+	 The account with the username {account_username} has been reactivated. Please visit our client area for further inquiry.<br>
 	 Regards {site_name}',
 	 'user',
 	'{site_name}, {site_url}, {account_username}, {user_name}, {user_email}'
@@ -354,7 +354,7 @@ INSERT INTO `is_email` (
 	'delete_account',
 	'Account Deleted',
 	'Hi {user_name}!<br>
-	 Account with the username {account_username} had been deleted. Please visit our clientarea for creating new account.<br>
+	 The account with the username {account_username} has been deleted. Please visit our client area to create a new account.<br>
 	 Regards {site_name}',
 	 'user',
 	'{site_name}, {site_url}, {account_username}, {user_name}, {user_email}'
