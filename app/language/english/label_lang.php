@@ -26,6 +26,6 @@ $lang['redirecting'] = 'Redirecting';
 $lang['or'] = 'or';
 $lang['show_hide'] = 'Show/Hide';
 $lang['record_name'] = 'Record Name';
-$lang['record Content'] = 'Record Content';
+$lang['record_content'] = 'Record Content';
 
 ?>
