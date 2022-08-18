@@ -2,12 +2,6 @@
     <img src="assets/img/xera.png">
 </div>
 
-## ❗ Warning
-
-While Xera is more safe and secure than its predecessor, [MOFHY-Lite](https://github.com/NXTS-Developers/MOFHY-Lite), it has not yet been fully cleared by the community, and is not yet recommended to be used in a production or public environment. If you do decide to use this software publicly, you claim full responsibility, and release mahtab2003 and all maintainers, contributors and any entity involved with the project from any liability and legal action.
-
-We invite you to search for vulnerabilities and report them (or better yet, fix them and make a pull request), so we can have a safe and secure MOFH client area for all!
-
 ## 👀 What is Xera ?
 Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features which are listed below:
 
