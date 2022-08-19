@@ -26,6 +26,6 @@ $lang['redirecting'] = '導向中...';
 $lang['or'] = '或';
 $lang['show_hide'] = '顯示/隱藏';
 $lang['record_name'] = '紀錄名稱';
-$lang['record Content'] = '紀錄內容';
+$lang['record_content'] = '紀錄內容';
 
 ?>
