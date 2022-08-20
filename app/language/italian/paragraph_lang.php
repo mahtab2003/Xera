@@ -1,0 +1,27 @@
+<?php 
+
+$lang['forget_password'] = 'Inserisci il tuo indirizzo email e la tua password verrà resettata e inviata via email a te.';
+$lang['account_limit'] = 'Hai raggiunto il limite di 3 Account di Hosting Gratuito. Perfavore aggiorna il tuo piano per';
+$lang['better_service'] = 'per un servizio migliore.';
+$lang['nothing_to_show'] = 'Niente da mostrare.';
+$lang['account_warning'] = 'Per favore rimuovi tutti i domini e sottodomini prima di disattivare il tuo account altrimenti tutti i domini e sottodomini di questo account saranno cancellati per sempre.';
+$lang['cpanel_login'] = 'Ti stiamo reindirizzando a cPanel.';
+$lang['account_created'] = 'Tutto è stato eseguito correttamente.';
+$lang['search_note'] = 'I risultati di ricerca sono visualizzati ogni volta che il dominio è cercato.';
+$lang['search_error'] = 'Scusa! Questo dominio non è associato con nessuno dei nostri account web.';
+$lang['oops_note'] = 'Oops… Tu hai trovato una pagina di errore';
+$lang['user_inactive_note'] = 'Ci scusiamo ma il tuo account non è attivo. Per favore controlla la tua posta in arrivo.';
+$lang['err_404_note'] = 'Ci scusiamo ma la pagina a cui volevi andare non è stata trovata.';
+$lang['err_500_note'] = 'Ci scusiamo ma il servizio non è disponibile adesso.';
+$lang['err_503_note'] = 'Ci scusiamo ma la pagina a cui volevi andare è proibita.';
+$lang['account_pending'] = 'Questo account di hosting è in sospeso e verrà attivato presto.';
+$lang['account_reactivating'] = 'Questo account di hosting è in riattivamento e verrà attivato presto.';
+$lang['account_deactivating'] = 'Questo account di hosting è in sospensione e verrà disattivato presto.';
+$lang['account_suspended'] = 'Questo account di hosting è stato sospeso per qualche ragione e verrà completamente elmininato in 30 giorni.';
+$lang['account_deactivated'] = 'Questo account di hosting è stato disattivato e verrà completamente elmininato in 30 giorni';
+$lang['account_note'] = 'Alcune delle funzioni di hosting possono non funzionare. Possono volerci fino a 72 ore perché l'account funziona correttamente.';
+$lang['no_reply_found'] = 'Nessuna risposta trovata.';
+$lang['ticket_closed'] = 'Il biglietto è stato chiuso. Clicca';
+$lang['to_reopen'] = ' per riaprirlo.';
+
+ ?>
