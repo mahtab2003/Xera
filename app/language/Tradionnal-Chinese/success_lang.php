@@ -17,5 +17,6 @@ $lang['label_updated_msg'] = '已成功更新帳戶標籤';
 $lang['ssl_created_msg'] = 'SSL 成功請求.';
 $lang['ssl_deleted_msg'] = 'SSL 成功刪除.';
 $lang['ssl_cancelled_msg'] = 'SSL 已被取消.';
+$lang['account_msg'] = '賬戶創建成功';
 
 ?>
