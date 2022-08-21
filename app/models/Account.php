@@ -30,10 +30,10 @@ class Account extends CI_Model
 
 	function get_active_accounts($for)
 	{
-		$res = $this->base->fetch('is_account', ['for' => $for, 'status' => 'active'], 'account_');
+		$res = $this->fetch(['for' => $for, 'status' => 'active']);
 		if($res !== false)
 		{
-			return $res;
+			return count($res);
 		}
 		return false;
 	}
