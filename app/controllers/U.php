@@ -895,7 +895,7 @@ class U extends CI_Controller
 		if($this->user->is_logged())
 		{
 			$count = $this->account->get_active_accounts($this->user->get_key());
-			if(!$count > 2)
+			if($count < 3)
 			{
 				if($this->input->post('check_domain')){
 					$this->fv->set_rules('domain', $this->base->text('domain', 'label'), ['trim', 'required']);
@@ -1097,7 +1097,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-                                $this->session->set_flashdata('msg', json_encode([0, $this->base->text('account_limit', 'error')]));
+				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('account_limit', 'error')]));
 				redirect('u/accounts');
 			}
 		}
@@ -1170,7 +1170,7 @@ class U extends CI_Controller
 				$count = $this->account->get_active_accounts($this->user->get_key());
 				if($count > 2)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('cant_reactivate', 'error')]));
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('cant_reactivate', 'error')]));
 					redirect("u/view_account/$id");
 				}
 				else
