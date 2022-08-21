@@ -12,6 +12,6 @@ $lang['fill_domain_field'] = 'Please fill up domain field.';
 $lang['deactivation_error'] = 'Unable to deactivate account.';
 $lang['reactivation_error'] = 'Unable to reactivate account.';
 $lang['cant_reactivate'] = 'Maximum number of accounts already active.';
-$lang['account_limit'] = 'You have reached free accounts limit.';
+$lang['account_limit'] = 'You have reached free account limit.';
 
 ?>
