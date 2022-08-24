@@ -181,7 +181,7 @@ class C extends CI_Controller
 		}
 	}
 
-	function github_ouath()
+	function github_oauth()
 	{
 		$this->load->model('user');
 		$this->load->model('oauth');
