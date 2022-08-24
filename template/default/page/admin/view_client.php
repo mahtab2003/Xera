@@ -25,6 +25,13 @@
 							Secret Key: <?= $info['user_key'] ?>
 						</p>
 						<p class="col-md-6">
+							Login Agent: <?php if ($this->user->get_oauth($info['user_key'])): ?>
+								Oauth
+							<?php else: ?>
+								Built-in
+							<?php endif ?>
+						</p>
+						<p class="col-md-6">
 							Status: <?php if ($info['user_status'] == 'inactive'): ?>
 										<span class="badge bg-yellow">
 											<?= $info['user_status'] ?>

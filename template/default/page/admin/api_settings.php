@@ -324,4 +324,59 @@
 			</form>
 		</div>
 	</div>
+	<div class="card mb-3">
+		<div class="card-header">
+			<div class="card-title">Oauth Integration</div>
+		</div>
+		<div class="card-body">
+			<?= form_open('a/api_settings') ?>
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label">Oauth Client</label>
+						<select class="form-control mb-2" name="type">
+								<option value="1" selected="true">Github</option>
+						</select>
+					</div>
+					<input type="hidden" name="service" value="<?php $oauth = 'github'; echo($oauth); ?>">
+					<div class="col-sm-6">
+						<label class="form-label">Client Key</label>
+						<input type="text" name="client" class="form-control mb-2" value="<?= $this->oauth->get_client($oauth) ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Secret Key</label>
+						<input type="text" name="secret" class="form-control mb-2" value="<?= $this->oauth->get_secret($oauth) ?>">
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Endpoint URL</label>
+						<input type="text" name="endpoint" class="form-control mb-2" value="<?= $this->oauth->get_endpoint($oauth) ?>" readonly>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Callback URL</label>
+						<input type="text" name="callback" class="form-control mb-2" value="<?= base_url() ?>c/github_oauth" readonly>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label">Status</label>
+						<select class="form-control mb-2" name="status">
+							<?php 
+							if($this->oauth->get_status($oauth) === 'active'):
+							?>
+								<option value="1" selected="true">Active</option>
+								<option value="0">Inactive</option>
+							<?php
+							else:
+							?>
+								<option value="1">Active</option>
+								<option value="0" selected="true">Inactive</option>
+							<?php
+							endif;
+							?>
+						</select>
+					</div>
+					<div class="col-sm-12">
+						<input type="submit" name="update_github" value="Change" class="btn btn-primary btn-pill">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
