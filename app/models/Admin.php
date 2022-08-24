@@ -201,7 +201,7 @@ class Admin extends CI_Model
 		$res = $this->fetch_if_logged();
 		if($res !== false)
 		{
-			$default = base_url().'assets/img/user.png';
+			$default = base_url().'assets/'.$this->base->get_template().'/img/user.png';
 			$size = 30;
 			$url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($res['admin_email'])))."?d=".urlencode($default)."&s=".$size;
 			$ch = curl_init($url);

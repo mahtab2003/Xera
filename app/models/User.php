@@ -40,6 +40,31 @@ class User extends CI_Model
 		return false;
 	}
 
+	function oauth_register($name, $email, $secret)
+	{
+		$data['user_name'] = $name;
+		$data['user_email'] = $email;
+		$data['user_password'] = char64($email.':'.$secret);
+		$data['user_status'] = 'active';
+		$data['user_date'] = time();
+		$data['user_key'] = char16(implode(':', $data));
+		$data['user_rec'] = char32($data['user_key'].':'.$email.':'.$secret);
+		$res = $this->db->insert('is_user', $data);
+		if($res)
+		{
+			if($this->mailer->is_active())
+			{
+				$param['user_name'] = $name;
+				$param['user_email'] = $email;
+				$param['activation_link'] = base_url().'e/activate/'.$data['user_rec'];
+				$this->mailer->send('new_user', $email, $param);
+				return true;
+			}
+			return true;
+		}
+		return false;
+	}
+
 	function resend_email()
 	{
 		$res = $this->fetch_if_logged();
@@ -69,16 +94,44 @@ class User extends CI_Model
 		$data = $this->fetch_where('email', $email);
 		if($data !== false)
 		{
-			$passwd = $data['user_password'];
-			$password = char64($password);
-			if(hash_equals($passwd, $password))
+			if($data['user_oauth'])
 			{
-				$json = json_encode([$data['user_rec'], time()]);
-				$gz = gzcompress($json);
-				$token = base64_encode($gz);
-				set_cookie('logged', true, $days*86400);
-				set_cookie('token', $token, $days*86400);
-				return true;
+				$passwd = $data['user_password'];
+				$password = char64($password);
+				if(hash_equals($passwd, $password))
+				{
+					$json = json_encode([$data['user_rec'], time()]);
+					$gz = gzcompress($json);
+					$token = base64_encode($gz);
+					set_cookie('logged', true, $days*86400);
+					set_cookie('token', $token, $days*86400);
+					return true;
+				}
+				return false;
+			}
+			return 'error';
+		}
+		return false;
+	}
+
+	function oauth_login($key, $email, $secret, $days)
+	{
+		$data = $this->fetch_where('email', $email);
+		if($data !== false)
+		{
+			if($data['user_oauth'] !== 'disabled')
+			{
+				$hash = char32($key.':'.$email.':'.$secret);
+				$rec = $data['user_rec'];
+				if(hash_equals($rec, $hash)){
+					$json = json_encode([$data['user_rec'], time()]);
+					$gz = gzcompress($json);
+					$token = base64_encode($gz);
+					set_cookie('logged', true, $days*86400);
+					set_cookie('token', $token, $days*86400);
+					return true;
+				}
+				return false;
 			}
 			return false;
 		}
@@ -158,17 +211,21 @@ class User extends CI_Model
 		$res = $this->fetch_where('email', $email);
 		if($res !== false)
 		{
-			$time = time();
-			$token = char32($email.':'.$res['user_rec'].':'.$time.':'.$res['user_key']);
-			$json = json_encode(['email' => $email, 'token' => $token, 'time' => $time]);
-			$base64 = base64_encode($json);
-			if($this->mailer->is_active())
+			if($res['user_oauth'])
 			{
-				$param['user_name'] = $res['user_name'];
-				$param['user_email'] = $email;
-				$param['new_password'] = base_url().'u/reset_password/'.$base64;
-				$this->mailer->send('forget_password', $email, $param);
-				return true;
+				$time = time();
+				$token = char32($email.':'.$res['user_rec'].':'.$time.':'.$res['user_key']);
+				$json = json_encode(['email' => $email, 'token' => $token, 'time' => $time]);
+				$base64 = base64_encode($json);
+				if($this->mailer->is_active())
+				{
+					$param['user_name'] = $res['user_name'];
+					$param['user_email'] = $email;
+					$param['new_password'] = base_url().'u/reset_password/'.$base64;
+					$this->mailer->send('forget_password', $email, $param);
+					return true;
+				}
+				return false;
 			}
 			return true;
 		}
@@ -313,12 +370,29 @@ class User extends CI_Model
 		return false;
 	}
 
+	function get_oauth($key)
+	{
+		$res =  $this->fetch_where('key', $key);
+		if($res !== false)
+		{
+			if($res['user_oauth'] === 'enabled')
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return false;
+	}
+
 	function get_avatar()
 	{
 		$res = $this->fetch_if_logged();
 		if($res !== false)
 		{
-			$default = base_url().'assets/img/user.png';
+			$default = base_url().'assets/'.$this->base->get_template().'/img/user.png';
 			$size = 30;
 			$url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($res['user_email'])))."?d=".urlencode($default)."&s=".$size;
 			$ch = curl_init($url);
@@ -339,7 +413,7 @@ class User extends CI_Model
 		$res = $this->fetch_where('key', $key);
 		if($res !== false)
 		{
-			$default = base_url().'assets/img/user.png';
+			$default = base_url().'assets/'.$this->base->get_template().'/img/user.png';
 			$size = 30;
 			$url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($res['user_email'])))."?d=".urlencode($default)."&s=".$size;
 			$ch = curl_init($url);
