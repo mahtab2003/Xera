@@ -180,6 +180,105 @@ class C extends CI_Controller
 			}
 		}
 	}
+
+	function github_ouath()
+	{
+		$this->load->model('user');
+		$this->load->model('oauth');
+		$oauth = 'github';
+		if($this->input->get('code'))
+		{
+			$arr = [
+				'client_id' => $this->oauth->get_client($oauth),
+				'client_secret' => $this->oauth->get_secret($oauth),
+				'code' => $this->input->get('code')
+			];
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, "https://github.com/login/oauth/access_token");
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($arr));
+			curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$adata = curl_exec($ch);
+			curl_close($ch);
+			$adata = json_decode($adata, true);
+			if(isset($adata['error']))
+			{
+				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_oauth_key', 'error')]));
+				redirect('u/login');
+			}
+			else
+			{
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $this->oauth->get_endpoint($oauth));
+				curl_setopt($ch, CURLOPT_POST, 0);
+				curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: token '.$adata['access_token'],'User-Agent: PHP']);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				$udata = curl_exec($ch);
+				curl_close($ch);
+				$udata = json_decode($udata, true);
+				if(isset($udata['error']))
+				{
+					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_oauth_key', 'error')]));
+					redirect('u/login');
+				}
+				else
+				{
+					$key = char16($udata['id']);
+					$secret = $udata['id'];
+					$name = explode(' ', $udata['name']);
+					$password = char64($udata['login']);
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $this->oauth->get_endpoint($oauth)."/emails");
+					curl_setopt($ch, CURLOPT_POST, 0);
+					curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: token '.$adata['access_token'],'User-Agent: PHP']);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					$email_data = curl_exec($ch);
+					print_r($email_data = json_decode($email_data,true));
+					curl_close($ch); 
+					$email = $email_data[0]['email'];
+					if($this->user->is_register())
+					{
+						$res = $this->user->oauth_login($key, $email, $secret, 30);
+						if($res !== false)
+						{
+							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
+							redirect('u/login');
+						}
+						else
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('oauth_msg', 'error')]));
+							redirect('u/login');
+						}
+					}
+					else
+					{
+						$res = $this->user->oauth_register($name, $email, $secret);
+						if($res !== false)
+						{
+
+							$res = $this->user->oauth_login($key, $email, $secret, 30);
+							{
+								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
+								redirect('u/login');
+							}
+							else
+							{
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
+								redirect('u/login');
+							}
+						}
+						else
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('oauth_msg', 'error')]));
+							redirect('u/login');
+						}
+
+					}
+				}
+			}
+		}
+	}
 }
 
 ?>	
