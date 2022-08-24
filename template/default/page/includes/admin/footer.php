@@ -22,7 +22,7 @@
 		?>
 	</div>
 	
-	<script src="<?= base_url()?>assets/js/jquery.slim.js"></script>
-	<script src="<?= base_url()?>assets/js/tabler.min.js"></script>
+	<script src="<?= base_url()?>assets/<?= $this->base->get_template() ?>/js/jquery.slim.js"></script>
+	<script src="<?= base_url()?>assets/<?= $this->base->get_template() ?>/js/tabler.min.js"></script>
 </body>
 </html>
