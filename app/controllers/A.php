@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 class A extends CI_Controller
 {
-		function __construct()
+	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('user');
@@ -14,438 +14,301 @@ class A extends CI_Controller
 		$this->load->model('mofh');
 		$this->load->library(['form_validation' => 'fv']);
 		$this->load->model(['recaptcha' => 'grc']);
-		if(!get_cookie('theme'))
-		{
-			set_cookie('theme', 'light', 30*86400);
+		if (!get_cookie('theme')) {
+			set_cookie('theme', 'light', 30 * 86400);
 		}
 	}
 
 	function index()
 	{
-		if(!$this->admin->admin_count() > 0)
-		{
+		if (!$this->admin->admin_count() > 0) {
 			redirect('a/register');
-		}
-		else
-		{
+		} else {
 			$this->login();
 		}
 	}
 
 	function register()
 	{
-		if(!$this->admin->admin_count() > 0)
-		{
-			if($this->input->post('register'))
-			{
+		if (!$this->admin->admin_count() > 0) {
+			if ($this->input->post('register')) {
 				$this->fv->set_rules('name', 'Name', ['trim', 'required', 'valid_name']);
 				$this->fv->set_rules('email', 'Email address', ['trim', 'required', 'valid_email']);
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
-				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required','matches[password]']);
-				if($this->grc->is_active())
-				{
-					if($this->grc->get_type() == "google")
-					{
+				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required', 'matches[password]']);
+				if ($this->grc->is_active()) {
+					if ($this->grc->get_type() == "google") {
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
-					}
-					elseif($this->grc->get_type() == "crypto")
-					{
+					} elseif ($this->grc->get_type() == "crypto") {
 						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
-					}
-					else
-					{
+					} else {
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
 					}
-					if($this->fv->run() === true)
-					{
+					if ($this->fv->run() === true) {
 						$name = $this->input->post('name');
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
-						if($this->grc->get_type() == "google")
-						{
+						if ($this->grc->get_type() == "google") {
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
-						}
-						elseif($this->grc->get_type() == "crypto")
-						{
+						} elseif ($this->grc->get_type() == "crypto") {
 							$token = $this->input->post('CRLT-captcha-token');
 							$type = "crypto";
-						}
-						else
-						{
+						} else {
 							$token = $this->input->post('h-captcha-response');
 							$type = "human";
 						}
-						if($this->grc->is_valid($token, $type))
-						{
-							if(!$this->admin->is_register($email))
-							{
+						if ($this->grc->is_valid($token, $type)) {
+							if (!$this->admin->is_register($email)) {
 								$res = $this->admin->register($name, $email, $password);
-								if($res)
-								{
+								if ($res) {
 									$this->session->set_flashdata('msg', json_encode([1, 'User have been registered successfully.']));
 									redirect('a/login');
-								}
-								else
-								{
+								} else {
 									$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 									redirect('a/register');
 								}
-							}
-							else
-							{
+							} else {
 								$this->session->set_flashdata('msg', json_encode([0, 'User already exists with this email address.']));
 								redirect('a/register');
 							}
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
 							redirect('a/register');
 						}
-					}
-					else
-					{
-						if(validation_errors() !== '')
-						{
+					} else {
+						if (validation_errors() !== '') {
 							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 						}
 						redirect('a/register');
 					}
-				}
-				else
-				{
-					if($this->fv->run() === true)
-					{
+				} else {
+					if ($this->fv->run() === true) {
 						$name = $this->input->post('name');
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
-						if(!$this->admin->is_register($email))
-						{
+						if (!$this->admin->is_register($email)) {
 							$res = $this->admin->register($name, $email, $password);
-							if($res)
-							{
+							if ($res) {
 								$this->session->set_flashdata('msg', json_encode([1, 'User have been registered successfully.']));
-									redirect('a/login');
-							}
-							else
-							{
+								redirect('a/login');
+							} else {
 								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 							}
 							redirect('a/register');
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'User already exists with this email address.']));
 							redirect('a/register');
 						}
-					}
-					else
-					{
-						if(validation_errors() !== '')
-						{
+					} else {
+						if (validation_errors() !== '') {
 							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 						}
 						redirect('a/register');
 					}
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Register';
-				$this->load->view('form/includes/header.php', $data);
-				$this->load->view('form/admin/register.php');
-				$this->load->view('form/includes/footer.php');
+				$this->load->view('default/form/includes/admin/header.php', $data);
+				$this->load->view('default/form/admin/register.php');
+				$this->load->view('default/form/includes/admin/footer.php');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/dashboard');
 		}
 	}
 
 	function login()
 	{
-		if(!$this->admin->is_logged())
-		{
-			if($this->input->post('login'))
-			{
+		if (!$this->admin->is_logged()) {
+			if ($this->input->post('login')) {
 				$this->fv->set_rules('email', 'Email address', ['trim', 'required', 'valid_email']);
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
-				if($this->grc->is_active())
-				{
-					if($this->grc->get_type() == "google")
-					{
+				if ($this->grc->is_active()) {
+					if ($this->grc->get_type() == "google") {
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
-					}
-					elseif($this->grc->get_type() == "crypto")
-					{
+					} elseif ($this->grc->get_type() == "crypto") {
 						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
-					}
-					else
-					{
+					} else {
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
 					}
-					if($this->fv->run() === true)
-					{
+					if ($this->fv->run() === true) {
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
 						$checkbox = $this->input->post('checkbox');
-						if(!$checkbox)
-						{
+						if (!$checkbox) {
 							$days = 1;
-						}
-						else
-						{
+						} else {
 							$days = 30;
 						}
-						if($this->grc->get_type() == "google")
-						{
+						if ($this->grc->get_type() == "google") {
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
-						}
-						elseif($this->grc->get_type() == "crypto")
-						{
+						} elseif ($this->grc->get_type() == "crypto") {
 							$token = $this->input->post('CRLT-captcha-token');
 							$type = "crypto";
-						}
-						else
-						{
+						} else {
 							$token = $this->input->post('h-captcha-response');
 							$type = "human";
 						}
-						if($this->grc->is_valid($token, $type))
-						{
+						if ($this->grc->is_valid($token, $type)) {
 							$res = $this->admin->login($email, $password, $days);
-							if($res)
-							{
+							if ($res) {
 								$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
 								redirect('a/dashboard');
-							}
-							else
-							{
+							} else {
 								$this->session->set_flashdata('msg', json_encode([0, 'Invalid email address or password.']));
 								redirect('a/login');
 							}
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
 							redirect('a/login');
 						}
-					}
-					else
-					{
-						if(validation_errors() !== '')
-						{
+					} else {
+						if (validation_errors() !== '') {
 							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 						}
 						redirect('a/login');
 					}
-				}
-				else
-				{
-					if($this->fv->run() === true)
-					{
+				} else {
+					if ($this->fv->run() === true) {
 						$email = $this->input->post('email');
 						$password = $this->input->post('password');
 						$checkbox = $this->input->post('checkbox');
-						if(!$checkbox)
-						{
+						if (!$checkbox) {
 							$days = 1;
-						}
-						else
-						{
+						} else {
 							$days = 30;
 						}
 						$res = $this->admin->login($email, $password, $days);
-						if($res)
-						{
+						if ($res) {
 							$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
 							redirect('a/dashboard');
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Invalid email address or password.']));
 							redirect('a/login');
 						}
-					}
-					else
-					{
-						if(validation_errors() !== '')
-						{
+					} else {
+						if (validation_errors() !== '') {
 							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 						}
 						redirect('a/login');
 					}
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Login';
-				$this->load->view('form/includes/header.php', $data);
-				$this->load->view('form/admin/login.php');
-				$this->load->view('form/includes/footer.php');
+				$this->load->view('default/form/includes/admin/header.php', $data);
+				$this->load->view('default/form/admin/login.php');
+				$this->load->view('default/form/includes/admin/footer.php');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/dashboard');
 		}
 	}
 
 	function forget()
 	{
-		if(!$this->admin->is_logged())
-		{
-			if($this->input->post('forget'))
-			{
+		if (!$this->admin->is_logged()) {
+			if ($this->input->post('forget')) {
 				$this->fv->set_rules('email', 'Email address', ['trim', 'required', 'valid_email']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$email = $this->input->post('email');
 					$this->admin->reset_password($email);
 					$this->session->set_flashdata('msg', json_encode([1, 'Please check your inbox for further instructions.']));
 					redirect('a/login');
-				}
-				else
-				{
-					if(validation_errors() !== '')
-					{
+				} else {
+					if (validation_errors() !== '') {
 						$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 					}
 					redirect('a/forget');
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Login';
-				$this->load->view('form/includes/header.php', $data);
-				$this->load->view('form/admin/forget.php');
-				$this->load->view('form/includes/footer.php');
+				$this->load->view('default/form/includes/admin/header.php', $data);
+				$this->load->view('default/form/admin/forget.php');
+				$this->load->view('default/form/includes/admin/footer.php');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/dashboard');
 		}
 	}
 
 	function reset_password($token)
 	{
-		if(!$this->admin->is_logged())
-		{
+		if (!$this->admin->is_logged()) {
 			$json = base64_decode($token);
 			$arr = json_decode($json, true);
 			$email = $arr['email'];
 			$key = $arr['token'];
 			$time = $arr['time'];
 			$admin = $this->admin->fetch_where('email', $email);
-			if(time() > $time + 3600)
-			{
+			if (time() > $time + 3600) {
 				$this->session->set_flashdata('msg', json_encode([0, 'Password reset token expired.']));
 				redirect('a/login');
-			}
-			elseif($admin !== false)
-			{
-				$verify = char32($email.':'.$admin['admin_rec'].':'.$time.':'.$admin['admin_key']);
-				if($verify == $key)
-				{
-					if($this->input->post('reset'))
-					{
+			} elseif ($admin !== false) {
+				$verify = char32($email . ':' . $admin['admin_rec'] . ':' . $time . ':' . $admin['admin_key']);
+				if ($verify == $key) {
+					if ($this->input->post('reset')) {
 						$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 						$this->fv->set_rules('password1', 'Confirm Password', ['trim', 'required', 'matches[password]']);
-						if($this->fv->run() === true)
-						{
+						if ($this->fv->run() === true) {
 							$password = $this->input->post('password');
 							$res = $this->admin->reset_admin_password($password, $email);
-							if($res !== false)
-							{
+							if ($res !== false) {
 								$this->session->set_flashdata('msg', json_encode([1, 'Password reset successfully.']));
 								redirect('a/login');
-							}
-							else
-							{
+							} else {
 								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 								redirect('a/login');
 							}
-						}
-						else
-						{
-							if(validation_errors() !== '')
-							{
+						} else {
+							if (validation_errors() !== '') {
 								$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-							}
-							else
-							{
+							} else {
 								$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 							}
 							redirect('a/login');
 						}
-					}
-					else
-					{
+					} else {
 						$data['title'] = 'Reset Password';
 						$data['token'] = $token;
-						$this->load->view('form/includes/header.php', $data);
-						$this->load->view('form/admin/reset_password.php');
-						$this->load->view('form/includes/footer.php');	
+						$this->load->view('default/form/includes/admin/header.php', $data);
+						$this->load->view('default/form/admin/reset_password.php');
+						$this->load->view('default/form/includes/admin/footer.php');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
 					redirect('a/login');
 				}
-			}
-			else
-			{
+			} else {
 				$this->session->set_flashdata('msg', json_encode([0, 'Invalid password reset token.']));
 				redirect('a/login');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/dashboard');
 		}
 	}
 
 	function logout($status = 1, $msg = '')
 	{
-		if($this->admin->logout())
-		{
-			if($msg !== '')
-			{
+		if ($this->admin->logout()) {
+			if ($msg !== '') {
 				$this->session->set_flashdata('msg', json_encode([$status, $msg]));
-			}
-			else
-			{
+			} else {
 				$this->session->set_flashdata('msg', json_encode([1, 'Logged out successfully.']));
 			}
 			redirect('a/login');
-		}
-		else
-		{
+		} else {
 			$this->session->set_flashdata('msg', json_encode([0, 'Login to continue.']));
 			redirect('a/login');
 		}
@@ -453,77 +316,54 @@ class A extends CI_Controller
 
 	function settings()
 	{
-		if($this->admin->is_logged())
-		{
-			if($this->input->post('update_theme'))
-			{
-				set_cookie('theme', $this->input->post('theme'), 30*86400);
+		if ($this->admin->is_logged()) {
+			if ($this->input->post('update_theme')) {
+				set_cookie('theme', $this->input->post('theme'), 30 * 86400);
 				$this->session->set_flashdata('msg', json_encode([1, 'Theme changed successfully.']));
 				redirect('a/settings');
-			}
-			elseif($this->input->post('update_name'))
-			{
+			} elseif ($this->input->post('update_name')) {
 				$this->fv->set_rules('name', 'Name', ['trim', 'required', 'valid_name']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$name = $this->input->post('name');
 					$res = $this->admin->set_name($name);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'User name updated successfully.']));
 						redirect('a/settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/settings');
 				}
-			}
-			elseif($this->input->post('update_password'))
-			{
+			} elseif ($this->input->post('update_password')) {
 				$this->fv->set_rules('password', 'New password', ['trim', 'required']);
 				$this->fv->set_rules('password1', 'Confirm password', ['trim', 'required', 'matches[password]']);
 				$this->fv->set_rules('old_password', 'Old password', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$password = $this->input->post('password');
 					$old_password = $this->input->post('old_password');
 					$res = $this->admin->set_password($old_password, $password);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->logout(1, 'User password updated successfully.');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/settings');
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Settings';
 
-				$this->load->view('page/includes/admin/header', $data);
-				$this->load->view('page/includes/admin/navbar');
-				$this->load->view('page/admin/settings');
-				$this->load->view('page/includes/admin/footer');
+				$this->load->view('default/page/includes/admin/header', $data);
+				$this->load->view('default/page/includes/admin/navbar');
+				$this->load->view('default/page/admin/settings');
+				$this->load->view('default/page/includes/admin/footer');
 			}
-
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
@@ -531,43 +371,36 @@ class A extends CI_Controller
 	function api_settings()
 	{
 
-		if($this->admin->is_logged())
-		{
-			if($this->input->post('update_host'))
-			{
+		if ($this->admin->is_logged()) {
+			if ($this->input->post('update_host')) {
 				$this->fv->set_rules('hostname', 'Host Name', ['trim', 'required']);
 				$this->fv->set_rules('email', 'Alert Email', ['trim', 'required', 'valid_email']);
 				$this->fv->set_rules('fourm', 'Fourm URL', ['trim', 'required', 'valid_url']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				$this->fv->set_rules('template', 'Template Dir', ['trim', 'required']);
+				if ($this->fv->run() === true) {
 					$name = $this->input->post('hostname');
 					$email = $this->input->post('email');
 					$status = $this->input->post('status');
 					$fourm = $this->input->post('fourm');
+					$template = $this->input->post('template');
 					$res = $this->base->set_hostname($name);
 					$res = $this->base->set_email($email);
 					$res = $this->base->set_status($status);
 					$res = $this->base->set_fourm($fourm);
-					if($res !== false)
-					{
+					$res = $this->base->set_template($template);
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'General settings updated successfully.']));
 						redirect('a/api_settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/api_settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/api_settings');
 				}
-			}
-			elseif($this->input->post('update_smtp'))
-			{
+			} elseif ($this->input->post('update_smtp')) {
 				$this->fv->set_rules('hostname', 'Hostname', ['trim', 'required']);
 				$this->fv->set_rules('name', 'From Name', ['trim', 'required']);
 				$this->fv->set_rules('from', 'From Email', ['trim', 'required', 'valid_email']);
@@ -575,8 +408,7 @@ class A extends CI_Controller
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 				$this->fv->set_rules('port', 'Port', ['trim', 'required']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$hostname = $this->input->post('hostname');
 					$name = $this->input->post('name');
 					$from = $this->input->post('from');
@@ -591,31 +423,23 @@ class A extends CI_Controller
 					$res = $this->smtp->set_from($from);
 					$res = $this->smtp->set_name($name);
 					$res = $this->smtp->set_port($port);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'SMTP settings updated successfully.']));
 						redirect('a/api_settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/api_settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/api_settings');
 				}
-			}
-			elseif($this->input->post('update_grc'))
-			{
+			} elseif ($this->input->post('update_grc')) {
 				$this->fv->set_rules('site_key', 'Site key', ['trim', 'required']);
 				$this->fv->set_rules('secret_key', 'Secret key', ['trim', 'required']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
 				$this->fv->set_rules('type', 'Type', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$site_key = $this->input->post('site_key');
 					$secret_key = $this->input->post('secret_key');
 					$status = $this->input->post('status');
@@ -624,63 +448,47 @@ class A extends CI_Controller
 					$res = $this->grc->set_secret_key($secret_key);
 					$res = $this->grc->set_status($status);
 					$res = $this->grc->set_type($type);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'Recaptcha settings updated successfully.']));
 						redirect('a/api_settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/api_settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/api_settings');
 				}
-			}
-			elseif($this->input->post('update_ssl'))
-			{
+			} elseif ($this->input->post('update_ssl')) {
 				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$username = $this->input->post('username');
 					$password = $this->input->post('password');
 					$status = $this->input->post('status');
 					$res = $this->ssl->set_username($username);
 					$res = $this->ssl->set_password($password);
 					$res = $this->ssl->set_status($status);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'GoGetSSL settings updated successfully.']));
 						redirect('a/api_settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/api_settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/api_settings');
 				}
-			}
-			elseif($this->input->post('update_mofh'))
-			{
+			} elseif ($this->input->post('update_mofh')) {
 				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 				$this->fv->set_rules('cpanel', 'cPanel URL', ['trim', 'required']);
 				$this->fv->set_rules('ns_1', 'Nameserver 1', ['trim', 'required']);
 				$this->fv->set_rules('ns_2', 'Nameserver 2', ['trim', 'required']);
 				$this->fv->set_rules('package', 'Package', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$username = $this->input->post('username');
 					$cpanel = $this->input->post('cpanel');
 					$password = $this->input->post('password');
@@ -693,31 +501,23 @@ class A extends CI_Controller
 					$res = $this->mofh->set_ns_1($ns_1);
 					$res = $this->mofh->set_ns_2($ns_2);
 					$res = $this->mofh->set_package($package);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'MOFH settings updated successfully.']));
 						redirect('a/api_settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/api_settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/api_settings');
 				}
-			}
-			elseif($this->input->post('update_sp'))
-			{
+			} elseif ($this->input->post('update_sp')) {
 				$this->fv->set_rules('hostname', 'Hostname', ['trim', 'required']);
 				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
 				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$hostname = $this->input->post('hostname');
 					$username = $this->input->post('username');
 					$status = $this->input->post('status');
@@ -726,77 +526,55 @@ class A extends CI_Controller
 					$res = $this->sp->set_username($username);
 					$res = $this->sp->set_status($status);
 					$res = $this->sp->set_password($password);
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'SitePro settings updated successfully.']));
 						redirect('a/api_settings');
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect('a/api_settings');
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('a/api_settings');
 				}
-			}
-			elseif($this->input->get('test_mail'))
-			{
+			} elseif ($this->input->get('test_mail')) {
 				$res = $this->mailer->test_mail();
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Test email sent successfully.']));
 					redirect("a/api_settings");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/api_settings");
 				}
-			}
-			elseif($this->input->get('test_mofh'))
-			{
+			} elseif ($this->input->get('test_mofh')) {
 				$res = $this->mofh->test_mofh();
-				if($res === true)
-				{
+				if ($res === true) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Mofh api working successfully.']));
 					redirect("a/api_settings");
-				}
-				elseif($res === false)
-				{
+				} elseif ($res === false) {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/api_settings");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
 					redirect("a/api_settings");
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Api Settings';
 				$data['active'] = 'api';
 
-				$this->load->view('page/includes/admin/header', $data);
-				$this->load->view('page/includes/admin/navbar');
-				$this->load->view('page/admin/api_settings');
-				$this->load->view('page/includes/admin/footer');
+				$this->load->view('default/page/includes/admin/header', $data);
+				$this->load->view('default/page/includes/admin/navbar');
+				$this->load->view('default/page/admin/api_settings');
+				$this->load->view('default/page/includes/admin/footer');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function dashboard()
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$data['title'] = 'Dashboard';
 			$data['active'] = 'home';
 			$data['ci_clients'] = count($this->user->list_users());
@@ -804,737 +582,525 @@ class A extends CI_Controller
 			$data['ci_tickets'] = count($this->ticket->get_tickets());
 			$data['ci_templates'] = count($this->mailer->get_user_templates());
 
-			$this->load->view('page/includes/admin/header', $data);
-			$this->load->view('page/includes/admin/navbar');
-			$this->load->view('page/admin/dashboard');
-			$this->load->view('page/includes/admin/footer');
-		}
-		else
-		{
+			$this->load->view('default/page/includes/admin/header', $data);
+			$this->load->view('default/page/includes/admin/navbar');
+			$this->load->view('default/page/admin/dashboard');
+			$this->load->view('default/page/includes/admin/footer');
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function email_templates()
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$data['title'] = 'Email Templates';
 			$data['active'] = 'email';
 			$data['list'] = $this->mailer->get_user_templates();
-			
-			$this->load->view('page/includes/admin/header', $data);
-			$this->load->view('page/includes/admin/navbar');
-			$this->load->view('page/admin/email_templates');
-			$this->load->view('page/includes/admin/footer');
-		}
-		else
-		{
+
+			$this->load->view('default/page/includes/admin/header', $data);
+			$this->load->view('default/page/includes/admin/navbar');
+			$this->load->view('default/page/admin/email_templates');
+			$this->load->view('default/page/includes/admin/footer');
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function edit_email($id)
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$id = $this->security->xss_clean($id);
-			if($this->input->post('update'))
-			{
+			if ($this->input->post('update')) {
 				$this->fv->set_rules('subject', 'Subject', ['trim', 'required']);
 				$this->fv->set_rules('content', 'Content', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
+				if ($this->fv->run() === true) {
 					$subject = $this->input->post('subject');
 					$content = $this->input->post('content', false);
 					$res = $this->mailer->set_template(['subject' => $subject, 'content' => $content], $id);
-					if($res)
-					{
+					if ($res) {
 						$this->session->set_flashdata('msg', json_encode([1, 'Email template updated successfully.']));
 						redirect("a/edit_email/$id");
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect("a/edit_email/$id");
 					}
-				}
-				else
-				{
-					if(validation_errors() !== '')
-					{
-							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					}
-					else
-					{
+				} else {
+					if (validation_errors() !== '') {
+						$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 					}
 					redirect("a/edit_email/$id");
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Edit Email';
 				$data['active'] = 'email';
 				$data['email'] = $this->mailer->get_template($id);
-				
-				$this->load->view('page/includes/admin/header', $data);
-				$this->load->view('page/includes/admin/navbar');
-				$this->load->view('page/admin/edit_email');
-				$this->load->view('page/includes/admin/footer');
+
+				$this->load->view('default/page/includes/admin/header', $data);
+				$this->load->view('default/page/includes/admin/navbar');
+				$this->load->view('default/page/admin/edit_email');
+				$this->load->view('default/page/includes/admin/footer');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function tickets()
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$data['title'] = 'Tickets';
 			$data['active'] = 'ticket';
 			$data['list'] = $this->ticket->get_tickets();
 
-			$this->load->view('page/includes/admin/header', $data);
-			$this->load->view('page/includes/admin/navbar');
-			$this->load->view('page/admin/tickets');
-			$this->load->view('page/includes/admin/footer');
-		}
-		else
-		{
+			$this->load->view('default/page/includes/admin/header', $data);
+			$this->load->view('default/page/includes/admin/navbar');
+			$this->load->view('default/page/admin/tickets');
+			$this->load->view('default/page/includes/admin/footer');
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function view_ticket($id)
 	{
-		if($this->admin->is_logged()){
+		if ($this->admin->is_logged()) {
 			$id = $this->security->xss_clean($id);
-			if($this->input->get('close'))
-			{
+			if ($this->input->get('close')) {
 				$res = $this->ticket->change_ticket_status($id, 'closed');
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been closed successfully.']));
 					redirect("a/view_ticket/$id");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_ticket/$id");
 				}
-			}
-			elseif($this->input->get('open'))
-			{
+			} elseif ($this->input->get('open')) {
 				$res = $this->ticket->change_ticket_status($id, 'open');
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been opened successfully.']));
 					redirect("a/view_ticket/$id");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_ticket/$id");
 				}
-			}
-			elseif($this->input->post('reply'))
-			{
+			} elseif ($this->input->post('reply')) {
 				$this->fv->set_rules('content', 'Content', ['trim', 'required']);
-				if($this->grc->is_active())
-				{
-					if($this->grc->get_type() == "google")
-					{
+				if ($this->grc->is_active()) {
+					if ($this->grc->get_type() == "google") {
 						$this->fv->set_rules('g-recaptcha-response', 'Recaptcha', ['trim', 'required']);
-					}
-					elseif($this->grc->get_type() == "crypto")
-					{
+					} elseif ($this->grc->get_type() == "crypto") {
 						$this->fv->set_rules('CRLT-captcha-token', 'Recaptcha', ['trim', 'required']);
-					}
-					else
-					{
+					} else {
 						$this->fv->set_rules('h-captcha-response', 'Recaptcha', ['trim', 'required']);
 					}
-					if($this->fv->run() === true)
-					{
+					if ($this->fv->run() === true) {
 						$content = $this->input->post('content');
-						if($this->grc->get_type() == "google")
-						{
+						if ($this->grc->get_type() == "google") {
 							$token = $this->input->post('g-recaptcha-response');
 							$type = "google";
-						}
-						elseif($this->grc->get_type() == "crypto")
-						{
+						} elseif ($this->grc->get_type() == "crypto") {
 							$token = $this->input->post('CRLT-captcha-token');
 							$type = "crypto";
-						}
-						else
-						{
+						} else {
 							$token = $this->input->post('h-captcha-response');
 							$type = "human";
 						}
-						if($this->grc->is_valid($token, $type))
-						{
+						if ($this->grc->is_valid($token, $type)) {
 							$res = $this->ticket->add_reply($id, $content, $this->admin->get_key(), 'support');
-							if($res)
-							{
+							if ($res) {
 								$this->session->set_flashdata('msg', json_encode([1, 'Ticket reply added successfully.']));
 								redirect("a/view_ticket/$id");
-							}
-							else
-							{
+							} else {
 								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 								redirect("a/view_ticket/$id");
 							}
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
 							redirect("a/view_ticket/$id");
 						}
-					}
-					else
-					{
-						if(validation_errors() !== '')
-						{
+					} else {
+						if (validation_errors() !== '') {
 							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 						}
 						redirect("a/view_ticket/$id");
 					}
-				}
-				else
-				{
-					if($this->fv->run() === true)
-					{
+				} else {
+					if ($this->fv->run() === true) {
 						$content = $this->input->post('content');
 						$res = $this->ticket->add_reply($id, $content, $this->admin->get_key(), 'support');
-						if($res)
-						{
+						if ($res) {
 							$this->session->set_flashdata('msg', json_encode([1, 'Ticket reply added successfully.']));
 							redirect("a/view_ticket/$id");
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 							redirect("a/view_ticket/$id");
 						}
-					}
-					else
-					{
-						if(validation_errors() !== '')
-						{
-								$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-						}
-						else
-						{
+					} else {
+						if (validation_errors() !== '') {
+							$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'Please fill all required fields.']));
 						}
 						redirect("a/view_ticket/$id");
 					}
 				}
-			}
-			else
-			{
-				$data['title'] = 'View Ticket '.$id;
+			} else {
+				$data['title'] = 'View Ticket ' . $id;
 				$data['active'] = 'ticket';
 				$data['ticket'] = $this->ticket->view_ticket($id);
-				if($data['ticket'] !== false)
-				{
+				if ($data['ticket'] !== false) {
 					$data['replies'] = $this->ticket->get_ticket_reply($id);
 
-					$this->load->view('page/includes/admin/header', $data);
-					$this->load->view('page/includes/admin/navbar');
-					$this->load->view('page/admin/view_ticket');
-					$this->load->view('page/includes/admin/footer');
-				}
-				else
-				{
+					$this->load->view('default/page/includes/admin/header', $data);
+					$this->load->view('default/page/includes/admin/navbar');
+					$this->load->view('default/page/admin/view_ticket');
+					$this->load->view('default/page/includes/admin/footer');
+				} else {
 					redirect('e/error_404');
 				}
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function clients()
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$data['title'] = 'Clients';
 			$data['active'] = 'client';
 			$data['list'] = $this->user->list_users();
 
-			$this->load->view('page/includes/admin/header', $data);
-			$this->load->view('page/includes/admin/navbar');
-			$this->load->view('page/admin/clients');
-			$this->load->view('page/includes/admin/footer');
-		}
-		else
-		{
+			$this->load->view('default/page/includes/admin/header', $data);
+			$this->load->view('default/page/includes/admin/navbar');
+			$this->load->view('default/page/admin/clients');
+			$this->load->view('default/page/includes/admin/footer');
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function view_client($id)
 	{
-		if($this->admin->is_logged()){
+		if ($this->admin->is_logged()) {
 			$id = $this->security->xss_clean($id);
-			if($this->input->get('active'))
-			{
+			if ($this->input->get('active')) {
 				$res = $this->user->set_status(1, $id);
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Client had been activated successfully.']));
 					redirect("a/view_client/$id");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_client/$id");
 				}
-			}
-			elseif($this->input->get('login'))
-			{
+			} elseif ($this->input->get('login')) {
 				$res = $this->user->login_me_as($id);
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Logged in successfully.']));
 					redirect("a/");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_client/$id");
 				}
-			}
-			else
-			{
-				$data['title'] = 'View Client '.$id;
+			} else {
+				$data['title'] = 'View Client ' . $id;
 				$data['active'] = 'client';
 				$data['info'] = $this->user->get_info($id);
-				if($data['info'] !== false)
-				{
-					$this->load->view('page/includes/admin/header', $data);
-					$this->load->view('page/includes/admin/navbar');
-					$this->load->view('page/admin/view_client');
-					$this->load->view('page/includes/admin/footer');
-				}
-				else
-				{
+				if ($data['info'] !== false) {
+					$this->load->view('default/page/includes/admin/header', $data);
+					$this->load->view('default/page/includes/admin/navbar');
+					$this->load->view('default/page/admin/view_client');
+					$this->load->view('default/page/includes/admin/footer');
+				} else {
 					redirect('e/error_404');
 				}
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function domains()
 	{
-		if($this->admin->is_logged()){
-			if($this->input->get('add_domain'))
-			{
+		if ($this->admin->is_logged()) {
+			if ($this->input->get('add_domain')) {
 				$res = $this->mofh->add_ext($this->input->get('domain'));
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Domain extension added successfully.']));
 					redirect("a/domains");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/domains");
 				}
-			}
-			elseif($this->input->get('rm_domain'))
-			{
+			} elseif ($this->input->get('rm_domain')) {
 				$res = $this->mofh->rm_ext($this->input->get('domain'));
-				if($res)
-				{
+				if ($res) {
 					$this->session->set_flashdata('msg', json_encode([1, 'Domain extension removed successfully.']));
 					redirect("a/domains");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/domains");
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Domain Extensions';
 				$data['active'] = 'domain';
 				$data['list'] = $this->mofh->list_exts();
 
-				$this->load->view('page/includes/admin/header', $data);
-				$this->load->view('page/includes/admin/navbar');
-				$this->load->view('page/admin/domains');
-				$this->load->view('page/includes/admin/footer');
+				$this->load->view('default/page/includes/admin/header', $data);
+				$this->load->view('default/page/includes/admin/navbar');
+				$this->load->view('default/page/admin/domains');
+				$this->load->view('default/page/includes/admin/footer');
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function accounts()
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$data['title'] = 'Accounts';
 			$data['active'] = 'account';
 			$data['list'] = $this->account->get_accounts();
-			
-			$this->load->view('page/includes/admin/header', $data);
-			$this->load->view('page/includes/admin/navbar');
-			$this->load->view('page/admin/accounts');
-			$this->load->view('page/includes/admin/footer');
-		}
-		else
-		{
+
+			$this->load->view('default/page/includes/admin/header', $data);
+			$this->load->view('default/page/includes/admin/navbar');
+			$this->load->view('default/page/admin/accounts');
+			$this->load->view('default/page/includes/admin/footer');
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function view_account($id)
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$id = $this->security->xss_clean($id);
-			if($this->input->get('login'))
-			{
+			if ($this->input->get('login')) {
 				$res = $this->account->get_account($id);
-				if($res !== false)
-				{
+				if ($res !== false) {
 					$data['username'] = $res['account_username'];
 					$data['password'] = $res['account_password'];
-					$this->load->view('page/admin/cpanel_login', $data);
-				}
-				else
-				{
+					$this->load->view('default/page/admin/cpanel_login', $data);
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_account/$id");
 				}
-			}
-			elseif($this->input->get('builder') AND $this->input->get('domain'))
-			{
+			} elseif ($this->input->get('builder') and $this->input->get('domain')) {
 				$res = $this->account->get_user_account($id);
-				if($res !== false)
-				{
+				if ($res !== false) {
 					$username = $res['account_username'];
 					$password = $res['account_password'];
 					$domain = $this->input->get('domain');
-					if($domain !== $res['account_domain'])
-					{
-						$dir = '/htdocs/'.$domain;
-					}
-					else
-					{
+					if ($domain !== $res['account_domain']) {
+						$dir = '/htdocs/' . $domain;
+					} else {
 						$dir = '/htdocs/';
 					}
 					$link = $this->sp->load_builder_url($username, $password, $domain, $dir);
-					if($link === false)
-					{
+					if ($link === false) {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect("a/view_account/$id");
-					}
-					elseif($link['success'] == true)
-					{
-						 header('location: '.$link['url']); 
-					}
-					else
-					{
+					} elseif ($link['success'] == true) {
+						header('location: ' . $link['url']);
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, $link['msg']]));
 						redirect("a/view_account/$id");
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_account/$id");
 				}
-			}
-			elseif($this->input->get('reactivate'))
-			{
+			} elseif ($this->input->get('reactivate')) {
 				$res = $this->account->get_account($id);
-				if($res !== false)
-				{
-					if($res['account_status'] === 'suspended' OR $res['account_status'] === 'deactivated')
-					{
+				if ($res !== false) {
+					if ($res['account_status'] === 'suspended' or $res['account_status'] === 'deactivated') {
 						$res = $this->mofh->reactivate_account($res['account_key']);
-						if(!is_bool($res))
-						{
+						if (!is_bool($res)) {
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 							redirect("a/view_account/$id");
-						}
-						elseif($res !== false)
-						{
+						} elseif ($res !== false) {
 							$this->session->set_flashdata('msg', json_encode([1, 'Account reactivated successfully.']));
 							redirect("a/view_account/$id");
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 							redirect("a/view_account/$id");
 						}
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'Unable to reactivate account.']));
 						redirect("a/view_account/$id");
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_account/$id");
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'View Account';
 				$data['active'] = 'account';
 				$data['id'] = $id;
 				$data['data'] = $this->account->get_account($id);
-				if($data['data'] !== false)
-				{
-					$this->load->view('page/includes/admin/header', $data);
-					$this->load->view('page/includes/admin/navbar');
-					$this->load->view('page/admin/view_account');
-					$this->load->view('page/includes/admin/footer');
-				}
-				else
-				{
+				if ($data['data'] !== false) {
+					$this->load->view('default/page/includes/admin/header', $data);
+					$this->load->view('default/page/includes/admin/navbar');
+					$this->load->view('default/page/admin/view_account');
+					$this->load->view('default/page/includes/admin/footer');
+				} else {
 					redirect('e/error_404');
 				}
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function account_settings($id)
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$id = $this->security->xss_clean($id);
-			if($this->input->post('update_label'))
-			{
+			if ($this->input->post('update_label')) {
 				$res = $this->account->get_account($id);
-				if($res !== false)
-				{
+				if ($res !== false) {
 					$res = $this->account->set_label($id, $this->input->post('label'));
-					if($res !== false)
-					{
+					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'Account label updated successfully.']));
 						redirect("a/account_settings/$id");
-					}
-						else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 						redirect("a/account_settings/$id");
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/account_settings/$id");
 				}
-			}
-			elseif($this->input->post('update_password'))
-			{
+			} elseif ($this->input->post('update_password')) {
 				$res = $this->account->get_account($id);
-				if($res !== false)
-				{
-					if(strlen($this->input->post('password')) > 4 AND strlen($this->input->post('old_password')) > 4)
-					{
+				if ($res !== false) {
+					if (strlen($this->input->post('password')) > 4 and strlen($this->input->post('old_password')) > 4) {
 						$res = $this->account->change_account_password($id, $this->input->post('password'), $this->input->post('old_password'));
-						if(!is_bool($res))
-						{
+						if (!is_bool($res)) {
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 							redirect("a/view_settings/$id");
-						}
-						elseif($res !== false)
-						{
+						} elseif ($res !== false) {
 							$this->session->set_flashdata('msg', json_encode([1, 'Account password updated successfully.']));
 							redirect("a/account_settings/$id");
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 							redirect("a/account_settings/$id");
 						}
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'Unable to delete account.']));
-							redirect("a/account_settings/$id");
+						redirect("a/account_settings/$id");
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/account_settings/$id");
 				}
-			}
-			elseif($this->input->post('deactivate'))
-			{
+			} elseif ($this->input->post('deactivate')) {
 				$res = $this->account->get_account($id);
-				if($res !== false)
-				{
-					if($res['account_status'] === 'active')
-					{
+				if ($res !== false) {
+					if ($res['account_status'] === 'active') {
 						$res = $this->mofh->deactivate_account($res['account_key'], $this->input->post('reason'));
-						if(!is_bool($res))
-						{
+						if (!is_bool($res)) {
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 							redirect("a/account_settings/$id");
-						}
-						elseif($res !== false)
-						{
+						} elseif ($res !== false) {
 							$this->session->set_flashdata('msg', json_encode([1, 'Account deactivated successfully.']));
 							redirect("a/accounts");
-						}
-						else
-						{
+						} else {
 							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 							redirect("a/account_settings/$id");
 						}
-					}
-					else
-					{
+					} else {
 						$this->session->set_flashdata('msg', json_encode([0, 'Unable to delete account.']));
-							redirect("a/account_settings/$id");
+						redirect("a/account_settings/$id");
 					}
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/account_settings/$id");
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'Account Settings';
 				$data['active'] = 'account';
 				$data['id'] = $id;
 				$data['data'] = $this->account->get_account($id);
-				if($data['data'] !== false)
-				{
-					$this->load->view('page/includes/admin/header', $data);
-					$this->load->view('page/includes/admin/navbar');
-					$this->load->view('page/admin/account_settings');
-					$this->load->view('page/includes/admin/footer');
-				}
-				else
-				{
+				if ($data['data'] !== false) {
+					$this->load->view('default/page/includes/admin/header', $data);
+					$this->load->view('default/page/includes/admin/navbar');
+					$this->load->view('default/page/admin/account_settings');
+					$this->load->view('default/page/includes/admin/footer');
+				} else {
 					redirect('e/error_404');
 				}
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
-	
+
 	function ssl()
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$data['title'] = 'SSL Certitcates';
 			$data['active'] = 'ssl';
 			$data['list'] = $this->ssl->get_ssl_list_all();
-			
-			$this->load->view('page/includes/admin/header', $data);
-			$this->load->view('page/includes/admin/navbar');
-			$this->load->view('page/admin/ssl');
-			$this->load->view('page/includes/admin/footer');
-		}
-		else
-		{
+
+			$this->load->view('default/page/includes/admin/header', $data);
+			$this->load->view('default/page/includes/admin/navbar');
+			$this->load->view('default/page/admin/ssl');
+			$this->load->view('default/page/includes/admin/footer');
+		} else {
 			redirect('a/login');
 		}
 	}
 
 	function view_ssl($id)
 	{
-		if($this->admin->is_logged())
-		{
+		if ($this->admin->is_logged()) {
 			$id = $this->security->xss_clean($id);
-			if($this->input->get('delete'))
-			{
+			if ($this->input->get('delete')) {
 				$this->db->where(['key' => $id]);
 				$res = $this->db->delete('is_ssl');
-				if($res !== false)
-				{
+				if ($res !== false) {
 					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate deleted successfully.']));
 					redirect("a/view_ssl/$id");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_ssl/$id");
 				}
-			}
-			elseif($this->input->get('cancel'))
-			{
+			} elseif ($this->input->get('cancel')) {
 				$res = $this->ssl->cancel_ssl($id, 'Some Reason');
-				if(!is_bool($res))
-				{
+				if (!is_bool($res)) {
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
 					redirect("a/view_ssl/$id");
 				}
-				if(is_bool($res) AND $res == true)
-				{
+				if (is_bool($res) and $res == true) {
 					$this->session->set_flashdata('msg', json_encode([1, 'SSL certificate cancelled successfully.']));
 					redirect("a/view_ssl/$id");
-				}
-				else
-				{
+				} else {
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
 					redirect("a/view_ssl/$id");
 				}
-			}
-			else
-			{
+			} else {
 				$data['title'] = 'View SSL';
 				$data['active'] = 'ssl';
 				$data['id'] = $id;
 				$data['data'] = $this->ssl->get_ssl_info($id);
-				if($data['data'] !== false)
-				{
-					$this->load->view('page/includes/admin/header', $data);
-					$this->load->view('page/includes/admin/navbar');
-					$this->load->view('page/admin/view_ssl');
-					$this->load->view('page/includes/admin/footer');
-				}
-				else
-				{
+				if ($data['data'] !== false) {
+					$this->load->view('default/page/includes/admin/header', $data);
+					$this->load->view('default/page/includes/admin/navbar');
+					$this->load->view('default/page/admin/view_ssl');
+					$this->load->view('default/page/includes/admin/footer');
+				} else {
 					redirect('e/error_404');
 				}
 			}
-		}
-		else
-		{
+		} else {
 			redirect('a/login');
 		}
 	}
 }
-
-?>
