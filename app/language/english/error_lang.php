@@ -13,5 +13,7 @@ $lang['deactivation_error'] = 'Unable to deactivate account.';
 $lang['reactivation_error'] = 'Unable to reactivate account.';
 $lang['cant_reactivate'] = 'Maximum number of accounts already active.';
 $lang['account_limit'] = 'You have reached free account limit.';
+$lang['oauth_msg'] = 'You need to sign in with your github account.';
+$lang['invalid_oauth_key'] = 'Invalid client or secret key.';
 
 ?>
