@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="assets/img/xera.png">
+    <img src="assets/default/img/xera.png">
 </div>
 
 ## 👀 What is Xera ?
