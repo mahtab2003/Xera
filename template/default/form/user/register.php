@@ -58,6 +58,11 @@
 		<div class="form-footer mt-1">
 			<input type="submit" class="btn btn-primary w-100" name="register" value="<?= $this->base->text('register', 'button') ?>">
 		</div>
+		<?php if ($this->oauth->is_active('github')): ?>
+			<div class="form-footer mt-1">
+				<a href="https://github.com/login/oauth/authorize?client_id=<?= $this->oauth->get_client('github') ?>&scope=user,email" class="btn btn-dark w-100"><i class="fab fa-github me-2"></i><?= $this->base->text('github_signin', 'button') ?></a>
+			</div>
+		<?php endif ?>
 	</div>
 </form>
 <div class="text-center text-muted mt-3">
