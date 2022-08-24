@@ -26,6 +26,7 @@ Xera is a hosting account and support management system especially designed to w
 	- SitePro
 	- SMTP
 - Update Manager
+- Multi-langual
 
 ## 🤸 Getting Started
 
