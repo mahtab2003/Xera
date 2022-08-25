@@ -315,6 +315,10 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 
 		$sql = mysqli_query($mysqli, "CREATE TABLE `is_ssl` (`ssl_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,`ssl_pid` varchar(250) NOT NULL,`ssl_key` varchar(20) NOT NULL,`ssl_for` varchar(20) NOT NULL
 		);");
+
+		$sql = mysqli_query($mysqli, "CREATE TABLE `is_oauth` (`oauth_id` varchar(20) NOT NULL, `oauth_client` varchar(100) NOT NULL, `oauth_secret` varchar(100) NOT NULL, `oauth_endpoint` varchar(100) NOT NULL, `oauth_status` varchar(8) NOT NULL);");
+		$sql = mysqli_query($mysqli, "INSERT INTO `is_oauth`(`oauth_id`, `oauth_client`, `oauth_secret`, `oauth_endpoint`, `oauth_status`) VALUES ('github', 'client key', 'client key', 'https://api.github.com/user', 'inactive');");
+
 		if($sql)
 		{
 			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/database.php');
