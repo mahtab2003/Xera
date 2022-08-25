@@ -258,7 +258,8 @@ class C extends CI_Controller
 						{
 
 							$res = $this->user->oauth_login($key, $email, $secret, 30);
-							{
+							if($res)
+                                                        {
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
 								redirect('u/login');
 							}
