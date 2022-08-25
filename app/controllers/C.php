@@ -234,10 +234,9 @@ class C extends CI_Controller
 					curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: token '.$adata['access_token'],'User-Agent: PHP']);
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 					$email_data = curl_exec($ch);
-					print_r($email_data = json_decode($email_data,true));
 					curl_close($ch); 
 					$email = $email_data[0]['email'];
-					if($this->user->is_register())
+					if($this->user->is_register($email))
 					{
 						$res = $this->user->oauth_login($key, $email, $secret, 30);
 						if($res !== false)
