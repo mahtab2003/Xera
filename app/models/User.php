@@ -46,6 +46,7 @@ class User extends CI_Model
 		$data['user_email'] = $email;
 		$data['user_password'] = char64($email.':'.$secret);
 		$data['user_status'] = 'active';
+		$data['user_oauth'] = 'enabled';
 		$data['user_date'] = time();
 		$data['user_key'] = char16(implode(':', $data));
 		$data['user_rec'] = char32($data['user_key'].':'.$email.':'.$secret);
