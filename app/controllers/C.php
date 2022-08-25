@@ -239,7 +239,7 @@ class C extends CI_Controller
 					$email = $edata[0]['email'];
 					if($this->user->is_register())
 					{
-						$res = $this->user->oauth_login($key, $email, $secret, 30);
+						$res = $this->user->oauth_login($email, $secret, 30);
 						if($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
@@ -257,7 +257,7 @@ class C extends CI_Controller
 						if($res !== false)
 						{
 
-							$res = $this->user->oauth_login($key, $email, $secret, 30);
+							$res = $this->user->oauth_login($email, $secret, 30);
 							if($res !== false)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
