@@ -48,7 +48,7 @@ class User extends CI_Model
 		$data['user_status'] = 'active';
 		$data['user_oauth'] = 'enabled';
 		$data['user_date'] = time();
-		$data['user_key'] = char16(implode(':', $data));
+		$data['user_key'] = char16(char32($secret).':'.char64($email));
 		$data['user_rec'] = char32($data['user_key'].':'.$email.':'.$secret);
 		$res = $this->db->insert('is_user', $data);
 		if($res)
@@ -104,8 +104,8 @@ class User extends CI_Model
 					$json = json_encode([$data['user_rec'], time()]);
 					$gz = gzcompress($json);
 					$token = base64_encode($gz);
-					set_cookie('logged', true, $days*86400);
-					set_cookie('token', $token, $days*86400);
+					set_cookie('logged', true, $days * 86400);
+					set_cookie('token', $token, $days * 86400);
 					return true;
 				}
 				return false;
@@ -115,21 +115,21 @@ class User extends CI_Model
 		return false;
 	}
 
-	function oauth_login($key, $email, $secret, $days)
+	function oauth_login($email, $secret, $days)
 	{
 		$data = $this->fetch_where('email', $email);
 		if($data !== false)
 		{
 			if($data['user_oauth'] !== 'disabled')
 			{
-				$hash = char32($key.':'.$email.':'.$secret);
-				$rec = $data['user_rec'];
+				$hash = char16(char32($secret).':'.char64($email));
+				$rec = $data['user_key'];
 				if(hash_equals($rec, $hash)){
 					$json = json_encode([$data['user_rec'], time()]);
 					$gz = gzcompress($json);
 					$token = base64_encode($gz);
-					set_cookie('logged', true, $days*86400);
-					set_cookie('token', $token, $days*86400);
+					set_cookie('logged', true, $days * 86400);
+					set_cookie('token', $token, $days * 86400);
 					return true;
 				}
 				return false;
