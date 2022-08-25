@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="assets/img/xera.png">
+    <img src="assets/default/img/xera.png">
 </div>
 
 ## 👀 What is Xera ?
@@ -26,6 +26,7 @@ Xera is a hosting account and support management system especially designed to w
 	- SitePro
 	- SMTP
 - Update Manager
+- Multi-langual
 
 ## 🤸 Getting Started
 
