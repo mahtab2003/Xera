@@ -226,7 +226,7 @@ class C extends CI_Controller
 				{
 					$key = char16($udata['id']);
 					$secret = $udata['id'];
-					$name = explode(' ', $udata['name']);
+					$name = $udata['name'];
 					$password = char64($udata['login']);
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, $this->oauth->get_endpoint($oauth)."/emails");
@@ -235,6 +235,7 @@ class C extends CI_Controller
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 					$email_data = curl_exec($ch);
 					curl_close($ch); 
+					$email_data = json_decode($email_data, true);
 					$email = $email_data[0]['email'];
 					if($this->user->is_register($email))
 					{
@@ -246,7 +247,7 @@ class C extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('oauth_msg', 'error')]));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							redirect('u/login');
 						}
 					}
