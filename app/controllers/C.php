@@ -233,11 +233,11 @@ class C extends CI_Controller
 					curl_setopt($ch, CURLOPT_POST, 0);
 					curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: token '.$adata['access_token'],'User-Agent: PHP']);
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-					$email_data = curl_exec($ch);
+					$edata = curl_exec($ch);
+					$edata = json_decode($edata, true);
 					curl_close($ch); 
-					$email_data = json_decode($email_data, true);
-					$email = $email_data[0]['email'];
-					if($this->user->is_register($email))
+					$email = $edata[0]['email'];
+					if($this->user->is_register())
 					{
 						$res = $this->user->oauth_login($key, $email, $secret, 30);
 						if($res !== false)
@@ -258,8 +258,8 @@ class C extends CI_Controller
 						{
 
 							$res = $this->user->oauth_login($key, $email, $secret, 30);
-							if($res)
-                                                        {
+							if($res !== false)
+							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
 								redirect('u/login');
 							}
