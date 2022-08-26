@@ -9,6 +9,7 @@ CREATE TABLE `is_base` (
 	`base_fourm` varchar(100) NOT NULL,
 	`base_template` varchar(100) NOT NULL DEFAULT 'default',
 	`base_status` varchar(8) NOT NULL
+	`base_rpp` int(10) NOT NULL DEFAULT '1',
 );
 
 -- Insert default record for `is_base`
