@@ -541,6 +541,7 @@ class A extends CI_Controller
 				$this->fv->set_rules('fourm', 'Fourm URL', ['trim', 'required', 'valid_url']);
 				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
 				$this->fv->set_rules('template', 'Template Dir', ['trim', 'required']);
+				$this->fv->set_rules('rpp', 'Records Per Page', ['trim', 'required']);
 				if($this->fv->run() === true)
 				{
 					$name = $this->input->post('hostname');
@@ -548,11 +549,13 @@ class A extends CI_Controller
 					$status = $this->input->post('status');
 					$fourm = $this->input->post('fourm');
 					$template = $this->input->post('template');
+					$rpp = $this->input->post('rpp');
 					$res = $this->base->set_hostname($name);
 					$res = $this->base->set_email($email);
 					$res = $this->base->set_status($status);
 					$res = $this->base->set_fourm($fourm);
 					$res = $this->base->set_template($template);
+					$res = $this->base->set_rpp($rpp);
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'General settings updated successfully.']));
@@ -598,18 +601,18 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'SMTP settings updated successfully.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?smtp=1');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?smtp=1');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('a/api_settings');
+					redirect('a/api_settings?smtp=1');
 				}
 			}
 			elseif($this->input->post('update_grc'))
@@ -631,18 +634,18 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'Recaptcha settings updated successfully.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?captcha=1');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?captcha=1');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('a/api_settings');
+					redirect('a/api_settings?captcha=1');
 				}
 			}
 			elseif($this->input->post('update_ssl'))
@@ -661,18 +664,18 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'GoGetSSL settings updated successfully.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?ssl=1');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?ssl=1');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('a/api_settings');
+					redirect('a/api_settings?ssl=1');
 				}
 			}
 			elseif($this->input->post('update_github'))
@@ -695,18 +698,18 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'Github oauth settings updated successfully.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?oauth=1');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?oauth=1');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('a/api_settings');
+					redirect('a/api_settings?oauth=1');
 				}
 			}
 			elseif($this->input->post('update_mofh'))
@@ -734,18 +737,18 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'MOFH settings updated successfully.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?mofh=1');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?mofh=1');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('a/api_settings');
+					redirect('a/api_settings?mofh=1');
 				}
 			}
 			elseif($this->input->post('update_sp'))
@@ -767,18 +770,18 @@ class A extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, 'SitePro settings updated successfully.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?sitepro=1');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-						redirect('a/api_settings');
+						redirect('a/api_settings?sitepro=1');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('a/api_settings');
+					redirect('a/api_settings?sitepro=1');
 				}
 			}
 			elseif($this->input->get('test_mail'))
@@ -787,12 +790,12 @@ class A extends CI_Controller
 				if($res)
 				{
 					$this->session->set_flashdata('msg', json_encode([1, 'Test email sent successfully.']));
-					redirect("a/api_settings");
+					redirect("a/api_settings?smtp=1");
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-					redirect("a/api_settings");
+					redirect("a/api_settings?smtp=1");
 				}
 			}
 			elseif($this->input->get('test_mofh'))
@@ -801,17 +804,17 @@ class A extends CI_Controller
 				if($res === true)
 				{
 					$this->session->set_flashdata('msg', json_encode([1, 'Mofh api working successfully.']));
-					redirect("a/api_settings");
+					redirect("a/api_settings?mofh=1");
 				}
 				elseif($res === false)
 				{
 					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
-					redirect("a/api_settings");
+					redirect("a/api_settings?mofh=1");
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
-					redirect("a/api_settings");
+					redirect("a/api_settings?mofh=1");
 				}
 			}
 			else
@@ -934,7 +937,8 @@ class A extends CI_Controller
 		{
 			$data['title'] = 'Tickets';
 			$data['active'] = 'ticket';
-			$data['list'] = $this->ticket->get_tickets();
+			$count = $this->input->get('page') ?? 0;
+			$data['list'] = $this->ticket->get_tickets($count);
 
 			$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
 			$this->load->view($this->base->get_template().'/page/includes/admin/navbar');
@@ -1110,7 +1114,8 @@ class A extends CI_Controller
 		{
 			$data['title'] = 'Clients';
 			$data['active'] = 'client';
-			$data['list'] = $this->user->list_users();
+			$count = $this->input->get('page') ?? 0;
+			$data['list'] = $this->user->list_users($count);
 
 			$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
 			$this->load->view($this->base->get_template().'/page/includes/admin/navbar');
@@ -1234,7 +1239,8 @@ class A extends CI_Controller
 		{
 			$data['title'] = 'Accounts';
 			$data['active'] = 'account';
-			$data['list'] = $this->account->get_accounts();
+			$count = $this->input->get('page') ?? 0;
+			$data['list'] = $this->account->get_accounts($count);
 			
 			$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
 			$this->load->view($this->base->get_template().'/page/includes/admin/navbar');
@@ -1497,7 +1503,8 @@ class A extends CI_Controller
 		{
 			$data['title'] = 'SSL Certitcates';
 			$data['active'] = 'ssl';
-			$data['list'] = $this->ssl->get_ssl_list_all();
+			$count = $this->input->get('page') ?? 0;
+			$data['list'] = $this->ssl->get_ssl_list_all($count);
 			
 			$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
 			$this->load->view($this->base->get_template().'/page/includes/admin/navbar');
