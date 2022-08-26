@@ -109,7 +109,7 @@ class Gogetssl extends CI_Model
 		return false;
 	}
 
-	function get_ssl_list_all()
+	function get_ssl_list_all($count = 0)
 	{
 		$res = $this->fetch();
 		if($res !== false)
@@ -124,7 +124,46 @@ class Gogetssl extends CI_Model
 				}
 				return $arr;
 			}
-			return $arr;
+			$list = [];
+			if($count == 0)
+			{
+				$count = 0;
+			}
+			else
+			{
+				$count = $count * $this->base->rpp();
+			}
+			for ($i = $count; $i < count($arr); $i++) { 
+				if($i >= $count + $this->base->rpp())
+				{
+					break;
+				}
+				else
+				{
+					$list[] = $arr[$i];
+				}
+			}
+			return $list;
+		}
+		return false;
+	}
+
+	function list_count()
+	{
+		$res = $this->fetch();
+		if($res !== false)
+		{
+			$arr = [];
+			if(count($res)>0)
+			{
+				foreach ($res as $key) {
+					$data = $this->s->getOrderStatus($key['ssl_pid']);
+					$data['key'] = $key['ssl_key'];
+					$arr[] = $data;
+				}
+				return $arr;
+			}
+			return count($arr);
 		}
 		return false;
 	}

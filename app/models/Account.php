@@ -8,12 +8,41 @@ class Account extends CI_Model
 		$this->load->model('mofh');
 	}
 
-	function get_accounts()
+	function get_accounts($count = 0)
 	{
 		$res = $this->fetch();
 		if($res !== false)
 		{
-			return $res;
+			$list = [];
+			if($count == 0)
+			{
+				$count = 0;
+			}
+			else
+			{
+				$count = $count * $this->base->rpp();
+			}
+			for ($i = $count; $i < count($res); $i++) { 
+				if($i >= $count + $this->base->rpp())
+				{
+					break;
+				}
+				else
+				{
+					$list[] = $res[$i];
+				}
+			}
+			return $list;
+		}
+		return false;
+	}
+
+	function list_count()
+	{
+		$res = $this->fetch();
+		if($res !== false)
+		{
+			return count($res);
 		}
 		return false;
 	}

@@ -39,14 +39,43 @@ class Ticket extends CI_Model
 		return count($res);
 	}
 
-	function get_tickets()
+	function get_tickets($count = 0)
 	{
 		$this->db->where('ticket_status', 'open');
 		$this->db->or_where('ticket_status', 'customer');
 		$this->db->select('*');
 		$this->db->from('is_ticket');
 		$res = $this->db->get()->result_array();
-		return $res;
+		$list = [];
+		if($count == 0)
+		{
+			$count = 0;
+		}
+		else
+		{
+			$count = $count * $this->base->rpp();
+		}
+		for ($i = $count; $i < count($res); $i++) { 
+			if($i >= $count + $this->base->rpp())
+			{
+				break;
+			}
+			else
+			{
+				$list[] = $res[$i];
+			}
+		}
+		return $list;
+	}
+
+	function list_count()
+	{
+		$this->db->where('ticket_status', 'open');
+		$this->db->or_where('ticket_status', 'customer');
+		$this->db->select('*');
+		$this->db->from('is_ticket');
+		$res = $this->db->get()->result_array();
+		return count($res);
 	}
 
 	function get_user_tickets()

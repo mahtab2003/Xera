@@ -31,6 +31,26 @@ class Base extends CI_Model
 		return '...';
 	}
 
+	function set_rpp($rpp)
+	{
+		$res = $this->update_base('rpp', $rpp);
+		if($res)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	function rpp()
+	{
+		$res = $this->fetch_base();
+		if($res !== false)
+		{
+			return $res['base_rpp'];
+		}
+		return false;
+	}
+
 	function get_hostname()
 	{
 		$res = $this->fetch_base();

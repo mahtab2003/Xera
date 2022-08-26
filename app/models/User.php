@@ -430,14 +430,43 @@ class User extends CI_Model
 		return false;
 	}
 
-	function list_users()
+	function list_count()
 	{
 		$res = $this->base->fetch(
 			'is_user',
 			[],
 			'user_'
 		);
-		return $res;
+		return count($res);
+	}
+
+	function list_users($count = 0)
+	{
+		$res = $this->base->fetch(
+			'is_user',
+			[],
+			'user_'
+		);
+		$list = [];
+		if($count == 0)
+		{
+			$count = 0;
+		}
+		else
+		{
+			$count = $count * $this->base->rpp();
+		}
+		for ($i = $count; $i < count($res); $i++) { 
+			if($i >= $count + $this->base->rpp())
+			{
+				break;
+			}
+			else
+			{
+				$list[] = $res[$i];
+			}
+		}
+		return $list;
 	}
 
 	function get_info($key)
