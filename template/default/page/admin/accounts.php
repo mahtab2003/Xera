@@ -51,14 +51,36 @@
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="5" class="text-center">Nothing to show</td>
+							<td colspan="4" class="text-center">Nothing to show</td>
 						</tr>
 					<?php endif ?>
 				</tbody>
 			</table>
 		</div>
 		<div class="card-footer py-2">
-			<?= count($list) ?> Hosting Accounts Found
+			<div class="d-flex align-items-center justify-content-between">
+				<div>
+					Showing <?php if(isset($mcount)): echo $mcount; else: echo 0; endif; ?> to <?php if(isset($count)): echo $count - 1; else: echo 0; endif; ?> of <?= $this->account->list_count() ?> entries
+				</div>
+				<div>
+					<?php $page = $this->input->get('page') ?? 0 ?>
+					<?php $i = $this->account->list_count() - $this->base->rpp(); ?>
+					<?php $i = $i / $this->base->rpp(); ?>
+					<?php $i = intval($i); ?>
+					<ul class="pagination mb-0">
+						<li class="page-item <?php if ($page < 1): ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page > 0): ?>href="<?= base_url() ?>a/accounts?page=<?= $page - 1 ?>"<?php endif ?>>
+								<span>&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item <?php if ($page > $i): ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page < $i + 1): ?>href="<?= base_url() ?>a/accounts?page=<?= $page + 1 ?>"<?php endif ?>>
+								<span>&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

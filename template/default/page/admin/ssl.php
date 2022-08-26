@@ -27,7 +27,14 @@
 					<?php if (count($list) > 0): ?>
 						<?php foreach ($list as $item): ?>
 							<tr>
-								<td><?php echo $count = $count ?? 1 ?></td>
+								<?php 
+									if($this->input->get('page')):
+										$mcount = $this->base->rpp() * $this->input->get('page') + 1;
+									else:
+										$mcount = 1;
+									endif; 
+								?>
+								<td><?php echo $count = $count ?? $mcount ?></td>
 								<td><?= $item['domain'] ?></td>
 								<td>DNS</td>
 								<td>
@@ -61,7 +68,29 @@
 			</table>
 		</div>
 		<div class="card-footer py-2">
-			<?= count($list) ?> SSL Certificates
+			<div class="d-flex align-items-center justify-content-between">
+				<div>
+					Showing <?php if(isset($mcount)): echo $mcount; else: echo 0; endif; ?> to <?php if(isset($count)): echo $count - 1; else: echo 0; endif; ?> of <?= $this->ssl->list_count() ?> entries
+				</div>
+				<div>
+					<?php $page = $this->input->get('page') ?? 0 ?>
+					<?php $i = $this->ssl->list_count() - $this->base->rpp(); ?>
+					<?php $i = $i / $this->base->rpp(); ?>
+					<?php $i = intval($i); ?>
+					<ul class="pagination mb-0">
+						<li class="page-item <?php if ($page < 1): ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page > 0): ?>href="<?= base_url() ?>a/ssl?page=<?= $page - 1 ?>"<?php endif ?>>
+								<span>&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item <?php if ($page > $i): ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page < $i + 1): ?>href="<?= base_url() ?>a/ssl?page=<?= $page + 1 ?>"<?php endif ?>>
+								<span>&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
