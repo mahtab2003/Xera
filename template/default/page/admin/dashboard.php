@@ -75,7 +75,8 @@
 				</div>
 			</div>
 		</div>
-	</div><div class="page-header d-print-none">
+	</div>
+	<div class="page-header d-print-none">
 		<div class="row align-items-center">
 			<div class="col">
 				<h2 class="page-title py-3">
@@ -91,7 +92,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-orange avatar">
-								<i class="fa fa-info"></i>
+								<em class="fa fa-info"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -112,7 +113,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-yellow avatar">
-								<i class="fa fa-upload"></i>
+								<em class="fa fa-upload"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -133,7 +134,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-info avatar">
-								<i class="fa fa-book"></i>
+								<em class="fa fa-book"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -154,7 +155,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-green avatar">
-								<i class="fa fa-bullhorn"></i>
+								<em class="fa fa-bullhorn"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -175,7 +176,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-purple avatar">
-								<i class="fa fa-tools"></i>
+								<em class="fa fa-tools"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -196,7 +197,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-pink avatar">
-								<i class="fa fa-thumbs-up"></i>
+								<em class="fa fa-thumbs-up"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -217,7 +218,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-cyan avatar">
-								<i class="fa fa-file-alt"></i>
+								<em class="fa fa-file-alt"></em>
 							</span>
 						</div>
 						<div class="col">
@@ -238,7 +239,7 @@
 					<div class="row align-items-center">
 						<div class="col-auto">
 							<span class="text-white bg-teal avatar">
-								<i class="fa fa-file"></i>
+								<em class="fa fa-file"></em>
 							</span>
 						</div>
 						<div class="col">

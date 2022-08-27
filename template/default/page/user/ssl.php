@@ -27,35 +27,35 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (count($list) > 0): ?>
-						<?php foreach ($list as $item): ?>
+					<?php if (count($list) > 0) : ?>
+						<?php foreach ($list as $item) : ?>
 							<tr>
 								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['domain'] ?></td>
 								<td>DNS</td>
 								<td>
-									<?php if ($item['status'] == 'processing'): ?>
+									<?php if ($item['status'] == 'processing') : ?>
 										<span class="badge bg-yellow">
 											<?= $this->base->text($item['status'], 'table') ?>
 											<?php $btn = ['fa-cogs', 'btn-yellow'] ?>
 										</span>
-									<?php elseif ($item['status'] == 'active'): ?>
+									<?php elseif ($item['status'] == 'active') : ?>
 										<span class="badge bg-green">
 											<?= $this->base->text($item['status'], 'table') ?>
 											<?php $btn = ['fa-shield-alt', 'btn-green'] ?>
 										</span>
-									<?php elseif ($item['status'] == 'cancelled' OR $item['status'] == 'expired'): ?>
+									<?php elseif ($item['status'] == 'cancelled' or $item['status'] == 'expired') : ?>
 										<span class="badge bg-danger">
 											<?= $this->base->text($item['status'], 'table') ?>
 											<?php $btn = ['fa-lock', 'btn-red'] ?>
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'u/view_ssl/'.$item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> <?= $this->base->text('manage', 'button') ?></a></td>
+								<td><a href="<?= base_url() . 'u/view_ssl/' . $item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
-					<?php else: ?>
+					<?php else : ?>
 						<tr>
 							<td colspan="5" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 						</tr>

@@ -4,8 +4,8 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-			<a href="<?= base_url()?>">
-				<img src="<?= base_url()?>assets/<?= $this->base->get_template() ?>/img/logo.png" width="110" height="32" alt="Logo" class="navbar-brand-image">
+			<a href="<?= base_url() ?>">
+				<img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/logo.png" width="110" height="32" alt="Logo" class="navbar-brand-image">
 			</a>
 		</h1>
 		<div class="navbar-nav flex-row order-md-last">
@@ -30,10 +30,10 @@
 		<div class="navbar navbar-light">
 			<div class="container-xl">
 				<ul class="navbar-nav">
-					<li class="nav-item <?php if (isset($active) and $active == 'home'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'home') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/dashboard" >
+						<a class="nav-link" href="<?= base_url() ?>a/dashboard">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-home"></i>
 							</span>
@@ -42,7 +42,7 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'client'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'client') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/clients">
@@ -54,7 +54,7 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'account'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'account') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/accounts">
@@ -66,7 +66,7 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'domain'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'domain') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/domains">
@@ -78,7 +78,7 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'email'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'email') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/email_templates">
@@ -90,19 +90,19 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'ssl'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'ssl') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/ssl">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-shield-alt"></i>
+								<em class="fa fa-shield-alt"></em>
 							</span>
 							<span class="nav-link-title">
 								SSL Certificates
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'ticket'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'ticket') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/tickets">
@@ -114,7 +114,7 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'api'): ?>
+					<li class="nav-item <?php if (isset($active) and $active == 'api') : ?>
 						active
 					<?php endif ?>">
 						<a class="nav-link" href="<?= base_url() ?>a/api_settings">

@@ -23,33 +23,33 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (count($list) > 0): ?>
-						<?php foreach ($list as $item): ?>
+					<?php if (count($list) > 0) : ?>
+						<?php foreach ($list as $item) : ?>
 							<tr>
 								<td><?= $item['account_username'] ?></td>
 								<td><?= $item['account_label'] ?></td>
 								<td>
-									<?php if ($item['account_status'] == 'pending' OR $item['account_status'] == 'deactivating' OR $item['account_status'] == 'reactivating'): ?>
+									<?php if ($item['account_status'] == 'pending' or $item['account_status'] == 'deactivating' or $item['account_status'] == 'reactivating') : ?>
 										<span class="badge bg-yellow">
 											<?= $item['account_status'] ?>
 											<?php $btn = ['fa-cogs', 'btn-yellow'] ?>
 										</span>
-									<?php elseif ($item['account_status'] == 'active'): ?>
+									<?php elseif ($item['account_status'] == 'active') : ?>
 										<span class="badge bg-green">
 											<?= $item['account_status'] ?>
 											<?php $btn = ['fa-globe', 'btn-green'] ?>
 										</span>
-									<?php elseif ($item['account_status'] == 'deactivated' OR $item['account_status'] == 'suspended'): ?>
+									<?php elseif ($item['account_status'] == 'deactivated' or $item['account_status'] == 'suspended') : ?>
 										<span class="badge bg-red">
 											<?= $item['account_status'] ?>
 											<?php $btn = ['fa-lock', 'btn-red'] ?>
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'a/view_account/'.$item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> Manage</a></td>
+								<td><a href="<?= base_url() . 'a/view_account/' . $item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-1"></em> Manage</a></td>
 							</tr>
 						<?php endforeach; ?>
-					<?php else: ?>
+					<?php else : ?>
 						<tr>
 							<td colspan="4" class="text-center">Nothing to show</td>
 						</tr>
@@ -60,7 +60,11 @@
 		<div class="card-footer py-2">
 			<div class="d-flex align-items-center justify-content-between">
 				<div>
-					Showing <?php if(isset($mcount)): echo $mcount; else: echo 0; endif; ?> to <?php if(isset($count)): echo $count - 1; else: echo 0; endif; ?> of <?= $this->account->list_count() ?> entries
+					Showing <?php if (isset($mcount)) : echo $mcount;
+							else : echo 0;
+							endif; ?> to <?php if (isset($count)) : echo $count - 1;
+											else : echo 0;
+											endif; ?> of <?= $this->account->list_count() ?> entries
 				</div>
 				<div>
 					<?php $page = $this->input->get('page') ?? 0 ?>
@@ -68,13 +72,13 @@
 					<?php $i = $i / $this->base->rpp(); ?>
 					<?php $i = intval($i); ?>
 					<ul class="pagination mb-0">
-						<li class="page-item <?php if ($page < 1): ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page > 0): ?>href="<?= base_url() ?>a/accounts?page=<?= $page - 1 ?>"<?php endif ?>>
+						<li class="page-item <?php if ($page < 1) : ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>a/accounts?page=<?= $page - 1 ?>" <?php endif ?>>
 								<span>&laquo;</span>
 							</a>
 						</li>
-						<li class="page-item <?php if ($page > $i): ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page < $i + 1): ?>href="<?= base_url() ?>a/accounts?page=<?= $page + 1 ?>"<?php endif ?>>
+						<li class="page-item <?php if ($page > $i) : ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>a/accounts?page=<?= $page + 1 ?>" <?php endif ?>>
 								<span>&raquo;</span>
 							</a>
 						</li>
