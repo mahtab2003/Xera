@@ -65,7 +65,7 @@ if (!function_exists('get_languages')) {
 		$dirs = scandir(APPPATH . 'language');
 		$langs = [];
 		foreach ($dirs as $lang) {
-			if ($lang !== '.' and $lang !== '..' and $lang !== 'index.html') {
+			if ($lang !== '.' && $lang !== '..' && $lang !== 'index.html') {
 				$langs[] = ['name' => str_replace('-', ' ', ucfirst($lang)), 'code' => $lang];
 			}
 		}
@@ -79,7 +79,7 @@ if (!function_exists('get_templates')) {
 		$dirs = scandir(APPPATH . '../template/');
 		$templates = [];
 		foreach ($dirs as $dir) {
-			if ($dir !== '.' and $dir !== '..' and $dir !== 'index.html' and $dir !== 'errors') {
+			if ($dir !== '.' && $dir !== '..' && $dir !== 'index.html' && $dir !== 'errors') {
 				$templates[] = ['name' => str_replace('-', ' ', ucfirst($dir)), 'dir' => $dir];
 			}
 		}

@@ -45,7 +45,7 @@ class E extends CI_Controller
 	{
 		$this->load->model('admin');
 		if ($this->admin->is_logged()) {
-			$file = file_get_contents('http://builds.local/update/check.json');
+			$file = file_get_contents('https://github.com/mahtab2003/Xera/blob/updates/check.json');
 			$data = json_decode($file, true);
 			$version = $data['version'];
 			$current = get_version();
@@ -56,7 +56,7 @@ class E extends CI_Controller
 						while ($current !== $version) {
 							$c_version[2] += 1;
 							$current = implode('.', $c_version);
-							$update = file_get_contents('http://builds.local/update/' . $current . '.json');
+							$update = file_get_contents('https://github.com/mahtab2003/Xera/blob/updates/' . $current . '.json');
 							$data = json_decode($update, true);
 							if (count($data['files']) > 0) {
 								foreach ($data['files'] as $name => $value) {

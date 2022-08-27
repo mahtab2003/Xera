@@ -14,11 +14,11 @@ $base_path = str_replace('1', '', $base_path);
 $base_path = str_replace('2', '', $base_path);
 $base_path = str_replace('3', '', $base_path);
 $base_url = $protocol . $hostname . $base_path;
-if (isset($_GET['step']) and $_GET['step'] == 1) {
+if (isset($_GET['step']) && $_GET['step'] == 1) {
 	$title = 'Basic Settings - Xera Installation';
-} elseif (isset($_GET['step']) and $_GET['step'] == 2) {
+} elseif (isset($_GET['step']) && $_GET['step'] == 2) {
 	$title = 'Database Settings - Xera Installation';
-} elseif (isset($_GET['step']) and $_GET['step'] == 3) {
+} elseif (isset($_GET['step']) && $_GET['step'] == 3) {
 	$title = 'Next Step - Xera Installation';
 } else {
 	$title = 'Welcome to Xera Installation Page';
@@ -44,7 +44,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 				</a>
 			</div>
 			<div class="card card-md">
-				<?php if (isset($_GET['step']) and $_GET['step'] == 1) : ?>
+				<?php if (isset($_GET['step']) && $_GET['step'] == 1) : ?>
 					<form action="<?= $base_url ?>install.php?step=1" method='POST'>
 						<div class="card-body">
 							<h2 class="card-title text-center mb-3">Basic Settings</h2>
@@ -68,7 +68,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 							</div>
 						</div>
 					</form>
-				<?php elseif (isset($_GET['step']) and $_GET['step'] == 2) : ?>
+				<?php elseif (isset($_GET['step']) && $_GET['step'] == 2) : ?>
 					<form action="<?= $base_url ?>install.php?step=2" method='POST'>
 						<div class="card-body">
 							<h2 class="card-title text-center mb-3">Database Settings</h2>
@@ -93,7 +93,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 							</div>
 						</div>
 					</form>
-				<?php elseif (isset($_GET['step']) and $_GET['step'] == 3) : ?>
+				<?php elseif (isset($_GET['step']) && $_GET['step'] == 3) : ?>
 					<div class="card-body">
 						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
 						<p class="text-muted mb-3">Xera has been installed successfully! Once you click on the button below, you will be redirected to the admin registration page and the install.php file will be deleted automatically.</p>
@@ -132,7 +132,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 
 </html>
 <?php
-if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
+if (isset($_GET['step']) && $_GET['step'] == 1 && isset($_POST['submit'])) {
 	$base_url_value = $_POST['base_url'];
 	$cookie_prefix = $_POST['cookie_prefix'];
 	$csrf = $_POST['csrf'];
@@ -151,7 +151,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
 	$res = file_put_contents(__DIR__ . '/app/config/config.php', $data);
 	$_SESSION['msg'] = json_encode(['success', 'Basic settings changed successfully.']);
 	header('location: ' . $base_url . 'install.php?step=2');
-} elseif (isset($_GET['step']) and $_GET['step'] == 2 and isset($_POST['submit'])) {
+} elseif (isset($_GET['step']) && $_GET['step'] == 2 && isset($_POST['submit'])) {
 	$hostname = $_POST['hostname'];
 	$username = $_POST['username'];
 	$password = $_POST['password'];
