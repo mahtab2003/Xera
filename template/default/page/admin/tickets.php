@@ -25,43 +25,43 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (count($list) > 0): ?>
-						<?php foreach ($list as $item): ?>
+					<?php if (count($list) > 0) : ?>
+						<?php foreach ($list as $item) : ?>
 							<tr>
-								<?php 
-									if($this->input->get('page')):
-										$mcount = $this->base->rpp() * $this->input->get('page') + 1;
-									else:
-										$mcount = 1;
-									endif; 
+								<?php
+								if ($this->input->get('page')) :
+									$mcount = $this->base->rpp() * $this->input->get('page') + 1;
+								else :
+									$mcount = 1;
+								endif;
 								?>
 								<td><?php echo $count = $count ?? $mcount ?></td>
 								<td><?= $item['ticket_subject'] ?></td>
 								<td><?= date('d-m-Y', $item['ticket_time']) ?></td>
 								<td><?= $this->ticket->get_user_name($item['ticket_for']) ?></td>
 								<td>
-									<?php if ($item['ticket_status'] == 'open'): ?>
+									<?php if ($item['ticket_status'] == 'open') : ?>
 										<span class="badge bg-orange">
 											<?= $item['ticket_status'] ?>
 											<?php $btn = ['fa-clock', 'btn-yellow'] ?>
 										</span>
-									<?php elseif ($item['ticket_status'] == 'support' OR $item['ticket_status'] == 'customer'): ?>
+									<?php elseif ($item['ticket_status'] == 'support' or $item['ticket_status'] == 'customer') : ?>
 										<span class="badge bg-green">
 											<?= $item['ticket_status'] ?>
 											<?php $btn = ['fa-envelope-open', 'btn-green'] ?>
 										</span>
-									<?php elseif ($item['ticket_status'] == 'closed'): ?>
+									<?php elseif ($item['ticket_status'] == 'closed') : ?>
 										<span class="badge bg-red">
 											<?= $item['ticket_status'] ?>
 											<?php $btn = ['fa-lock', 'btn-red'] ?>
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'a/view_ticket/'.$item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> Manage</a></td>
+								<td><a href="<?= base_url() . 'a/view_ticket/' . $item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
-					<?php else: ?>
+					<?php else : ?>
 						<tr>
 							<td colspan="6" class="text-center">Nothing to show</td>
 						</tr>
@@ -72,7 +72,11 @@
 		<div class="card-footer py-2">
 			<div class="d-flex align-items-center justify-content-between">
 				<div>
-					Showing <?php if(isset($mcount)): echo $mcount; else: echo 0; endif; ?> to <?php if(isset($count)): echo $count - 1; else: echo 0; endif; ?> of <?= $this->ticket->list_count() ?> entries
+					Showing <?php if (isset($mcount)) : echo $mcount;
+							else : echo 0;
+							endif; ?> to <?php if (isset($count)) : echo $count - 1;
+											else : echo 0;
+											endif; ?> of <?= $this->ticket->list_count() ?> entries
 				</div>
 				<div>
 					<?php $page = $this->input->get('page') ?? 0 ?>
@@ -80,13 +84,13 @@
 					<?php $i = $i / $this->base->rpp(); ?>
 					<?php $i = intval($i); ?>
 					<ul class="pagination mb-0">
-						<li class="page-item <?php if ($page < 1): ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page > 0): ?>href="<?= base_url() ?>a/tickets?page=<?= $page - 1 ?>"<?php endif ?>>
+						<li class="page-item <?php if ($page < 1) : ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>a/tickets?page=<?= $page - 1 ?>" <?php endif ?>>
 								<span>&laquo;</span>
 							</a>
 						</li>
-						<li class="page-item <?php if ($page > $i): ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page < $i + 1): ?>href="<?= base_url() ?>a/tickets?page=<?= $page + 1 ?>"<?php endif ?>>
+						<li class="page-item <?php if ($page > $i) : ?>disabled<?php endif ?>">
+							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>a/tickets?page=<?= $page + 1 ?>" <?php endif ?>>
 								<span>&raquo;</span>
 							</a>
 						</li>

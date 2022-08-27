@@ -27,35 +27,35 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (count($list) > 0): ?>
-						<?php foreach ($list as $item): ?>
+					<?php if (count($list) > 0) : ?>
+						<?php foreach ($list as $item) : ?>
 							<tr>
 								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['ticket_subject'] ?></td>
 								<td><?= date('d-m-Y', $item['ticket_time']) ?></td>
 								<td>
-									<?php if ($item['ticket_status'] == 'open'): ?>
+									<?php if ($item['ticket_status'] == 'open') : ?>
 										<span class="badge bg-orange">
 											<?= $this->base->text($item['ticket_status'], 'table') ?>
 											<?php $btn = ['fa-clock', 'btn-yellow'] ?>
 										</span>
-									<?php elseif ($item['ticket_status'] == 'support' OR $item['ticket_status'] == 'customer'): ?>
+									<?php elseif ($item['ticket_status'] == 'support' or $item['ticket_status'] == 'customer') : ?>
 										<span class="badge bg-green">
 											<?= $this->base->text($item['ticket_status'], 'table') ?>
 											<?php $btn = ['fa-envelope-open', 'btn-green'] ?>
 										</span>
-									<?php elseif ($item['ticket_status'] == 'closed'): ?>
+									<?php elseif ($item['ticket_status'] == 'closed') : ?>
 										<span class="badge bg-red">
 											<?= $this->base->text($item['ticket_status'], 'table') ?>
 											<?php $btn = ['fa-lock', 'btn-red'] ?>
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'u/view_ticket/'.$item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-2"></i> <?= $this->base->text('manage', 'button') ?></a></td>
+								<td><a href="<?= base_url() . 'u/view_ticket/' . $item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
-					<?php else: ?>
+					<?php else : ?>
 						<tr>
 							<td colspan="5" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 						</tr>

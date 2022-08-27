@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
+
 <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8" />
 	<title>License - <?= $this->base->get_hostname() ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/png" href="<?= base_url()?>assets/<?= $this->base->get_template() ?>/img/fav.png">
-	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/<?= $this->base->get_template() ?>/css/tabler.min.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/<?= $this->base->get_template() ?>/css/all.min.css">
+	<link rel="icon" type="image/png" href="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/fav.png">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/css/tabler.min.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/css/all.min.css">
 	<style type="text/css">
-		.alert p
-		{
+		.alert p {
 			margin: 0;
 		}
 	</style>
 </head>
+
 <body class="border-top-wide border-primary d-flex flex-column theme-<?= get_cookie('theme') ?? 'light' ?>">
 	<div class="page page-center">
 		<div class="container-narrow py-4">
 			<div class="text-center mb-2">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url()?>assets/img/xera.png" height="36" alt=""></a>
+				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/img/xera.png" height="36" alt=""></a>
 			</div>
 			<div class="card card-md">
 				<div class="card-body">
@@ -27,11 +28,11 @@
 
 					<p>Version 2, June 1991</p>
 
-					<p>Copyright (C) 1989, 1991 Free Software Foundation, Inc.  
-					51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA</p>
+					<p>Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+						51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA</p>
 
 					<p>Everyone is permitted to copy and distribute verbatim copies
-					of this license document, but changing it is not allowed.</p>
+						of this license document, but changing it is not allowed.</p>
 
 					<p>Preamble</p>
 
@@ -50,7 +51,7 @@
 					<p>Finally, any free program is threatened constantly by software patents. We wish to avoid the danger that redistributors of a free program will individually obtain patent licenses, in effect making the program proprietary. To prevent this, we have made it clear that any patent must be licensed for everyone's free use or not licensed at all.</p>
 
 					<p>The precise terms and conditions for copying, distribution and modification follow.
-					TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</p>
+						TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</p>
 
 					<p>0. This License applies to any program or other work which contains a notice placed by the copyright holder saying it may be distributed under the terms of this General Public License. The "Program", below, refers to any such program or work, and a "work based on the Program" means either the Program or any derivative work under copyright law: that is to say, a work containing the Program or a portion of it, either verbatim or with modifications and/or translated into another language. (Hereinafter, translation is included without limitation in the term "modification".) Each licensee is addressed as "you".</p>
 
@@ -62,9 +63,9 @@
 
 					<p>2. You may modify your copy or copies of the Program or any portion of it, thus forming a work based on the Program, and copy and distribute such modifications or work under the terms of Section 1 above, provided that you also meet all of these conditions:</p>
 
-					<p>    a) You must cause the modified files to carry prominent notices stating that you changed the files and the date of any change. 
-					    b) You must cause any work that you distribute or publish, that in whole or in part contains or is derived from the Program or any part thereof, to be licensed as a whole at no charge to all third parties under the terms of this License. 
-					    c) If the modified program normally reads commands interactively when run, you must cause it, when started running for such interactive use in the most ordinary way, to print or display an announcement including an appropriate copyright notice and a notice that there is no warranty (or else, saying that you provide a warranty) and that users may redistribute the program under these conditions, and telling the user how to view a copy of this License. (Exception: if the Program itself is interactive but does not normally print such an announcement, your work based on the Program is not required to print an announcement.) </p>
+					<p> a) You must cause the modified files to carry prominent notices stating that you changed the files and the date of any change.
+						b) You must cause any work that you distribute or publish, that in whole or in part contains or is derived from the Program or any part thereof, to be licensed as a whole at no charge to all third parties under the terms of this License.
+						c) If the modified program normally reads commands interactively when run, you must cause it, when started running for such interactive use in the most ordinary way, to print or display an announcement including an appropriate copyright notice and a notice that there is no warranty (or else, saying that you provide a warranty) and that users may redistribute the program under these conditions, and telling the user how to view a copy of this License. (Exception: if the Program itself is interactive but does not normally print such an announcement, your work based on the Program is not required to print an announcement.) </p>
 
 					<p>These requirements apply to the modified work as a whole. If identifiable sections of that work are not derived from the Program, and can be reasonably considered independent and separate works in themselves, then this License, and its terms, do not apply to those sections when you distribute them as separate works. But when you distribute the same sections as part of a whole which is a work based on the Program, the distribution of the whole must be on the terms of this License, whose permissions for other licensees extend to the entire whole, and thus to each and every part regardless of who wrote it.</p>
 
@@ -74,9 +75,9 @@
 
 					<p>3. You may copy and distribute the Program (or a work based on it, under Section 2) in object code or executable form under the terms of Sections 1 and 2 above provided that you also do one of the following:</p>
 
-					<p>a) Accompany it with the complete corresponding machine-readable source code, which must be distributed under the terms of Sections 1 and 2 above on a medium customarily used for software interchange; or, 
-					    b) Accompany it with a written offer, valid for at least three years, to give any third party, for a charge no more than your cost of physically performing source distribution, a complete machine-readable copy of the corresponding source code, to be distributed under the terms of Sections 1 and 2 above on a medium customarily used for software interchange; or, 
-					    c) Accompany it with the information you received as to the offer to distribute corresponding source code. (This alternative is allowed only for noncommercial distribution and only if you received the program in object code or executable form with such an offer, in accord with Subsection b above.) </p>
+					<p>a) Accompany it with the complete corresponding machine-readable source code, which must be distributed under the terms of Sections 1 and 2 above on a medium customarily used for software interchange; or,
+						b) Accompany it with a written offer, valid for at least three years, to give any third party, for a charge no more than your cost of physically performing source distribution, a complete machine-readable copy of the corresponding source code, to be distributed under the terms of Sections 1 and 2 above on a medium customarily used for software interchange; or,
+						c) Accompany it with the information you received as to the offer to distribute corresponding source code. (This alternative is allowed only for noncommercial distribution and only if you received the program in object code or executable form with such an offer, in accord with Subsection b above.) </p>
 
 					<p>The source code for a work means the preferred form of the work for making modifications to it. For an executable work, complete source code means all the source code for all modules it contains, plus any associated interface definition files, plus the scripts used to control compilation and installation of the executable. However, as a special exception, the source code distributed need not include anything that is normally distributed (in either source or binary form) with the major components (compiler, kernel, and so on) of the operating system on which the executable runs, unless that component itself accompanies the executable.</p>
 
@@ -112,9 +113,10 @@
 				</div>
 			</div>
 			<p class="text-muted text-center py-2">
-		    	&copy; Copyright <?= date('Y') ?>. Powered by NxNetwork Ltd.
-		    </p>
+				&copy; Copyright <?= date('Y') ?>. Powered by NxNetwork Ltd.
+			</p>
 		</div>
 	</div>
 </body>
+
 </html>

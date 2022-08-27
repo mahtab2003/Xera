@@ -7,13 +7,13 @@
 				</h2>
 			</div>
 			<div class="col-auto ms-auto d-print-none">
-				<?php if (count($list) < 3): ?>
+				<?php if (count($list) < 3) : ?>
 					<a class="btn btn-primary" href="<?= base_url() ?>u/create_account"><?= $this->base->text('create', 'button') ?></a>
 				<?php endif ?>
 			</div>
 		</div>
 	</div>
-	<?php if (count($list) > 1): ?>
+	<?php if (count($list) > 1) : ?>
 		<div class="alert alert-danger"><?= $this->base->text('account_limit', 'paragraph') ?> <a href="https://ifastnet.com"><?= $this->base->text('premium_hosting', 'heading') ?></a> <?= $this->base->text('better_service', 'paragraph') ?></div>
 	<?php endif ?>
 	<div class="card mb-3 rounded">
@@ -32,35 +32,35 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (count($list) > 0): ?>
-						<?php foreach ($list as $item): ?>
+					<?php if (count($list) > 0) : ?>
+						<?php foreach ($list as $item) : ?>
 							<tr>
 								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['account_username'] ?></td>
 								<td><?= $item['account_label'] ?></td>
 								<td>
-									<?php if ($item['account_status'] == 'pending' OR $item['account_status'] == 'deactivating' OR $item['account_status'] == 'reactivating'): ?>
+									<?php if ($item['account_status'] == 'pending' or $item['account_status'] == 'deactivating' or $item['account_status'] == 'reactivating') : ?>
 										<span class="badge bg-yellow">
 											<?= $this->base->text($item['account_status'], 'table') ?>
 											<?php $btn = ['fa-cogs', 'btn-yellow'] ?>
 										</span>
-									<?php elseif ($item['account_status'] == 'active'): ?>
+									<?php elseif ($item['account_status'] == 'active') : ?>
 										<span class="badge bg-green">
 											<?= $this->base->text($item['account_status'], 'table') ?>
 											<?php $btn = ['fa-globe', 'btn-green'] ?>
 										</span>
-									<?php elseif ($item['account_status'] == 'deactivated' OR $item['account_status'] == 'suspended'): ?>
+									<?php elseif ($item['account_status'] == 'deactivated' or $item['account_status'] == 'suspended') : ?>
 										<span class="badge bg-red">
 											<?= $this->base->text($item['account_status'], 'table') ?>
 											<?php $btn = ['fa-lock', 'btn-red'] ?>
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url().'u/view_account/'.$item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><i class="fa <?= $btn[0] ?> me-1"></i> <?= $this->base->text('manage', 'button') ?></a></td>
+								<td><a href="<?= base_url() . 'u/view_account/' . $item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-1"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
-					<?php else: ?>
+					<?php else : ?>
 						<tr>
 							<td colspan="5" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 						</tr>

@@ -1,13 +1,10 @@
-<?php 
+<?php
 ob_start();
 session_start();
 
-if(isset($_SERVER['HTTPS']))
-{
+if (isset($_SERVER['HTTPS'])) {
 	$protocol = 'https://';
-}
-else
-{
+} else {
 	$protocol = 'http://';
 }
 $hostname = $_SERVER['HTTP_HOST'];
@@ -16,32 +13,28 @@ $base_path = str_replace('?step=', '', $base_path);
 $base_path = str_replace('1', '', $base_path);
 $base_path = str_replace('2', '', $base_path);
 $base_path = str_replace('3', '', $base_path);
-$base_url = $protocol.$hostname.$base_path;
-if(isset($_GET['step']) AND $_GET['step'] == 1)
-{
+$base_url = $protocol . $hostname . $base_path;
+if (isset($_GET['step']) and $_GET['step'] == 1) {
 	$title = 'Basic Settings - Xera Installation';
-}
-elseif(isset($_GET['step']) AND $_GET['step'] == 2)
-{
+} elseif (isset($_GET['step']) and $_GET['step'] == 2) {
 	$title = 'Database Settings - Xera Installation';
-}
-elseif(isset($_GET['step']) AND $_GET['step'] == 3)
-{
+} elseif (isset($_GET['step']) and $_GET['step'] == 3) {
 	$title = 'Next Step - Xera Installation';
-}
-else
-{
+} else {
 	$title = 'Welcome to Xera Installation Page';
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
+
 <head>
 	<title><?= $title ?></title>
 	<link rel="stylesheet" type="text/css" href="<?= $base_url ?>assets/css/tabler.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= $base_url ?>assets/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= $base_url ?>assets/css/style.css">
+	<meta name="robots" content="noindex" />
 </head>
+
 <body class="border-top-wide border-primary d-flex flex-column">
 	<div class="page page-center">
 		<div class="container-tight py-4">
@@ -51,7 +44,7 @@ else
 				</a>
 			</div>
 			<div class="card card-md">
-				<?php if(isset($_GET['step']) AND $_GET['step'] == 1): ?>
+				<?php if (isset($_GET['step']) and $_GET['step'] == 1) : ?>
 					<form action="<?= $base_url ?>install.php?step=1" method='POST'>
 						<div class="card-body">
 							<h2 class="card-title text-center mb-3">Basic Settings</h2>
@@ -75,7 +68,7 @@ else
 							</div>
 						</div>
 					</form>
-				<?php elseif(isset($_GET['step']) AND $_GET['step'] == 2): ?>
+				<?php elseif (isset($_GET['step']) and $_GET['step'] == 2) : ?>
 					<form action="<?= $base_url ?>install.php?step=2" method='POST'>
 						<div class="card-body">
 							<h2 class="card-title text-center mb-3">Database Settings</h2>
@@ -100,7 +93,7 @@ else
 							</div>
 						</div>
 					</form>
-				<?php elseif(isset($_GET['step']) AND $_GET['step'] == 3): ?>
+				<?php elseif (isset($_GET['step']) and $_GET['step'] == 3) : ?>
 					<div class="card-body">
 						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
 						<p class="text-muted mb-3">Xera has been installed successfully! Once you click on the button below, you will be redirected to the admin registration page and the install.php file will be deleted automatically.</p>
@@ -108,7 +101,7 @@ else
 							<a href="<?= $base_url ?>a/register" class="btn btn-primary w-100">Redirect</a>
 						</div>
 					</div>
-				<?php else: ?>
+				<?php else : ?>
 					<div class="card-body">
 						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
 						<p class="text-muted mb-3">Xera is a hosting account and support management system especially designed to work with MyOwnFreeHost and the GoGetSSL API. Please click on the button below to continue the installation.</p>
@@ -124,7 +117,7 @@ else
 		</div>
 	</div>
 	<div class="hidden-area">
-		<?php if(isset($_SESSION['msg'])): ?>
+		<?php if (isset($_SESSION['msg'])) : ?>
 			<?php $data = json_decode($_SESSION['msg'], true) ?>
 			<div class="alert alert-<?= $data[0] ?> alert-dismissible" role="alert">
 				<?= $data[1] ?>
@@ -136,35 +129,29 @@ else
 	<script src="<?= $base_url ?>assets/js/jquery.slim.js"></script>
 	<script src="<?= $base_url ?>assets/js/tabler.min.js"></script>
 </body>
+
 </html>
-<?php 
-if(isset($_GET['step']) AND $_GET['step'] == 1 AND isset($_POST['submit']))
-{
+<?php
+if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
 	$base_url_value = $_POST['base_url'];
 	$cookie_prefix = $_POST['cookie_prefix'];
 	$csrf = $_POST['csrf'];
-	if(strpos($cookie_prefix, '_') !== strlen($cookie_prefix))
-	{
-		$cookie_prefix = $cookie_prefix.'_';
+	if (strpos($cookie_prefix, '_') !== strlen($cookie_prefix)) {
+		$cookie_prefix = $cookie_prefix . '_';
 	}
-	if($csrf == 0)
-	{
+	if ($csrf == 0) {
 		$csrf_value = 'FALSE';
-	}
-	else
-	{
+	} else {
 		$csrf_value = 'TRUE';
 	}
 	$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/config.php');
 	$data = str_replace('BASE_URL_VALUE', $base_url_value, $file);
 	$data = str_replace('COOKIE_PREFIX_VALUE', $cookie_prefix, $data);
 	$data = str_replace('CSRF_PROTECTION_MODE', $csrf_value, $data);
-	$res = file_put_contents(__DIR__.'/app/config/config.php', $data);
+	$res = file_put_contents(__DIR__ . '/app/config/config.php', $data);
 	$_SESSION['msg'] = json_encode(['success', 'Basic settings changed successfully.']);
-	header('location: '.$base_url.'install.php?step=2');
-}
-elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
-{
+	header('location: ' . $base_url . 'install.php?step=2');
+} elseif (isset($_GET['step']) and $_GET['step'] == 2 and isset($_POST['submit'])) {
 	$hostname = $_POST['hostname'];
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -175,13 +162,10 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		$password,
 		$database
 	);
-	if(!$mysqli)
-	{
+	if (!$mysqli) {
 		$_SESSION['msg'] = json_encode(['danger', 'Database connect cannot be establised.']);
-		header('location: '.$base_url.'install.php?step=2');
-	}
-	else
-	{
+		header('location: ' . $base_url . 'install.php?step=2');
+	} else {
 		$sql = mysqli_query($mysqli, "CREATE TABLE `is_base` (`base_id` varchar(89) NOT NULL DEFAULT 'xera_base',`base_name` varchar(20) NOT NULL,`base_email` varchar(100) NOT NULL,`base_template` varchar(100) NOT NULL DEFAULT 'default', `base_fourm` varchar(100) NOT NULL,`base_status` varchar(8) NOT NULL, `base_rpp` int(10) NOT NULL DEFAULT '1'
 );");
 
@@ -319,23 +303,20 @@ elseif(isset($_GET['step']) AND $_GET['step'] == 2 AND isset($_POST['submit']))
 		$sql = mysqli_query($mysqli, "CREATE TABLE `is_oauth` (`oauth_id` varchar(20) NOT NULL, `oauth_client` varchar(100) NOT NULL, `oauth_secret` varchar(100) NOT NULL, `oauth_endpoint` varchar(100) NOT NULL, `oauth_status` varchar(8) NOT NULL);");
 		$sql = mysqli_query($mysqli, "INSERT INTO `is_oauth`(`oauth_id`, `oauth_client`, `oauth_secret`, `oauth_endpoint`, `oauth_status`) VALUES ('github', 'client key', 'client key', 'https://api.github.com/user', 'inactive');");
 
-		if($sql)
-		{
+		if ($sql) {
 			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/database.php');
 			$data = str_replace('DB_HOSTNAME', $hostname, $file);
 			$data = str_replace('DB_USERNAME', $username, $data);
 			$data = str_replace('DB_PASSWORD', $password, $data);
 			$data = str_replace('DB_NAME', $database, $data);
-			$res = file_put_contents(__DIR__.'/app/config/database.php', $data);
+			$res = file_put_contents(__DIR__ . '/app/config/database.php', $data);
 			$json = json_encode(['installed' => true, 'time' => date('d-m-Y h:i:s A')]);
-			file_put_contents(__DIR__.'/app/logs/install.json', $json);
+			file_put_contents(__DIR__ . '/app/logs/install.json', $json);
 			$_SESSION['msg'] = json_encode(['success', 'Database connection established successfully.']);
-			header('location: '.$base_url.'install.php?step=3');
-		}
-		else
-		{
+			header('location: ' . $base_url . 'install.php?step=3');
+		} else {
 			$_SESSION['msg'] = json_encode(['danger', 'An error occured. Try again later.']);
-			header('location: '.$base_url.'install.php?step=2');
+			header('location: ' . $base_url . 'install.php?step=2');
 		}
 	}
 }
