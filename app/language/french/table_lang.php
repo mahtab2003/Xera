@@ -1,0 +1,37 @@
+<?php 
+
+$lang['id'] = 'ID';
+$lang['username'] = "Nom d'utilisateur";
+$lang['label'] = 'Étiquette';
+$lang['status'] = 'Statut';
+$lang['action'] = 'Action';
+$lang['domain'] = 'Domaine';
+$lang['method'] = 'Méthode';
+$lang['subject'] = 'Sujet';
+$lang['date'] = 'Date';
+$lang['pending'] = 'En attente';
+$lang['active'] = 'Actif';
+$lang['deactivated'] = 'Désactivé';
+$lang['reactivated'] = 'Réactivé';
+$lang['suspended'] = 'Suspendu';
+$lang['deactivating'] = 'Désactivation';
+$lang['reactivating'] = 'Réactivation';
+$lang['open'] = 'Ouvert';
+$lang['customer'] = 'Client';
+$lang['support'] = 'Support';
+$lang['closed'] = 'Fermé';
+$lang['processing'] = 'Traitement';
+$lang['cancelled'] = 'Annulé';
+$lang['password'] = 'Mot de passe';
+$lang['port'] = 'Port';
+$lang['hostname'] = "Nom d'hôte";
+$lang['main_domain'] = 'Domaine principal';
+$lang['cpanel_domain'] = 'Domaine cPanel';
+$lang['website_ip'] = 'IP du site';
+$lang['created_on'] = 'Créé le';
+$lang['database_name'] = 'Nom de la base de données';
+$lang['start_date'] = 'Date de début';
+$lang['end_date'] = 'Date de fin';
+$lang['open_at'] = 'Ouvert le';
+$lang['open_by'] = 'Ouvert par';
+$lang['last_reply'] = 'Dernière réponse';
