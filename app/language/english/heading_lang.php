@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $lang['login_to_account'] = 'Login to your account';
 $lang['i_forget_password'] = 'I forgot password';
@@ -6,7 +6,7 @@ $lang['dont_have_account'] = 'Don\'t have account yet?';
 $lang['remember_me_device'] = 'Remember me on this device';
 $lang['create_an_account'] = 'Create a new account';
 $lang['i_agree_to'] = 'I agree to';
-$lang['tos'] = 'Term of Service(TOS)';
+$lang['tos'] = 'Term of Service (TOS)';
 $lang['have_an_account'] = 'Already have an account?';
 $lang['forget_password'] = 'Forget password';
 $lang['send_me_back'] = 'send me back';
@@ -41,5 +41,3 @@ $lang['home'] = 'Home';
 $lang['accounts'] = 'Accounts';
 $lang['community_forum'] = 'Community Forum';
 $lang['domain_checker'] = 'Domain Checker';
-
-?>
