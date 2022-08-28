@@ -1,0 +1,36 @@
+<?php
+
+$lang['signin'] = "S'identifier";
+$lang['register'] = "S'inscrire";
+$lang['login'] = 'Connexion';
+$lang['change'] = 'Modifier';
+$lang['send_me_link'] = 'Envoyez-moi un nouveau mot de passe';
+$lang['reset_password'] = 'Réinitialiser le mot de passe';
+$lang['create'] = 'Créer';
+$lang['manage'] = 'Gérer';
+$lang['deactivate'] = 'Désactiver';
+$lang['redirect'] = 'Rediriger maintenant';
+$lang['check_domain'] = 'Vérifier le domaine';
+$lang['configure'] = 'Configurer';
+$lang['subdomain'] = 'Sous-domaine';
+$lang['custom_domain'] = 'Domaine personnalisé';
+$lang['check_availibilty'] = 'Vérifier la disponibilité';
+$lang['create_account'] = 'Créer un compte';
+$lang['view_accounts'] = 'Afficher les comptes';
+$lang['request'] = 'Demander';
+$lang['search'] = 'Chercher';
+$lang['resend_email'] = "Renvoyer l'email";
+$lang['logout'] = 'Se déconnecter';
+$lang['control_panel'] = 'Panneau de gestion';
+$lang['file_manager'] = 'Gestionnaire de fichiers';
+$lang['reactivate'] = 'Réactiver';
+$lang['settings'] = 'Paramètres';
+$lang['open_ticket'] = 'Ouvrir un ticket';
+$lang['delete'] = 'Effacer';
+$lang['cancel'] = 'Annuler';
+$lang['here'] = 'ici';
+$lang['done'] = 'Fait';
+$lang['close_ticket'] = 'Fermer le ticket';
+$lang['add_reply'] = 'Répondre';
+$lang['redirect_now'] = 'Rediriger maintenant';
+$lang['github_signin'] = "S'identifier avec github";
