@@ -36,4 +36,3 @@ $lang['redirect_now'] = 'Omdiriger nå';
 $lang['github_signin'] = 'Logg på med Github';
 
 ?>
-Norwegian (Bokmål)
