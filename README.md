@@ -59,5 +59,8 @@ Here are some widely used SMTP services. They have free plans with some limitati
 If you require assistance, please proceed to [our forum](https://fourm.xera.eu.org/), where you can find the answers to many questions and also ask your own.  
 You can also [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue, although the forum is still the preferred way, especially for feature requests. In any way, please ensure your topic has not been previously discussed, and if it has contribute to that discussion instead of making a new one when you can.
 
+### 👍Like Xera?
+If you like project xera please donate [here](https://xera.eu.org/DONATE.md).
+
 ## ©️ Copyright
 This build is created and maintained by [Mehtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).
