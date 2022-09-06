@@ -32,13 +32,13 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Open by:</span>
+						<span class="col">Opened by:</span>
 						<span class="col-auto ms-auto"><?= $this->ticket->get_user_name($ticket['ticket_for']) ?></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="row align-items-center">
-						<span class="col">Open at:</span>
+						<span class="col">Opened at:</span>
 						<span class="col-auto ms-auto"><?= date('d-m-Y', $ticket['ticket_time']) ?></span>
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 		<div class="card-header d-block">
 			<div class="row align-items-center">
 				<span class="col">
-					<span class="avatar avatar-xs me-2" style="background-image: url(<?= base_url() ?>assets/img/user.png)"></span>
+					<span class="avatar avatar-xs me-2" style="background-image: url(<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/user.png)"></span>
 					<?= $this->ticket->get_user_name($ticket['ticket_for']) ?>
 				</span>
 				<span class="col-auto ms-auto"><?= date('d-m-Y', $ticket['ticket_time']) ?></span>
@@ -82,10 +82,10 @@
 		<?php foreach ($replies as $reply): ?>
 			<?php if ($reply['reply_by'] !== $this->admin->get_key()): 
 				$reply_name = $this->ticket->get_user_name($reply['reply_by']);
-				$ico = base_url().'assets/img/user.png';
+				$ico = base_url().'assets/<?= $this->base->get_template() ?>/img/user.png';
 			 else:
 			  	$reply_name = $this->ticket->get_admin_name($reply['reply_by']);
-			  	$ico = base_url().'assets/img/fav.png';
+			  	$ico = base_url().'assets/<?= $this->base->get_template() ?>/img/fav.png';
 			 endif ?>
 			<div class="card mb-3">
 				<div class="card-header d-block">
@@ -115,7 +115,7 @@
 		<div class="card mb-3">
 			<div class="card-status-start bg-red"></div>
 			<div class="card-body">
-				Ticket had been closed. Click <a href="<?= base_url().'a/view_ticket/'.$ticket['ticket_key'].'?open=true' ?>">here</a> to re-open.
+				The ticket has been closed. Click <a href="<?= base_url().'a/view_ticket/'.$ticket['ticket_key'].'?open=true' ?>">here</a> to re-open.
 			</div>
 		</div>
 	<?php else: ?>

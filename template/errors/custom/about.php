@@ -12,7 +12,7 @@
 	<div class="page page-center">
 		<div class="container text-center">
 			<div class="empty">
-	        <div class="empty-header"><img src="<?= base_url()?>assets/img/xera.png" class="img-fluid"></div>
+	        <div class="empty-header"><img src="<?= base_url()?>assets/<?= $this->base->get_template() ?>/img/xera.png" class="img-fluid"></div>
 		        <p class="empty-title">v<?= get_version() ?> <?= get_tag() ?></p>
 		        <p class="empty-subtitle text-muted">
 		        	 &copy; Copyright <?= date('Y') ?>. Powered by NxNetwork Ltd.

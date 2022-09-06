@@ -22,5 +22,5 @@
 	<div class="page page-center">
 		<div class="container-tight py-4">
 			<div class="text-center mb-4">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/default/img/logo.png" height="36" alt=""></a>
+				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/logo.png" height="36" alt=""></a>
 			</div>

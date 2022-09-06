@@ -23,8 +23,8 @@
 		?>
 	</div>
 	
-	<script src="<?= base_url()?>assets/default/js/jquery.slim.js"></script>
-	<script src="<?= base_url()?>assets/default/js/tabler.min.js"></script>
+	<script src="<?= base_url()?>assets/<?= $this->base->get_template() ?>/js/jquery.slim.js"></script>
+	<script src="<?= base_url()?>assets/<?= $this->base->get_template() ?>/js/tabler.min.js"></script>
 	<script type="text/javascript">
 		var coll = document.getElementsByClassName("trigger");
 		var i;

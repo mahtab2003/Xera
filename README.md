@@ -45,7 +45,7 @@ The installation of Xera is much easier than you think!
 - Set your website's ```Website URL```, ```Cookie Prefix```, enable ```CSRF Protection``` and hit the 'Next Step' button.
 - Edit the database credentials and click on the 'Next Step' button (this will automatically import tables and records to the database).
 - Register an admin account and login to your admin panel. 
-- Replace the logo and favicon located in ```assets/img/``` with your own.
+- Replace the logo and favicon located in ```assets/default/img/``` with your own.
 - Setup SMTP (see below for some services you can use).
 - All done! 
 

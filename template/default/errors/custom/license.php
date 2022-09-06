@@ -19,7 +19,7 @@
 	<div class="page page-center">
 		<div class="container-narrow py-4">
 			<div class="text-center mb-2">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/img/xera.png" height="36" alt=""></a>
+				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/xera.png" height="36" alt=""></a>
 			</div>
 			<div class="card card-md">
 				<div class="card-body">
