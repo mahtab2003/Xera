@@ -57,7 +57,7 @@
 						<input type="text" name="email" class="form-control mb-2" value="<?= $this->base->get_email() ?>">
 					</div>
 					<div class="col-sm-6">
-						<label class="form-label">Fourm URL</label>
+						<label class="form-label">Forum URL</label>
 						<input type="text" name="fourm" class="form-control mb-2" value="<?= $this->base->get_fourm() ?>">
 					</div>
 					<div class="col-sm-6">
@@ -122,7 +122,7 @@
 						<input type="text" name="ns_1" class="form-control mb-2" value="<?= $this->mofh->get_ns_1() ?>">
 					</div>
 					<div class="col-sm-6">
-						<label class="form-label">Namserver 2</label>
+						<label class="form-label">Nameserver 2</label>
 						<input type="text" name="ns_2" class="form-control mb-2" value="<?= $this->mofh->get_ns_2() ?>">
 					</div>
 					<div class="col-sm-6">
@@ -210,22 +210,22 @@
 				<?= form_open('a/api_settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
-						<label class="form-label">Recaptcha Type</label>
+						<label class="form-label">Captcha Type</label>
 						<select class="form-control mb-2" name="type">
 							<?php
 							if ($this->grc->get_type() === 'google') :
 							?>
-								<option value="google" selected="true">Google Recaptcha</option>
+								<option value="google" selected="true">Google reCAPTCHA</option>
 								<option value="human">hCaptcha</option>
 								<option value="crypto">CryptoLoot</option>
 							<?php
 							elseif ($this->grc->get_type() === 'human') :
 							?>
-								<option value="google">Google Recaptcha</option>
+								<option value="google">Google reCAPTCHA</option>
 								<option value="human" selected="true">hCaptcha</option>
 								<option value="crypto">CryptoLoot</option>
 							<?php else : ?>
-								<option value="google">Google Recaptcha</option>
+								<option value="google">Google reCAPTCHA</option>
 								<option value="human">hCaptcha</option>
 								<option value="crypto" selected="true">CryptoLoot</option>
 							<?php

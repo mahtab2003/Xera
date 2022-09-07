@@ -39,7 +39,7 @@
 			<?php endif; ?>
 			<?php if ($data['account_status'] === 'pending') : ?>
 				<div class="alert alert-info">
-					This hosting account is pending and will be activated soon...
+					This hosting account is pending activation and will be activated soon...
 				</div>
 			<?php elseif ($data['account_status'] === 'reactivating') : ?>
 				<div class="alert alert-warning">
@@ -51,11 +51,11 @@
 				</div>
 			<?php elseif ($data['account_status'] === 'suspended') : ?>
 				<div class="alert alert-danger">
-					This hosting account is suspended due to some reason and will be completely removed with in 30 days...
+					This hosting account is suspended due to {some_reason} and will be completely removed within 30 days...
 				</div>
 			<?php elseif ($data['account_status'] === 'deactivated') : ?>
 				<div class="alert alert-success">
-					This hosting account is deactivated and will be completely removed with in 30 days...
+					This hosting account is deactivated and will be completely removed within 30 days...
 				</div>
 			<?php endif; ?>
 			<div class="row row-cards">

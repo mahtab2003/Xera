@@ -2,11 +2,11 @@
 
 $lang['login'] = 'Login';
 $lang['register'] = 'Register';
-$lang['forget_password'] = 'Forget Password';
+$lang['forget_password'] = 'Forgot Password';
 $lang['reset_password'] = 'Reset Password';
 $lang['dashboard'] = 'Dashboard';
 $lang['settings'] = 'Settings';
-$lang['api_settings'] = 'Api Settings';
+$lang['api_settings'] = 'API Settings';
 $lang['accounts'] = 'Hosting Accounts';
 $lang['create_account'] = 'Create Account';
 $lang['view_account'] = 'View Account';

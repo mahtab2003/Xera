@@ -14,7 +14,7 @@
 	<div class="page page-center">
 		<div class="container text-center">
 			<div class="empty">
-				<div class="empty-header"><img src="<?= base_url() ?>assets/img/xera.png" alt="Xera logo" class="img-fluid"></div>
+				<div class="empty-header"><img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/xera.png" alt="Xera logo" class="img-fluid"></div>
 				<p class="empty-title">Version <?= get_version() ?></p>
 				<p class="empty-subtitle text-muted">
 					You are using the latest version of Xera.

@@ -66,7 +66,7 @@
 		<div class="card-header d-block">
 			<div class="row align-items-center">
 				<span class="col">
-					<span class="avatar avatar-xs me-2" style="background-image: url(<?= base_url() ?>assets/img/user.png)"></span>
+					<span class="avatar avatar-xs me-2" style="background-image: url(<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/user.png)"></span>
 					<?= $this->user->get_name() ?>
 				</span>
 				<span class="col-auto ms-auto"><?= date('d-m-Y', $ticket['ticket_time']) ?></span>
@@ -85,7 +85,7 @@
 				$ico = $this->user->get_avatar();
 			 else:
 			  	$reply_name = $this->ticket->get_admin_name($reply['reply_by']);
-			  	$ico = base_url().'assets/img/fav.png';
+			  	$ico = base_url().'assets/<?= $this->base->get_template() ?>/img/fav.png';
 			 endif ?>
 			<div class="card mb-3">
 				<div class="card-header d-block">

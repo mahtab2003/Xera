@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Term of Services - <?= $this->base->get_hostname() ?></title>
+	<title>Terms of Service - <?= $this->base->get_hostname() ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="icon" type="image/png" href="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/fav.png">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/css/tabler.min.css">
@@ -19,7 +19,7 @@
 	<div class="page page-center">
 		<div class="container-narrow py-4">
 			<div class="text-center mb-2">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/img/xera.png" height="36" alt=""></a>
+				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/xera.png" height="36" alt=""></a>
 			</div>
 			<div class="card card-md">
 				<div class="card-body">
