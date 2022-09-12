@@ -1639,6 +1639,90 @@ class U extends CI_Controller
 			redirect('u/login');
 		}
 	}
+
+	function dns_lookup()
+	{
+		if($this->user->is_logged())
+		{
+			$data['title'] = 'dns_lookup';
+			$data['type'] = [
+				'A' => DNS_A,
+				'AAAA' => DNS_AAAA,
+				'CNAME' => DNS_CNAME,
+				'TXT' => DNS_TXT,
+				'MX' => DNS_MX,
+				'NS' => DNS_NS,
+				'CAA' => DNS_CAA,
+				'SOA' => DNS_SOA
+			];
+			$data['fields'] = [
+				'A' => [
+					'host' => $this->base->text('host', 'table'),
+					'type' => $this->base->text('type', 'table'),
+					'ttl' => $this->base->text('ttl', 'table'),
+					'ip' => $this->base->text('ip', 'table')
+				],
+				'AAAA' => [
+					'host' => $this->base->text('host', 'table'),
+					'type' => $this->base->text('type', 'table'),
+					'ttl' => $this->base->text('ttl', 'table'),
+					'ip' => $this->base->text('ip', 'table')
+				],
+				'CNAME' => [
+					'host' => $this->base->text('host', 'table'),
+					'type' => $this->base->text('type', 'table'),
+					'ttl' => $this->base->text('ttl', 'table'),
+					'target' => $this->base->text('target', 'table')
+				],
+				'TXT' => [
+					'host' => $this->base->text('host', 'table'),
+					'type' => $this->base->text('type', 'table'),
+					'ttl' => $this->base->text('ttl', 'table'),
+					'content' => $this->base->text('content', 'table')
+				],
+				'MX' => [
+					'host' => $this->base->text('host', 'table'),
+					'type' => $this->base->text('type', 'table'),
+					'ttl' => $this->base->text('ttl', 'table'),
+					'pri' => $this->base->text('pri', 'table'),
+					'target' => $this->base->text('target', 'table')
+				],
+				'NS' => [
+					'host' => $this->base->text('host', 'table'),
+					'type' => $this->base->text('type', 'table'),
+					'ttl' => $this->base->text('ttl', 'table'),
+					'target' => $this->base->text('target', 'table')
+				],
+			];
+
+			$this->load->view($this->base->get_template().'/page/includes/user/header', $data);
+			$this->load->view($this->base->get_template().'/page/includes/user/navbar');
+			$this->load->view($this->base->get_template().'/page/user/dns_lookup');
+			$this->load->view($this->base->get_template().'/page/includes/user/footer');
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
+
+	function whois_lookup()
+	{
+		if($this->user->is_logged())
+		{
+			$data['title'] = 'whois_lookup';
+			$this->load->helper('whois');
+
+			$this->load->view($this->base->get_template().'/page/includes/user/header', $data);
+			$this->load->view($this->base->get_template().'/page/includes/user/navbar');
+			$this->load->view($this->base->get_template().'/page/user/whois_lookup');
+			$this->load->view($this->base->get_template().'/page/includes/user/footer');
+		}
+		else
+		{
+			redirect('u/login');
+		}
+	}
 }
 
 ?>
