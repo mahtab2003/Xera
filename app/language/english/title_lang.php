@@ -2,11 +2,11 @@
 
 $lang['login'] = 'Login';
 $lang['register'] = 'Register';
-$lang['forget_password'] = 'Forgot Password';
+$lang['forget_password'] = 'Forget Password';
 $lang['reset_password'] = 'Reset Password';
 $lang['dashboard'] = 'Dashboard';
 $lang['settings'] = 'Settings';
-$lang['api_settings'] = 'API Settings';
+$lang['api_settings'] = 'Api Settings';
 $lang['accounts'] = 'Hosting Accounts';
 $lang['create_account'] = 'Create Account';
 $lang['view_account'] = 'View Account';
@@ -24,5 +24,7 @@ $lang['err_404'] = 'File not found';
 $lang['err_500'] = 'Service unavailable';
 $lang['err_503'] = 'Forbidden access';
 $lang['upgrade_hosting'] = 'Upgrade Hosting';
+$lang['dns_lookup'] = 'DNS Lookup';
+$lang['whois_lookup'] = 'WHOIS Lookup';
 
 ?>
