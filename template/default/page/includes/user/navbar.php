@@ -95,17 +95,26 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'domain') : ?>
-						active
-					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>u/domain_checker">
+					<li class="nav-item dropdown active">
+						<a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-globe"></i>
+								<i class="fa fa-book"></i>
 							</span>
 							<span class="nav-link-title">
-								<?= $this->base->text('domain_checker', 'heading') ?>
+								<?= $this->base->text('domain_lookup', 'heading') ?>
 							</span>
 						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="<?= base_url() ?>u/domain_checker">
+								<?= $this->base->text('domain_checker', 'heading') ?>
+							</a>
+							<a class="dropdown-item" href="<?= base_url() ?>u/whois_lookup">
+								<?= $this->base->text('whois_lookup', 'heading') ?>
+							</a>
+							<a class="dropdown-item" href="<?= base_url() ?>u/dns_lookup">
+								<?= $this->base->text('dns_lookup', 'heading') ?>
+							</a>
+						</div>
 					</li>
 				</ul>
 			</div>
