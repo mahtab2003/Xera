@@ -2,6 +2,8 @@
     <img src="assets/default/img/xera.png">
 </div>
 
+#### This build is no longer maintained by the developer.
+
 ## 👀 What is Xera ?
 Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features which are listed below:
 
@@ -9,7 +11,7 @@ Xera is a hosting account and support management system especially designed to w
 ![AppVeyor](https://img.shields.io/badge/Version-v1.2.7-lightgrey)
 ![AppVeyor](https://img.shields.io/badge/Build-Passed-lightgreen)
 ![AppVeyor](https://img.shields.io/badge/Interface-Tabler-lightgreen)
-![AppVeyor](https://img.shields.io/badge/Development-In_Progress-lightred)
+![AppVeyor](https://img.shields.io/badge/Development-Discontinued-lightred)
 ![AppVeyor](https://img.shields.io/badge/Dependencies-PHP,_MySQL,_cUrl-lightred)
 
 ### 🎮 Features
