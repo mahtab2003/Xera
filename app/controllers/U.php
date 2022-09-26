@@ -1143,7 +1143,7 @@ class U extends CI_Controller
 					$domain = $this->input->get('domain');
 					if($domain !== $res['account_domain'])
 					{
-						$dir = '/htdocs/'.$domain;
+						$dir = '/'.$domain.'/htdocs/';
 					}
 					else
 					{
