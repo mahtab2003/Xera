@@ -35,5 +35,10 @@ $lang['end_date'] = 'Data Fine';
 $lang['open_at'] = 'Aperto a';
 $lang['open_by'] = 'Aperto da';
 $lang['last_reply'] = 'Ultima Risposta';
-
-?>
+$lang['host'] = 'Host';
+$lang['type'] = 'Type';
+$lang['ttl'] = 'TTL';
+$lang['ip'] = 'IP Address';
+$lang['target'] = 'Target';
+$lang['content'] = 'Content';
+$lang['pri'] = 'Preference';

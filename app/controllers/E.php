@@ -109,7 +109,7 @@ class E extends CI_Controller
 					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'Activation email sent successfully.']));
 					} else {
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					}
 					redirect('e/error_400');
 				} elseif ($this->input->get('logout')) {
@@ -117,7 +117,7 @@ class E extends CI_Controller
 					if ($res !== false) {
 						$this->session->set_flashdata('msg', json_encode([1, 'Logged out successfully.']));
 					} else {
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					}
 					redirect('e/error_400');
 				} else {

@@ -24,3 +24,5 @@ $lang['err_404'] = 'Page introuvable';
 $lang['err_500'] = 'Service indisponible';
 $lang['err_503'] = 'Accès interdit';
 $lang['upgrade_hosting'] = "Amélioration de l'hébergement";
+$lang['dns_lookup'] = 'DNS Lookup';
+$lang['whois_lookup'] = 'WHOIS Lookup';

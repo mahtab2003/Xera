@@ -51,7 +51,7 @@
 				</div>
 			<?php elseif ($data['account_status'] === 'suspended') : ?>
 				<div class="alert alert-danger">
-					This hosting account is suspended due to {some_reason} and will be completely removed within 30 days...
+					This hosting account is suspended due to the reason provided in your email and will be completely removed within 30 days...
 				</div>
 			<?php elseif ($data['account_status'] === 'deactivated') : ?>
 				<div class="alert alert-success">

@@ -161,9 +161,8 @@ class Gogetssl extends CI_Model
 					$data['key'] = $key['ssl_key'];
 					$arr[] = $data;
 				}
-				return $arr;
+				return count($arr);
 			}
-			return count($arr);
 		}
 		return false;
 	}

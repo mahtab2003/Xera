@@ -12,5 +12,8 @@ $lang['fill_domain_field'] = '请填写你要的网域.';
 $lang['deactivation_error'] = '无法停用此帐户.';
 $lang['reactivation_error'] = '无法激活此帐户.';
 $lang['cant_reactivate'] = '你已达到最多免费帐户的上限.';
-
-?>
+$lang['account_limit'] = 'You have reached free account limit.';
+$lang['oauth_msg'] = 'You need to sign in with your GitHub account.';
+$lang['invalid_oauth_key'] = 'Invalid client or secret key.';
+$lang['cant_lookup'] = 'No records found for this domain name.';
+$lang['invalid_domain'] = 'Unable to find a valid whois server for this domain.';

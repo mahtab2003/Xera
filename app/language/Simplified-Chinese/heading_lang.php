@@ -40,6 +40,7 @@ $lang['go_premium'] = '升级到高级托管';
 $lang['home'] = '主页';
 $lang['accounts'] = '帐户';
 $lang['community_forum'] = '论坛';
+$lang['domain_lookup'] = 'Domain Lookup';
 $lang['domain_checker'] = '网域检查器';
-
-?>
+$lang['dns_lookup'] = 'DNS Lookup';
+$lang['whois_lookup'] = 'WHOIS Lookup';

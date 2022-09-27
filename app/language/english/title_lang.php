@@ -6,7 +6,7 @@ $lang['forget_password'] = 'Forget Password';
 $lang['reset_password'] = 'Reset Password';
 $lang['dashboard'] = 'Dashboard';
 $lang['settings'] = 'Settings';
-$lang['api_settings'] = 'Api Settings';
+$lang['api_settings'] = 'API Settings';
 $lang['accounts'] = 'Hosting Accounts';
 $lang['create_account'] = 'Create Account';
 $lang['view_account'] = 'View Account';
@@ -26,5 +26,3 @@ $lang['err_503'] = 'Forbidden access';
 $lang['upgrade_hosting'] = 'Upgrade Hosting';
 $lang['dns_lookup'] = 'DNS Lookup';
 $lang['whois_lookup'] = 'WHOIS Lookup';
-
-?>

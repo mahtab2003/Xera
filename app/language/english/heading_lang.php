@@ -1,14 +1,14 @@
 <?php
 
 $lang['login_to_account'] = 'Login to your account';
-$lang['i_forget_password'] = 'I forgot password';
+$lang['i_forget_password'] = 'I forgot my password';
 $lang['dont_have_account'] = 'Don\'t have account yet?';
 $lang['remember_me_device'] = 'Remember me on this device';
 $lang['create_an_account'] = 'Create a new account';
-$lang['i_agree_to'] = 'I agree to';
-$lang['tos'] = 'Term of Service (TOS)';
+$lang['i_agree_to'] = 'I agree to the';
+$lang['tos'] = 'Terms of Service (TOS)';
 $lang['have_an_account'] = 'Already have an account?';
-$lang['forget_password'] = 'Forget password';
+$lang['forget_password'] = 'Forgot password';
 $lang['send_me_back'] = 'send me back';
 $lang['forget_it'] = 'Forget it';
 $lang['to_screen'] = 'to the sign in screen';

@@ -24,5 +24,5 @@ $lang['err_404'] = 'Το αρχείο δε βρέθηκε';
 $lang['err_500'] = 'Μη διαθέσιμη υπηρεσία';
 $lang['err_503'] = 'Απαγορευμένη πρόσβαση';
 $lang['upgrade_hosting'] = 'Αναβάθμιση';
-
-?>
+$lang['dns_lookup'] = 'Αναζήτηση DNS';
+$lang['whois_lookup'] = 'Αναζήτηση WHOIS';

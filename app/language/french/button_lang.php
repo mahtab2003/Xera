@@ -32,5 +32,6 @@ $lang['here'] = 'ici';
 $lang['done'] = 'Fait';
 $lang['close_ticket'] = 'Fermer le ticket';
 $lang['add_reply'] = 'Répondre';
+$lang['lookup'] = 'Lookup';
 $lang['redirect_now'] = 'Rediriger maintenant';
-$lang['github_signin'] = "S'identifier avec github";
+$lang['github_signin'] = "S'identifier avec GitHub";

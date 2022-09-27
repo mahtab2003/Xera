@@ -84,24 +84,24 @@ class A extends CI_Controller
 								$res = $this->admin->register($name, $email, $password);
 								if($res)
 								{
-									$this->session->set_flashdata('msg', json_encode([1, 'User have been registered successfully.']));
+									$this->session->set_flashdata('msg', json_encode([1, 'User has been registered successfully.']));
 									redirect('a/login');
 								}
 								else
 								{
-									$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+									$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 									redirect('a/register');
 								}
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'User already exists with this email address.']));
+								$this->session->set_flashdata('msg', json_encode([0, 'A user with this email address already exists.']));
 								redirect('a/register');
 							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'Invalid captcha response received.']));
 							redirect('a/register');
 						}
 					}
@@ -130,18 +130,18 @@ class A extends CI_Controller
 							$res = $this->admin->register($name, $email, $password);
 							if($res)
 							{
-								$this->session->set_flashdata('msg', json_encode([1, 'User have been registered successfully.']));
+								$this->session->set_flashdata('msg', json_encode([1, 'User has been registered successfully.']));
 									redirect('a/login');
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 							}
 							redirect('a/register');
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'User already exists with this email address.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'A user with this email address already exists.']));
 							redirect('a/register');
 						}
 					}
@@ -387,7 +387,7 @@ class A extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 								redirect('a/login');
 							}
 						}
@@ -476,7 +476,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/settings');
 					}
 				}
@@ -502,7 +502,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/settings');
 					}
 				}
@@ -563,7 +563,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings');
 					}
 				}
@@ -605,7 +605,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings?smtp=1');
 					}
 				}
@@ -633,12 +633,12 @@ class A extends CI_Controller
 					$res = $this->grc->set_type($type);
 					if($res !== false)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'Recaptcha settings updated successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, 'Captcha settings updated successfully.']));
 						redirect('a/api_settings?captcha=1');
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings?captcha=1');
 					}
 				}
@@ -668,7 +668,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings?ssl=1');
 					}
 				}
@@ -697,12 +697,12 @@ class A extends CI_Controller
 					$res = $this->oauth->set_status($id, $status);
 					if($res !== false)
 					{
-						$this->session->set_flashdata('msg', json_encode([1, 'Github oauth settings updated successfully.']));
+						$this->session->set_flashdata('msg', json_encode([1, 'GitHub oauth settings updated successfully.']));
 						redirect('a/api_settings?oauth=1');
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings?oauth=1');
 					}
 				}
@@ -741,7 +741,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings?mofh=1');
 					}
 				}
@@ -774,7 +774,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect('a/api_settings?sitepro=1');
 					}
 				}
@@ -794,7 +794,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/api_settings?smtp=1");
 				}
 			}
@@ -803,12 +803,12 @@ class A extends CI_Controller
 				$res = $this->mofh->test_mofh();
 				if($res === true)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, 'Mofh api working successfully.']));
+					$this->session->set_flashdata('msg', json_encode([1, 'MOFH API working successfully.']));
 					redirect("a/api_settings?mofh=1");
 				}
 				elseif($res === false)
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/api_settings?mofh=1");
 				}
 				else
@@ -819,7 +819,7 @@ class A extends CI_Controller
 			}
 			else
 			{
-				$data['title'] = 'Api Settings';
+				$data['title'] = 'API Settings';
 				$data['active'] = 'api';
 
 				$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
@@ -896,7 +896,7 @@ class A extends CI_Controller
 					}
 					else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect("a/edit_email/$id");
 					}
 				}
@@ -960,12 +960,12 @@ class A extends CI_Controller
 				$res = $this->ticket->change_ticket_status($id, 'closed');
 				if($res)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been closed successfully.']));
+					$this->session->set_flashdata('msg', json_encode([1, 'Ticket has been closed successfully.']));
 					redirect("a/view_ticket/$id");
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_ticket/$id");
 				}
 			}
@@ -974,12 +974,12 @@ class A extends CI_Controller
 				$res = $this->ticket->change_ticket_status($id, 'open');
 				if($res)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, 'Ticket had been opened successfully.']));
+					$this->session->set_flashdata('msg', json_encode([1, 'Ticket has been opened successfully.']));
 					redirect("a/view_ticket/$id");
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_ticket/$id");
 				}
 			}
@@ -1028,13 +1028,13 @@ class A extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+								$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 								redirect("a/view_ticket/$id");
 							}
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'Invalid recaptcha response received.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'Invalid captcha response received.']));
 							redirect("a/view_ticket/$id");
 						}
 					}
@@ -1064,7 +1064,7 @@ class A extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 							redirect("a/view_ticket/$id");
 						}
 					}
@@ -1137,12 +1137,12 @@ class A extends CI_Controller
 				$res = $this->user->set_status(1, $id);
 				if($res)
 				{
-					$this->session->set_flashdata('msg', json_encode([1, 'Client had been activated successfully.']));
+					$this->session->set_flashdata('msg', json_encode([1, 'Client has been activated successfully.']));
 					redirect("a/view_client/$id");
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_client/$id");
 				}
 			}
@@ -1156,7 +1156,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_client/$id");
 				}
 			}
@@ -1197,7 +1197,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/domains");
 				}
 			}
@@ -1211,7 +1211,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/domains");
 				}
 			}
@@ -1269,7 +1269,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_account/$id");
 				}
 			}
@@ -1292,7 +1292,7 @@ class A extends CI_Controller
 					$link = $this->sp->load_builder_url($username, $password, $domain, $dir);
 					if($link === false)
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect("a/view_account/$id");
 					}
 					elseif($link['success'] == true)
@@ -1307,7 +1307,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_account/$id");
 				}
 			}
@@ -1331,7 +1331,7 @@ class A extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 							redirect("a/view_account/$id");
 						}
 					}
@@ -1343,7 +1343,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_account/$id");
 				}
 			}
@@ -1390,13 +1390,13 @@ class A extends CI_Controller
 					}
 						else
 					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 						redirect("a/account_settings/$id");
 					}
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/account_settings/$id");
 				}
 			}
@@ -1420,7 +1420,7 @@ class A extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 							redirect("a/account_settings/$id");
 						}
 					}
@@ -1432,7 +1432,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/account_settings/$id");
 				}
 			}
@@ -1456,7 +1456,7 @@ class A extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+							$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 							redirect("a/account_settings/$id");
 						}
 					}
@@ -1468,7 +1468,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/account_settings/$id");
 				}
 			}
@@ -1501,7 +1501,7 @@ class A extends CI_Controller
 	{
 		if($this->admin->is_logged())
 		{
-			$data['title'] = 'SSL Certitcates';
+			$data['title'] = 'SSL Certificates';
 			$data['active'] = 'ssl';
 			$count = $this->input->get('page') ?? 0;
 			$data['list'] = $this->ssl->get_ssl_list_all($count);
@@ -1533,7 +1533,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_ssl/$id");
 				}
 			}
@@ -1552,7 +1552,7 @@ class A extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. try again later.']));
+					$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
 					redirect("a/view_ssl/$id");
 				}
 			}

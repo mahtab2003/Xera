@@ -102,20 +102,20 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>Status</strong>
+										<strong><?= $this->base->text('status', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] == 'pending' or $data['account_status'] == 'deactivating' or $data['account_status'] == 'reactivating') : ?>
 											<span class="badge bg-yellow">
-												<?= $data['account_status'] ?>
+												<?= $this->base->text($data['account_status'], 'table') ?>
 											</span>
 										<?php elseif ($data['account_status'] == 'active') : ?>
 											<span class="badge bg-green">
-												<?= $data['account_status'] ?>
+												<?= $this->base->text($data['account_status'], 'table') ?>
 											</span>
 										<?php elseif ($data['account_status'] == 'deactivated' or $data['account_status'] == 'suspended') : ?>
 											<span class="badge bg-red">
-												<?= $data['account_status'] ?>
+												<?= $this->base->text($data['account_status'], 'table') ?>
 											</span>
 										<?php endif ?>
 									</td>

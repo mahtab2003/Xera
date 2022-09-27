@@ -17,8 +17,8 @@ $lang['suspended'] = 'Suspended';
 $lang['deactivating'] = 'Deactivating';
 $lang['reactivating'] = 'Reactivating';
 $lang['open'] = 'Open';
-$lang['customer'] = 'Customer';
-$lang['support'] = 'Support';
+$lang['customer'] = 'Last reply: Customer';
+$lang['support'] = 'Last reply: Support';
 $lang['closed'] = 'Closed';
 $lang['processing'] = 'Processing';
 $lang['cancelled'] = 'Cancelled';
@@ -42,5 +42,3 @@ $lang['ip'] = 'IP Address';
 $lang['target'] = 'Target';
 $lang['content'] = 'Content';
 $lang['pri'] = 'Preference';
-
-?>

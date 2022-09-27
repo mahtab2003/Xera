@@ -40,4 +40,7 @@ $lang['go_premium'] = 'Gå Premium';
 $lang['home'] = 'Hjem';
 $lang['accounts'] = 'Kontoer';
 $lang['community_forum'] = 'Fellesskapsforum';
+$lang['domain_lookup'] = 'Domain Lookup';
 $lang['domain_checker'] = 'Domenesjekker';
+$lang['dns_lookup'] = 'DNS Lookup';
+$lang['whois_lookup'] = 'WHOIS Lookup';

@@ -15,3 +15,5 @@ $lang['cant_reactivate'] = 'Nombre maximum de comptes atteint.';
 $lang['account_limit'] = 'Vous avez atteint la limite de comptes gratuits.';
 $lang['oauth_msg'] = 'Vous devez vous connecter avec votre compte GitHub.';
 $lang['invalid_oauth_key'] = 'Client ou clé secrète invalide.';
+$lang['cant_lookup'] = 'No records found for this domain name.';
+$lang['invalid_domain'] = 'Unable to find a valid whois server for this domain.';

@@ -193,7 +193,7 @@ INSERT INTO `is_email` (
 	'{user_name} {user_email} {activation_link} {site_name} {site_url}'
 );
 
--- Forget password
+-- Forgot password
 
 -- For user
 
