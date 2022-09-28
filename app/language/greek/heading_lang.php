@@ -40,6 +40,7 @@ $lang['go_premium'] = 'Επιλέξτε Προνομιακή Φιλοξενία'
 $lang['home'] = 'Αρχική';
 $lang['accounts'] = 'Λογαριασμοί';
 $lang['community_forum'] = 'Φόρουμ κοινότητας';
+$lang['domain_lookup'] = 'Αναζήτηση τομέα';
 $lang['domain_checker'] = 'Έλεγχος τομέα';
-
-?>
+$lang['dns_lookup'] = 'Αναζήτηση DNS';
+$lang['whois_lookup'] = 'Αναζήτηση WHOIS';

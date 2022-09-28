@@ -17,11 +17,9 @@ $lang['err_503_note'] = 'We are sorry but access to the page you are looking for
 $lang['account_pending'] = 'This hosting account is pending and will be activated soon.';
 $lang['account_reactivating'] = 'This hosting account is reactivating and will be activated soon.';
 $lang['account_deactivating'] = 'This hosting account is deactivating and will be deactivated soon.';
-$lang['account_suspended'] = 'This hosting account is suspended due to {some_reason} and will be completely removed with in 30 days.';
+$lang['account_suspended'] = 'This hosting account is suspended due to the reason provided in your email and will be completely removed with in 30 days.';
 $lang['account_deactivated'] = 'This hosting account is deactivated and will be completely removed with in 30 days.';
 $lang['account_note'] = 'Some of the hosting features may not work. It may take up to 72 hours for the hosting account to work properly.';
 $lang['no_reply_found'] = 'No reply found.';
 $lang['ticket_closed'] = 'Ticket has been closed. Click';
 $lang['to_reopen'] = 'to re-open.';
-
- ?>

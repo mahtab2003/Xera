@@ -11,13 +11,13 @@ $lang['recaptcha'] = 'Captcha';
 $lang['language'] = 'Γλώσσα';
 $lang['subject'] = 'Θέμα';
 $lang['content'] = 'Περιεχόμενο';
-$lang['domain'] = 'Τομέας';
+$lang['domain'] = 'ΤΟΜΕΑΣ';
 $lang['theme'] = 'Θέμα';
 $lang['label'] = 'Ετικέτα';
 $lang['csr_code'] = 'Κώδικας CSR';
 $lang['crt_code'] = 'Κώδικας CRT';
 $lang['ca_code'] = 'Κώδικας CA';
-$lang['reason'] = 'Λόγος';
+$lang['reason'] = 'Αιτία (Προαιρετικά)';
 $lang['domain_name'] = 'Όνομα τομέα';
 $lang['account_label'] = 'Όνομα λογαριασμού';
 $lang['ok'] = 'Εντάξει';
@@ -27,5 +27,3 @@ $lang['or'] = 'ή';
 $lang['show_hide'] = 'Εμφάνιση/Απόκρυψη';
 $lang['record_name'] = 'Όνομα εγγραφής';
 $lang['record_content'] = 'Περιεχόμενο εγγραφής';
-
-?>

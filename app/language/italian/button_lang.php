@@ -1,1 +1,37 @@
-<?php $lang['signin'] = 'Accedi';$lang['register'] = 'Registrati';$lang['login'] = 'Entra';$lang['change'] = 'Cambia';$lang['send_me_link'] = 'Inviami una nuova password';$lang['reset_password'] = 'Resetta password';$lang['create'] = 'Crea';$lang['manage'] = 'Modifica';$lang['deactivate'] = 'Disattiva';$lang['redirect'] = 'Reindirizzamento';$lang['check_domain'] = 'Controlla Dominio';$lang['configure'] = 'Configura';$lang['subdomain'] = 'Sottodominio';$lang['custom_domain'] = 'Dominio Personalizzato';$lang['check_availibilty'] = 'Controlla Disponibilità';$lang['create_account'] = 'Crea Account';$lang['view_accounts'] = 'Visualizza Account';$lang['request'] = 'Richiedi';$lang['search'] = 'Cerca';$lang['resend_email'] = 'Reinvia Email';$lang['logout'] = 'Esci';$lang['control_panel'] = 'Pannello di Controllo';$lang['file_manager'] = 'Gestore di File';$lang['reactivate'] = 'Riattiva';$lang['settings'] = 'Impostazioni';$lang['open_ticket'] = 'Apri Biglietto';$lang['delete'] = 'Elimina';$lang['cancel'] = 'Annulla';$lang['here'] = 'quì';$lang['done'] = 'Fatto';$lang['close_ticket'] = 'Chiudi Biglietto';$lang['add_reply'] = 'Rispondi';$lang['redirect_now'] = 'Reindirizzamento';?>
+<?php 
+
+$lang['signin'] = 'Accedi';
+$lang['register'] = 'Registrati';
+$lang['login'] = 'Entra';
+$lang['change'] = 'Cambia';
+$lang['send_me_link'] = 'Inviami una nuova password';
+$lang['reset_password'] = 'Resetta password';
+$lang['create'] = 'Crea';
+$lang['manage'] = 'Modifica';
+$lang['deactivate'] = 'Disattiva';
+$lang['redirect'] = 'Reindirizzamento';
+$lang['check_domain'] = 'Controlla Dominio';
+$lang['configure'] = 'Configura';
+$lang['subdomain'] = 'Sottodominio';
+$lang['custom_domain'] = 'Dominio Personalizzato';
+$lang['check_availibilty'] = 'Controlla Disponibilità';
+$lang['create_account'] = 'Crea Account';
+$lang['view_accounts'] = 'Visualizza Account';
+$lang['request'] = 'Richiedi';
+$lang['search'] = 'Cerca';
+$lang['resend_email'] = 'Reinvia Email';
+$lang['logout'] = 'Esci';
+$lang['control_panel'] = 'Pannello di Controllo';
+$lang['file_manager'] = 'Gestore di File';
+$lang['reactivate'] = 'Riattiva';
+$lang['settings'] = 'Impostazioni';
+$lang['open_ticket'] = 'Apri Biglietto';
+$lang['delete'] = 'Elimina';
+$lang['cancel'] = 'Annulla';
+$lang['here'] = 'quì';
+$lang['done'] = 'Fatto';
+$lang['close_ticket'] = 'Chiudi Biglietto';
+$lang['add_reply'] = 'Rispondi';
+$lang['lookup'] = 'Lookup';
+$lang['redirect_now'] = 'Reindirizzamento';
+$lang['github_signin'] = 'Sign in with GitHub';

@@ -24,5 +24,5 @@ $lang['err_404'] = 'File non trovato';
 $lang['err_500'] = 'Servizio non disponibile';
 $lang['err_503'] = 'Accesso proibito';
 $lang['upgrade_hosting'] = 'Aggiornamento Hosting';
-
-?>
+$lang['dns_lookup'] = 'DNS Lookup';
+$lang['whois_lookup'] = 'WHOIS Lookup';

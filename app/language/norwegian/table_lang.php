@@ -35,5 +35,10 @@ $lang['end_date'] = 'Sluttdato';
 $lang['open_at'] = 'Åpne kl.'; 
 $lang['open_by'] = 'Åpne av'; 
 $lang['last_reply'] = 'Siste svar'; 
-
-?>
+$lang['host'] = 'Host';
+$lang['type'] = 'Type';
+$lang['ttl'] = 'TTL';
+$lang['ip'] = 'IP Address';
+$lang['target'] = 'Target';
+$lang['content'] = 'Content';
+$lang['pri'] = 'Preference';

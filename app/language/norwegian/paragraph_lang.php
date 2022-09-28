@@ -23,5 +23,3 @@ $lang['account_note'] = 'Noen av vertsfunksjonene fungerer kanskje ikke. Det kan
 $lang['no_reply_found'] = 'Finner ikke noe svar.';
 $lang['ticket_closed'] = 'Billetten var stengt. Klikk';
 $lang['to_reopen'] = 'å åpne igjen.';
-
- ?>

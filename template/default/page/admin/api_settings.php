@@ -1,7 +1,7 @@
 <div class="container-xl">
 	<div class="page-header d-print-none">
 		<h2 class="page-title py-3">
-			Api Settings
+			API Settings
 		</h2>
 	</div>
 	<div class="card">
@@ -357,7 +357,7 @@
 					<div class="col-sm-6">
 						<label class="form-label">Oauth Client</label>
 						<select class="form-control mb-2" name="type">
-							<option value="1" selected="true">Github</option>
+							<option value="1" selected="true">GitHub</option>
 						</select>
 					</div>
 					<input type="hidden" name="service" value="<?php $oauth = 'github';

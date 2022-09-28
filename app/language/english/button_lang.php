@@ -34,6 +34,4 @@ $lang['close_ticket'] = 'Close Ticket';
 $lang['add_reply'] = 'Add Reply';
 $lang['lookup'] = 'Lookup';
 $lang['redirect_now'] = 'Redirect Now';
-$lang['github_signin'] = 'Sign in with Github';
-
-?>
+$lang['github_signin'] = 'Sign in with GitHub';

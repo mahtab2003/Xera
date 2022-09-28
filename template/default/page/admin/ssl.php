@@ -87,7 +87,7 @@
 								<span>&laquo;</span>
 							</a>
 						</li>
-						<li class="page-item <?php if ($page > $i) : ?>disabled<?php endif ?>">
+						<li class="page-item <?php if ($page >= $i) : ?>disabled<?php endif ?>">
 							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>a/ssl?page=<?= $page + 1 ?>" <?php endif ?>>
 								<span>&raquo;</span>
 							</a>

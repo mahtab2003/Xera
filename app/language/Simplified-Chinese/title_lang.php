@@ -24,5 +24,5 @@ $lang['err_404'] = '找不到此网页';
 $lang['err_500'] = '服务不可用';
 $lang['err_503'] = '你没权限访问此网页';
 $lang['upgrade_hosting'] = '升级到高级托管';
-
-?>
+$lang['dns_lookup'] = 'DNS Lookup';
+$lang['whois_lookup'] = 'WHOIS Lookup';

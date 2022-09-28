@@ -13,7 +13,7 @@ $lang['deactivation_error'] = 'Kan ikke deaktivere kontoen.';
 $lang['reactivation_error'] = 'Kan ikke aktivere kontoen på nytt.';
 $lang['cant_reactivate'] = 'Maksimalt antall kontoer som allerede er aktive.';
 $lang['account_limit'] = 'Du har nådd gratiskontogrensen.';
-$lang['oauth_msg'] = 'Du må logge på med github-kontoen din.';
+$lang['oauth_msg'] = 'Du må logge på med GitHub-kontoen din.';
 $lang['invalid_oauth_key'] = 'Ugyldig klient eller hemmelig nøkkel.';
-
-?>
+$lang['cant_lookup'] = 'No records found for this domain name.';
+$lang['invalid_domain'] = 'Unable to find a valid whois server for this domain.';

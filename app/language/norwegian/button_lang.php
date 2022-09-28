@@ -32,7 +32,6 @@ $lang['here'] = 'her';
 $lang['done'] = 'Ferdig';
 $lang['close_ticket'] = 'Lukk billett';
 $lang['add_reply'] = 'Legg til svar';
+$lang['lookup'] = 'Lookup';
 $lang['redirect_now'] = 'Omdiriger nå';
-$lang['github_signin'] = 'Logg på med Github';
-
-?>
+$lang['github_signin'] = 'Logg på med GitHub';

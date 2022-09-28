@@ -27,5 +27,3 @@ $lang['or'] = 'eller';
 $lang['show_hide'] = 'Vis/Skjul';
 $lang['record_name'] = 'Opptaksnavn';
 $lang['record_content'] = 'Ta opp innhold';
-
-?>

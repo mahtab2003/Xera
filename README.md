@@ -2,17 +2,19 @@
     <img src="assets/default/img/xera.png">
 </div>
 
-#### This build is no longer maintained by the developer.
+> **Note**  
+> **This build is not actively maintained by the developer.**  
+> Pull requests are welcome and will still be accepted. If you want to see a feature, feel free to contribute it.
 
 ## 👀 What is Xera ?
 Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features which are listed below:
 
-![AppVeyor](https://img.shields.io/badge/Licence-GPL_2.0-lightgrey)
-![AppVeyor](https://img.shields.io/badge/Version-v1.2.7-lightgrey)
-![AppVeyor](https://img.shields.io/badge/Build-Passed-lightgreen)
+[![AppVeyor](https://img.shields.io/badge/Licence-GPL_2.0-orange)](LICENSE)
+[![AppVeyor](https://img.shields.io/badge/Version-v1.2.8-informational)](https://github.com/mahtab2003/Xera/releases/latest)
+![AppVeyor](https://img.shields.io/badge/Build-Passed-brightgreen)
 ![AppVeyor](https://img.shields.io/badge/Interface-Tabler-lightgreen)
-![AppVeyor](https://img.shields.io/badge/Development-Discontinued-lightred)
-![AppVeyor](https://img.shields.io/badge/Dependencies-PHP,_MySQL,_cUrl-lightred)
+![AppVeyor](https://img.shields.io/badge/Development-Paused-inactive)
+![AppVeyor](https://img.shields.io/badge/Dependencies-PHP,_MySQL,_cUrl-red)
 
 ### 🎮 Features
 - User Management
@@ -40,7 +42,7 @@ Your server needs to meet the following minimum requirements to run Xera:
 
 ### 💾 Installation 
 The installation of Xera is much easier than you think!
-- Download the latest Xera installation file [here](https://github.com/mahtab2003/Xera/releases/latest). 
+- Download the Xera installation files [here](https://github.com/mahtab2003/Xera/releases/latest). Alternatively, if you want the latest development version you can get it [here](https://github.com/mahtab2003/Xera/archive/refs/heads/dev.zip).
 - Extract the file and upload the contents to your web hosting account. 
 - Create a new database for Xera.
 - Go to ```https://{your.domain}/{xera-directory}/install.php``` and click on the 'Get Started' button.
@@ -53,7 +55,9 @@ The installation of Xera is much easier than you think!
 
 ### 📧 SMTP
 Here are some widely used SMTP services. They have free plans with some limitations, most importantly though, they are compatible with Xera.
-- [Mailgun](https://www.mailgun.com/). (**Important Note**: Mailgun seems to offer only a trial plan for a month, and without adding a credit card you are only authorized to send emails to 5 recipients. As such, you may want to choose another service.)
+- [Mailgun](https://www.mailgun.com/). 
+> **Note**  
+> Mailgun seems to offer only a trial plan for a month, and without adding a credit card you are only authorized to send emails to 5 recipients. Therefore, you may want to choose another service.
 - [Mailjet](https://mailjet.com/).
 - [SendGrid](https://sendgrid.com/free/).
 

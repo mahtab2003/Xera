@@ -18,5 +18,3 @@ $lang['ssl_created_msg'] = 'SSL 成功请求.';
 $lang['ssl_deleted_msg'] = 'SSL 成功删除.';
 $lang['ssl_cancelled_msg'] = 'SSL 已被取消.';
 $lang['account_msg'] = '账户创建成功';
-
-?>

@@ -35,5 +35,10 @@ $lang['end_date'] = '结束日气';
 $lang['open_at'] = '开启于';
 $lang['open_by'] = '由';
 $lang['last_reply'] = '最后一则回覆';
-
-?>
+$lang['host'] = 'Host';
+$lang['type'] = 'Type';
+$lang['ttl'] = 'TTL';
+$lang['ip'] = 'IP Address';
+$lang['target'] = 'Target';
+$lang['content'] = 'Content';
+$lang['pri'] = 'Preference';

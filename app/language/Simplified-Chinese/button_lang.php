@@ -32,6 +32,6 @@ $lang['here'] = '这里';
 $lang['done'] = '完成';
 $lang['close_ticket'] = '关闭服务单';
 $lang['add_reply'] = '新增回覆';
+$lang['lookup'] = 'Lookup';
 $lang['redirect_now'] = '现在导向';
-
-?>
+$lang['github_signin'] = 'Sign in with GitHub';

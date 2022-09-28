@@ -23,5 +23,3 @@ $lang['account_note'] = '一些托管功能可能不可用,可能须等待高达
 $lang['no_reply_found'] = '没有回覆.';
 $lang['ticket_closed'] = '服务单已被关闭,请点击';
 $lang['to_reopen'] = '来开启.';
-
- ?>

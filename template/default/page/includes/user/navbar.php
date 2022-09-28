@@ -95,7 +95,9 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item dropdown active">
+					<li class="nav-item dropdown <?php if (isset($active) and $active == 'domain') : ?>
+						active
+					<?php endif ?>">
 						<a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-book"></i>
