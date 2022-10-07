@@ -23,7 +23,7 @@
 								Registered Clients
 							</div>
 							<div class="text-muted">
-								<?= $ci_clients ?> in total
+								<?= $this->user->get_count('active') + $this->user->get_count('inactive') ?> in total
 							</div>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 								Hosting Accounts
 							</div>
 							<div class="text-muted">
-								<?= $ci_accounts ?> in total
+								<?= $this->account->get_count('active') + $this->account->get_count('suspended') + $this->account->get_count('deactivated') ?> in total
 							</div>
 						</div>
 					</div>
@@ -277,7 +277,7 @@
 		}]
 	};
 	var options1 = {
-		series: [<?= $this->account->get_count('active'); ?>, <?= $this->user->get_count('suspended') + $this->user->get_count('deactivated'); ?>],
+		series: [<?= $this->account->get_count('active'); ?>, <?= $this->account->get_count('suspended') + $this->account->get_count('deactivated'); ?>],
 		chart: {
 			type: 'donut'
 		},
