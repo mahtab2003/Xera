@@ -25,7 +25,7 @@
 				</thead>
 				<tbody>
 					<?php if (count($list) > 0) : ?>
-						<?php foreach ($list as $item) : ?>
+						<!-- <?php foreach ($list as $item) : ?> -->
 							<tr>
 								<?php
 								if ($this->input->get('page')) :
@@ -34,7 +34,7 @@
 									$mcount = 1;
 								endif;
 								?>
-								<td><?php echo $count = $count ?? $mcount ?></td>
+								<td><?= $item['user_id'] ?></td>
 								<td><?= $item['user_name'] ?></td>
 								<td><?= $item['user_email'] ?></td>
 								<td>
@@ -50,8 +50,8 @@
 								</td>
 								<td><a href="<?= base_url() . 'a/view_client/' . $item['user_key'] ?>" class="btn rounded btn-green btn-sm"><em class="fa fa-user me-2"></em> Manage</a></td>
 							</tr>
-							<?php $count += 1; ?>
-						<?php endforeach; ?>
+							<!-- <?php $count += 1; ?>
+						<?php endforeach; ?> -->
 					<?php else : ?>
 						<tr>
 							<td colspan="5" class="text-center">

@@ -13,9 +13,14 @@
 			</div>
 		</div>
 	</div>
-	<?php if (count($list) > 1) : ?>
-		<div class="alert alert-danger"><?= $this->base->text('account_limit', 'paragraph') ?> <a href="https://ifastnet.com"><?= $this->base->text('premium_hosting', 'heading') ?></a> <?= $this->base->text('better_service', 'paragraph') ?></div>
-	<?php endif ?>
+	<?php
+        if (count($list) === 2) { ?>
+            <div class="alert alert-danger"><?= $this->base->text('account_limit', 'paragraph') ?> <a href="https://ifastnet.com"><?= $this->base->text('premium_hosting', 'heading') ?></a> <?= $this->base->text('better_service', 'paragraph') ?></div>
+       <? } else if (count($list) === 3) { ?>
+            <div class="alert alert-danger"><?= $this->base->text('account_limit_crossed', 'paragraph') ?> <a href="https://ifastnet.com"><?= $this->base->text('premium_hosting', 'heading') ?></a> <?= $this->base->text('better_service', 'paragraph') ?></div>
+        <? } else {
+        } 
+    ?>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
 			<div class="card-title"><?= $this->base->text('your_accounts', 'heading') ?></div>

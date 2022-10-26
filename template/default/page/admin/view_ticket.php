@@ -53,6 +53,12 @@
 						</span>
 					</div>
 				</div>
+				<div class="col-sm-6">
+					<div class="row align-items-center">
+						<span class="col">User Email:</span>
+						<span class="col-auto ms-auto"><?= $this->ticket->get_user_email($ticket['ticket_for']) ?></span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="card-footer">
