@@ -2,6 +2,7 @@
 
 $lang['forget_password'] = 'Enter your email address and your password will be reset and emailed to you.';
 $lang['account_limit'] = 'You are about to reach the limit of 3 free hosting accounts per user. Please upgrade to';
+$lang['account_limit_crossed'] = 'You have reached the maximum limit of 3 free hosting accounts per user. Please consider upgrading to';
 $lang['better_service'] = 'for better service.';
 $lang['nothing_to_show'] = 'Nothing to show.';
 $lang['account_warning'] = 'Please remove all domains and subdomains before deactivating your account otherwise all domains and subdomains on this account will be locked forever.';

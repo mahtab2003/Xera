@@ -6,6 +6,7 @@
 	</div>
 	<div class="card p-2 mb-3">
 		<div class="card-body">
+		<p> You can generate CSR and Private key from <a href="https://www.gogetssl.com/online-csr-generator/">Online CSR Generator</a>
 			<?= form_open('u/create_ssl') ?>
 				<div class="row">
 					<div class="col-sm-12 mb-2">
