@@ -69,4 +69,4 @@ You can also [open an issue here](https://github.com/mahtab2003/Xera/issues/new)
 If you like project Xera please donate [here](https://xera.eu.org/DONATE.md).
 
 ## ©️ Copyright
-This build is created and maintained by [Mehtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).
+This build is created and maintained by [Mahtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).
