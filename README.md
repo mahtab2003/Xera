@@ -4,7 +4,7 @@
 
 > **Note**  
 > **This build is not actively maintained by the developer.**  
-> Pull requests are welcome and will still be accepted. If you want to see a feature, feel free to contribute it.
+> Pull requests are welcome and will still be accepted. If you want to see a feature, feel free to contribute it. For a more up-to-date solution, check out <a href="https://github.com/GenerateApps/GenerateArea">GenerateArea</a>.
 
 ## 👀 What is Xera ?
 Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features which are listed below:
