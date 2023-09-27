@@ -3,8 +3,8 @@
 </div>
 
 > **Note**  
-> **This build is not actively maintained by the developer.**  
-> Pull requests are welcome and will still be accepted. If you want to see a feature, feel free to contribute it. For a more up-to-date solution, check out <a href="https://github.com/GenerateApps/GenerateArea">GenerateArea</a>.
+> **This development of this build is live again.**  
+> Pull requests are welcome and will still be accepted. If you want to see a feature, feel free to contribute it.
 
 ## 👀 What is Xera ?
 Xera is a hosting account and support management system especially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features which are listed below:
@@ -13,7 +13,7 @@ Xera is a hosting account and support management system especially designed to w
 [![AppVeyor](https://img.shields.io/badge/Version-v1.2.8-informational)](https://github.com/mahtab2003/Xera/releases/latest)
 ![AppVeyor](https://img.shields.io/badge/Build-Passed-brightgreen)
 ![AppVeyor](https://img.shields.io/badge/Interface-Tabler-lightgreen)
-![AppVeyor](https://img.shields.io/badge/Development-Paused-inactive)
+![AppVeyor](https://img.shields.io/badge/Development-Live)
 ![AppVeyor](https://img.shields.io/badge/Dependencies-PHP,_MySQL,_cUrl-red)
 
 ### 🎮 Features
