@@ -13,7 +13,7 @@ Xera is a hosting account and support management system especially designed to w
 [![AppVeyor](https://img.shields.io/badge/Version-v1.2.8-informational)](https://github.com/mahtab2003/Xera/releases/latest)
 ![AppVeyor](https://img.shields.io/badge/Build-Passed-brightgreen)
 ![AppVeyor](https://img.shields.io/badge/Interface-Tabler-lightgreen)
-![AppVeyor](https://img.shields.io/badge/Development-Live)
+![AppVeyor](https://img.shields.io/badge/Development-Live-brightgreen)
 ![AppVeyor](https://img.shields.io/badge/Dependencies-PHP,_MySQL,_cUrl-red)
 
 ### 🎮 Features
