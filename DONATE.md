@@ -4,23 +4,20 @@ Make a donation to encourage this project and for further updates.
 #### Donate Now
 You can make donatins through several ways.
 
-##### Bitcoin
-Account Address: ```3JHhLZ5rcDTWyudQfLCZaEMPDg5TtmmDbR```
+##### Ethereum . ETH
+Account Address: ```0x9f5ec5e00B094bF046BB95c2ada2617AAe797bB7```
 
-##### Litecoin
-Account Address: ```MQAMLLv4ujYjXR4i2i2ZxevJCqfo1ifHg3```
+##### Polygon / MATIC
+Account Address: ```0x9f5ec5e00B094bF046BB95c2ada2617AAe797bB7```
 
-##### Ethereum
-Account Address: ```0x7B90E49e204aE452DdFEa3d82379D6D4A54D0003```
+##### Binance Coin / BNB
+Account Address: ```0x9f5ec5e00B094bF046BB95c2ada2617AAe797bB7```
 
-##### Wave Coin
-Account Address: ```3PCUuRSQsMvoLc92vGDaiqQixyQU6vamyyH```
-
-##### Tronix
+##### Tronix / TRX
 Account Address: ```TYBpfA2b3ZpNc5cwUGybKRcDcRFQNzZYrp```
 
-##### Perfect Money
+##### Perfect Money / PM
 Account Number: ```U27729309```
 
-##### Payeer
+##### Payeer / PR
 Account Number: ```P1034396974```
