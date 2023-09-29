@@ -14,12 +14,11 @@
 		</div>
 	</div>
 	<?php
-        if (count($list) === 2) { ?>
-            <div class="alert alert-danger"><?= $this->base->text('account_limit', 'paragraph') ?> <a href="https://ifastnet.com"><?= $this->base->text('premium_hosting', 'heading') ?></a> <?= $this->base->text('better_service', 'paragraph') ?></div>
-       <? } else if (count($list) === 3) { ?>
-            <div class="alert alert-danger"><?= $this->base->text('account_limit_crossed', 'paragraph') ?> <a href="https://ifastnet.com"><?= $this->base->text('premium_hosting', 'heading') ?></a> <?= $this->base->text('better_service', 'paragraph') ?></div>
-        <? } else {
-        } 
+        if (count($list) === 2) { 
+            echo '<div class="alert alert-danger">'.$this->base->text('account_limit', 'paragraph').'<a href="https://ifastnet.com">'.$this->base->text('premium_hosting', 'heading').'</a>'.$this->base->text('better_service', 'paragraph').'</div>';
+        } else if (count($list) === 3) { 
+            echo '<div class="alert alert-danger">'.$this->base->text('account_limit_crossed', 'paragraph').'<a href="https://ifastnet.com">'.$this->base->text('premium_hosting', 'heading').'</a>'.$this->base->text('better_service', 'paragraph').'</div>';
+        }
     ?>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
@@ -61,7 +60,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'u/view_account/' . $item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-1"></em> <?= $this->base->text('manage', 'button') ?></a></td>
+								<td><a href="<?= base_url() . 'account/view/' . $item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-1"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>

@@ -57,7 +57,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'a/view_ticket/' . $item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> Manage</a></td>
+								<td><a href="<?= base_url() . 'admin/ticket/view/' . $item['ticket_key'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> Manage</a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
@@ -85,12 +85,12 @@
 					<?php $i = intval($i); ?>
 					<ul class="pagination mb-0">
 						<li class="page-item <?php if ($page < 1) : ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>a/tickets?page=<?= $page - 1 ?>" <?php endif ?>>
+							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>admin/ticket/list?page=<?= $page - 1 ?>" <?php endif ?>>
 								<span>&laquo;</span>
 							</a>
 						</li>
 						<li class="page-item <?php if ($page > $i) : ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>a/tickets?page=<?= $page + 1 ?>" <?php endif ?>>
+							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>admin/ticket/list?page=<?= $page + 1 ?>" <?php endif ?>>
 								<span>&raquo;</span>
 							</a>
 						</li>

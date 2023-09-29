@@ -9,7 +9,7 @@
 			<div class="card-title">General</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('a/settings') ?>
+			<?= form_open('admin/settings') ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label">Your name</label>
@@ -25,7 +25,7 @@
 			<div class="card-title">Interface</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('a/settings') ?>
+			<?= form_open('admin/settings') ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label">Theme</label>
@@ -55,7 +55,7 @@
 			<div class="card-title">Security</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('a/settings') ?>
+			<?= form_open('admin/settings') ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label">New password</label>

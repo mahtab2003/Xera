@@ -1,4 +1,4 @@
-<?= form_open('u/reset_password/' . $token, ['class' => 'card card-md']) ?>
+<?= form_open('reset/password/' . $token, ['class' => 'card card-md']) ?>
 <div class="card-body">
 	<h2 class="card-title text-center mb-3"><?= $this->base->text('reset_password', 'heading') ?></h2>
 	<div class="mb-2">
@@ -47,5 +47,5 @@
 </div>
 </form>
 <div class="text-center text-muted mt-3">
-	<?= $this->base->text('create_an_account', 'heading') ?> <a href="<?= base_url(); ?>u/register" tabindex="-1"><?= $this->base->text('login', 'button') ?></a>
+	<?= $this->base->text('create_an_account', 'heading') ?> <a href="<?= base_url(); ?>register" tabindex="-1"><?= $this->base->text('login', 'button') ?></a>
 </div>

@@ -114,7 +114,7 @@
 	<?php if ($ticket['ticket_status'] == 'closed'): ?>
 		<div class="card mb-3">
 			<div class="card-body">
-				<?= $this->base->text('ticket_closed', 'paragraph') ?> <a href="<?= base_url().'u/view_ticket/'.$ticket['ticket_key'].'?open=true' ?>"><?= $this->base->text('here', 'button') ?></a> <?= $this->base->text('to_reopen', 'paragraph') ?>
+				<?= $this->base->text('ticket_closed', 'paragraph') ?> <a href="<?= base_url().'ticket/view/'.$ticket['ticket_key'].'?open=true' ?>"><?= $this->base->text('here', 'button') ?></a> <?= $this->base->text('to_reopen', 'paragraph') ?>
 			</div>
 		</div>
 	<?php else: ?>
@@ -123,7 +123,7 @@
 				<div class="card-title"><?= $this->base->text('make_a_reply', 'heading') ?></div>
 			</div>
 			<div class="card-body">
-				<?= form_open('u/view_ticket/'.$ticket['ticket_key']) ?>
+				<?= form_open('ticket/view/'.$ticket['ticket_key']) ?>
 					<div class="mb-2">
 						<textarea id="editor" class="form-control" name="content" placeholder="Content..."></textarea>
 					</div>
@@ -147,7 +147,7 @@
 					<?php endif ?>
 					<div>
 						<input type="submit" name="reply" value="<?= $this->base->text('add_reply', 'button') ?>" class="btn btn-primary btn-pill">
-						<a href="<?= base_url().'u/view_ticket/'.$ticket['ticket_key'].'?close=true' ?>" class="btn btn-pill btn-danger"><?= $this->base->text('close_ticket', 'button') ?></a>
+						<a href="<?= base_url().'ticket/view/'.$ticket['ticket_key'].'?close=true' ?>" class="btn btn-pill btn-danger"><?= $this->base->text('close_ticket', 'button') ?></a>
 					</div>
 				</form>
 			</div>

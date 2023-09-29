@@ -29,7 +29,7 @@
 								<td><?php echo $count = $count ?? 1 ?></td>
 								<td><?= $item['email_subject'] ?></td>
 								<td><?= strtoupper($item['email_id']) ?></td>
-								<td><a href="<?= base_url().'a/edit_email/'.$item['email_id'] ?>" class="btn btn-sm">Manage</a></td>
+								<td><a href="<?= base_url().'email/edit/'.$item['email_id'] ?>" class="btn btn-sm">Manage</a></td>
 							</tr>
 						<?php $count += 1; ?>
 						<?php endforeach; ?>

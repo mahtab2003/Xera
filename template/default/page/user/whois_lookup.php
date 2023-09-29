@@ -9,7 +9,7 @@
 			<div class="card-title"><?= $this->base->text($title, 'title') ?></div>
 		</div>
 		<div class="card-body">
-			<form action="<?= base_url() ?>u/whois_lookup" method="GET">
+			<form action="<?= base_url() ?>whois/lookup" method="GET">
 				<div class="mb-0">
 					<div class="row">
 						<div class="col-md-12">

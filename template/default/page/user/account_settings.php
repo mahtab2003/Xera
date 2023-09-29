@@ -9,7 +9,7 @@
 			<div class="card-title"><?= $this->base->text('general', 'heading') ?></div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/account_settings/'.$id) ?>
+			<?= form_open('account/settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label"><?= $this->base->text('account_label', 'label') ?></label>
@@ -25,7 +25,7 @@
 			<div class="card-title"><?= $this->base->text('security', 'heading') ?></div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/account_settings/'.$id) ?>
+			<?= form_open('account/settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label"><?= $this->base->text('new_password', 'label') ?></label>
@@ -43,7 +43,7 @@
 			<div class="card-title"><?= $this->base->text('deactivation', 'heading') ?></div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/account_settings/'.$id) ?>
+			<?= form_open('account/settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="alert alert-danger">

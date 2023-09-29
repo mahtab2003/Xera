@@ -9,22 +9,22 @@
 			<div class="card">
 				<div class="pt-2 px-3 pb-0">
 					<div class="d-grid mb-2">
-						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= base_url() ?>u/view_account/<?= $id ?>?login=true" target="_blank" <?php else : ?> href="#" disabled class="btn btn-primary rounded disabled" <?php endif ?> class="btn btn-primary rounded"><em class="fa fa-globe me-2"></em> <?= $this->base->text('control_panel', 'button') ?></a>
+						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= base_url() ?>account/view/<?= $id ?>?login=true" target="_blank" <?php else : ?> href="#" disabled class="btn btn-primary rounded disabled" <?php endif ?> class="btn btn-primary rounded"><em class="fa fa-globe me-2"></em> <?= $this->base->text('control_panel', 'button') ?></a>
 					</div>
 					<div class="d-grid mb-2">
 						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= $this->account->create_fm_link($data['account_username'], $data['account_password']) ?>" target="_blank" <?php else : ?> class="disabled btn btn-yellow rounded" href="#" disabled <?php endif ?> class="btn btn-green rounded"><em class="fa fa-file me-2"></em> <?= $this->base->text('file_manager', 'button') ?></a>
 					</div>
 					<?php if ($data['account_status'] === 'active') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>u/account_settings/<?= $id ?>" target="_blank" class="btn btn-yellow rounded"><em class="fa fa-cogs me-2"></em> <?= $this->base->text('settings', 'button') ?></a>
+							<a href="<?= base_url() ?>account/settings/<?= $id ?>" target="_blank" class="btn btn-yellow rounded"><em class="fa fa-cogs me-2"></em> <?= $this->base->text('settings', 'button') ?></a>
 						</div>
 					<?php elseif ($data['account_status'] === 'suspended') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>u/create_ticket" class="btn btn-green rounded"><em class="fa fa-cog me-2"></em> <?= $this->base->text('open_ticket', 'button') ?></a>
+							<a href="<?= base_url() ?>ticket/create" class="btn btn-green rounded"><em class="fa fa-cog me-2"></em> <?= $this->base->text('open_ticket', 'button') ?></a>
 						</div>
 					<?php elseif ($data['account_status'] === 'deactivated') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>u/view_account/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><em class="fa fa-cog me-2"></em> <?= $this->base->text('reactivate', 'button') ?></a>
+							<a href="<?= base_url() ?>account/view/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><em class="fa fa-cog me-2"></em> <?= $this->base->text('reactivate', 'button') ?></a>
 						</div>
 					<?php else : ?>
 						<div class="d-grid mb-2">
@@ -338,7 +338,7 @@
 												<td class="row align-items-center">
 													<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm rounded btn-yellow col me-2" target="_blank"><em class="fa fa-file"></em></a>
 													<?php if ($this->sp->is_active()) : ?>
-														<a href="<?= base_url() . 'u/view_account/' . $data['account_username'] . '/?builder=true&domain=' . $domain['domain'] ?>" class="btn btn-red btn-sm rounded col" target="_blank"><em class="fa fa-upload"></em></a>
+														<a href="<?= base_url() . 'account/view/' . $data['account_username'] . '/?builder=true&domain=' . $domain['domain'] ?>" class="btn btn-red btn-sm rounded col" target="_blank"><em class="fa fa-upload"></em></a>
 													<?php endif ?>
 												</td>
 											</tr>

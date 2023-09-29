@@ -1,4 +1,4 @@
-<?= form_open('u/forget', ['class' => 'card card-md']) ?>
+<?= form_open('forget', ['class' => 'card card-md']) ?>
 	<div class="card-body">
 		<h2 class="card-title text-center mb-3"><?= $this->base->text('forget_password', 'heading') ?></h2>
 		<p class="text-muted mb-3"><?= $this->base->text('forget_password', 'paragraph') ?></p>
@@ -12,5 +12,5 @@
 	</div>
 </form>
 <div class="text-center text-muted mt-3">
-	<?= $this->base->text('forget_it', 'heading') ?>, <a href="<?= base_url();?>u/login" tabindex="-1"><?= $this->base->text('send_me_back', 'heading') ?></a> <?= $this->base->text('to_screen', 'heading') ?>
+	<?= $this->base->text('forget_it', 'heading') ?>, <a href="<?= base_url();?>login" tabindex="-1"><?= $this->base->text('send_me_back', 'heading') ?></a> <?= $this->base->text('to_screen', 'heading') ?>
 </div>

@@ -1,4 +1,4 @@
-<?= form_open('u/register', ['class' => 'card card-md']) ?>
+<?= form_open('register', ['class' => 'card card-md']) ?>
 <div class="card-body">
 	<h2 class="card-title text-center mb-3"><?= $this->base->text('create_an_account', 'heading') ?></h2>
 	<div class="mb-2">
@@ -34,7 +34,7 @@
 	<div class="mb-3">
 		<label class="form-check">
 			<input type="checkbox" name="checkbox" value="1" class="form-check-input" required="true" />
-			<span class="form-check-label"><?= $this->base->text('i_agree_to', 'heading') ?> <a href="<?= base_url() ?>e/tos"><?= $this->base->text('tos', 'heading') ?></a></span>
+			<span class="form-check-label"><?= $this->base->text('i_agree_to', 'heading') ?> <a href="<?= base_url() ?>tos"><?= $this->base->text('tos', 'heading') ?></a></span>
 		</label>
 	</div>
 	<?php if ($this->grc->is_active()) : ?>
@@ -66,5 +66,5 @@
 </div>
 </form>
 <div class="text-center text-muted mt-3">
-	<?= $this->base->text('have_an_account', 'heading') ?> <a href="<?= base_url(); ?>u/login" tabindex="-1"><?= $this->base->text('login', 'button') ?></a>
+	<?= $this->base->text('have_an_account', 'heading') ?> <a href="<?= base_url(); ?>login" tabindex="-1"><?= $this->base->text('login', 'button') ?></a>
 </div>

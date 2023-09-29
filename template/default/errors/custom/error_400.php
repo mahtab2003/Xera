@@ -17,7 +17,7 @@
 				<div class="empty-header"><em class="fa fa-envelope-open"></em></div>
 				<p class="empty-title"><?= $this->base->text('oops_note', 'paragraph') ?></p>
 				<p class="empty-subtitle text-muted">
-					<?= $this->base->text('user_inactive_note', 'paragraph') ?> <a href="<?= base_url() ?>/e/error_400?resend=true"><?= $this->base->text('resend_email', 'button') ?></a> <?= $this->base->text('or', 'label') ?> <a href="<?= base_url() ?>/e/error_400?logout=true"><?= $this->base->text('logout', 'button') ?></a>
+					<?= $this->base->text('user_inactive_note', 'paragraph') ?> <a href="<?= base_url() ?>400?resend=true"><?= $this->base->text('resend_email', 'button') ?></a> <?= $this->base->text('or', 'label') ?> <a href="<?= base_url() ?>400?logout=true"><?= $this->base->text('logout', 'button') ?></a>
 				</p>
 			</div>
 		</div>

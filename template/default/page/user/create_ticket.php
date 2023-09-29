@@ -6,7 +6,7 @@
 	</div>
 	<div class="card p-2 mb-3">
 		<div class="card-body">
-			<?= form_open('u/create_ticket') ?>
+			<?= form_open('ticket/create') ?>
 				<div class="row">
 					<div class="col-md-12">
 						<label class="form-label"><?= $this->base->text('subject', 'label') ?></label>

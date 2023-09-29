@@ -1,4 +1,4 @@
-<?= form_open('u/login', ['class' => 'card card-md']) ?>
+<?= form_open('login', ['class' => 'card card-md']) ?>
 <div class="card-body">
 	<h2 class="card-title text-center mb-3"><?= $this->base->text('login_to_account', 'heading') ?></h2>
 	<div class="mb-3">
@@ -9,7 +9,7 @@
 		<label class="form-label">
 			<?= $this->base->text('password', 'label') ?>
 			<span class="form-label-description">
-				<a href="<?= base_url(); ?>u/forget"><?= $this->base->text('i_forget_password', 'heading') ?></a>
+				<a href="<?= base_url(); ?>forget"><?= $this->base->text('i_forget_password', 'heading') ?></a>
 			</span>
 		</label>
 		<div class="input-group input-group-flat">
@@ -56,5 +56,5 @@
 </div>
 </form>
 <div class="text-center text-muted mt-3">
-	<?= $this->base->text('dont_have_account', 'heading') ?> <a href="<?= base_url(); ?>u/register" tabindex="-1"><?= $this->base->text('register', 'button') ?></a>
+	<?= $this->base->text('dont_have_account', 'heading') ?> <a href="<?= base_url(); ?>register" tabindex="-1"><?= $this->base->text('register', 'button') ?></a>
 </div>

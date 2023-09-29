@@ -1,4 +1,4 @@
-<?= form_open('a/reset_password/' . $token, ['class' => 'card card-md']) ?>
+<?= form_open('admin/reset/password/' . $token, ['class' => 'card card-md']) ?>
 <div class="card-body">
 	<h2 class="card-title text-center mb-3">Reset account password</h2>
 	<div class="mb-2">

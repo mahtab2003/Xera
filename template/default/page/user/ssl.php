@@ -51,7 +51,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'u/view_ssl/' . $item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> <?= $this->base->text('manage', 'button') ?></a></td>
+								<td><a href="<?= base_url() . 'ssl/view/' . $item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>

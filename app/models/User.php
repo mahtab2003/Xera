@@ -31,7 +31,7 @@ class User extends CI_Model
 			{
 				$param['user_name'] = $name;
 				$param['user_email'] = $email;
-				$param['activation_link'] = base_url().'e/activate/'.$data['user_rec'];
+				$param['activation_link'] = base_url().'user//activate/'.$data['user_rec'];
 				$this->mailer->send('new_user', $email, $param);
 				return true;
 			}
@@ -57,7 +57,7 @@ class User extends CI_Model
 			{
 				$param['user_name'] = $name;
 				$param['user_email'] = $email;
-				$param['activation_link'] = base_url().'e/activate/'.$data['user_rec'];
+				$param['activation_link'] = base_url().'user//activate/'.$data['user_rec'];
 				$this->mailer->send('new_user', $email, $param);
 				return true;
 			}
@@ -73,7 +73,7 @@ class User extends CI_Model
 		{
 			$param['user_name'] = $res['user_name'];
 			$param['user_email'] = $res['user_email'];
-			$param['activation_link'] = base_url().'e/activate/'.$res['user_rec'];
+			$param['activation_link'] = base_url().'user/activate/'.$res['user_rec'];
 			$res = $this->mailer->send('new_user', $param['user_email'], $param);
 			if($res !== false)
 			{
@@ -222,7 +222,7 @@ class User extends CI_Model
 				{
 					$param['user_name'] = $res['user_name'];
 					$param['user_email'] = $email;
-					$param['new_password'] = base_url().'u/reset_password/'.$base64;
+					$param['new_password'] = base_url().'reset/password/'.$base64;
 					$this->mailer->send('forget_password', $email, $param);
 					return true;
 				}

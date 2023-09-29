@@ -1,4 +1,4 @@
-<?= form_open('a/login', ['class' => 'card card-md']) ?>
+<?= form_open('admin/login', ['class' => 'card card-md']) ?>
 	<div class="card-body">
 		<h2 class="card-title text-center mb-3">Login as admin</h2>
 		<div class="mb-3">
@@ -9,7 +9,7 @@
 			<label class="form-label">
 				Password
 				<span class="form-label-description">
-					<a href="<?= base_url();?>a/forget">I forgot password</a>
+					<a href="<?= base_url();?>admin/forget">I forgot password</a>
 				</span>
 			</label>
 			<div class="input-group input-group-flat">

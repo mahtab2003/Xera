@@ -1,4 +1,4 @@
-<?= form_open('a/forget', ['class' => 'card card-md']) ?>
+<?= form_open('admin/forget', ['class' => 'card card-md']) ?>
 	<div class="card-body">
 		<h2 class="card-title text-center mb-3">Forgot password</h2>
 		<p class="text-muted mb-3">Enter your email address and your password will be reset and emailed to you.</p>
@@ -12,5 +12,5 @@
 	</div>
 </form>
 <div class="text-center text-muted mt-3">
-	Forget it, <a href="<?= base_url();?>a/login" tabindex="-1">send me back</a> to the sign in screen.
+	Forget it, <a href="<?= base_url();?>admin/login" tabindex="-1">send me back</a> to the sign in screen.
 </div>

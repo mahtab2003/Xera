@@ -9,18 +9,18 @@
 			<div class="card">
 				<div class="pt-2 px-3 pb-0">
 					<div class="d-grid mb-2">
-						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= base_url() ?>a/view_account/<?= $id ?>?login=true" target="_blank" <?php else : ?> href="#" disabled class="btn btn-primary rounded disabled" <?php endif ?> class="btn btn-primary rounded"><i class="fa fa-globe me-2"></i> Control Panel</a>
+						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= base_url() ?>admin/account/view/<?= $id ?>?login=true" target="_blank" <?php else : ?> href="#" disabled class="btn btn-primary rounded disabled" <?php endif ?> class="btn btn-primary rounded"><i class="fa fa-globe me-2"></i> Control Panel</a>
 					</div>
 					<div class="d-grid mb-2">
 						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= $this->account->create_fm_link($data['account_username'], $data['account_password']) ?>" target="_blank" <?php else : ?> class="disabled btn btn-yellow rounded" href="#" disabled <?php endif ?> class="btn btn-green rounded"><i class="fa fa-file me-2"></i> File Manager</a>
 					</div>
 					<?php if ($data['account_status'] === 'active') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>a/account_settings/<?= $id ?>" target="_blank" class="btn btn-yellow rounded"><i class="fa fa-cogs me-2"></i> Settings</a>
+							<a href="<?= base_url() ?>admin/account/settings/<?= $id ?>" target="_blank" class="btn btn-yellow rounded"><i class="fa fa-cogs me-2"></i> Settings</a>
 						</div>
 					<?php elseif ($data['account_status'] === 'suspended' or $data['account_status'] === 'deactivated') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>a/view_account/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><i class="fa fa-cog me-2"></i> Reactivate</a>
+							<a href="<?= base_url() ?>admin/account/view/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><i class="fa fa-cog me-2"></i> Reactivate</a>
 						</div>
 					<?php else : ?>
 						<div class="d-grid mb-2">
@@ -334,7 +334,7 @@
 												<td class="row align-items-center">
 													<a href="<?= $domain['file_manager'] ?>" class="btn btn-sm btn-yellow col" target="_blank"><em class="fa fa-file"></em></a>
 													<?php if ($this->sp->is_active()) : ?>
-														<a href="<?= base_url() . 'a/view_account/' . $data['account_username'] . '/?builder=true&domain=' . $domain['domain'] ?>" class="btn btn-red btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
+														<a href="<?= base_url() . 'admin/account/view/' . $data['account_username'] . '/?builder=true&domain=' . $domain['domain'] ?>" class="btn btn-red btn-sm col" target="_blank"><i class="fa fa-upload"></i></a>
 													<?php endif ?>
 												</td>
 											</tr>

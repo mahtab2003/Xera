@@ -29,7 +29,7 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="subdomain">
-							<?= form_open('u/create_account') ?>
+							<?= form_open('account/create') ?>
 								<div class="">
 									<div class="mb-2">
 										<input type="text" name="domain" class="form-control" placeholder="<?= $this->base->text('domain_name', 'label') ?>">
@@ -48,7 +48,7 @@
 							</form>
 						</div>
 						<div class="tab-pane" id="customdomain">
-							<?= form_open('u/create_account') ?>
+							<?= form_open('account/create') ?>
 								<div class="">
 									<div class="mb-2">
 										<input type="text" name="domain" class="form-control" placeholder="<?= $this->base->text('domain_name', 'label') ?>">
@@ -62,7 +62,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="configure">
-					<?= form_open('u/create_account') ?>
+					<?= form_open('account/create') ?>
 						<div class="mb-2">
 							<label class="form-label"><?= $this->base->text('domain_name', 'label') ?></label>
 							<input type="text" name="domain" value="<?php if(isset($_SESSION['domain'])): echo($_SESSION['domain']); endif ?>" class="form-control" readonly="true">

@@ -18,7 +18,7 @@
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a href="<?= base_url() ?>a/settings" class="dropdown-item">Settings</a>
+					<a href="<?= base_url() ?>admin/settings" class="dropdown-item">Settings</a>
 					<a href="<?= base_url() ?>a/logout" class="dropdown-item">Logout</a>
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'home') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/dashboard">
+						<a class="nav-link" href="<?= base_url() ?>admin/">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-home"></i>
 							</span>
@@ -45,7 +45,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'client') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/clients">
+						<a class="nav-link" href="<?= base_url() ?>client/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-users"></i>
 							</span>
@@ -57,7 +57,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'account') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/accounts">
+						<a class="nav-link" href="<?= base_url() ?>admin/account/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-server"></i>
 							</span>
@@ -69,7 +69,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'domain') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/domains">
+						<a class="nav-link" href="<?= base_url() ?>domain/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-globe"></i>
 							</span>
@@ -81,7 +81,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'email') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/email_templates">
+						<a class="nav-link" href="<?= base_url() ?>email/templates">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-envelope"></i>
 							</span>
@@ -93,7 +93,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'ssl') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/ssl">
+						<a class="nav-link" href="<?= base_url() ?>admin/ssl/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<em class="fa fa-shield-alt"></em>
 							</span>
@@ -105,7 +105,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'ticket') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/tickets">
+						<a class="nav-link" href="<?= base_url() ?>admin/ticket/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-bullhorn"></i>
 							</span>
@@ -117,7 +117,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'api') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>a/api_settings">
+						<a class="nav-link" href="<?= base_url() ?>api/settings">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-cogs"></i>
 							</span>

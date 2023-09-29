@@ -16,13 +16,13 @@ class U extends CI_Controller
 		$this->load->model(['recaptcha' => 'grc']);
 		if(!$this->base->is_active())
 		{
-			redirect('e/error_500');
+			redirect('500');
 		}
 		if($this->user->is_logged())
 		{
 			if(!$this->user->is_active())
 			{
-				redirect('e/error_400');
+				redirect('400');
 			}
 		}
 		if(!get_cookie('theme'))
@@ -88,24 +88,24 @@ class U extends CI_Controller
 								if($res)
 								{
 									$this->session->set_flashdata('msg', json_encode([1, $this->base->text('register_msg', 'success')]));
-									redirect('u/login');
+									redirect('login');
 								}
 								else
 								{
 									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-									redirect('u/register');
+									redirect('register');
 								}
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'success')]));
-								redirect('u/register');
+								redirect('register');
 							}
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
-							redirect('u/register');
+							redirect('register');
 						}
 					}
 					else
@@ -118,7 +118,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
-						redirect('u/register');
+						redirect('register');
 					}
 				}
 				else
@@ -134,18 +134,18 @@ class U extends CI_Controller
 							if($res)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('register_msg', 'success')]));
-									redirect('u/login');
+									redirect('login');
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 							}
-							redirect('u/register');
+							redirect('register');
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'success')]));
-							redirect('u/register');
+							redirect('register');
 						}
 					}
 					else
@@ -158,7 +158,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
-						redirect('u/register');
+						redirect('register');
 					}
 				}
 			}
@@ -172,7 +172,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/dashboard');
+			redirect('user');
 		}
 	}
 
@@ -232,23 +232,23 @@ class U extends CI_Controller
 							if(!is_bool($res))
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('oauth_msg', 'error')]));
-								redirect('u/dashboard');
+								redirect('user');
 							}
 							elseif($res)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
-								redirect('u/dashboard');
+								redirect('user');
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
-								redirect('u/login');
+								redirect('login');
 							}
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
-							redirect('u/login');
+							redirect('login');
 						}
 					}
 					else
@@ -261,7 +261,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
-						redirect('u/login');
+						redirect('login');
 					}
 				}
 				else
@@ -283,12 +283,12 @@ class U extends CI_Controller
 						if($res)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
-							redirect('u/dashboard');
+							redirect('user');
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
-							redirect('u/login');
+							redirect('login');
 						}
 					}
 					else
@@ -301,7 +301,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
-						redirect('u/login');
+						redirect('login');
 					}
 				}
 			}
@@ -315,7 +315,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/dashboard');
+			redirect('user');
 		}
 	}
 
@@ -331,7 +331,7 @@ class U extends CI_Controller
 					$email = $this->input->post('email');
 					$data = $this->user->reset_password($email);
 					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('forget_msg', 'success')]));
-					redirect('u/login');
+					redirect('login');
 				}
 				else
 				{
@@ -343,7 +343,7 @@ class U extends CI_Controller
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 					}
-					redirect('u/forget');
+					redirect('forget');
 				}
 			}
 			else
@@ -356,7 +356,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/dashboard');
+			redirect('user');
 		}
 	}
 
@@ -373,7 +373,7 @@ class U extends CI_Controller
 			if(time() > $time + 3600)
 			{
 				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('reset_token_expired', 'error')]));
-				redirect('u/login');
+				redirect('login');
 			}
 			elseif($user !== false)
 			{
@@ -391,12 +391,12 @@ class U extends CI_Controller
 							if($res !== false)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('reset_msg', 'success')]));
-								redirect('u/login');
+								redirect('login');
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-								redirect('u/login');
+								redirect('login');
 							}
 						}
 						else
@@ -409,7 +409,7 @@ class U extends CI_Controller
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
-							redirect('u/login');
+							redirect('login');
 						}
 					}
 					else
@@ -424,18 +424,18 @@ class U extends CI_Controller
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_token', 'error')]));
-					redirect('u/login');
+					redirect('login');
 				}
 			}
 			else
 			{
 				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_token', 'error')]));
-				redirect('u/login');
+				redirect('login');
 			}
 		}
 		else
 		{
-			redirect('u/dashboard');
+			redirect('user');
 		}
 	}
 
@@ -451,12 +451,12 @@ class U extends CI_Controller
 			{
 				$this->session->set_flashdata('msg', json_encode([1, $this->base->text('logout_msg', 'success')]));
 			}
-			redirect('u/login');
+			redirect('login');
 		}
 		else
 		{
 			$this->session->set_flashdata('msg', json_encode([0, $this->base->text('login_to_continue', 'error')]));
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -469,7 +469,7 @@ class U extends CI_Controller
 				set_cookie('theme', $this->input->post('theme'), 30 * 86400);
 				set_cookie('lang', $this->input->post('language'), 30 * 86400);
 				$this->session->set_flashdata('msg', json_encode([1, $this->base->text('theme_msg', 'success')]));
-				redirect('u/settings');
+				redirect('settings');
 			}
 			elseif($this->input->post('update_name'))
 			{
@@ -481,18 +481,18 @@ class U extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('name_msg', 'success')]));
-						redirect('u/settings');
+						redirect('settings');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect('u/settings');
+						redirect('settings');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('u/settings');
+					redirect('settings');
 				}
 			}
 			elseif($this->input->post('update_password'))
@@ -512,13 +512,13 @@ class U extends CI_Controller
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect('u/settings');
+						redirect('settings');
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('u/settings');
+					redirect('settings');
 				}
 			}
 			else
@@ -534,7 +534,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -553,7 +553,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -572,7 +572,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -623,18 +623,18 @@ class U extends CI_Controller
 							if($res)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_msg', 'success')]));
-								redirect('u/tickets');
+								redirect('ticket/list');
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-								redirect('u/create_ticket');
+								redirect('ticket/create');
 							}
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
-							redirect('u/create_ticket');
+							redirect('ticket/create');
 						}
 					}
 					else
@@ -647,7 +647,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
-						redirect('u/create_ticket');
+						redirect('ticket/create');
 					}
 				}
 				else
@@ -660,12 +660,12 @@ class U extends CI_Controller
 						if($res)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_msg', 'success')]));
-							redirect('u/tickets');
+							redirect('ticket/list');
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-							redirect('u/create_ticket');
+							redirect('ticket/create');
 						}
 					}
 					else
@@ -678,7 +678,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 						}
-						redirect('u/create_ticket');
+						redirect('ticket/create');
 					}
 				}
 			}
@@ -695,7 +695,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -711,17 +711,17 @@ class U extends CI_Controller
 					if($res)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_closed_msg', 'success')]));
-						redirect("u/view_ticket/$id");
+						redirect("ticket/view/$id");
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("u/view_ticket/$id");
+						redirect("ticket/view/$id");
 					}
 				}
 				else
 				{
-					redirect('u/tickets');
+					redirect('ticket/list');
 				}
 			}
 			elseif($this->input->get('open'))
@@ -732,17 +732,17 @@ class U extends CI_Controller
 					if($res)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ticket_opened_msg', 'success')]));
-						redirect("u/view_ticket/$id");
+						redirect("ticket/view/$id");
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("u/view_ticket/$id");
+						redirect("ticket/view/$id");
 					}
 				}
 				else
 				{
-					redirect('u/tickets');
+					redirect('ticket/list');
 				}
 			}
 			elseif($this->input->post('reply'))
@@ -788,18 +788,18 @@ class U extends CI_Controller
 								if($res)
 								{
 									$this->session->set_flashdata('msg', json_encode([1, $this->base->text('reply_msg', 'success')]));
-									redirect("u/view_ticket/$id");
+									redirect("ticket/view/$id");
 								}
 								else
 								{
 									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-									redirect("u/view_ticket/$id");
+									redirect("ticket/view/$id");
 								}
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
-								redirect("u/view_ticket/$id");
+								redirect("ticket/view/$id");
 							}
 						}
 						else
@@ -812,7 +812,7 @@ class U extends CI_Controller
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
-							redirect("u/view_ticket/$id");
+							redirect("ticket/view/$id");
 						}
 					}
 					else
@@ -824,12 +824,12 @@ class U extends CI_Controller
 							if($res)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('reply_msg', 'success')]));
-								redirect("u/view_ticket/$id");
+								redirect("ticket/view/$id");
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-								redirect("u/view_ticket/$id");
+								redirect("ticket/view/$id");
 							}
 						}
 						else
@@ -842,13 +842,13 @@ class U extends CI_Controller
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
-							redirect("u/view_ticket/$id");
+							redirect("ticket/view/$id");
 						}
 					}
 				}
 				else
 				{
-					redirect("u/tickets");
+					redirect("ticket/list");
 				}
 			}
 			else
@@ -867,13 +867,13 @@ class U extends CI_Controller
 				}
 				else
 				{
-					redirect('e/error_404');
+					redirect('404');
 				}
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -892,7 +892,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -913,7 +913,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('domain_selected_msg', 'success')]));
 							$this->session->set_userdata('domain', strtolower($domain));
-							redirect('u/create_account#configure');
+							redirect('account/create#configure');
 						}
 						elseif($res === false){
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('domain_not_available', 'error')]));
@@ -922,12 +922,12 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 						}
-						redirect('u/create_account');
+						redirect('account/create');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('fill_domain_field', 'error')]));
-						redirect('u/create_account');
+						redirect('account/create');
 					}
 				}
 				elseif($this->input->post('check_subdomain')){
@@ -943,7 +943,7 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('domain_selected_msg', 'success')]));
 							$this->session->set_userdata('domain', strtolower($subdomain));
-							redirect('u/create_account#configure');
+							redirect('account/create#configure');
 						}
 						elseif($res === false){
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('domain_not_available', 'error')]));
@@ -952,12 +952,12 @@ class U extends CI_Controller
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
 						}
-						redirect('u/create_account');
+						redirect('account/create');
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('fill_domain_field', 'error')]));
-						redirect('u/create_account');
+						redirect('account/create');
 					}
 				}
 				elseif($this->input->post('create'))
@@ -1012,23 +1012,23 @@ class U extends CI_Controller
 										unset($_SESSION['ext']);
 									}
 									$this->session->set_userdata('done', true);
-									redirect('u/create_account#done');
+									redirect('account/create#done');
 								}
 								elseif($res === false)
 								{
 									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-									redirect('u/create_account#configure');
+									redirect('account/create#configure');
 								}
 								else
 								{
 									$this->session->set_flashdata('msg', json_encode([0, $res]));
-									redirect('u/create_account#configure');
+									redirect('account/create#configure');
 								}
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
-								redirect('u/create_account#configure');
+								redirect('account/create#configure');
 							}
 						}
 						else
@@ -1041,7 +1041,7 @@ class U extends CI_Controller
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
-							redirect('u/create_account#configure');
+							redirect('account/create#configure');
 						}
 					}
 					else
@@ -1063,17 +1063,17 @@ class U extends CI_Controller
 									unset($_SESSION['ext']);
 								}
 								$this->session->set_userdata('done', true);
-								redirect('u/create_account#done');
+								redirect('account/create#done');
 							}
 							elseif($res === false)
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-								redirect('u/create_account#configure');
+								redirect('account/create#configure');
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $res]));
-								redirect('u/create_account#configure');
+								redirect('account/create#configure');
 							}
 						}
 						else
@@ -1086,7 +1086,7 @@ class U extends CI_Controller
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
 							}
-							redirect('u/create_account#configure');
+							redirect('account/create#configure');
 						}
 					}
 				}
@@ -1104,12 +1104,12 @@ class U extends CI_Controller
 			else
 			{
 				$this->session->set_flashdata('msg', json_encode([0, $this->base->text('account_limit', 'error')]));
-				redirect('u/accounts');
+				redirect('account/list');
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1130,7 +1130,7 @@ class U extends CI_Controller
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/view_account/$id");
+					redirect("account/view/$id");
 				}
 			}
 			elseif($this->input->get('builder') AND $this->input->get('domain'))
@@ -1153,7 +1153,7 @@ class U extends CI_Controller
 					if($link === false)
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("u/view_account/$id");
+						redirect("account/view/$id");
 					}
 					elseif($link['success'] == true)
 					{
@@ -1162,13 +1162,13 @@ class U extends CI_Controller
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $link['msg']]));
-						redirect("u/view_account/$id");
+						redirect("account/view/$id");
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/view_account/$id");
+					redirect("account/view/$id");
 				}
 			}
 			elseif($this->input->get('reactivate'))
@@ -1177,7 +1177,7 @@ class U extends CI_Controller
 				if($count > 2)
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('cant_reactivate', 'error')]));
-					redirect("u/view_account/$id");
+					redirect("account/view/$id");
 				}
 				else
 				{
@@ -1190,29 +1190,29 @@ class U extends CI_Controller
 							if(!is_bool($res))
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $res]));
-								redirect("u/view_account/$id");
+								redirect("account/view/$id");
 							}
 							elseif($res !== false)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_reactivated_msg', 'success')]));
-								redirect("u/view_account/$id");
+								redirect("account/view/$id");
 							}
 							else
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-								redirect("u/view_account/$id");
+								redirect("account/view/$id");
 							}
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('reactivation_error', 'error')]));
-							redirect("u/view_account/$id");
+							redirect("account/view/$id");
 						}
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("u/view_account/$id");
+						redirect("account/view/$id");
 					}
 				}
 			}
@@ -1231,13 +1231,13 @@ class U extends CI_Controller
 				}
 				else
 				{
-					redirect('e/error_404');
+					redirect('404');
 				}
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1255,18 +1255,18 @@ class U extends CI_Controller
 					if($res !== false)
 					{
 						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('label_updated_msg', 'success')]));
-						redirect("u/account_settings/$id");
+						redirect("account/settings/$id");
 					}
 						else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("u/account_settings/$id");
+						redirect("account/settings/$id");
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/account_settings/$id");
+					redirect("account/settings/$id");
 				}
 			}
 			elseif($this->input->post('update_password'))
@@ -1280,29 +1280,29 @@ class U extends CI_Controller
 						if(!is_bool($res))
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect("u/account_settings/$id");
+							redirect("account/settings/$id");
 						}
 						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_password_msg', 'success')]));
-							redirect("u/view_account/$id");
+							redirect("account/view/$id");
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-							redirect("u/account_settings/$id");
+							redirect("account/settings/$id");
 						}
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, 'Unable to delete account.']));
-							redirect("u/account_settings/$id");
+							redirect("account/settings/$id");
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/account_settings/$id");
+					redirect("account/settings/$id");
 				}
 			} 
 			elseif($this->input->post('deactivate'))
@@ -1315,29 +1315,29 @@ class U extends CI_Controller
 						$res = $this->mofh->deactivate_account($res['account_key'], $this->input->post('reason'));
 						if(!is_bool($res)){
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect("u/account_settings/$id");
+							redirect("account/settings/$id");
 						}
 						elseif($res !== false)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('account_deactivated_msg', 'success')]));
-							redirect("u/accounts");
+							redirect("account/list");
 						}
 						else
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-							redirect("u/account_settings/$id");
+							redirect("account/settings/$id");
 						}
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('deactivation_error', 'error')]));
-							redirect("u/account_settings/$id");
+							redirect("account/settings/$id");
 					}
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/account_settings/$id");
+					redirect("account/settings/$id");
 				}
 			}
 			else
@@ -1355,13 +1355,13 @@ class U extends CI_Controller
 				}
 				else
 				{
-					redirect('e/error_404');
+					redirect('404');
 				}
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1390,7 +1390,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1411,12 +1411,12 @@ class U extends CI_Controller
 			}
 			else
 			{
-				redirect('u/');
+				redirect('user');
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1465,12 +1465,12 @@ class U extends CI_Controller
 							if(!is_bool($res))
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $res]));
-								redirect('u/ssl');
+								redirect('ssl/list');
 							}
 							elseif(is_bool($res) AND $res == true)
 							{
 								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_created_msg', 'success')]));
-								redirect('u/ssl');
+								redirect('ssl/list');
 							}
 							else
 							{
@@ -1506,12 +1506,12 @@ class U extends CI_Controller
 						if(!is_bool($res))
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
-							redirect('u/ssl');
+							redirect('ssl/list');
 						}
 						if(is_bool($res) AND $res == true)
 						{
 							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_created_msg', 'success')]));
-							redirect('u/ssl');
+							redirect('ssl/list');
 						}
 						else
 						{
@@ -1547,13 +1547,13 @@ class U extends CI_Controller
 				}
 				else
 				{
-					redirect('u/');
+					redirect('user');
 				}
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1569,12 +1569,12 @@ class U extends CI_Controller
 				if($res !== false)
 				{
 					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_deleted_msg', 'success')]));
-					redirect("u/view_ssl/$id");
+					redirect("ssl/view/$id");
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/view_ssl/$id");
+					redirect("ssl/view/$id");
 				}
 			}
 			elseif($this->input->get('cancel'))
@@ -1583,17 +1583,17 @@ class U extends CI_Controller
 				if(!is_bool($res))
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
-					redirect("u/view_ssl/$id");
+					redirect("ssl/view/$id");
 				}
 				elseif(is_bool($res) AND $res == true)
 				{
 					$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_cancelled_msg', 'success')]));
-					redirect("u/view_ssl/$id");
+					redirect("ssl/view/$id");
 				}
 				else
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("u/view_ssl/$id");
+					redirect("ssl/view/$id");
 				}
 			}
 			else
@@ -1613,18 +1613,18 @@ class U extends CI_Controller
 					}
 					else
 					{
-						redirect('e/error_404');
+						redirect('404');
 					}
 				}
 				else
 				{
-					redirect('u/');
+					redirect('user');
 				}
 			}
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1636,7 +1636,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1702,7 +1702,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 
@@ -1720,7 +1720,7 @@ class U extends CI_Controller
 		}
 		else
 		{
-			redirect('u/login');
+			redirect('login');
 		}
 	}
 }

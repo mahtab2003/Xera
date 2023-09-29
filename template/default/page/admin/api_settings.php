@@ -46,7 +46,7 @@
 			<div class="tab-pane <?php if (empty($_GET)) : ?>
 				active
 			<?php endif ?>" id="general">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">Host Name</label>
@@ -103,7 +103,7 @@
 			<div class="tab-pane <?php if ($this->input->get('mofh')) : ?>
 				active
 			<?php endif ?>" id="mofh">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">Username</label>
@@ -147,7 +147,7 @@
 			<div class="tab-pane <?php if ($this->input->get('smtp')) : ?>
 				active
 			<?php endif ?>" id="smtp">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">Service Type</label>
@@ -207,7 +207,7 @@
 			<div class="tab-pane <?php if ($this->input->get('captcha')) : ?>
 				active
 			<?php endif ?>" id="captcha">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">Captcha Type</label>
@@ -268,7 +268,7 @@
 			<div class="tab-pane <?php if ($this->input->get('ssl')) : ?>
 				active
 			<?php endif ?>" id="ssl">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">SSL Type</label>
@@ -311,7 +311,7 @@
 			<div class="tab-pane <?php if ($this->input->get('sitepro')) : ?>
 				active
 			<?php endif ?>" id="sitepro">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">Hostname</label>
@@ -352,7 +352,7 @@
 			<div class="tab-pane <?php if ($this->input->get('oauth')) : ?>
 				active
 			<?php endif ?>" id="oauth">
-				<?= form_open('a/api_settings') ?>
+				<?= form_open('api/settings') ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label">Oauth Client</label>

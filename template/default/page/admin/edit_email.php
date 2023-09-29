@@ -6,7 +6,7 @@
 	</div>
 	<div class="card p-2 mb-3">
 		<div class="card-body">
-			<?= form_open('a/edit_email/'.$email['email_id']) ?>
+			<?= form_open('email/edit/'.$email['email_id']) ?>
 				<div class="row">
 					<div class="col-md-12">
 						<label class="form-label">Subject</label>

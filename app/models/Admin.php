@@ -94,7 +94,7 @@ class Admin extends CI_Model
 			{
 				$param['user_name'] = $res['admin_name'];
 				$param['user_email'] = $email;
-				$param['new_password'] = base_url().'a/reset_password/'.$base64;
+				$param['new_password'] = base_url().'admin/reset/password/'.$base64;
 				$this->mailer->send('forget_password', $email, $param, 'admin');
 				return true;
 			}

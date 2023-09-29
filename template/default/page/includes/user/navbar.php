@@ -11,7 +11,7 @@
 		<div class="navbar-nav flex-row order-md-last">
 			<div class="nav-item">
 				<div class="d-none d-md-flex me-2">
-					<a href="<?= base_url() ?>u/upgrade" class="btn btn-yellow"><em class="fa fa-arrow-circle-up me-md-2"></em> <?= $this->base->text('go_premium', 'heading') ?></a>
+					<a href="<?= base_url() ?>upgrade" class="btn btn-yellow"><em class="fa fa-arrow-circle-up me-md-2"></em> <?= $this->base->text('go_premium', 'heading') ?></a>
 				</div>
 			</div>
 			<div class="nav-item dropdown">
@@ -23,7 +23,7 @@
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a href="<?= base_url() ?>u/settings" class="dropdown-item"><?= $this->base->text('settings', 'button') ?></a>
+					<a href="<?= base_url() ?>settings" class="dropdown-item"><?= $this->base->text('settings', 'button') ?></a>
 					<a href="<?= base_url() ?>u/logout" class="dropdown-item"><?= $this->base->text('logout', 'button') ?></a>
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'home') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>u/dashboard">
+						<a class="nav-link" href="<?= base_url() ?>user">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-home"></i>
 							</span>
@@ -50,7 +50,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'account') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>u/accounts">
+						<a class="nav-link" href="<?= base_url() ?>account/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-server"></i>
 							</span>
@@ -63,7 +63,7 @@
 						<li class="nav-item <?php if (isset($active) and $active == 'ssl') : ?>
 							active
 						<?php endif ?>">
-							<a class="nav-link" href="<?= base_url() ?>u/ssl">
+							<a class="nav-link" href="<?= base_url() ?>ssl/list">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<i class="fa fa-shield-alt"></i>
 								</span>
@@ -76,7 +76,7 @@
 					<li class="nav-item <?php if (isset($active) and $active == 'ticket') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>u/tickets">
+						<a class="nav-link" href="<?= base_url() ?>ticket/list">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-bullhorn"></i>
 							</span>
@@ -107,10 +107,10 @@
 							</span>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<?= base_url() ?>u/domain_checker">
+							<a class="dropdown-item" href="<?= base_url() ?>domain/checker">
 								<?= $this->base->text('domain_checker', 'heading') ?>
 							</a>
-							<a class="dropdown-item" href="<?= base_url() ?>u/whois_lookup">
+							<a class="dropdown-item" href="<?= base_url() ?>whois/lookup">
 								<?= $this->base->text('whois_lookup', 'heading') ?>
 							</a>
 							<a class="dropdown-item" href="<?= base_url() ?>u/dns_lookup">

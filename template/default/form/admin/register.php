@@ -1,4 +1,4 @@
-<?= form_open('a/register', ['class' => 'card card-md']) ?>
+<?= form_open('admin/register', ['class' => 'card card-md']) ?>
 	<div class="card-body">
 		<h2 class="card-title text-center mb-3">Create a new account</h2>
 		<div class="mb-2">

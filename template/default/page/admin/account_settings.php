@@ -9,7 +9,7 @@
 			<div class="card-title">General</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('a/account_settings/'.$id) ?>
+			<?= form_open('admin/account/settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label">Account Label</label>
@@ -25,7 +25,7 @@
 			<div class="card-title">Security</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('a/account_settings/'.$id) ?>
+			<?= form_open('admin/account/settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label">New password</label>
@@ -43,7 +43,7 @@
 			<div class="card-title">Deactivation</div>
 		</div>
 		<div class="card-body">
-			<?= form_open('a/account_settings/'.$id) ?>
+			<?= form_open('admin/account/settings/'.$id) ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="alert alert-danger">

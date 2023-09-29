@@ -9,7 +9,7 @@
 			<div class="card-title"><?= $this->base->text('your_name', 'label') ?></div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/settings') ?>
+			<?= form_open('settings') ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label"><?= $this->base->text('your_name', 'label') ?></label>
@@ -25,7 +25,7 @@
 			<div class="card-title"><?= $this->base->text('interface', 'heading') ?></div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/settings') ?>
+			<?= form_open('settings') ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label"><?= $this->base->text('theme', 'label') ?></label>
@@ -65,7 +65,7 @@
 			<div class="card-title"><?= $this->base->text('security', 'heading') ?></div>
 		</div>
 		<div class="card-body">
-			<?= form_open('u/settings') ?>
+			<?= form_open('settings') ?>
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="form-label"><?= $this->base->text('new_password', 'label') ?></label>

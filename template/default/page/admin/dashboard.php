@@ -100,7 +100,7 @@
 								About Xera
 							</div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>e/about" class="text-muted" target="_blank">View here.</a>
+								<a href="<?= base_url() ?>about" class="text-muted" target="_blank">View here.</a>
 							</div>
 						</div>
 					</div>
@@ -121,7 +121,7 @@
 								Check Updates
 							</div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>e/update" class="text-muted" target="_blank">Check here.</a>
+								<a href="<?= base_url() ?>update" class="text-muted" target="_blank">Check here.</a>
 							</div>
 						</div>
 					</div>
@@ -226,7 +226,7 @@
 								Terms of Service
 							</div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>e/tos" class="text-muted" target="_blank">View here.</a>
+								<a href="<?= base_url() ?>tos" class="text-muted" target="_blank">View here.</a>
 							</div>
 						</div>
 					</div>
@@ -247,7 +247,7 @@
 								License
 							</div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>e/license" class="text-muted" target="_blank">View here.</a>
+								<a href="<?= base_url() ?>license" class="text-muted" target="_blank">View here.</a>
 							</div>
 						</div>
 					</div>

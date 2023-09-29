@@ -48,7 +48,7 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'a/view_client/' . $item['user_key'] ?>" class="btn rounded btn-green btn-sm"><em class="fa fa-user me-2"></em> Manage</a></td>
+								<td><a href="<?= base_url() . 'client/view/' . $item['user_key'] ?>" class="btn rounded btn-green btn-sm"><em class="fa fa-user me-2"></em> Manage</a></td>
 							</tr>
                             <?php $count += 1; ?>
 						<?php endforeach; ?>
@@ -78,12 +78,12 @@
 					<?php $i = intval($i); ?>
 					<ul class="pagination mb-0">
 						<li class="page-item <?php if ($page < 1) : ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>a/clients?page=<?= $page - 1 ?>" <?php endif ?>>
+							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>client/list?page=<?= $page - 1 ?>" <?php endif ?>>
 								<span>&laquo;</span>
 							</a>
 						</li>
 						<li class="page-item <?php if ($page > $i) : ?>disabled<?php endif ?>">
-							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>a/clients?page=<?= $page + 1 ?>" <?php endif ?>>
+							<a class="page-link" <?php if ($page < $i + 1) : ?>href="<?= base_url() ?>client/list?page=<?= $page + 1 ?>" <?php endif ?>>
 								<span>&raquo;</span>
 							</a>
 						</li>

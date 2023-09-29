@@ -121,7 +121,7 @@
 		<div class="card mb-3">
 			<div class="card-status-start bg-red"></div>
 			<div class="card-body">
-				The ticket has been closed. Click <a href="<?= base_url().'a/view_ticket/'.$ticket['ticket_key'].'?open=true' ?>">here</a> to re-open.
+				The ticket has been closed. Click <a href="<?= base_url().'admin/ticket/view/'.$ticket['ticket_key'].'?open=true' ?>">here</a> to re-open.
 			</div>
 		</div>
 	<?php else: ?>
@@ -130,7 +130,7 @@
 				<div class="card-title">Make a reply</div>
 			</div>
 			<div class="card-body">
-				<?= form_open('a/view_ticket/'.$ticket['ticket_key']) ?>
+				<?= form_open('admin/ticket/view/'.$ticket['ticket_key']) ?>
 					<div class="mb-2">
 						<textarea id="editor" class="form-control" name="content"></textarea>
 					</div>
@@ -154,7 +154,7 @@
 					<?php endif ?>
 					<div>
 						<input type="submit" name="reply" value="Add reply" class="btn btn-primary btn-pill">
-						<a href="<?= base_url().'a/view_ticket/'.$ticket['ticket_key'].'?close=true' ?>" class="btn btn-pill btn-danger">Close Ticket</a>
+						<a href="<?= base_url().'admin/ticket/view/'.$ticket['ticket_key'].'?close=true' ?>" class="btn btn-pill btn-danger">Close Ticket</a>
 					</div>
 				</form>
 			</div>

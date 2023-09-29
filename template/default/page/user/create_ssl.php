@@ -7,7 +7,7 @@
 	<div class="card p-2 mb-3">
 		<div class="card-body">
 		<p> You can generate CSR and Private key from <a href="https://www.gogetssl.com/online-csr-generator/">Online CSR Generator</a>
-			<?= form_open('u/create_ssl') ?>
+			<?= form_open('ssl/create') ?>
 				<div class="row">
 					<div class="col-sm-12 mb-2">
 						<label class="form-label"><?= $this->base->text('csr_code', 'label') ?></label>

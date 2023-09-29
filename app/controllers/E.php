@@ -12,7 +12,7 @@ class E extends CI_Controller
 		if (!$this->base->is_active()) {
 			$this->load->view($this->base->get_template() . '/errors/custom/error_500');
 		} else {
-			redirect('u');
+			redirect('user');
 		}
 	}
 
@@ -92,17 +92,17 @@ class E extends CI_Controller
 		} else {
 			$this->session->set_flashdata('msg', json_encode([0, 'Invalid activation token.']));
 		}
-		redirect('u/login');
+		redirect('login');
 	}
 
 	function error_400()
 	{
 		$this->load->model('user');
 		if (!$this->user->is_logged()) {
-			redirect('u/');
+			redirect('user');
 		} else {
 			if ($this->user->is_active()) {
-				redirect('u/');
+				redirect('user');
 			} else {
 				if ($this->input->get('resend')) {
 					$res = $this->user->resend_email();

@@ -24,7 +24,7 @@ class Ticket extends CI_Model
 			{
 				$param['user_name'] = $this->user->get_name();
 				$param['ticket_id'] = $data['ticket_key'];
-				$param['ticket_url'] = base_url().'a/view_ticket/'.$data['ticket_key'];
+				$param['ticket_url'] = base_url().'admin/ticket/view/'.$data['ticket_key'];
 				$this->mailer->send('new_ticket', $this->base->get_email(), $param, 'admin');
 				return true;
 			}
@@ -130,7 +130,7 @@ class Ticket extends CI_Model
 						$param['admin_name'] = $this->base->get_hostname();
 						$email = $this->base->get_email();
 						$tpl = 'admin';
-						$param['ticket_url'] = base_url().'a/view_ticket/'.$data['ticket_key'];
+						$param['ticket_url'] = base_url().'admin/ticket/view/'.$data['ticket_key'];
 					}
 					else
 					{
@@ -138,7 +138,7 @@ class Ticket extends CI_Model
 						$param['user_name'] = $this->get_user_name($except_key);
 						$email = $this->get_user_email($except_key);
 						$tpl = 'user';
-						$param['ticket_url'] = base_url().'u/view_ticket/'.$data['ticket_key'];
+						$param['ticket_url'] = base_url().'ticket/view/'.$data['ticket_key'];
 					}
 					$param['ticket_id'] = $data['ticket_key'];
 					$this->mailer->send('reply_ticket', $email, $param, $tpl);

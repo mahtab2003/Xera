@@ -83,6 +83,6 @@
 	var domain = document.getElementById('domain');
 	domain.onchange = function(){
 		var search = document.getElementById('search');
-		search.href = '<?= base_url() ?>' + 'u/domain_checker/' + domain.value;
+		search.href = '<?= base_url() ?>' + 'domain/checker/' + domain.value;
 	}
 </script>
