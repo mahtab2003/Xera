@@ -65,7 +65,7 @@ Here are some widely used SMTP services. They have free plans with some limitati
 If you require assistance, please proceed to [our forum](https://fourm.xera.eu.org/), where you can find the answers to many questions and also ask your own.  
 You can also [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue, although the forum is still the preferred way, especially for feature requests. In any way, please ensure your topic has not been previously discussed, and if it has contribute to that discussion instead of making a new one when you can.
 
-# 🚴‍♂️ TO-DO List
+### 🚴‍♂️ TO-DO List
 - Self-signed SSL certificates Module for Xera (Pending).
 - Update SMTP Module (Codeignitor 3) (Pending).
 - Add additional features modules (Pending).
