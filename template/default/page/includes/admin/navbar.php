@@ -66,42 +66,20 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'domain') : ?>
-						active
-					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>domain/list">
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-globe"></i>
-							</span>
-							<span class="nav-link-title">
-								Domain Extensions
-							</span>
-						</a>
-					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'email') : ?>
-						active
-					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>email/templates">
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-envelope"></i>
-							</span>
-							<span class="nav-link-title">
-								Email Templates
-							</span>
-						</a>
-					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'ssl') : ?>
-						active
-					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>admin/ssl/list">
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<em class="fa fa-shield-alt"></em>
-							</span>
-							<span class="nav-link-title">
-								SSL Certificates
-							</span>
-						</a>
-					</li>
+					<?php if ($this->ssl->is_active()): ?>
+						<li class="nav-item <?php if (isset($active) and $active == 'ssl') : ?>
+							active
+						<?php endif ?>">
+							<a class="nav-link" href="<?= base_url() ?>admin/ssl/list">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<em class="fa fa-shield-alt"></em>
+								</span>
+								<span class="nav-link-title">
+									SSL Certificates
+								</span>
+							</a>
+						</li>
+					<?php endif ?>
 					<li class="nav-item <?php if (isset($active) and $active == 'ticket') : ?>
 						active
 					<?php endif ?>">
@@ -114,17 +92,28 @@
 							</span>
 						</a>
 					</li>
-					<li class="nav-item <?php if (isset($active) and $active == 'api') : ?>
+					<li class="nav-item dropdown <?php if (isset($active) and $active == 'settings') : ?>
 						active
 					<?php endif ?>">
-						<a class="nav-link" href="<?= base_url() ?>api/settings">
+						<a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="fa fa-cogs"></i>
+								<i class="fa fa-book"></i>
 							</span>
 							<span class="nav-link-title">
-								API Settings
+								Settings
 							</span>
 						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="<?= base_url() ?>api/settings">
+								API Settings
+							</a>
+							<a class="dropdown-item" href="<?= base_url() ?>email/templates">
+								Email Templates
+							</a>
+							<a class="dropdown-item" href="<?= base_url() ?>domain/list">
+								Domain Extensions
+							</a>
+						</div>
 					</li>
 				</ul>
 			</div>

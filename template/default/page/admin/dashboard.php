@@ -142,7 +142,7 @@
 								Documentation
 							</div>
 							<div class="text-muted">
-								<a href="https://fourm.xera.eu.org/t/documentation" class="text-muted" target="_blank">Read here.</a>
+								<a href="#" class="text-muted" target="_blank">Not Available</a>
 							</div>
 						</div>
 					</div>
@@ -163,7 +163,7 @@
 								Need Help?
 							</div>
 							<div class="text-muted">
-								<a href="mailto:mahtabhassan159@gmail.com" class="text-muted" target="_blank">Email here.</a>
+								<a href="mailto:mehtab@nxtsdev.eu.org" class="text-muted" target="_blank">Email here.</a>
 							</div>
 						</div>
 					</div>
@@ -184,7 +184,7 @@
 								Contribute
 							</div>
 							<div class="text-muted">
-								<a href="https://github.com/mahtab2003/Xera/" class="text-muted" target="_blank">Check here.</a>
+								<a href="https://github.com/mahtab2003/Xera/#help" class="text-muted" target="_blank">Check here.</a>
 							</div>
 						</div>
 					</div>

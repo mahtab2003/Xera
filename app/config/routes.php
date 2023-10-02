@@ -65,6 +65,7 @@ $route['account/list'] = "u/accounts";
 $route['account/create'] = "u/create_account";
 $route['account/view/(:any)'] = "u/view_account/$1";
 $route['account/settings/(:any)'] = "u/account_settings/$1";
+$route['domain/checker'] = "u/domain_checker";
 $route['domain/checker/(:any)'] = "u/domain_checker/$1";
 $route['ssl/list'] = "u/ssl";
 $route['ssl/create'] = "u/create_ssl";

@@ -820,7 +820,7 @@ class A extends CI_Controller
 			else
 			{
 				$data['title'] = 'API Settings';
-				$data['active'] = 'api';
+				$data['active'] = 'settings';
 
 				$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
 				$this->load->view($this->base->get_template().'/page/includes/admin/navbar');
@@ -861,7 +861,7 @@ class A extends CI_Controller
 		if($this->admin->is_logged())
 		{
 			$data['title'] = 'Email Templates';
-			$data['active'] = 'email';
+			$data['active'] = 'settings';
 			$data['list'] = $this->mailer->get_user_templates();
 			
 			$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
@@ -1218,7 +1218,7 @@ class A extends CI_Controller
 			else
 			{
 				$data['title'] = 'Domain Extensions';
-				$data['active'] = 'domain';
+				$data['active'] = 'settings';
 				$data['list'] = $this->mofh->list_exts();
 
 				$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);
