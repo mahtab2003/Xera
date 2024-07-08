@@ -8,27 +8,18 @@ class Mailer extends CI_Model
 		$this->load->model('smtp');
 		$this->load->library('email');
  	    $this->load->model('base');
-
         $crypto = $this->smtp->get_encryption();
         if ($crypto === 'none') {
             $crypto = '';
-        } elseif ($crypto == 'tls') {
-            $email['starttls'] = true;
         }
 
-        // Initialize email configuration
-        $email = [
-            'protocol' => 'smtp',
-            'smtp_host' => $this->smtp->get_hostname(),
-            'smtp_timeout' => 4,
-            'charset' => 'utf-8',
-            'smtp_user' => $this->smtp->get_username(),
-            'smtp_pass' => $this->smtp->get_password(),
-            'smtp_port' => $this->smtp->get_port(),
-            'smtp_crypto' => $crypto,
-            'mailtype' => 'html',
-            'newline' => "\r\n"
-        ];
+		$email['smtp_host'] = $this->smtp->get_hostname();
+		$email['smtp_user'] = $this->smtp->get_username();
+		$email['smtp_pass'] = $this->smtp->get_password();
+		$email['smtp_port'] = $this->smtp->get_port();
+        $email['smtp_crypto'] = $crypto;
+        $email['mailtype'] = 'html';
+        $email['newline'] = '\r\n';
 
 		$this->email->initialize($email);
 	}
@@ -67,11 +58,10 @@ class Mailer extends CI_Model
 			$this->email->subject($subject);
 			$this->email->message($content);
 			$res = $this->email->send();
-			if($res)
+			if($res !== false)
 			{
 				return true;
 			}
-            log_message('error', $this->email->print_debugger());
 			return false;
 		}
 		return false;
@@ -84,11 +74,10 @@ class Mailer extends CI_Model
 		$this->email->subject('Test Email');
 		$this->email->message('If you have received this email thats mean smtp config is setup correctly.');
 		$res = $this->email->send();
-		if($res)
+		if($res !== false)
 		{
 			return true;
 		}
-        log_message('error', $this->email->print_debugger());
 		return false;
 	}
 
