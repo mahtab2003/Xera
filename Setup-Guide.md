@@ -5,7 +5,7 @@ Access your Xera admin section: `https://{your.domain}/{xera-directory}/a`.
 - **Forum URL:** URL of your forum, including https://.
 - **Alert Email:** Your hosting email to receive ticket replies and notifications of new tickets.
 - **Host Status:** Option to enable or disable your hosting.
-- **Records per Page:** Number of records displayed per page for accounts, SSL certificates, tickets, or ticket replies. Recommended setting for free hosting is 5, based on your server's capacity.
+- **Records per Page:** Number of records displayed per page for accounts, SSL certificates, tickets, or ticket replies. The recommended setting for free hosting is 5, based on your server's capacity.
 
 ## MyOwnFreeHost Integration (Important):
 1. Access your Xera admin section: `https://{your.domain}/{xera-directory}/a`.
@@ -32,19 +32,19 @@ After saving, click `Test Connection` to verify the credentials are set correctl
 1. Enter your SMTP credentials to enable email sending.
 2. Set `Hostname` to the hostname provided by your SMTP provider.
 3. Enter your `Username` and `Password` for SMTP.
-4. Set `From Email` to the email address used for sending mails (must be authenticated by the SMTP provider).
+4. Set `From Email` to the email address used for sending emails (must be authenticated by the SMTP provider).
 5. Enter the `From Name` to display as the sender in emails from Xera.
 6. Set `SMTP Port` as provided by your SMTP provider.
 7. Configure `SMTP Encryption`:
    - `25/2525` = None
    - `465` = SSL
    - `587` = TLS
-8. Set `SMTP Status` to `Active` to enable mailing or `Inactive` to disable.
+8. Set `SMTP Status` to `Active` to enable mailing or `Inactive` to disable it.
 
 ## Bot Protection:
 To protect your site from automated abuse, Xera supports several bot protection services. Here’s how to set them up:
 
-1. **Google reCAPTCHA:** Go to the Google reCAPTCHA website, sign up, and get the necessary site key and secret key. Enter these credentials in Xera.
+1. **Google reCAPTCHA:** Go to the Google reCAPTCHA website, sign up, and get the necessary site and secret keys. Enter these credentials in Xera.
 2. **Human Captcha:** If you have a preferred human captcha service, obtain the credentials from the service provider and enter them in Xera.
 3. **CryptoLoot:** Visit the CryptoLoot website, register, and get the required API key. Enter this key in Xera.
 4. **Cloudflare Turnstile:** Sign up on the Cloudflare website, get the required credentials, and enter them in Xera.
@@ -57,9 +57,9 @@ To manage SSL certificates through GoGetSSL, follow these steps:
 2. Enter the obtained API credentials into Xera under the SSL configuration section.
 
 ## ACME SSL Configuration:
-Xera supports ACME SSL certificate provisioning from multiple providers. Configure them as follows:
+Xera supports the provision of ACME SSL certificates from multiple providers. Configure them as follows:
 
-**Important:** CloudFlare API is mandatory to use ACME SSL because it is used to delegate the DNS CNAME records.
+**Important:** CloudFlare API is mandatory for ACME SSL because it is used to delegate the DNS CNAME records.
 
 ### Let's Encrypt:
 Refer to [Let's Encrypt Get Started Page](https://letsencrypt.org/getting-started/)
@@ -90,7 +90,7 @@ Refer to [How to get CloudFlare API Key](https://developers.cloudflare.com/funda
 - Enable this option to use DNS over HTTPS.
 
 **DNS Resolver:**
-- Set this to the respective from your prefered DNS resolver.
+- Set this to the respective from your preferred DNS resolver.
 
 **Google Public DNS:**
 - Normal DNS: `8.8.8.8`
