@@ -50,6 +50,7 @@
 						<div class="tab-pane" id="customdomain">
 							<?= form_open('account/create') ?>
 								<div class="">
+									<div class="alert">Your domain must point to our nameservers <strong>ns1.byet.org</strong> &amp; <strong>ns2.byet.org</strong> before hosting it on our website.</div>
 									<div class="mb-2">
 										<input type="text" name="domain" class="form-control" placeholder="<?= $this->base->text('domain_name', 'label') ?>">
 									</div>
