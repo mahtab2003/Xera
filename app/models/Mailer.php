@@ -25,7 +25,7 @@ class Mailer extends CI_Model
             'smtp_port' => $this->smtp->get_port(),
             'smtp_crypto' => $crypto,
             'mailtype' => 'html',
-            'newline' => "\r\n"
+            'newline' => "<br>"
         ];
 
 		$this->email->initialize($email);
