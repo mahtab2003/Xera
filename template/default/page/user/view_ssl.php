@@ -96,6 +96,10 @@
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['csr_code'] ?></textarea>
 				</div>
 				<div class="mb-3">
+					<label class="form-label"><?= $this->base->text('private_key', 'label') ?></label>
+					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $this->base->text('processing', 'table') ?></textarea>
+				</div>
+				<div class="mb-3">
 					<label class="form-label"><?= $this->base->text('record_name', 'label') ?></label>
 					<input type="text" class="form-control" value="<?= trim($record[0]) ?>" readonly="true">
 				</div>
