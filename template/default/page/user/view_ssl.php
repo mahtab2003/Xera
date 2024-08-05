@@ -91,10 +91,11 @@
 				<div class="card-title"><?= $this->base->text('verify_ownership', 'heading') ?></div>
 			</div>
 			<div class="card-body">
-				<div class="mb-3">
+			    <div class="alert">Please confirm your SSL for <strong><?= $data['domain'] ?></strong> by adding CNAME Records in cPanel.</div>
+				<!--<div class="mb-3">
 					<label class="form-label"><?= $this->base->text('csr_code', 'label') ?></label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['csr_code'] ?></textarea>
-				</div>
+				</div>!-->
 				<div class="mb-3">
 					<label class="form-label"><?= $this->base->text('record_name', 'label') ?></label>
 					<input type="text" class="form-control" value="<?= trim($record[0]) ?>" readonly="true">
@@ -147,12 +148,13 @@
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $this->base->text('processing', 'table') ?></textarea>
 				</div>
 			</div>
-		<?php else: ?>
+		<?php elseif ($data['status'] == 'active'): ?>
 			<div class="card-body">
-				<div class="mb-3">
+			    <div class="alert">Your SSL certificate has been <?= $data['status'] ?> for <strong><?= $data['domain'] ?></strong>.</div>
+				<!--<div class="mb-3">
 					<label class="form-label"><?= $this->base->text('csr_code', 'label') ?></label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['csr_code'] ?></textarea>
-				</div>
+				</div>!-->
  			    <div class="mb-3">
 					<label class="form-label"><?= $this->base->text('private_key', 'label') ?></label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['private_key'] ?></textarea>
@@ -161,10 +163,14 @@
 					<label class="form-label"><?= $this->base->text('crt_code', 'label') ?></label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['crt_code'] ?></textarea>
 				</div>
-				<div class="mb-3">
+				<!--<div class="mb-3">
 					<label class="form-label"><?= $this->base->text('ca_code', 'label') ?></label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['ca_code'] ?></textarea>
-				</div>
+				</div>!-->
+			</div>
+		<?php elseif ($data['status'] == 'cancelled'): ?>
+		<div class="card-body">
+			    <div class="alert">Your SSL certificate has been <?= $data['status'] ?> for <strong><?= $data['domain'] ?></strong>.</div>
 			</div>
 		<?php endif ?>
 	</div>
