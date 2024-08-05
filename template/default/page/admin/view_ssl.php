@@ -116,15 +116,19 @@
 		<?php else: ?>
 			<div class="card-body">
 				<div class="mb-3">
-					<label class="form-label">CSR Code</label>
+					<label class="form-label">CSR Key</label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['csr_code'] ?></textarea>
 				</div>
 				<div class="mb-3">
-					<label class="form-label">CRT Code</label>
+					<label class="form-label">Private Key</label>
+					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['private_key'] ?></textarea>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">CRT Key</label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['crt_code'] ?></textarea>
 				</div>
 				<div class="mb-3">
-					<label class="form-label">CA Code</label>
+					<label class="form-label">CA Key</label>
 					<textarea class="form-control" style="min-height: 200px;" readonly="true"><?= $data['ca_code'] ?></textarea>
 				</div>
 			</div>
