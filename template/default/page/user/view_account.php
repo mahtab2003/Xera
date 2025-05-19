@@ -16,7 +16,7 @@
 					</div>
 					<?php if ($data['account_status'] === 'active') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>account/settings/<?= $id ?>" target="_blank" class="btn btn-yellow rounded"><em class="fa fa-cogs me-2"></em> <?= $this->base->text('settings', 'button') ?></a>
+							<a href="<?= base_url() ?>account/settings/<?= $id ?>" class="btn btn-yellow rounded"><em class="fa fa-cogs me-2"></em> <?= $this->base->text('settings', 'button') ?></a>
 						</div>
 					<?php elseif ($data['account_status'] === 'suspended') : ?>
 						<div class="d-grid mb-2">
