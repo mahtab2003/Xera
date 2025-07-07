@@ -64,6 +64,7 @@ Here are some widely used SMTP services. They have free plans with some limitati
 > Mailgun seems to offer only a trial plan for a month, and without adding a credit card, you are only authorized to send emails to 5 recipients. Therefore, you may want to choose another service.
 - [Mailjet](https://mailjet.com/).
 - [SendGrid](https://sendgrid.com/free/).
+- [MailTrap](https://mailtrap.io)
 
 ### 🤔 Help
 You can [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue. In any way, please ensure your topic has not been previously discussed, and if it has, contribute to that discussion instead of making a new one when you can.
