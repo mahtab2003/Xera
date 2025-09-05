@@ -1,13 +1,13 @@
 <?php 
 use \InfinityFree\MofhClient\Client;
-
+use GuzzleHttp\Client as Guzzle;
 class Mofh extends CI_Model
 {
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('mailer');
-		$this->m = new Client;
+		$this->m = new Client(new Guzzle(['force_ip_resolve' => 'v4']));
 		$this->m->setApiUsername($this->get_username());
 		$this->m->setApiPassword($this->get_password());
 		$this->m->setPlan($this->get_package());
