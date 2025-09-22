@@ -53,7 +53,7 @@ Your server needs to meet the following minimum requirements:
 - A valid, trusted SSL certificate  
 
 👉 **Note about PostgreSQL / 404 Error after Installation**  
-Some free hosting accounts use **PostgreSQL** instead of **MySQL**. Since Xera was built for MySQL, this can cause installation issues (like a `404 error` after setup).  
+Some hosting accounts use **PostgreSQL** instead of **MySQL**. Since Xera was built for MySQL, this can cause installation issues (like a `404 error` after setup).  
 
 ✅ To fix this:
 - Make sure your hosting provider supports **MySQL**.  
