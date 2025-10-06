@@ -205,7 +205,7 @@
 								Like Xera?
 							</div>
 							<div class="text-muted">
-								<a href="https://xera.eu.org/DONATE.md" class="text-muted" target="_blank">Donate here.</a>
+								<a href="https://github.com/mahtab2003/Xera" class="text-muted" target="_blank">Star us on GitHub.</a>
 							</div>
 						</div>
 					</div>
