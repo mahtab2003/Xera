@@ -29,3 +29,4 @@ $lang['show_hide'] = '显示/隐藏';
 $lang['record_name'] = '记录名称';
 $lang['record_content'] = '记录内容';
 $lang['record_type'] = '记录类型';
+$lang['gen_auto'] = '自动生成';
