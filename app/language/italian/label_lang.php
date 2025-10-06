@@ -29,4 +29,3 @@ $lang['show_hide'] = 'Mostra/Nascondi';
 $lang['record_name'] = 'Nome Annotazione ';
 $lang['record_content'] = 'Contenuto Annotazione';
 $lang['record_type'] = 'Tipo di record';
-$lang['gen_auto'] = 'Generato automaticamente';
