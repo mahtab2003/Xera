@@ -106,5 +106,5 @@ This project was built for **MyOwnFreeHost users**, but if you’re looking for 
 
 ## ©️ Copyright
 - Original project: [Xera by Mehtab Hassan](https://github.com/mahtab2003/Xera)  
-- Fork maintained by: **[YourNameHere](https://github.com/yourusername)**  
+- Fork maintained by: **[Yang](https://github.com/yourusername)**  
 - License: [GPL-2.0](LICENSE)  
