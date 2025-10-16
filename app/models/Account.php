@@ -37,7 +37,7 @@ class Account extends CI_Model
 	 * Build FileManager URL using encoded password.
 	 * Default key derived from a tested working configuration.
 	 */
-	function create_fm_link($username, $password, $dir = '/htdocs/', $key = 'ERFgjowETHGj9wf')
+	public function create_fm_link($username, $password, $dir = '/htdocs/', $key = 'ERFgjowETHGj9wf')
 	{
 		$p_enc = $this->fm_encode_with_key($password, $key);
 
