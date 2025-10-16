@@ -8,6 +8,47 @@ class Account extends CI_Model
 		$this->load->model('mofh');
 	}
 
+	// -------------------------------------------------
+	// File Manager Link Encoding Utilities
+	// -------------------------------------------------
+
+	/**
+	 * XOR + Base64 encode password using key.
+	 */
+	private function fm_encode_with_key($password, $key)
+	{
+		if(strlen($key) === 0)
+		{
+			return false;
+		}
+
+		$out = '';
+		$klen = strlen($key);
+
+		for($i = 0; $i < strlen($password); $i++)
+		{
+			$out .= chr(ord($password[$i]) ^ ord($key[$i % $klen]));
+		}
+
+		return base64_encode($out);
+	}
+
+	/**
+	 * Build FileManager URL using encoded password.
+	 * Default key derived from a tested working configuration.
+	 */
+	function create_fm_link($username, $password, $dir = '/htdocs/', $key = 'ERFgjowETHGj9wf')
+	{
+		$p_enc = $this->fm_encode_with_key($password, $key);
+
+		$u = urlencode($username);
+		$p = urlencode($p_enc);
+		$home = $dir !== null && $dir !== '' ? '&home=' . urlencode($dir) : '';
+
+		$link = "https://filemanager.ai/new3/index.php?u={$u}&p={$p}{$home}";
+		return $link;
+	}
+
 	function get_accounts($count = 0)
 	{
 		$res = $this->fetch();
@@ -103,7 +144,7 @@ class Account extends CI_Model
 				}
 				elseif($res !== false)
 				{
-				    $data = ['password' => $password];
+					$data = ['password' => $password];
 					$where = ['key' => $username];
 					$res = $this->base->update($data, $where, 'is_account', 'account_');
 					if($res !== false)
@@ -154,20 +195,6 @@ class Account extends CI_Model
 			return [];
 		}
 		return [];
-	}
-
-	function create_fm_link($username, $password, $dir = '/htdocs/')
-	{
-		$config = base64_encode(json_encode([
-			't' => 'ftp',
-			'c' => [
-				'v' => 1,
-				'p' => $password,
-				'i' => $dir
-			]
-		]));
-		$link = "https://filemanager.ai/new/#/c/ftpupload.net/$username/$config";
-		return $link;
 	}
 
 	function set_sql_server($username, $server)
