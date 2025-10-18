@@ -70,7 +70,7 @@ Here are some widely used SMTP services. They have free plans with some limitati
 You can [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue. In any way, please ensure your topic has not been previously discussed, and if it has, contribute to that discussion instead of making a new one when you can.
 
 ### 👍Like Xera?
-If you like project Xera, please donate [here](https://xera.eu.org/DONATE.md).
+If you like project Xera, please star this project [here](https://github.com/mahtab2003/Xera).
 
 ## ©️ Copyright
 This build is created and maintained by [Mehtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).<br>
