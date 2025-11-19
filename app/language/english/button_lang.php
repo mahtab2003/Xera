@@ -37,3 +37,7 @@ $lang['redirect_now'] = 'Redirect Now';
 $lang['github_signin'] = 'Sign in with GitHub';
 $lang['close'] = 'Close';
 $lang['validate'] = 'Validate SSL';
+$lang['activate'] = 'Activate';
+$lang['test_connection'] = 'Test Connection';
+$lang['update'] = 'Update';
+$lang['add'] = 'Add';

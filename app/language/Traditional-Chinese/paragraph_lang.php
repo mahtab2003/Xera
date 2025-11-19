@@ -5,6 +5,7 @@ $lang['account_limit'] = '您即將達到每個用戶的3個免費託管帳戶�
 $lang['account_limit_crossed'] = '您已達到每個用戶的3個免費託管帳戶的最大限制。請考慮升級到';
 $lang['better_service'] = '以獲得更好的服務。';
 $lang['nothing_to_show'] = '沒有要顯示的內容。';
+$lang['no_clients_yet'] = '尚無客戶';
 $lang['account_warning'] = '在停用您的帳戶之前，請先刪除所有域名和子域名，否則該帳戶上的所有域名和子域名將永久鎖定。';
 $lang['cpanel_login'] = '我們現在將重定向您到cPanel。';
 $lang['account_created'] = '一切都已正確設置。';
@@ -30,3 +31,13 @@ $lang['delete_msg'] = '在此處刪除證書將從客戶區域的列表中刪除
     <li>這不會使您的網站切換回HTTP。</li>
     <li>證書將在到期日期之前保持有效。</li>
 </ul>';
+$lang['view_here'] = '在此查看。';
+$lang['check_here'] = '在此檢查。';
+$lang['setup_guide'] = '安裝指南';
+$lang['open_issue_github'] = '在 GitHub 建立 issue。';
+$lang['star_on_github'] = '在 GitHub 上為我們加星。';
+$lang['use_doh_hint'] = '若使用免費主機，請啟用 DNS over HTTPS 以避免問題。';
+$lang['dns_over_https_normal'] = 'DNS over HTTPS 使用不同主機名稱。';
+$lang['google_public_dns'] = 'Google 公共 DNS：';
+$lang['normal_dns'] = '一般 DNS：';
+$lang['dns_over_https'] = 'DNS over HTTPS：';

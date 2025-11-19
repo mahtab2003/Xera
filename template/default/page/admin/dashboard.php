@@ -2,9 +2,9 @@
 	<div class="page-header d-print-none">
 		<div class="row align-items-center">
 			<div class="col">
-				<h2 class="page-title py-3">
-					Dashboard
-				</h2>
+                <h2 class="page-title py-3">
+                    <?= $this->base->text('dashboard', 'title') ?>
+                </h2>
 			</div>
 		</div>
 	</div>
@@ -19,9 +19,9 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Registered Clients
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('registered_clients', 'heading') ?>
+                            </div>
 							<div class="text-muted">
 								<?= $this->user->get_count('active') + $this->user->get_count('inactive') ?> in total
 							</div>
@@ -41,9 +41,9 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Hosting Accounts
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('accounts', 'title') ?>
+                            </div>
 							<div class="text-muted">
 								<?= $this->account->get_count('active') + $this->account->get_count('suspended') + $this->account->get_count('deactivated') ?> in total
 							</div>
@@ -63,9 +63,9 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Support Tickets
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('support_tickets', 'heading') ?>
+                            </div>
 							<div class="text-muted">
 								<?= $ci_tickets ?> in total
 							</div>
@@ -79,9 +79,9 @@
 	<div class="page-header d-print-none">
 		<div class="row align-items-center">
 			<div class="col">
-				<h2 class="page-title py-3">
-					Tools
-				</h2>
+                <h2 class="page-title py-3">
+                    <?= $this->base->text('tools', 'heading') ?>
+                </h2>
 			</div>
 		</div>
 	</div>
@@ -96,11 +96,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								About Xera
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('about_xera', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>about" class="text-muted" target="_blank">View here.</a>
+                                <a href="<?= base_url() ?>about" class="text-muted" target="_blank"><?= $this->base->text('view_here', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -117,11 +117,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Check Updates
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('check_updates', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>update" class="text-muted" target="_blank">Check here.</a>
+                                <a href="<?= base_url() ?>update" class="text-muted" target="_blank"><?= $this->base->text('check_here', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -138,11 +138,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Documentation
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('documentation', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="https://github.com/mahtab2003/Xera/blob/dev/Setup-Guide.md" class="text-muted" target="_blank">Setup Guide</a>
+                                <a href="https://github.com/mahtab2003/Xera/blob/dev/Setup-Guide.md" class="text-muted" target="_blank"><?= $this->base->text('setup_guide', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -159,11 +159,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Need Help?
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('need_help', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="https://github.com/mahtab2003/Xera/issues" class="text-muted" target="_blank">Open an issue in GitHub.</a>
+                                <a href="https://github.com/mahtab2003/Xera/issues" class="text-muted" target="_blank"><?= $this->base->text('open_issue_github', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -180,11 +180,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Contribute
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('contribute', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="https://github.com/mahtab2003/Xera/#help" class="text-muted" target="_blank">Check here.</a>
+                                <a href="https://github.com/mahtab2003/Xera/#help" class="text-muted" target="_blank"><?= $this->base->text('check_here', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -201,11 +201,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Like Xera?
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('like_xera', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="https://github.com/mahtab2003/Xera" class="text-muted" target="_blank">Star us on GitHub.</a>
+                                <a href="https://github.com/mahtab2003/Xera" class="text-muted" target="_blank"><?= $this->base->text('star_on_github', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -222,11 +222,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								Terms of Service
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('terms_of_service', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>tos" class="text-muted" target="_blank">View here.</a>
+                                <a href="<?= base_url() ?>tos" class="text-muted" target="_blank"><?= $this->base->text('view_here', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -243,11 +243,11 @@
 							</span>
 						</div>
 						<div class="col">
-							<div class="font-weight-medium">
-								License
-							</div>
+                            <div class="font-weight-medium">
+                                <?= $this->base->text('license', 'heading') ?>
+                            </div>
 							<div class="text-muted">
-								<a href="<?= base_url() ?>license" class="text-muted" target="_blank">View here.</a>
+                                <a href="<?= base_url() ?>license" class="text-muted" target="_blank"><?= $this->base->text('view_here', 'paragraph') ?></a>
 							</div>
 						</div>
 					</div>
@@ -263,7 +263,7 @@
 		chart: {
 			type: 'donut'
 		},
-		labels: ['Active', 'Inactive'],
+        labels: ['<?= $this->base->text('active', 'table') ?>', '<?= $this->base->text('inactive', 'table') ?>'],
 		responsive: [{
 			breakpoint: 480,
 			options: {
@@ -281,7 +281,7 @@
 		chart: {
 			type: 'donut'
 		},
-		labels: ['Active', 'Inactive'],
+        labels: ['<?= $this->base->text('active', 'table') ?>', '<?= $this->base->text('inactive', 'table') ?>'],
 		responsive: [{
 			breakpoint: 480,
 			options: {
@@ -299,7 +299,7 @@
 		chart: {
 			type: 'donut'
 		},
-		labels: ['Open', 'Replied', 'Closed'],
+        labels: ['<?= $this->base->text('open', 'table') ?>', '<?= $this->base->text('support', 'table') ?>', '<?= $this->base->text('closed', 'table') ?>'],
 		responsive: [{
 			breakpoint: 480,
 			options: {

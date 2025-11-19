@@ -2,24 +2,24 @@
 	<div class="page-header d-print-none">
 		<div class="row align-items-center">
 			<div class="col">
-				<h2 class="page-title py-3">
-					Hosting Accounts
-				</h2>
+                <h2 class="page-title py-3">
+                    <?= $this->base->text('accounts', 'title') ?>
+                </h2>
 			</div>
 		</div>
 	</div>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
-			<div class="card-title">Active Accounts</div>
+            <div class="card-title"><?= $this->base->text('active', 'table') ?> <?= $this->base->text('accounts', 'heading') ?></div>
 		</div>
 		<div class="table-responsive">
 			<table class="table card-table table-transparent text-nowrap table-nowrap">
 				<thead>
 					<tr>
-						<th width="15%">Username</th>
-						<th width="75%">Label</th>
-						<th width="10%">Status</th>
-						<th width="10%" class="text-center">Action</th>
+                        <th width="15%"><?= $this->base->text('username', 'table') ?></th>
+                        <th width="75%"><?= $this->base->text('label', 'table') ?></th>
+                        <th width="10%"><?= $this->base->text('status', 'table') ?></th>
+                        <th width="10%" class="text-center"><?= $this->base->text('action', 'table') ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,13 +54,13 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'admin/account/view/' . $item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-1"></em> Manage</a></td>
+                                <td><a href="<?= base_url() . 'admin/account/view/' . $item['account_username'] ?>" class="btn rounded <?= $btn[1] ?> btn-sm"><em class="fa <?= $btn[0] ?> me-1"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else : ?>
 						<tr>
-							<td colspan="4" class="text-center">Nothing to show</td>
+                            <td colspan="4" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 						</tr>
 					<?php endif ?>
 				</tbody>

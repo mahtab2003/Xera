@@ -26,3 +26,6 @@ $lang['err_503'] = 'Forbidden access';
 $lang['upgrade_hosting'] = 'Upgrade Hosting';
 $lang['dns_lookup'] = 'DNS Lookup';
 $lang['whois_lookup'] = 'WHOIS Lookup';
+$lang['email_templates'] = 'Email Templates';
+$lang['domain_extensions'] = 'Domain Extensions';
+$lang['edit_email'] = 'Edit Email';

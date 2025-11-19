@@ -479,6 +479,20 @@ class U extends CI_Controller
 		}
 	}
 
+	function set_lang()
+	{
+		$code = $this->input->get('code');
+		$allow = [];
+		foreach (get_languages() as $lang) {
+			$allow[] = $lang['code'];
+		}
+		if (in_array($code, $allow, true)) {
+			set_cookie('lang', $code, 30 * 86400);
+		}
+		$ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
+		redirect($ref);
+	}
+
 	function settings()
 	{
 		if($this->user->is_logged())

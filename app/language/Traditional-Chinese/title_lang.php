@@ -26,3 +26,6 @@ $lang['err_503'] = '禁止存取';
 $lang['upgrade_hosting'] = '升級主機';
 $lang['dns_lookup'] = 'DNS 查詢';
 $lang['whois_lookup'] = 'WHOIS 查詢';
+$lang['email_templates'] = '郵件範本';
+$lang['domain_extensions'] = '網域擴充';
+$lang['edit_email'] = '編輯郵件';

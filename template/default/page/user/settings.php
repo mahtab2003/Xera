@@ -33,13 +33,13 @@
 							<?php 
 							if(get_cookie('theme', true) == 'light'):
 							?>
-								<option value="light" selected="true">Light</option>
-								<option value="dark">Dark</option>
+                                <option value="light" selected="true"><?= $this->base->text('light', 'label') ?></option>
+                                <option value="dark"><?= $this->base->text('dark', 'label') ?></option>
 							<?php
 							elseif(get_cookie('theme', true) == 'dark'):
 							?>
-								<option value="light">Light</option>
-								<option value="dark" selected="true">Dark</option>
+                                <option value="light"><?= $this->base->text('light', 'label') ?></option>
+                                <option value="dark" selected="true"><?= $this->base->text('dark', 'label') ?></option>
 							<?php
 							endif;
 							?>
