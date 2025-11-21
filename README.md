@@ -4,6 +4,7 @@
 
 > **Note:**  
 > **This development of this build is live again.**
+> Development is slow folks, everyone have their own lives so just be patient.
 > A bugfix release is coming due to the currently known errors.
 > Pull requests are welcome and will still be accepted. If you'd like to see a feature, feel free to contribute it.
 > Thanks to @greenreader9 for answering people's questions and solving their issues while I was gone.
@@ -70,8 +71,9 @@ Here are some widely used SMTP services. They have free plans with some limitati
 You can [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue. In any way, please ensure your topic has not been previously discussed, and if it has, contribute to that discussion instead of making a new one when you can.
 
 ### 👍Like Xera?
-If you like project Xera, please donate [here](https://xera.eu.org/DONATE.md).
+If you like project Xera, please star this project [here](https://github.com/mahtab2003/Xera) and if you wanna support this project you can do it [here] (https://xera.eu.org/support/)
 
 ## ©️ Copyright
 This build is created and maintained by [Mehtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).<br>
 <a href="//www.dmca.com/Protection/Status.aspx?ID=907c042a-ab9d-4d7b-8638-25d88c2ff2aa" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120b.png?ID=907c042a-ab9d-4d7b-8638-25d88c2ff2aa"  alt="DMCA.com Protection Status" /></a>
+
