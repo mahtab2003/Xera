@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="Xera PSR12">
+  <description>Xera coding standard (focus app, exclude templates and language)</description>
+  <file>app</file>
+  <exclude-pattern>app/language/*</exclude-pattern>
+  <exclude-pattern>app/vendor/*</exclude-pattern>
+  <exclude-pattern>template/*</exclude-pattern>
+  <exclude-pattern>assets/*</exclude-pattern>
+  <rule ref="PSR12"/>
+  <arg name="basepath" value="."/>
+</ruleset>
