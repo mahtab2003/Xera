@@ -489,7 +489,13 @@ class U extends CI_Controller
 		if (in_array($code, $allow, true)) {
 			set_cookie('lang', $code, 30 * 86400);
 		}
-		$ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
+		$ref = $this->input->server('HTTP_REFERER', true) ?: base_url();
+		$base = base_url();
+		$refHost = parse_url($ref, PHP_URL_HOST);
+		$baseHost = parse_url($base, PHP_URL_HOST);
+		if (!$refHost || !$baseHost || strtolower($refHost) !== strtolower($baseHost)) {
+			$ref = $base;
+		}
 		redirect($ref);
 	}
 
