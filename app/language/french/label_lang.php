@@ -29,3 +29,4 @@ $lang['show_hide'] = 'Afficher / masquer';
 $lang['record_name'] = "Nom d'enregistrement";
 $lang['record_content'] = "Contenu de l'enregistrement";
 $lang['record_type'] = 'Type d\'enregistrement';
+$lang['gen_auto'] = 'Généré automatiquement';
