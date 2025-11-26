@@ -28,5 +28,5 @@ $lang['or'] = 'vai';
 $lang['show_hide'] = 'Parādīt/Slēpt';
 $lang['record_name'] = 'Ieraksta nosaukums';
 $lang['record_content'] = 'Ieraksta saturs';
+$lang['expired'] = 'Expiratus';
 $lang['record_type'] = 'Ieraksta veids';
-$lang['gen_auto'] = 'Tiek ģenerēts automātiski';
