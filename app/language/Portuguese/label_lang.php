@@ -28,6 +28,6 @@ $lang['or'] = 'ou';
 $lang['show_hide'] = 'Mostrar/Ocultar';
 $lang['record_name'] = 'Nome do Registro';
 $lang['record_content'] = 'Conteúdo do Registro';
+$lang['expired'] = 'Expirado';
 $lang['record_type'] = 'Tipo de Registro';
 ?>
-
