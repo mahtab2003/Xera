@@ -12,10 +12,11 @@
 						<label class="form-label">Subject</label>
 						<input type="text" name="subject" placeholder="Subject" class="form-control mb-2" value="<?= $email['email_subject'] ?>">
 					</div>
-					<div class="col-sm-12 mb-2">
-						<label class="form-label">Content</label>
-						<textarea class="form-control" name="content" style="min-height: 250px;"><?= $email['email_content'] ?></textarea>
-					</div>
+                                        <div class="col-sm-12 mb-2">
+                                                <label class="form-label">Content</label>
+                                                <p class="text-muted">HTML and inline CSS are preserved when emails are sent.</p>
+                                                <textarea class="form-control font-monospace" name="content" style="min-height: 250px;" spellcheck="false"><?= $email['email_content'] ?></textarea>
+                                        </div>
 					<div class="col-sm-12 mb-3">
 						<label class="form-label">Custom Variables</label>
 						<textarea class="form-control" readonly="true"><?= $email['email_doc'] ?></textarea>
