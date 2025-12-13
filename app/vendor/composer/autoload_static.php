@@ -27,6 +27,11 @@ class ComposerStaticInited609bd98e3b5c3e3d3186f232403dea
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Clock\\' => 10,
+            'ParagonIE\\ConstantTime\\' => 23,
+        ),
+        'O' => 
+        array (
+            'OTPHP\\' => 6,
         ),
         'L' => 
         array (
@@ -76,6 +81,14 @@ class ComposerStaticInited609bd98e3b5c3e3d3186f232403dea
         'Psr\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'OTPHP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spomky-labs/otphp/src',
         ),
         'Lcobucci\\JWT\\' => 
         array (

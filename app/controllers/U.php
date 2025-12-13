@@ -186,11 +186,11 @@ class U extends CI_Controller
 		}
 	}
 
-	function login()
-	{
-		if(!$this->user->is_logged())
-		{
-			if($this->input->post('login'))
+        function login()
+        {
+                if(!$this->user->is_logged())
+                {
+                        if($this->input->post('login'))
 			{
 				$this->fv->set_rules('email', $this->base->text('email_address', 'label'), ['trim', 'required', 'valid_email']);
 				$this->fv->set_rules('password', $this->base->text('password', 'label'), ['trim', 'required']);
@@ -247,27 +247,33 @@ class U extends CI_Controller
 							{
 								$days = 30;
 							}
-							$res = $this->user->login($email, $password, $days);
-							if(!is_bool($res))
-							{
-								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('oauth_msg', 'error')]));
-								redirect('user');
-							}
-							elseif($res)
-							{
-								$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
-								redirect('user');
-							}
-							else
-							{
-								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
-								redirect('login');
-							}
-						}
-						else
-						{
-							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
-							redirect('login');
+                                                        $res = $this->user->login($email, $password, $days);
+                                                        if(is_array($res) && isset($res['2fa']))
+                                                        {
+                                                                $this->session->set_userdata('user_2fa', $res);
+                                                                $this->session->set_flashdata('msg', json_encode([1, 'Enter the authentication code from your authenticator app.']));
+                                                                redirect('2fa');
+                                                        }
+                                                        elseif($res === 'error')
+                                                        {
+                                                                $this->session->set_flashdata('msg', json_encode([0, $this->base->text('oauth_msg', 'error')]));
+                                                                redirect('user');
+                                                        }
+                                                        elseif($res)
+                                                        {
+                                                                $this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
+                                                                redirect('user');
+                                                        }
+                                                        else
+                                                        {
+                                                                $this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
+                                                                redirect('login');
+                                                        }
+                                                }
+                                                else
+                                                {
+                                                        $this->session->set_flashdata('msg', json_encode([0, $this->base->text('captcha_error', 'error')]));
+                                                        redirect('login');
 						}
 					}
 					else
@@ -298,18 +304,24 @@ class U extends CI_Controller
 						{
 							$days = 30;
 						}
-						$res = $this->user->login($email, $password, $days);
-						if($res)
-						{
-							$this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
-							redirect('user');
-						}
-						else
-						{
-							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
-							redirect('login');
-						}
-					}
+                                                $res = $this->user->login($email, $password, $days);
+                                                if(is_array($res) && isset($res['2fa']))
+                                                {
+                                                        $this->session->set_userdata('user_2fa', $res);
+                                                        $this->session->set_flashdata('msg', json_encode([1, 'Enter the authentication code from your authenticator app.']));
+                                                        redirect('2fa');
+                                                }
+                                                elseif($res)
+                                                {
+                                                        $this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
+                                                        redirect('user');
+                                                }
+                                                else
+                                                {
+                                                        $this->session->set_flashdata('msg', json_encode([0, $this->base->text('invalid_email_pass', 'error')]));
+                                                        redirect('login');
+                                                }
+                                        }
 					else
 					{
 						if(validation_errors() !== '')
@@ -324,19 +336,62 @@ class U extends CI_Controller
 					}
 				}
 			}
-			else
-			{
-				$data['title'] = 'login';
-				$this->load->view($this->base->get_template().'/form/includes/user/header.php', $data);
-				$this->load->view($this->base->get_template().'/form/user/login.php');
-				$this->load->view($this->base->get_template().'/form/includes/user/footer.php');
-			}
-		}
-		else
-		{
-			redirect('user');
-		}
-	}
+                        else
+                        {
+                                $data['title'] = 'login';
+                                $this->load->view($this->base->get_template().'/form/includes/user/header.php', $data);
+                                $this->load->view($this->base->get_template().'/form/user/login.php');
+                                $this->load->view($this->base->get_template().'/form/includes/user/footer.php');
+                        }
+                }
+                else
+                {
+                        redirect('user');
+                }
+        }
+
+        function twofa()
+        {
+                if($this->user->is_logged())
+                {
+                        redirect('user');
+                }
+                $pending = $this->session->userdata('user_2fa');
+                if(!$pending)
+                {
+                        redirect('login');
+                }
+                if($this->input->post('verify_2fa'))
+                {
+                        $this->fv->set_rules('code', 'Verification code', ['trim', 'required']);
+                        if($this->fv->run() === true)
+                        {
+                                $code = $this->input->post('code');
+                                if($this->user->verify_two_factor_code($code, $pending['rec']))
+                                {
+                                        $this->user->complete_two_factor_login($pending['rec'], $pending['days']);
+                                        $this->session->unset_userdata('user_2fa');
+                                        $this->session->set_flashdata('msg', json_encode([1, $this->base->text('login_msg', 'success')]));
+                                        redirect('user');
+                                }
+                                $this->session->set_flashdata('msg', json_encode([0, 'Invalid authentication code.']));
+                                redirect('2fa');
+                        }
+                        if(validation_errors() !== '')
+                        {
+                                $this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+                        }
+                        else
+                        {
+                                $this->session->set_flashdata('msg', json_encode([0, $this->base->text('required_fields', 'error')]));
+                        }
+                        redirect('2fa');
+                }
+                $data['title'] = 'two factor authentication';
+                $this->load->view($this->base->get_template().'/form/includes/user/header.php', $data);
+                $this->load->view($this->base->get_template().'/form/user/2fa.php');
+                $this->load->view($this->base->get_template().'/form/includes/user/footer.php');
+        }
 
 	function forget()
 	{
@@ -522,11 +577,11 @@ class U extends CI_Controller
 					redirect('settings');
 				}
 			}
-			elseif($this->input->post('update_password'))
-			{
-				$this->fv->set_rules('password', $this->base->text('new_password', 'label'), ['trim', 'required']);
-				$this->fv->set_rules('password1', $this->base->text('confirm_password', 'label'), ['trim', 'required', 'matches[password]']);
-				$this->fv->set_rules('old_password', $this->base->text('old_password', 'label'), ['trim', 'required']);
+                        elseif($this->input->post('update_password'))
+                        {
+                                $this->fv->set_rules('password', $this->base->text('new_password', 'label'), ['trim', 'required']);
+                                $this->fv->set_rules('password1', $this->base->text('confirm_password', 'label'), ['trim', 'required', 'matches[password]']);
+                                $this->fv->set_rules('old_password', $this->base->text('old_password', 'label'), ['trim', 'required']);
 				if($this->fv->run() === true)
 				{
 					$password = $this->input->post('password');
@@ -544,17 +599,66 @@ class U extends CI_Controller
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('settings');
-				}
-			}
-			else
-			{
-				$data['title'] = 'settings';
+                                        $this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+                                        redirect('settings');
+                                }
+                        }
+                        elseif($this->input->post('start_2fa'))
+                        {
+                                $secret = twofa_generate_secret();
+                                $this->session->set_userdata('user_2fa_secret', $secret);
+                                $this->session->set_flashdata('msg', json_encode([1, 'Scan the QR code and confirm with a code from your authenticator.']));
+                                redirect('settings');
+                        }
+                        elseif($this->input->post('confirm_2fa'))
+                        {
+                                $this->fv->set_rules('code', 'Verification code', ['trim', 'required']);
+                                $secret = $this->session->userdata('user_2fa_secret');
+                                if($this->fv->run() === true && $secret && twofa_verify_code($secret, $this->input->post('code')))
+                                {
+                                        $this->user->enable_two_factor($secret);
+                                        $this->session->unset_userdata('user_2fa_secret');
+                                        $this->session->set_flashdata('msg', json_encode([1, 'Two factor authentication enabled.']));
+                                        redirect('settings');
+                                }
+                                if(validation_errors() !== '')
+                                {
+                                        $this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
+                                }
+                                else
+                                {
+                                        $this->session->set_flashdata('msg', json_encode([0, 'Invalid authentication code.']));
+                                }
+                                redirect('settings');
+                        }
+                        elseif($this->input->post('disable_2fa'))
+                        {
+                                if($this->user->disable_two_factor())
+                                {
+                                        $this->session->unset_userdata('user_2fa_secret');
+                                        $this->session->set_flashdata('msg', json_encode([1, 'Two factor authentication disabled.']));
+                                }
+                                else
+                                {
+                                        $this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
+                                }
+                                redirect('settings');
+                        }
+                        else
+                        {
+                                $data['title'] = 'settings';
+                                $data['twofa_enabled'] = $this->user->is_two_factor_enabled();
+                                $data['twofa_secret'] = $this->user->get_two_factor_secret();
+                                $data['twofa_pending_secret'] = $this->session->userdata('user_2fa_secret');
+                                $data['twofa_provisioning'] = false;
+                                if($data['twofa_pending_secret'])
+                                {
+                                        $data['twofa_provisioning'] = twofa_provisioning_uri($data['twofa_pending_secret'], $this->user->get_email(), $this->base->get_hostname());
+                                }
 
-				$this->load->view($this->base->get_template().'/page/includes/user/header', $data);
-				$this->load->view($this->base->get_template().'/page/includes/user/navbar');
-				$this->load->view($this->base->get_template().'/page/user/settings');
+                                $this->load->view($this->base->get_template().'/page/includes/user/header', $data);
+                                $this->load->view($this->base->get_template().'/page/includes/user/navbar');
+                                $this->load->view($this->base->get_template().'/page/user/settings');
 				$this->load->view($this->base->get_template().'/page/includes/user/footer');
 			}
 

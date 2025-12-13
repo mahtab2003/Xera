@@ -8,24 +8,25 @@ class User extends CI_Model
 		$this->load->model('mailer');
 	}
 
-	function register($name, $email, $password)
-	{
-		$data['user_name'] = $name;
-		$data['user_email'] = $email;
-		$data['user_password'] = char64($password);
+        function register($name, $email, $password)
+        {
+                $data['user_name'] = $name;
+                $data['user_email'] = $email;
+                $data['user_password'] = char64($password);
 		if($this->mailer->is_active())
 		{
 			$data['user_status'] = 'inactive';
 		}
-		else
-		{
-			$data['user_status'] = 'active';
-		}
-		$data['user_date'] = time();
-		$data['user_key'] = char16(implode(':', $data));
-		$data['user_rec'] = char32(implode(':', $data));
-		$res = $this->db->insert('is_user', $data);
-		if($res)
+                else
+                {
+                        $data['user_status'] = 'active';
+                }
+                $data['user_2fa_status'] = 'disabled';
+                $data['user_date'] = time();
+                $data['user_key'] = char16(implode(':', $data));
+                $data['user_rec'] = char32(implode(':', $data));
+                $res = $this->db->insert('is_user', $data);
+                if($res)
 		{
 			if($this->mailer->is_active())
 			{
@@ -43,15 +44,16 @@ class User extends CI_Model
 	function oauth_register($name, $email, $secret)
 	{
 		$data['user_name'] = $name;
-		$data['user_email'] = $email;
-		$data['user_password'] = char64($email.':'.$secret);
-		$data['user_status'] = 'active';
-		$data['user_oauth'] = 'enabled';
-		$data['user_date'] = time();
-		$data['user_key'] = char16(char32($secret).':'.char64($email));
-		$data['user_rec'] = char32($data['user_key'].':'.$email.':'.$secret);
-		$res = $this->db->insert('is_user', $data);
-		if($res)
+                $data['user_email'] = $email;
+                $data['user_password'] = char64($email.':'.$secret);
+                $data['user_status'] = 'active';
+                $data['user_oauth'] = 'enabled';
+                $data['user_2fa_status'] = 'disabled';
+                $data['user_date'] = time();
+                $data['user_key'] = char16(char32($secret).':'.char64($email));
+                $data['user_rec'] = char32($data['user_key'].':'.$email.':'.$secret);
+                $res = $this->db->insert('is_user', $data);
+                if($res)
 		{
 			if($this->mailer->is_active())
 			{
@@ -90,28 +92,28 @@ class User extends CI_Model
 		return count($res);
 	}
 
-	function login($email, $password, $days)
-	{
-		$data = $this->fetch_where('email', $email);
-		if($data !== false)
-		{
+        function login($email, $password, $days)
+        {
+                $data = $this->fetch_where('email', $email);
+                if($data !== false)
+                {
 			if($data['user_oauth'])
 			{
-				$passwd = $data['user_password'];
-				$password = char64($password);
-				if(hash_equals($passwd, $password))
-				{
-					$json = json_encode([$data['user_rec'], time()]);
-					$gz = gzcompress($json);
-					$token = base64_encode($gz);
-					set_cookie('logged', true, $days * 86400);
-					set_cookie('token', $token, $days * 86400);
-					return true;
-				}
-				return false;
-			}
-			return 'error';
-		}
+                                $passwd = $data['user_password'];
+                                $password = char64($password);
+                                if(hash_equals($passwd, $password))
+                                {
+                                        if($this->is_two_factor_enabled($data))
+                                        {
+                                                return ['2fa' => true, 'rec' => $data['user_rec'], 'days' => $days];
+                                        }
+                                        $this->create_login_token($data, $days);
+                                        return true;
+                                }
+                                return false;
+                        }
+                        return 'error';
+                }
 		return false;
 	}
 
@@ -129,12 +131,12 @@ class User extends CI_Model
 				$hash = char32($data['user_key'].':'.$email.':'.$secret);
 				$rec = $data['user_rec'];
 				if(hash_equals($rec, $hash)){
-					$json = json_encode([$data['user_rec'], time()]);
-					$gz = gzcompress($json);
-					$token = base64_encode($gz);
-					set_cookie('logged', true, $days * 86400);
-					set_cookie('token', $token, $days * 86400);
-					return true;
+                                $json = json_encode([$data['user_rec'], time()]);
+                                $gz = gzcompress($json);
+                                $token = base64_encode($gz);
+                                set_cookie('logged', true, $days * 86400);
+                                set_cookie('token', $token, $days * 86400);
+                                return true;
 				}
 				if ($this->validate_oauth_enable($email, $secret, $data['user_key'])) {
 				  $data = $this->fetch_where('email', $email);
@@ -214,16 +216,28 @@ class User extends CI_Model
 		return false;
 	}
 
-	function logout()
-	{
-		if(get_cookie('logged', true))
-		{
-			delete_cookie('logged');
-			delete_cookie('token');
-			return true;
-		}
-		return false;
-	}
+        function logout()
+        {
+                if(get_cookie('logged', true))
+                {
+                        delete_cookie('logged');
+                        delete_cookie('token');
+                        $this->session->unset_userdata('user_2fa');
+                        return true;
+                }
+                return false;
+        }
+
+        function complete_two_factor_login($rec, $days)
+        {
+                $data = $this->fetch_where('rec', $rec);
+                if($data !== false)
+                {
+                        $this->create_login_token($data, $days);
+                        return true;
+                }
+                return false;
+        }
 
 	function reset_password($email)
 	{
@@ -525,11 +539,11 @@ class User extends CI_Model
 		return false;
 	}
 
-	private function update($data, $where)
-	{
-		$res = $this->base->update(
-			$data,
-			$where,
+        private function update($data, $where)
+        {
+                $res = $this->base->update(
+                        $data,
+                        $where,
 			'is_user',
 			'user_'
 		);
@@ -558,19 +572,78 @@ class User extends CI_Model
 	}
 
 
-	function fetch_where($index, $field)
-	{
-		$res = $this->base->fetch(
-			'is_user',
-			[$index => $field],
+        function fetch_where($index, $field)
+        {
+                $res = $this->base->fetch(
+                        'is_user',
+                        [$index => $field],
 			'user_'
 		);
 		if(count($res) > 0)
 		{
 			return $res[0];
 		}
-		return false;
-	}
+                return false;
+        }
+
+        function is_two_factor_enabled($data = null)
+        {
+                if($data === null)
+                {
+                        $data = $this->fetch_if_logged();
+                }
+                if($data !== false)
+                {
+                        return isset($data['user_2fa_status']) && $data['user_2fa_status'] === 'enabled' && !empty($data['user_2fa_secret']);
+                }
+                return false;
+        }
+
+        function get_two_factor_secret()
+        {
+                $res = $this->fetch_if_logged();
+                if($res !== false)
+                {
+                        return $res['user_2fa_secret'] ?? null;
+                }
+                return false;
+        }
+
+        function enable_two_factor($secret)
+        {
+                return $this->update(['2fa_status' => 'enabled', '2fa_secret' => $secret], ['email' => $this->get_email()]);
+        }
+
+        function disable_two_factor()
+        {
+                return $this->update(['2fa_status' => 'disabled', '2fa_secret' => null], ['email' => $this->get_email()]);
+        }
+
+        function verify_two_factor_code($code, $rec = null)
+        {
+                if($rec !== null)
+                {
+                        $data = $this->fetch_where('rec', $rec);
+                }
+                else
+                {
+                        $data = $this->fetch_if_logged();
+                }
+                if($data !== false && $this->is_two_factor_enabled($data))
+                {
+                        return twofa_verify_code($data['user_2fa_secret'], $code);
+                }
+                return false;
+        }
+
+        private function create_login_token($data, $days)
+        {
+                $json = json_encode([$data['user_rec'], time()]);
+                $gz = gzcompress($json);
+                $token = base64_encode($gz);
+                set_cookie('logged', true, $days * 86400);
+                set_cookie('token', $token, $days * 86400);
+        }
 }
 
 ?>
