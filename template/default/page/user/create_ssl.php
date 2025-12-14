@@ -12,7 +12,7 @@
 					if ($acme_active) :
 					?>
 					<div class="col-sm-6">
-						<label class="form-label">SSL Type</label>
+						<label class="form-label">SSL Providers</label>
 						<select class="form-control mb-2" name="type">
 							<?php
 							if ($this->acme->get_letsencrypt() != 'not-set' && $this->acme->get_letsencrypt() != '') {
