@@ -2,12 +2,18 @@
     <img src="assets/default/img/xera.png">
 </div>
 
-> **Note:**  
-> **This development of this build is live again.**
-> Development is slow folks, everyone have their own lives so just be patient.
-> A bugfix release is coming due to the currently known errors.
-> Pull requests are welcome and will still be accepted. If you'd like to see a feature, feel free to contribute it.
-> Thanks to @greenreader9 for answering people's questions and solving their issues while I was gone.
+# Xera Community Edition (Xera CE)
+
+**Xera Community Edition (Xera CE)** is a fork of the original [Xera](https://github.com/mahtab2003/Xera) panel. The original project has not seen updates since July 28, 2024.
+
+This Community Edition was created to address critical security vulnerabilities found in the original codebase and to continue development with new features and improvements.
+
+### 🛡️ Security Fixes in Xera CE
+The original Xera panel contained several critical security flaws that have been remediated in this edition:
+*   **Secure Password Storage**: Migrated from a custom, insecure hashing algorithm to industry-standard `bcrypt` (via `password_hash`). Legacy passwords are automatically upgraded upon login.
+*   **Encrypted Secrets**: Sensitive API credentials (MOFH, SMTP, SSL) are now encrypted in the database using the CodeIgniter Encryption library, instead of being stored in plaintext.
+*   **XSS Protection**: Mitigated Stored Cross-Site Scripting vulnerabilities in the support ticket system by enforcing output escaping.
+*   **Callback Security**: Implemented IP allowlisting (with CIDR support) for MOFH callback endpoints to prevent unauthorized account manipulation.
 
 ## 👀 What is Xera?
 Xera is a hosting account and support management system specially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features, which are listed below:
