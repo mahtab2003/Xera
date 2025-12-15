@@ -323,15 +323,6 @@ if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
 		) VALUES ('https://site.pro','username','password','inactive'
 		);");
 
-		$sql = mysqli_query($mysqli, "DROP TABLE IF EXISTS `is_gogetssl`;");
-
-		$sql = mysqli_query($mysqli, "CREATE TABLE `is_gogetssl` (`gogetssl_id` varchar(13) NOT NULL DEFAULT 'xera_gogetssl',`gogetssl_username` varchar(100) NOT NULL,`gogetssl_password` varchar(100) NOT NULL,`gogetssl_status` varchar(8) NOT NULL
-		);");
-
-		$sql = mysqli_query($mysqli, "INSERT INTO `is_gogetssl` (`gogetssl_username`,`gogetssl_password`,`gogetssl_status`
-		) VALUES ('username','password','inactive'
-		);");
-
 		$sql = mysqli_query($mysqli, "DROP TABLE IF EXISTS `is_acme`;");
 
 		$sql = mysqli_query($mysqli, "CREATE TABLE `is_acme` (`acme_id` varchar(13) NOT NULL DEFAULT 'xera_acme', `acme_letsencrypt` varchar(100) NOT NULL, `acme_zerossl` varchar(1000) NOT NULL, `acme_googletrust` varchar(1000) NOT NULL, `acme_status` varchar(8) NOT NULL, `acme_dns` varchar(500) NULL);");
@@ -353,7 +344,6 @@ if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_acme CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_domain CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_builder CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
-                $sql = mysqli_query($mysqli, "ALTER TABLE is_gogetssl CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_mofh CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_smtp CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_ticket CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");

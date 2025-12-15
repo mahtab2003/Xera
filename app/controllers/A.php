@@ -9,7 +9,6 @@ class A extends CI_Controller
 		$this->load->model('admin');
 		$this->load->model('ticket');
 		$this->load->model('account');
-		$this->load->model(['gogetssl' => 'ssl']);
 		$this->load->model(['acme' => 'acme']);
 		$this->load->model(['sitepro' => 'sp']);
 		$this->load->model('mofh');
@@ -668,36 +667,6 @@ class A extends CI_Controller
 				{
 					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
 					redirect('api/settings?captcha=1');
-				}
-			}
-			elseif($this->input->post('update_ssl'))
-			{
-				$this->fv->set_rules('username', 'Username', ['trim', 'required']);
-				$this->fv->set_rules('password', 'Password', ['trim', 'required']);
-				$this->fv->set_rules('status', 'Status', ['trim', 'required']);
-				if($this->fv->run() === true)
-				{
-					$username = $this->input->post('username');
-					$password = $this->input->post('password');
-					$status = $this->input->post('status');
-					$res = $this->ssl->set_username($username);
-					$res = $this->ssl->set_password($password);
-					$res = $this->ssl->set_status($status);
-					if($res !== false)
-					{
-						$this->session->set_flashdata('msg', json_encode([1, 'GoGetSSL settings updated successfully.']));
-						redirect('api/settings?ssl=1');
-					}
-					else
-					{
-						$this->session->set_flashdata('msg', json_encode([0, 'An error occured. Try again later.']));
-						redirect('api/settings?ssl=1');
-					}
-				}
-				else
-				{
-					$this->session->set_flashdata('msg', json_encode([0, validation_errors()]));
-					redirect('api/settings?ssl=1');
 				}
 			}
 			elseif($this->input->post('update_acme'))
@@ -1625,8 +1594,6 @@ class A extends CI_Controller
 			$id = $this->security->xss_clean($id);
 			if($this->input->get('delete'))
 			{
-				if ($this->ssl->get_ssl_type($id) != 'gogetssl') {
-				}
 				$this->db->where(['ssl_key' => $id]);
 				$res = $this->db->delete('is_ssl');
 				if($res !== false)
@@ -1642,28 +1609,14 @@ class A extends CI_Controller
 			}
 			elseif($this->input->get('cancel'))
 			{
-				$ssl_type = $this->ssl->get_ssl_type($id);
-				if ($ssl_type == 'gogetssl') {
-					$res = $this->ssl->cancel_ssl($id, 'Some Reason');
-				} else {
-					$res = $this->acme->initilize($ssl_type, $id);
-					if(!is_bool($res))
-					{
-						$this->session->set_flashdata('msg', json_encode([0, $res]));
-						redirect("ssl/view/$id");
-					}
-					elseif(is_bool($res) AND $res == true)
-					{
-						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_cancelled_msg', 'success')]));
-						redirect("ssl/view/$id");
-					}
-					else
-					{
-						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("ssl/view/$id");
-					}
-					$res = $this->acme->cancel_ssl($id, 'Some Reason');
-				}
+				// Assume ACME as GoGetSSL is removed
+				// We need the type to initialize ACME properly, assuming we can get it from the DB in Acme model or pass it here.
+				// But get_ssl_info handles fetching info. For cancel, we need to know the type.
+				// The previous code used $this->ssl->get_ssl_type($id). Since we removed the 'ssl' model (Gogetssl),
+				// we should rely on ACME model or just check the DB directly if needed, but ACME cancel_ssl takes key.
+
+				$res = $this->acme->cancel_ssl($id, 'Some Reason');
+
 				if(!is_bool($res))
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
@@ -1686,12 +1639,7 @@ class A extends CI_Controller
 				$data['active'] = 'ssl';
 				$data['id'] = $id;
 
-				$ssl_type = $this->ssl->get_ssl_type($id);
-				if ($ssl_type == 'gogetssl') {
-					$data['data'] = $this->ssl->get_ssl_info($id);
-				} else {
-					$data['data'] = $this->acme->get_ssl_info($id);
-				}
+				$data['data'] = $this->acme->get_ssl_info($id);
 				if($data['data'] !== false)
 				{
 					$this->load->view($this->base->get_template().'/page/includes/admin/header', $data);

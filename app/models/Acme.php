@@ -649,12 +649,6 @@ class acme extends CI_Model
         return False;
     }
 
-    function getOrderStatus_goget($id)
-    {
-        $this->load->model(['gogetssl' => 'ssl']);
-        return $this->ssl->getStatus($id);
-    }
-
     function get_ssl_list()
 	{
 		$res = $this->fetch(['for' => $this->user->get_key()]);
@@ -664,10 +658,7 @@ class acme extends CI_Model
 			if(count($res)>0)
 			{
 				foreach ($res as $key) {
-                    if ($key['ssl_type'] == 'gogetssl') {
-                        $data = $this->getOrderStatus_goget($key['ssl_pid']);
-                        $data['type'] = "GoGetSSL";
-                    } elseif ($key['ssl_type'] == 'letsencrypt') {
+					if ($key['ssl_type'] == 'letsencrypt') {
                         $data = $this->getOrderStatus($key['ssl_pid']);
                         $data['type'] = "Let's Encrypt";
                     } elseif ($key['ssl_type'] == 'zerossl') {
@@ -676,7 +667,9 @@ class acme extends CI_Model
                     } elseif ($key['ssl_type'] == 'googletrust') {
                         $data = $this->getOrderStatus($key['ssl_pid']);
                         $data['type'] = "Google Trust Services";
-                    }
+                    } else {
+						continue; // Skip GoGetSSL or unknown
+					}
 					$data['key'] = $key['ssl_key'];
 					$arr[] = $data;
 				}
@@ -696,10 +689,7 @@ class acme extends CI_Model
 			if(count($res)>0)
 			{
 				foreach ($res as $key) {
-					if ($key['ssl_type'] == 'gogetssl') {
-                        $data = $this->getOrderStatus_goget($key['ssl_pid']);
-                        $data['type'] = "GoGetSSL";
-                    } elseif ($key['ssl_type'] == 'letsencrypt') {
+					if ($key['ssl_type'] == 'letsencrypt') {
                         $data = $this->getOrderStatus($key['ssl_pid']);
                         $data['type'] = "Let's Encrypt";
                     } elseif ($key['ssl_type'] == 'zerossl') {
@@ -708,7 +698,9 @@ class acme extends CI_Model
                     } elseif ($key['ssl_type'] == 'googletrust') {
                         $data = $this->getOrderStatus($key['ssl_pid']);
                         $data['type'] = "Google Trust Services";
-                    }
+                    } else {
+						continue; // Skip GoGetSSL or unknown
+					}
 					$data['key'] = $key['ssl_key'];
 					$arr[] = $data;
 				}
@@ -742,10 +734,7 @@ class acme extends CI_Model
 			if(count($res)>0)
 			{
 				foreach ($res as $key) {
-					if ($key['ssl_type'] == 'gogetssl') {
-                        $data = $this->getOrderStatus_goget($key['ssl_pid']);
-                        $data['type'] = "GoGetSSL";
-                    } elseif ($key['ssl_type'] == 'letsencrypt') {
+					if ($key['ssl_type'] == 'letsencrypt') {
                         $this->initilize($key['ssl_type']);
                         $data = $this->getOrderStatus($key['ssl_pid']);
                         $data['type'] = "Let's Encrypt";
@@ -757,7 +746,9 @@ class acme extends CI_Model
                         $this->initilize($key['ssl_type']);
                         $data = $this->getOrderStatus($key['ssl_pid']);
                         $data['type'] = "Google Trust Services";
-                    }
+                    } else {
+						continue; // Skip GoGetSSL
+					}
 					$data['key'] = $key['ssl_key'];
 					$arr[] = $data;
 				}

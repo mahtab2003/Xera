@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class U extends CI_Controller
 {
@@ -8,7 +8,6 @@ class U extends CI_Controller
 		$this->load->model('user');
 		$this->load->model('ticket');
 		$this->load->model('account');
-		$this->load->model(['gogetssl' => 'ssl']);
 		$this->load->model(['acme' => 'acme']);
 		$this->load->model('mofh');
 		$this->load->model('oauth');
@@ -437,7 +436,7 @@ class U extends CI_Controller
 						$data['token'] = $token;
 						$this->load->view($this->base->get_template().'/form/includes/user/header.php', $data);
 						$this->load->view($this->base->get_template().'/form/user/reset_password.php');
-						$this->load->view($this->base->get_template().'/form/includes/user/footer.php');	
+						$this->load->view($this->base->get_template().'/form/includes/user/footer.php');
 					}
 				}
 				else
@@ -572,7 +571,7 @@ class U extends CI_Controller
 			$data['title'] = 'dashboard';
 			$data['active'] = 'home';
 			$data['list'] = $this->account->get_user_accounts();
-			
+
 			$this->load->view($this->base->get_template().'/page/includes/user/header', $data);
 			$this->load->view($this->base->get_template().'/page/includes/user/navbar');
 			$this->load->view($this->base->get_template().'/page/user/accounts');
@@ -931,7 +930,7 @@ class U extends CI_Controller
 			$data['title'] = 'accounts';
 			$data['active'] = 'account';
 			$data['list'] = $this->account->get_user_accounts();
-			
+
 			$this->load->view($this->base->get_template().'/page/includes/user/header', $data);
 			$this->load->view($this->base->get_template().'/page/includes/user/navbar');
 			$this->load->view($this->base->get_template().'/page/user/accounts');
@@ -1360,7 +1359,7 @@ class U extends CI_Controller
 					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
 					redirect("account/settings/$id");
 				}
-			} 
+			}
 			elseif($this->input->post('deactivate'))
 			{
 				$res = $this->account->get_user_account($id);
@@ -1454,12 +1453,12 @@ class U extends CI_Controller
 	{
 		if($this->user->is_logged())
 		{
-			if($this->ssl->is_active() || $this->acme->is_active())
+			if($this->acme->is_active())
 			{
 				$data['title'] = 'ssl';
 				$data['active'] = 'ssl';
 				$data['list'] = $this->acme->get_ssl_list();
-				
+
 				$this->load->view($this->base->get_template().'/page/includes/user/header', $data);
 				$this->load->view($this->base->get_template().'/page/includes/user/navbar');
 				$this->load->view($this->base->get_template().'/page/user/ssl');
@@ -1529,22 +1528,20 @@ class U extends CI_Controller
 						if($this->grc->is_valid($token, $type))
 						{
 							$type = $this->input->post('type');
-							if ($type == 'gogetssl') {
-								$res = $this->ssl->create_ssl($domain);
-							} else {
-								$res = $this->acme->initilize($type);
-								if (!is_bool($res))
-								{
-									$this->session->set_flashdata('msg', json_encode([0, $res]));
-									redirect('ssl/list');
-								} elseif(is_bool($res) AND $res == false)
-								{
-									$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-									redirect('u/create_ssl');
-								}
 
-								$res = $this->acme->create_ssl($domain, $type);
+							$res = $this->acme->initilize($type);
+							if (!is_bool($res))
+							{
+								$this->session->set_flashdata('msg', json_encode([0, $res]));
+								redirect('ssl/list');
+							} elseif(is_bool($res) AND $res == false)
+							{
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
+								redirect('u/create_ssl');
 							}
+
+							$res = $this->acme->create_ssl($domain, $type);
+
 							if(!is_bool($res))
 							{
 								$this->session->set_flashdata('msg', json_encode([0, $res]));
@@ -1586,22 +1583,20 @@ class U extends CI_Controller
 					{
 						$domain = $this->input->post('domain');
 						$type = $this->input->post('type');
-						if ($type == 'gogetssl') {
-							$res = $this->ssl->create_ssl($domain);
-						} else {
-							$res = $this->acme->initilize($type);
-							if (!is_bool($res))
-							{
-								$this->session->set_flashdata('msg', json_encode([0, $res]));
-								redirect('ssl/list');
-							} elseif(is_bool($res) AND $res == false)
-							{
-								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-								redirect('u/create_ssl');
-							}
 
-							$res = $this->acme->create_ssl($domain, $type);
+						$res = $this->acme->initilize($type);
+						if (!is_bool($res))
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $res]));
+							redirect('ssl/list');
+						} elseif(is_bool($res) AND $res == false)
+						{
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
+							redirect('u/create_ssl');
 						}
+
+						$res = $this->acme->create_ssl($domain, $type);
+
 						if(!is_bool($res))
 						{
 							$this->session->set_flashdata('msg', json_encode([0, $res]));
@@ -1634,7 +1629,7 @@ class U extends CI_Controller
 			}
 			else
 			{
-				if($this->ssl->is_active() || $this->acme->is_active())
+				if($this->acme->is_active())
 				{
 					$data['title'] = 'create_ssl';
 					$data['active'] = 'ssl';
@@ -1679,28 +1674,9 @@ class U extends CI_Controller
 			}
 			elseif($this->input->get('cancel'))
 			{
-				$ssl_type = $this->ssl->get_ssl_type($id);
-				if ($ssl_type == 'gogetssl') {
-					$res = $this->ssl->cancel_ssl($id, 'Some Reason');
-				} else {
-					$res = $this->acme->initilize($ssl_type);
-					if(!is_bool($res))
-					{
-						$this->session->set_flashdata('msg', json_encode([0, $res]));
-						redirect("ssl/view/$id");
-					}
-					elseif(is_bool($res) AND $res == true)
-					{
-						$this->session->set_flashdata('msg', json_encode([1, $this->base->text('ssl_cancelled_msg', 'success')]));
-						redirect("ssl/view/$id");
-					}
-					else
-					{
-						$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-						redirect("ssl/view/$id");
-					}
-					$res = $this->acme->cancel_ssl($id, 'Some Reason');
-				}
+				// Assume ACME
+				$res = $this->acme->cancel_ssl($id, 'Some Reason');
+
 				if(!is_bool($res))
 				{
 					$this->session->set_flashdata('msg', json_encode([0, $res]));
@@ -1719,22 +1695,6 @@ class U extends CI_Controller
 			}
 			elseif($this->input->get('validate'))
 			{
-				$ssl_type = $this->ssl->get_ssl_type($id);
-				$res = $this->acme->initilize($ssl_type);
-				if(!is_bool($res))
-				{
-					$this->session->set_flashdata('msg', json_encode([0, $res]));
-					redirect("ssl/view/$id");
-				}
-				elseif(is_bool($res) AND $res == true)
-				{
-				}
-				else
-				{
-					$this->session->set_flashdata('msg', json_encode([0, $this->base->text('error_occured', 'error')]));
-					redirect("ssl/view/$id");
-				}
-
 				$res = $this->acme->validateOrder($id);
 				if(!is_bool($res))
 				{
@@ -1754,17 +1714,14 @@ class U extends CI_Controller
 			}
 			else
 			{
-				if($this->ssl->is_active() || $this->acme->is_active())
+				if($this->acme->is_active())
 				{
 					$data['title'] = 'view_ssl';
 					$data['active'] = 'ssl';
 					$data['id'] = $id;
-					$ssl_type = $this->ssl->get_ssl_type($id);
-					if ($ssl_type == 'gogetssl') {
-						$data['data'] = $this->ssl->get_ssl_info($id);
-					} else {
-						$data['data'] = $this->acme->get_ssl_info($id);
-					}
+
+					$data['data'] = $this->acme->get_ssl_info($id);
+
 					if($data['data'] !== false)
 					{
 						$this->load->view($this->base->get_template().'/page/includes/user/header', $data);

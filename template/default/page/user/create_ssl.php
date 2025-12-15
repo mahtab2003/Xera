@@ -22,13 +22,6 @@
 							}
 							?>
 							<?php
-							if ($this->ssl->is_active()) :
-							?>
-							<option value="gogetssl">GoGetSSL</option>
-							<?php
-							endif;
-							?>
-							<?php
 							$zerossl = $this->acme->get_zerossl();
 							if ($zerossl == 'not-set') {}
 							elseif ($zerossl['url'] != '' && $zerossl['eab_kid'] != '' && $zerossl['eab_hmac_key'] != '') {
@@ -53,7 +46,6 @@
 					<?php
 					else :
 					?>
-					<input type="hidden" value="gogetssl" name="type">
 					<div class="col-sm-12 mb-2">
 					<?php
 					endif;
