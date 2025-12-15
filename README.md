@@ -1,85 +1,97 @@
 <div align="center">
-    <img src="assets/default/img/xera.png">
+    <img src="assets/default/img/xera.png" alt="Xera Community Edition Logo" width="200">
+    <h1>Xera Community Edition</h1>
+    <p><b>The secure, community-driven hosting management system for MyOwnFreeHost (MOFH).</b></p>
+
+[![License](https://img.shields.io/badge/Licence-GPL_2.0-orange)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-v1.3.1--CE-informational)](https://github.com/mahtab2003/Xera/releases/latest)
+![Build](https://img.shields.io/badge/Build-Passing-brightgreen)
+![PHP](https://img.shields.io/badge/PHP-8.1+-blue)
+
 </div>
 
-# Xera Community Edition (Xera CE)
+---
 
-**Xera Community Edition (Xera CE)** is a fork of the original [Xera](https://github.com/mahtab2003/Xera) panel. The original project has not seen updates since July 28, 2024.
+## 🛡️ What is Xera CE?
 
-This Community Edition was created to address critical security vulnerabilities found in the original codebase and to continue development with new features and improvements.
+**Xera Community Edition (Xera CE)** is a dedicated fork of the original [Xera](https://github.com/mahtab2003/Xera) project.
 
-### 🛡️ Security Fixes in Xera CE
-The original Xera panel contained several critical security flaws that have been remediated in this edition:
-*   **Secure Password Storage**: Migrated from a custom, insecure hashing algorithm to industry-standard `bcrypt` (via `password_hash`). Legacy passwords are automatically upgraded upon login.
-*   **Encrypted Secrets**: Sensitive API credentials (MOFH, SMTP, SSL) are now encrypted in the database using the CodeIgniter Encryption library, instead of being stored in plaintext.
-*   **XSS Protection**: Mitigated Stored Cross-Site Scripting vulnerabilities in the support ticket system by enforcing output escaping.
-*   **Callback Security**: Implemented IP allowlisting (with CIDR support) for MOFH callback endpoints to prevent unauthorized account manipulation.
+With the original project inactive since July 2024, **Xera CE** was created to address critical security vulnerabilities and ensure a safe, reliable platform for hosting providers. Our mission is to modernize the codebase, fix legacy debt, and introduce new features while maintaining the simplicity that made Xera great.
 
-## 👀 What is Xera?
-Xera is a hosting account and support management system specially designed to work with MOFH (MyOwnFreeHost). Xera currently has a limited number of features, which are listed below:
+### 🔐 Security First
+Xera CE isn't just a rename; it's a hardened release. We have remediated major vulnerabilities found in the original core:
 
-[![AppVeyor](https://img.shields.io/badge/Licence-GPL_2.0-orange)](LICENSE)
-[![AppVeyor](https://img.shields.io/badge/Version-v1.3.1-informational)](https://github.com/mahtab2003/Xera/releases/latest)
-![AppVeyor](https://img.shields.io/badge/Build-Passed-brightgreen)
-![AppVeyor](https://img.shields.io/badge/Interface-Tabler-lightgreen)
-![AppVeyor](https://img.shields.io/badge/Development-Live-brightgreen)
-![AppVeyor](https://img.shields.io/badge/Dependencies-PHP,_MySQL,_cUrl-red)
+*   **🔒 Secure Password Storage**: Moved away from custom rolling hashing to industry-standard **Bcrypt** (`password_hash`). Legacy passwords are securely migrated securely upon next login.
+*   **🔑 Encrypted Secrets**: Sensitive API credentials (MOFH, SMTP, SSL) are no longer stored in plaintext. They are encrypted using AES-256 via the CodeIgniter Encryption library.
+*   **🛡️ XSS Protection**: Implemented rigorous output escaping in the ticketing system to prevent Stored Cross-Site Scripting attacks.
+*   **🚧 Callback Security**: Secured the MOFH callback API endpoint with IP allowlisting (CIDR support) to prevent unauthorized account manipulation.
 
-### 🎮 Features
-- User Management
-- Theme Management
-- Support Management
-- Administrative Access
-- Integration With:
-	- MOFH (MyOwnFreeHost)
-	- Google reCAPTCHA 
-	- CryptoLoot
-	- hCaptcha
-  	- Cloudflare Turnstile
-	- GoGetSSL (No support after March 10, 2025)
- 	- ACMEv2 (Let's Encrypt, ZeroSSL)
-	- SitePro
-	- SMTP
-- Update Manager
-- Multi-lingual
+---
 
-## 🤸 Getting Started
+## 🎮 Features
 
-### 🚅 Requirements
-Your server needs to meet the following minimum requirements to run Xera:
-- PHP v8.1 or above.
-- MySQL v5.7 or above.
-- A valid, trusted SSL certificate.
+Xera CE includes all the beloved features of the original, now safer than ever:
 
-### 💾 Installation 
-The installation of Xera is much easier than you think!
-- Download the Xera installation files [here](https://github.com/mahtab2003/Xera/releases/latest). Alternatively, if you want the latest development version, you can get it [here](https://github.com/mahtab2003/Xera/archive/refs/heads/dev.zip).
-- Extract the file and upload the contents to your web hosting account. 
-- Create a new database for Xera.
-- Go to ```https://{your.domain}/{xera-directory}/install.php``` and click on the 'Get Started' button.
-- Set your website's ```Website URL```, ```Cookie Prefix```, enable ```CSRF Protection``` and hit the 'Next Step' button.
-- Edit the database credentials and click on the 'Next Step' button (this will automatically import tables and records to the database).
-- Register an admin account and log in to your admin panel. 
-- Replace the logo and favicon located in ```assets/default/img/``` with your own.
-- Setup SMTP (see below for some services you can use).
-- Refer to [Setup Guide](Setup-Guide.md)
+*   **User Management**: Complete client area for registration, login, and profile management.
+*   **Hosting Management**: Seamless integration with **MOFH (MyOwnFreeHost)** for account provisioning.
+*   **Support System**: Built-in ticketing system for customer support.
+*   **Theme Engine**: Customize the look and feel of your host.
+*   **Integrations**:
+    *   **Captcha**: Google reCAPTCHA, hCaptcha, Cloudflare Turnstile, CryptoLoot.
+    *   **SSL**: ACMEv2 (Let's Encrypt, ZeroSSL), GoGetSSL.
+    *   **Builder**: SitePro integration.
+    *   **Mail**: SMTP support (Mailgun, SendGrid, etc.).
+*   **Multi-lingual Support**: Ready for a global audience.
 
-### 📧 SMTP
-Here are some widely used SMTP services. They have free plans with some limitations; most importantly, though, they are compatible with Xera.
-- [Mailgun](https://www.mailgun.com/). 
-> **Note**  
-> Mailgun seems to offer only a trial plan for a month, and without adding a credit card, you are only authorized to send emails to 5 recipients. Therefore, you may want to choose another service.
-- [Mailjet](https://mailjet.com/).
-- [SendGrid](https://sendgrid.com/free/).
-- [MailTrap](https://mailtrap.io)
+---
 
-### 🤔 Help
-You can [open an issue here](https://github.com/mahtab2003/Xera/issues/new) if you have discovered a bug or have an issue. In any way, please ensure your topic has not been previously discussed, and if it has, contribute to that discussion instead of making a new one when you can.
+## 🚀 Getting Started
 
-### 👍Like Xera?
-If you like project Xera, please star this project [here](https://github.com/mahtab2003/Xera) and if you wanna support this project you can do it [here] (https://xera.eu.org/support/)
+### 📋 Prerequisites
+Ensure your server meets these requirements before installation:
+*   **PHP**: Version 8.1 or higher.
+*   **Database**: MySQL 5.7+ or MariaDB.
+*   **Web Server**: Apache (with `mod_rewrite`) or Nginx.
+*   **SSL**: A valid SSL certificate is required for security features.
 
-## ©️ Copyright
-This build is created and maintained by [Mehtab Hassan](https://github.com/mahtab2003). Code released under [the GPL-2.0 license](LICENSE).<br>
+### 🛠️ Installation
+1.  **Download**: Get the latest release of Xera CE.
+2.  **Upload**: Extract the contents to your web server's public directory.
+3.  **Database**: Create a new MySQL database and user.
+4.  **Installer**: Navigate to `https://your-domain.com/install.php` and follow the wizard.
+5.  **Post-Install**: Delete `install.php` and `db.sql` after successful installation.
+
+### ⚙️ Critical Configuration (New in CE)
+To enable the security fixes, you **must** configure the following in `app/config/config.php`:
+
+1.  **Encryption Key**: Set a secure, random 32-byte hex string.
+    *   *Recommended*: Set the `XERA_ENCRYPTION_KEY` environment variable on your server.
+    *   *Fallback*: Edit `$config['encryption_key']` in `app/config/config.php`.
+2.  **Trusted IPs**: Secure your MOFH callback endpoint.
+    *   Edit `$config['mofh_trusted_ips']` in `app/config/config.php`.
+    *   Add the IP addresses used by MOFH to send callbacks (e.g., `['185.27.134.0/24']`). *Without this, callbacks remain insecure.*
+
+---
+
+## 📧 SMTP Recommendations
+Xera CE works best with transactional email services.
+*   **Mailjet** (Free tier available)
+*   **SendGrid**
+*   **MailTrap** (Great for testing)
+*   *Note: Mailgun's free tier is now very limited.*
+
+---
+
+## 🤝 Contributing
+Contributions are the lifeblood of the Community Edition.
+*   **Found a bug?** Open an issue.
+*   **Fixed a bug?** Submit a Pull Request.
+*   **Security Issue?** Please disclose responsibly.
+
+## ©️ License & Credits
+**Xera Community Edition** is released under the **GPL-2.0 License**.
+
+*   Based on [Xera](https://github.com/mahtab2003/Xera) by [Mehtab Hassan](https://github.com/mahtab2003).
+*   maintained by the Community.
+
 <a href="//www.dmca.com/Protection/Status.aspx?ID=907c042a-ab9d-4d7b-8638-25d88c2ff2aa" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120b.png?ID=907c042a-ab9d-4d7b-8638-25d88c2ff2aa"  alt="DMCA.com Protection Status" /></a>
-
