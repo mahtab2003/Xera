@@ -45,32 +45,72 @@ class E extends CI_Controller
 	{
 		$this->load->model('admin');
 		if ($this->admin->is_logged()) {
-			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/updates/check.json');
-			$data = json_decode($file, true);
-			$version = $data['version'];
+			// Fetch constants.php from the main branch to check version
+			$opts = [
+				"http" => [
+					"method" => "GET",
+					"header" => "User-Agent: Xera-CE-Updater\r\n"
+				]
+			];
+			$context = stream_context_create($opts);
+
+			// Using Galaxixoff1/Xera-Community-Edition repo
+			$remote_file = @file_get_contents('https://raw.githubusercontent.com/Galaxixoff1/Xera-Community-Edition/main/app/config/constants.php', false, $context);
+
+			$version = false;
+			if ($remote_file) {
+				if (preg_match("/define\('XERA_VERSION', '([^']+)'\);/", $remote_file, $matches)) {
+					$version = $matches[1];
+				}
+			}
+
 			$current = get_version();
-			if ($version > $current) {
+
+			if ($version && version_compare($version, $current, '>')) {
+				$data['version'] = $version;
+				$data['changelog'] = 'Check GitHub for changelog.'; // Simplified
+
 				if ($this->input->get("update")) {
-					if ($version > $current) {
-						$c_version = explode('.', $current);
-						while ($current !== $version) {
-							$c_version[2] += 1;
-							$current = implode('.', $c_version);
-							$update = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/updates/' . $current . '.json');
-							$data = json_decode($update, true);
-							if (count($data['files']) > 0) {
-								foreach ($data['files'] as $name => $value) {
-									file_put_contents(APPPATH . $name, base64_decode($value));
-								}
+					// Auto Update Logic via Zip Download
+					$zip_url = 'https://github.com/Galaxixoff1/Xera-Community-Edition/archive/refs/heads/main.zip';
+					$zip_file = FCPATH . 'update.zip';
+
+					// Download Zip
+					if (file_put_contents($zip_file, file_get_contents($zip_url, false, $context))) {
+						$zip = new ZipArchive;
+						if ($zip->open($zip_file) === TRUE) {
+							// Extract to a temp folder first to avoid mess
+							$extract_path = FCPATH . 'temp_update/';
+							if (!is_dir($extract_path)) mkdir($extract_path);
+
+							$zip->extractTo($extract_path);
+							$zip->close();
+
+							// The zip usually contains a folder "Xera-Community-Edition-main"
+							$source_dir = $extract_path . 'Xera-Community-Edition-main/';
+							if (!is_dir($source_dir)) {
+								// Fallback if structure differs
+								$dirs = glob($extract_path . '*', GLOB_ONLYDIR);
+								if (count($dirs) > 0) $source_dir = $dirs[0] . '/';
 							}
-							if (count($data['db']) > 0) {
-								foreach ($data['db'] as $value) {
-									$query = $this->db->query($value);
-								}
-							}
+
+							// Recursive copy function
+							$this->copy_recursive($source_dir, FCPATH);
+
+							// Cleanup
+							$this->delete_recursive($extract_path);
+							unlink($zip_file);
+
+							$this->session->set_flashdata('msg', json_encode([1, 'Update completed successfully!']));
+							redirect("e/about");
+						} else {
+							$this->session->set_flashdata('msg', json_encode([0, 'Failed to open update package.']));
+							redirect("update");
 						}
+					} else {
+						$this->session->set_flashdata('msg', json_encode([0, 'Failed to download update package.']));
+						redirect("update");
 					}
-					redirect("e/about");
 				} else {
 					$this->load->view($this->base->get_template() . '/errors/custom/update_now', $data);
 				}
@@ -80,6 +120,46 @@ class E extends CI_Controller
 		} else {
 			redirect('e/error_404');
 		}
+	}
+
+	private function copy_recursive($src, $dst) {
+		$dir = opendir($src);
+		@mkdir($dst);
+		while(false !== ( $file = readdir($dir)) ) {
+			if (( $file != '.' ) && ( $file != '..' )) {
+				// Exclude config files and install.php to prevent overwrite
+				if ($file == 'config.php' && strpos($dst, 'app/config') !== false) continue;
+				if ($file == 'database.php' && strpos($dst, 'app/config') !== false) continue;
+				if ($file == 'install.php') continue;
+				if ($file == 'db.sql') continue;
+				if ($file == '.git') continue;
+
+				if ( is_dir($src . '/' . $file) ) {
+					$this->copy_recursive($src . '/' . $file, $dst . '/' . $file);
+				} else {
+					copy($src . '/' . $file, $dst . '/' . $file);
+				}
+			}
+		}
+		closedir($dir);
+	}
+
+	private function delete_recursive($dir) {
+		if (!file_exists($dir)) {
+			return true;
+		}
+		if (!is_dir($dir)) {
+			return unlink($dir);
+		}
+		foreach (scandir($dir) as $item) {
+			if ($item == '.' || $item == '..') {
+				continue;
+			}
+			if (!$this->delete_recursive($dir . DIRECTORY_SEPARATOR . $item)) {
+				return false;
+			}
+		}
+		return rmdir($dir);
 	}
 
 	function activate($token)
