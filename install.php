@@ -13,15 +13,16 @@ $base_path = str_replace('?step=', '', $base_path);
 $base_path = str_replace('1', '', $base_path);
 $base_path = str_replace('2', '', $base_path);
 $base_path = str_replace('3', '', $base_path);
+$base_path = str_replace('4', '', $base_path); // Added cleanup for step 4
 $base_url = $protocol . $hostname . $base_path;
 if (isset($_GET['step']) and $_GET['step'] == 1) {
-	$title = 'Basic Settings - Xera Installation';
+	$title = 'Basic Settings - Xera CE Installation';
 } elseif (isset($_GET['step']) and $_GET['step'] == 2) {
-	$title = 'Database Settings - Xera Installation';
+	$title = 'Database Settings - Xera CE Installation';
 } elseif (isset($_GET['step']) and $_GET['step'] == 3) {
-	$title = 'Next Step - Xera Installation';
+	$title = 'Installation Complete - Xera CE';
 } else {
-	$title = 'Welcome to Xera Installation Page';
+	$title = 'Welcome to Xera CE Installation';
 }
 ?>
 <!DOCTYPE html>
@@ -40,7 +41,8 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 		<div class="container-tight py-4">
 			<div class="text-center mb-4">
 				<a href="." class="navbar-brand navbar-brand-autodark">
-					<img src="<?= $base_url ?>assets/default/img/logo.png" height="36" alt="">
+					<!-- Updated Logo Reference -->
+					<img src="<?= $base_url ?>assets/default/img/xera.png" height="36" alt="Xera CE">
 				</a>
 			</div>
 			<div class="card card-md">
@@ -55,6 +57,11 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 							<div class="mb-3">
 								<label class="form-label">Cookie Prefix</label>
 								<input required type="text" name="cookie_prefix" class="form-control" placeholder="xera_" value="xera_">
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Encryption Key (Security)</label>
+								<input required type="text" name="encryption_key" class="form-control" placeholder="32-char random hex string" value="<?= bin2hex(random_bytes(16)) ?>">
+								<small class="form-hint">A secure key has been generated for you. Keep this secret!</small>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Enable CSRF Protection</label>
@@ -95,16 +102,36 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 					</form>
 				<?php elseif (isset($_GET['step']) and $_GET['step'] == 3) : ?>
 					<div class="card-body">
-						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
-						<p class="text-muted mb-3">Xera has been installed successfully! Once you click on the button below, you will be redirected to the admin registration page and the install.php file will be deleted automatically.</p>
+						<h2 class="card-title text-center mb-3">Welcome to Xera CE!</h2>
+						<p class="text-muted mb-3">Xera Community Edition has been installed successfully! <br><br>
+                        <strong>Security Notice:</strong> The installer (install.php) will be automatically deleted when you click the button below.</p>
 						<div class="form-footer mt-1">
-							<a href="<?= $base_url ?>admin/register" class="btn btn-primary w-100">Redirect</a>
+							<form action="<?= $base_url ?>install.php?step=4" method="POST">
+                                <input type="submit" name="cleanup" value="Finish & Delete Installer" class="btn btn-primary w-100">
+                            </form>
 						</div>
 					</div>
+				<?php elseif (isset($_GET['step']) and $_GET['step'] == 4) : ?>
+                    <?php
+                        // Self-destruct logic
+                        if(file_exists(__FILE__)) {
+                            unlink(__FILE__);
+                        }
+                        // Also remove db.sql if it exists
+                        if(file_exists(__DIR__ . '/db.sql')) {
+                            unlink(__DIR__ . '/db.sql');
+                        }
+                        // Use meta refresh or javascript redirection because headers might have already been sent by outputting HTML above (though buffer is on)
+                        // Actually, the structure puts this inside the body. Let's do JS redirect.
+                    ?>
+                    <script>window.location.href = "<?= $base_url ?>admin/register";</script>
+                    <div class="card-body">
+                        <p>Redirecting to admin panel...</p>
+                    </div>
 				<?php else : ?>
 					<div class="card-body">
-						<h2 class="card-title text-center mb-3">Welcome to Xera!</h2>
-						<p class="text-muted mb-3">Xera is a hosting account and support management system especially designed to work with MyOwnFreeHost and the GoGetSSL API. Please click on the button below to continue the installation.</p>
+						<h2 class="card-title text-center mb-3">Welcome to Xera CE!</h2>
+						<p class="text-muted mb-3">Xera Community Edition is a hosting account and support management system designed to work with MyOwnFreeHost. <br><br>Click the button below to start the secure installation process.</p>
 						<div class="form-footer mt-1">
 							<a href="<?= $base_url ?>install.php?step=1" class="btn btn-primary w-100">Get Started</a>
 						</div>
@@ -112,7 +139,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 				<?php endif ?>
 			</div>
 			<div class="text-center text-muted mt-3">
-				&copy; Copyright <?= date('Y') ?>. Powered by NxNetwork Ltd.
+				&copy; Copyright <?= date('Y') ?>. Xera Community Edition.
 			</div>
 		</div>
 	</div>
@@ -135,6 +162,7 @@ if (isset($_GET['step']) and $_GET['step'] == 1) {
 if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
 	$base_url_value = $_POST['base_url'];
 	$cookie_prefix = $_POST['cookie_prefix'];
+	$encryption_key = $_POST['encryption_key'];
 	$csrf = $_POST['csrf'];
 	if (strpos($cookie_prefix, '_') !== strlen($cookie_prefix)) {
 		$cookie_prefix = $cookie_prefix . '_';
@@ -144,12 +172,20 @@ if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
 	} else {
 		$csrf_value = 'TRUE';
 	}
-	$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/config.php');
+	// Use local config template instead of fetching from remote GitHub
+	$file = file_get_contents(__DIR__ . '/app/config/config.php');
 	$data = str_replace('BASE_URL_VALUE', $base_url_value, $file);
 	$data = str_replace('COOKIE_PREFIX_VALUE', $cookie_prefix, $data);
 	$data = str_replace('CSRF_PROTECTION_MODE', $csrf_value, $data);
+
+    // Replace encryption key logic
+    // We expect the config.php to have the line: $config['encryption_key'] = getenv('XERA_ENCRYPTION_KEY') ?: '...';
+    // We want to replace the fallback value with the user's generated key.
+    // The previous fallback I set was '13bc237cf479fccebe6a469d14cb43010907ce54a7bd32c249f7cf810b041939'
+    $data = preg_replace("/(?:'|\")13bc237cf479fccebe6a469d14cb43010907ce54a7bd32c249f7cf810b041939(?:'|\")/", "'$encryption_key'", $data);
+
 	$res = file_put_contents(__DIR__ . '/app/config/config.php', $data);
-	$_SESSION['msg'] = json_encode(['success', 'Basic settings changed successfully.']);
+	$_SESSION['msg'] = json_encode(['success', 'Basic settings saved successfully.']);
 	header('location: ' . $base_url . 'install.php?step=2');
 } elseif (isset($_GET['step']) and $_GET['step'] == 2 and isset($_POST['submit'])) {
 	$hostname = $_POST['hostname'];
@@ -163,9 +199,10 @@ if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
 		$database
 	);
 	if (!$mysqli) {
-		$_SESSION['msg'] = json_encode(['danger', 'Database connect cannot be establised.']);
+		$_SESSION['msg'] = json_encode(['danger', 'Database connection failed: ' . mysqli_connect_error()]);
 		header('location: ' . $base_url . 'install.php?step=2');
 	} else {
+        // SQL Creation Logic
 		$sql = mysqli_query($mysqli, "CREATE TABLE `is_base` (`base_id` varchar(89) NOT NULL DEFAULT 'xera_base',`base_name` varchar(20) NOT NULL,`base_email` varchar(100) NOT NULL,`base_template` varchar(100) NOT NULL DEFAULT 'default', `base_fourm` varchar(100) NOT NULL,`base_status` varchar(8) NOT NULL, `base_rpp` int(10) NOT NULL DEFAULT '15'
 );");
 
@@ -324,8 +361,10 @@ if (isset($_GET['step']) and $_GET['step'] == 1 and isset($_POST['submit'])) {
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_admin CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_recaptcha CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 $sql = mysqli_query($mysqli, "ALTER TABLE is_reply CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+
+        // Use local config database template
 		if ($sql) {
-			$file = file_get_contents('https://raw.githubusercontent.com/mahtab2003/Xera/dev/app/config/database.php');
+			$file = file_get_contents(__DIR__ . '/app/config/database.php');
 			$data = str_replace('DB_HOSTNAME', $hostname, $file);
 			$data = str_replace('DB_USERNAME', $username, $data);
 			$data = str_replace('DB_PASSWORD', $password, $data);
