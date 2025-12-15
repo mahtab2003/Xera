@@ -324,7 +324,12 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+// SECURITY: It is highly recommended to set this key via an environment variable in production.
+$config['encryption_key'] = getenv('XERA_ENCRYPTION_KEY') ?: '13bc237cf479fccebe6a469d14cb43010907ce54a7bd32c249f7cf810b041939';
+
+// Trusted IPs for MOFH callbacks. Add MOFH IPs here.
+// $config['mofh_trusted_ips'] = ['185.27.134.0/24', '...'];
+$config['mofh_trusted_ips'] = [];
 
 /*
 |--------------------------------------------------------------------------

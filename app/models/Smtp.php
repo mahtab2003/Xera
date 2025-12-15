@@ -47,6 +47,10 @@ class Smtp extends CI_Model
 		$res = $this->fetch();
 		if($res !== false)
 		{
+			$decoded = $this->encryption->decrypt($res['smtp_password']);
+			if ($decoded) {
+				return $decoded;
+			}
 			return $res['smtp_password'];
 		}
 		return false;
@@ -54,7 +58,7 @@ class Smtp extends CI_Model
 
 	function set_password($password)
 	{
-		$res = $this->update('password', $password);
+		$res = $this->update('password', $this->encryption->encrypt($password));
 		if($res)
 		{
 			return true;

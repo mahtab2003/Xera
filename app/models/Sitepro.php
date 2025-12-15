@@ -47,14 +47,18 @@ class SitePro extends CI_Model
 		$res = $this->fetch();
 		if($res !== false)
 		{
+			$decoded = $this->encryption->decrypt($res['builder_password']);
+			if ($decoded) {
+				return $decoded;
+			}
 			return $res['builder_password'];
 		}
 		return false;
 	}
 
-	function set_password($name)
+	function set_password($password)
 	{
-		$res = $this->update('password', $name);
+		$res = $this->update('password', $this->encryption->encrypt($password));
 		if($res)
 		{
 			return true;

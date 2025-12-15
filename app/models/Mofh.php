@@ -38,6 +38,10 @@ class Mofh extends CI_Model
 		$res = $this->fetch_base();
 		if($res !== false)
 		{
+			$decoded = $this->encryption->decrypt($res['mofh_password']);
+			if ($decoded) {
+				return $decoded;
+			}
 			return $res['mofh_password'];
 		}
 		return false;
@@ -45,7 +49,7 @@ class Mofh extends CI_Model
 
 	function set_password($password)
 	{
-		$res = $this->update('password', $password);
+		$res = $this->update('password', $this->encryption->encrypt($password));
 		if($res)
 		{
 			return true;

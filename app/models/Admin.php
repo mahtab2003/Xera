@@ -12,7 +12,7 @@ class Admin extends CI_Model
 	{
 		$data['admin_name'] = $name;
 		$data['admin_email'] = $email;
-		$data['admin_password'] = char64($password);
+		$data['admin_password'] = password_hash($password, PASSWORD_DEFAULT);
 		$data['admin_status'] = 'active';
 		$data['admin_date'] = time();
 		$data['admin_key'] = char16(implode(':', $data));
@@ -35,9 +35,19 @@ class Admin extends CI_Model
 		if($data !== false)
 		{
 			$passwd = $data['admin_password'];
-			$password = char64($password);
-			if(hash_equals($passwd, $password))
+			if(password_verify($password, $passwd))
 			{
+				$json = json_encode([$data['admin_rec'], time()]);
+				$gz = gzcompress($json);
+				$token = base64_encode($gz);
+				set_cookie('logged_admin', true, $days * 86400);
+				set_cookie('token_admin', $token, $days * 86400);
+				return true;
+			}
+			$legacy_password = char64($password);
+			if(hash_equals($passwd, $legacy_password))
+			{
+				$this->update(['password' => password_hash($password, PASSWORD_DEFAULT)], ['email' => $email]);
 				$json = json_encode([$data['admin_rec'], time()]);
 				$gz = gzcompress($json);
 				$token = base64_encode($gz);
@@ -109,7 +119,7 @@ class Admin extends CI_Model
 		if($res !== false)
 		{
 			$rec = char64($res['admin_rec'].':'.$password.':'.time().':'.$res['admin_key']);
-			$password = char64($password);
+			$password = password_hash($password, PASSWORD_DEFAULT);
 			$res = $this->update(['password' => $password, 'rec' => $rec], ['email' => $email]);
 			if($res !== false)
 			{
@@ -184,9 +194,9 @@ class Admin extends CI_Model
 	function set_password($old_password, $new_password)
 	{
 		$hash = $this->get_password();
-		if(hash_equals($hash, char64($old_password)))
+		if(password_verify($old_password, $hash) || hash_equals($hash, char64($old_password)))
 		{
-			$res = $this->update(['password' => char64($new_password)], ['email' => $this->get_email()]);
+			$res = $this->update(['password' => password_hash($new_password, PASSWORD_DEFAULT)], ['email' => $this->get_email()]);
 			if($res !== false)
 			{
 				return true;

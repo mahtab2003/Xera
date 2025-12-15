@@ -11,6 +11,37 @@ class C extends CI_Controller
 
 		if($this->input->post('username'))
 		{
+			$trusted_ips = $this->config->item('mofh_trusted_ips');
+			if (!empty($trusted_ips))
+			{
+				$ip = $this->input->ip_address();
+				$allowed = false;
+				foreach ($trusted_ips as $trusted) {
+					if (strpos($trusted, '/') !== false) {
+						list($subnet, $bits) = explode('/', $trusted);
+						$ip_long = ip2long($ip);
+						$subnet_long = ip2long($subnet);
+						$mask = -1 << (32 - $bits);
+						$subnet_long &= $mask;
+						if (($ip_long & $mask) == $subnet_long) {
+							$allowed = true;
+							break;
+						}
+					} else {
+						if ($trusted === $ip) {
+							$allowed = true;
+							break;
+						}
+					}
+				}
+
+				if (!$allowed) {
+					log_message('error', 'Unauthorized MOFH callback attempt from: ' . $ip);
+					show_error('Unauthorized', 403);
+					return;
+				}
+			}
+
 			$username = $this->input->post('username');
 			$status = $this->input->post('status');
 			$comment = $this->input->post('comments');

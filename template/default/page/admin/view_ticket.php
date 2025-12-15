@@ -64,7 +64,7 @@
 		<div class="card-footer">
 			<div class="row align-items-center">
 				<span class="col">Subject:</span>
-				<span class="col-auto ms-auto"><?= $ticket['ticket_subject'] ?></span>
+				<span class="col-auto ms-auto"><?= html_escape($ticket['ticket_subject']) ?></span>
 			</div>
 		</div>
 	</div>
@@ -80,7 +80,7 @@
 		</div>
 		<div class="card-body pb-0">
 			<div>
-				<?= $ticket['ticket_content'] ?>
+				<?= html_escape($ticket['ticket_content']) ?>
 			</div>
 		</div>
 	</div>
@@ -115,7 +115,7 @@
 				</div>
 				<div class="card-body pb-0">
 					<div>
-						<?= $reply['reply_content'] ?>
+						<?= html_escape($reply['reply_content']) ?>
 					</div>
 				</div>
 			</div>

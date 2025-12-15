@@ -12,7 +12,7 @@ class User extends CI_Model
 	{
 		$data['user_name'] = $name;
 		$data['user_email'] = $email;
-		$data['user_password'] = char64($password);
+		$data['user_password'] = password_hash($password, PASSWORD_DEFAULT);
 		if($this->mailer->is_active())
 		{
 			$data['user_status'] = 'inactive';
@@ -98,9 +98,22 @@ class User extends CI_Model
 			if($data['user_oauth'])
 			{
 				$passwd = $data['user_password'];
-				$password = char64($password);
-				if(hash_equals($passwd, $password))
+				if(password_verify($password, $passwd))
 				{
+					$json = json_encode([$data['user_rec'], time()]);
+					$gz = gzcompress($json);
+					$token = base64_encode($gz);
+					set_cookie('logged', true, $days * 86400);
+					set_cookie('token', $token, $days * 86400);
+					return true;
+				}
+				// Legacy char64 support
+				$legacy_password = char64($password);
+				if(hash_equals($passwd, $legacy_password))
+				{
+					// Rehash password
+					$this->update(['password' => password_hash($password, PASSWORD_DEFAULT)], ['email' => $email]);
+
 					$json = json_encode([$data['user_rec'], time()]);
 					$gz = gzcompress($json);
 					$token = base64_encode($gz);
@@ -257,7 +270,7 @@ class User extends CI_Model
 		if($res !== false)
 		{
 			$rec = char64($res['user_rec'].':'.$password.':'.time().':'.$res['user_key']);
-			$password = char64($password);
+			$password = password_hash($password, PASSWORD_DEFAULT);
 			$res = $this->update(['password' => $password, 'rec' => $rec], ['email' => $email]);
 			if($res !== false)
 			{
@@ -409,9 +422,9 @@ class User extends CI_Model
 	function set_password($old_password, $new_password)
 	{
 		$hash = $this->get_password();
-		if(hash_equals($hash, char64($old_password)))
+		if(password_verify($old_password, $hash) || hash_equals($hash, char64($old_password)))
 		{
-			$res = $this->update(['password' => char64($new_password)], ['email' => $this->get_email()]);
+			$res = $this->update(['password' => password_hash($new_password, PASSWORD_DEFAULT)], ['email' => $this->get_email()]);
 			if($res !== false)
 			{
 				return true;
