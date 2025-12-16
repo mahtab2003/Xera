@@ -29,4 +29,5 @@ $lang['show_hide'] = 'Show/Hide';
 $lang['record_name'] = 'Record Name';
 $lang['record_content'] = 'Record Content';
 $lang['record_type'] = 'Record Type';
+$lang['expired'] = 'Expired';
 $lang['gen_auto'] = 'Generates Automatically';
