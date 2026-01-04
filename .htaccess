@@ -1,14 +1,10 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php [NC,L] 
-</IfModule>
+RewriteEngine On
+RewriteBase /
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule .*$ index.php?/$1 [L]
-</IfModule>
+# Jika file atau folder secara fisik ada di server, akses langsung
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Jika tidak ada, kirim rutenya ke index.php
+# Gunakan format ini untuk kompatibilitas tinggi di PHP 8.2
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
