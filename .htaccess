@@ -1,10 +1,9 @@
-RewriteEngine On
-RewriteBase /
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
 
-# Jika file atau folder secara fisik ada di server, akses langsung
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# Jika tidak ada, kirim rutenya ke index.php
-# Gunakan format ini untuk kompatibilitas tinggi di PHP 8.2
-RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+    # If the file or directory does not exist, redirect to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+</IfModule>
