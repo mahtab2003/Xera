@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<label class="form-label"><?= $this->base->text('subject', 'label') ?></label>
-						<input type="text" name="subject" placeholder="<?= $this->base->text('subject', 'label') ?>" class="form-control mb-2">
+						<input type="text" name="subject" maxlength="60" placeholder="<?= $this->base->text('subject', 'label') ?>" class="form-control mb-2">
 					</div>
 					<div class="col-sm-12 mb-2">
 						<label class="form-label"><?= $this->base->text('content', 'label') ?></label>
