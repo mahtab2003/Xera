@@ -95,7 +95,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?= $this->base->get_fourm() ?>">
+						<a class="nav-link" href="http://<?= $this->base->get_fourm() ?>" target="_blank">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-book"></i>
 							</span>

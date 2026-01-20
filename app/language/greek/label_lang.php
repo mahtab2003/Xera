@@ -28,5 +28,5 @@ $lang['or'] = 'ή';
 $lang['show_hide'] = 'Εμφάνιση/Απόκρυψη';
 $lang['record_name'] = 'Όνομα εγγραφής';
 $lang['record_content'] = 'Περιεχόμενο εγγραφής';
+$lang['expired'] = 'Λήξη';
 $lang['record_type'] = 'Τύπος εγγραφής';
-$lang['gen_auto'] = 'Δημιουργείται αυτόματα';

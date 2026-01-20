@@ -28,5 +28,5 @@ $lang['or'] = 'o';
 $lang['show_hide'] = 'Mostrar/Ocultar';
 $lang['record_name'] = 'Nombre del Registro';
 $lang['record_content'] = 'Contenido del Registro';
+$lang['expired'] = 'Caducado';
 $lang['record_type'] = 'Tipo de Registro';
-$lang['gen_auto'] = 'Generado automáticamente';

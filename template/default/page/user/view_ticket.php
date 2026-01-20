@@ -53,6 +53,12 @@
 						</span>
 					</div>
 				</div>
+				<div class="col-sm-6">
+					<div class="row align-items-center">
+				<span class="col">Ticket ID:</span>
+				<span class="col-auto ms-auto"><?= $ticket['ticket_key'] ?></span>
+			</div>
+			</div>
 			</div>
 		</div>
 		<div class="card-footer">

@@ -28,6 +28,7 @@ $lang['or'] = '或';
 $lang['show_hide'] = '顯示/隱藏';
 $lang['record_name'] = '記錄名稱';
 $lang['record_content'] = '記錄內容';
+$lang['expired'] = '已到期';
 $lang['record_type'] = '記錄類型';
 $lang['gen_auto'] = '自動生成';
 $lang['host_name'] = '主機名稱';

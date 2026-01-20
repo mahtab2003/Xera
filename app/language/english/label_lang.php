@@ -66,3 +66,5 @@ $lang['dark'] = 'Dark';
 $lang['none'] = 'None';
 $lang['login_agent'] = 'Login Agent';
 $lang['custom_variables'] = 'Custom Variables';
+$lang['expired'] = 'Expired';
+$lang['gen_auto'] = 'Generates Automatically';
