@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?= get_cookie('lang', true) === 'Traditional-Chinese' ? 'zh-Hant' : 'en' ?>">
 <head>
 	<meta charset="utf-8"/>
 	<title><?= $this->base->text($title, 'title').' - '.$this->base->get_hostname() ?></title>

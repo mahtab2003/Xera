@@ -37,3 +37,7 @@ $lang['redirect_now'] = '立即重定向';
 $lang['github_signin'] = '使用 GitHub 登入';
 $lang['close'] = '關閉';
 $lang['validate'] = '驗證 SSL';
+$lang['activate'] = '啟用';
+$lang['test_connection'] = '測試連線';
+$lang['update'] = '更新';
+$lang['add'] = '新增';

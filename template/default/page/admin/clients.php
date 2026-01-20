@@ -2,25 +2,25 @@
 	<div class="page-header d-print-none">
 		<div class="row align-items-center">
 			<div class="col">
-				<h2 class="page-title py-3">
-					Your Clients
-				</h2>
+                <h2 class="page-title py-3">
+                    <?= $this->base->text('your_clients', 'heading') ?>
+                </h2>
 			</div>
 		</div>
 	</div>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
-			<div class="card-title">Your Clients</div>
+            <div class="card-title"><?= $this->base->text('your_clients', 'heading') ?></div>
 		</div>
 		<div class="table-responsive">
 			<table class="table card-table table-vcenter table-transparent text-nowrap table-nowrap">
 				<thead>
 					<tr>
-						<th width="5%">User ID</th>
-						<th width="15%">Name</th>
-						<th width="70%">Email</th>
-						<th width="10%">Status</th>
-						<th width="10%" class="text-center">Action</th>
+                        <th width="5%"><?= $this->base->text('id', 'table') ?></th>
+                        <th width="15%"><?= $this->base->text('your_name', 'label') ?></th>
+                        <th width="70%"><?= $this->base->text('email_address', 'label') ?></th>
+                        <th width="10%"><?= $this->base->text('status', 'table') ?></th>
+                        <th width="10%" class="text-center"><?= $this->base->text('action', 'table') ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,15 +48,15 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'client/view/' . $item['user_key'] ?>" class="btn rounded btn-green btn-sm"><em class="fa fa-user me-2"></em> Manage</a></td>
+                                <td><a href="<?= base_url() . 'client/view/' . $item['user_key'] ?>" class="btn rounded btn-green btn-sm"><em class="fa fa-user me-2"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
                             <?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else : ?>
 						<tr>
-							<td colspan="5" class="text-center">
-								No clients yet
-							</td>
+                            <td colspan="5" class="text-center">
+                                <?= $this->base->text('no_clients_yet', 'paragraph') ?>
+                            </td>
 						</tr>
 					<?php endif ?>
 				</tbody>
@@ -73,7 +73,7 @@
 				</div>
 				<div>
 					<?php $page = $this->input->get('page') ?? 0 ?>
-					<ul class="pagination mb-0">
+                    <ul class="pagination mb-0">
 						<li class="page-item <?php if ($page < 1) : ?>disabled<?php endif ?>">
 							<a class="page-link" <?php if ($page > 0) : ?>href="<?= base_url() ?>client/list?page=<?= $page - 1 ?>" <?php endif ?>>
 								<span>&laquo;</span>

@@ -1,7 +1,7 @@
 <div class="container-xl">
 	<div class="page-header d-print-none">
 		<h2 class="page-title py-3">
-			Client Info
+            <?= $this->base->text('client_info', 'heading') ?>
 		</h2>
 	</div>
 	<div class="card mb-3">
@@ -12,27 +12,27 @@
 				</div>
 				<div class="col-md-8">
 					<div class="row py-3">
-						<p class="col-md-6">
-							ID: <?= char8($info['user_id'].':'.$info['user_date'].':'.$info['user_key']) ?>
-						</p>
-						<p class="col-md-6">
-							Name: <?= $info['user_name'] ?>
-						</p>
-						<p class="col-md-6">
-							Email: <?= $info['user_email'] ?>
-						</p>
-						<p class="col-md-6">
-							Secret Key: <?= $info['user_key'] ?>
-						</p>
-						<p class="col-md-6">
-							Login Agent: <?php if ($this->user->get_oauth($info['user_key'])): ?>
-								Oauth
-							<?php else: ?>
-								Built-in
-							<?php endif ?>
-						</p>
-						<p class="col-md-6">
-							Status: <?php if ($info['user_status'] == 'inactive'): ?>
+                        <p class="col-md-6">
+                            <?= $this->base->text('id', 'table') ?>: <?= char8($info['user_id'].':'.$info['user_date'].':'.$info['user_key']) ?>
+                        </p>
+                        <p class="col-md-6">
+                            <?= $this->base->text('your_name', 'label') ?>: <?= $info['user_name'] ?>
+                        </p>
+                        <p class="col-md-6">
+                            <?= $this->base->text('email_address', 'label') ?>: <?= $info['user_email'] ?>
+                        </p>
+                        <p class="col-md-6">
+                            <?= $this->base->text('secret_key', 'label') ?>: <?= $info['user_key'] ?>
+                        </p>
+                        <p class="col-md-6">
+                            <?= $this->base->text('login_agent', 'label') ?>: <?php if ($this->user->get_oauth($info['user_key'])): ?>
+                                Oauth
+                            <?php else: ?>
+                                Built-in
+                            <?php endif ?>
+                        </p>
+                        <p class="col-md-6">
+                            <?= $this->base->text('status', 'table') ?>: <?php if ($info['user_status'] == 'inactive'): ?>
 										<span class="badge bg-yellow">
 											<?= $info['user_status'] ?>
 										</span>
@@ -41,14 +41,14 @@
 											<?= $info['user_status'] ?>
 										</span>
 									<?php endif ?>						</p>
-						<p class="col-md-6">
-							Registered: <?= date('d-m-Y', $info['user_date']) ?>
-						</p>
+                        <p class="col-md-6">
+                            <?= $this->base->text('created_on', 'table') ?>: <?= date('d-m-Y', $info['user_date']) ?>
+                        </p>
 						<div class="col-12">
-							<?php if($info['user_status'] !== 'active'): ?>
-								<a href="?active=true" class="btn btn-success">Activate</a>
-							<?php endif ?>
-							<a href="?login=true" class="btn btn-primary">Login</a>
+                            <?php if($info['user_status'] !== 'active'): ?>
+                                <a href="?active=true" class="btn btn-success"><?= $this->base->text('activate', 'button') ?></a>
+                            <?php endif ?>
+                            <a href="?login=true" class="btn btn-primary"><?= $this->base->text('login', 'button') ?></a>
 						</div>
 					</div>
 				</div>

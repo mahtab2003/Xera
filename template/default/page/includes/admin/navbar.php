@@ -9,6 +9,15 @@
 			</a>
 		</h1>
 		<div class="navbar-nav flex-row order-md-last">
+			<div class="nav-item dropdown me-2">
+				<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open language menu">
+					<span class="d-none d-xl-block ps-2">EN | 繁中</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+					<a href="<?= base_url() ?>u/set_lang?code=english" class="dropdown-item">English</a>
+					<a href="<?= base_url() ?>u/set_lang?code=Traditional-Chinese" class="dropdown-item">繁體中文</a>
+				</div>
+			</div>
 			<div class="nav-item dropdown">
 				<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
 					<span class="avatar avatar-sm" style="background-image: url(<?= $this->admin->get_avatar() ?>);"></span>
@@ -18,8 +27,8 @@
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a href="<?= base_url() ?>admin/settings" class="dropdown-item">Settings</a>
-					<a href="<?= base_url() ?>a/logout" class="dropdown-item">Logout</a>
+                    <a href="<?= base_url() ?>admin/settings" class="dropdown-item"><?= $this->base->text('settings', 'button') ?></a>
+                    <a href="<?= base_url() ?>a/logout" class="dropdown-item"><?= $this->base->text('logout', 'button') ?></a>
 				</div>
 			</div>
 		</div>
@@ -37,9 +46,9 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-home"></i>
 							</span>
-							<span class="nav-link-title">
-								Home
-							</span>
+                            <span class="nav-link-title">
+                                <?= $this->base->text('home', 'heading') ?>
+                            </span>
 						</a>
 					</li>
 					<li class="nav-item <?php if (isset($active) and $active == 'client') : ?>
@@ -49,9 +58,9 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-users"></i>
 							</span>
-							<span class="nav-link-title">
-								My Clients
-							</span>
+                            <span class="nav-link-title">
+                                <?= $this->base->text('your_clients', 'heading') ?>
+                            </span>
 						</a>
 					</li>
 					<li class="nav-item <?php if (isset($active) and $active == 'account') : ?>
@@ -61,9 +70,9 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-server"></i>
 							</span>
-							<span class="nav-link-title">
-								MOFH Accounts
-							</span>
+                            <span class="nav-link-title">
+                                <?= $this->base->text('mofh_accounts', 'heading') ?>
+                            </span>
 						</a>
 					</li>
 					<?php if ($this->ssl->is_active()): ?>
@@ -74,9 +83,9 @@
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<em class="fa fa-shield-alt"></em>
 								</span>
-								<span class="nav-link-title">
-									SSL Certificates
-								</span>
+                            <span class="nav-link-title">
+                                <?= $this->base->text('ssl_certificates', 'heading') ?>
+                            </span>
 							</a>
 						</li>
 					<?php endif ?>
@@ -87,9 +96,9 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-bullhorn"></i>
 							</span>
-							<span class="nav-link-title">
-								Support Tickets
-							</span>
+                            <span class="nav-link-title">
+                                <?= $this->base->text('support_tickets', 'heading') ?>
+                            </span>
 						</a>
 					</li>
 					<li class="nav-item dropdown <?php if (isset($active) and $active == 'settings') : ?>
@@ -99,20 +108,20 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="fa fa-book"></i>
 							</span>
-							<span class="nav-link-title">
-								Settings
-							</span>
+                            <span class="nav-link-title">
+                                <?= $this->base->text('settings', 'button') ?>
+                            </span>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<?= base_url() ?>api/settings">
-								API Settings
-							</a>
-							<a class="dropdown-item" href="<?= base_url() ?>email/templates">
-								Email Templates
-							</a>
-							<a class="dropdown-item" href="<?= base_url() ?>domain/list">
-								Domain Extensions
-							</a>
+                            <a class="dropdown-item" href="<?= base_url() ?>api/settings">
+                                <?= $this->base->text('api_settings', 'title') ?>
+                            </a>
+                            <a class="dropdown-item" href="<?= base_url() ?>email/templates">
+                                <?= $this->base->text('email_templates', 'title') ?>
+                            </a>
+                            <a class="dropdown-item" href="<?= base_url() ?>domain/list">
+                                <?= $this->base->text('domain_extensions', 'title') ?>
+                            </a>
 						</div>
 					</li>
 				</ul>

@@ -2,26 +2,26 @@
 	<div class="page-header d-print-none">
 		<div class="row align-items-center">
 			<div class="col">
-				<h2 class="page-title py-3">
-					SSL Certificates
-				</h2>
+                <h2 class="page-title py-3">
+                    <?= $this->base->text('ssl_certificates', 'heading') ?>
+                </h2>
 			</div>
 		</div>
 	</div>
 	<div class="card mb-3 rounded">
 		<div class="card-header">
-			<div class="card-title">Your Certificates</div>
+            <div class="card-title"><?= $this->base->text('your_certificates', 'heading') ?></div>
 		</div>
 		<div class="table-responsive">
 			<table class="table card-table table-transparent text-nowrap table-nowrap">
 				<thead>
 					<tr>
-						<th width="5%">ID</th>
-						<th width="65%">Domain</th>
-						<th width="10%">Method</th>
-						<th width="10%">Provider</th>
-						<th width="10%">Status</th>
-						<th width="10%" class="text-center">Action</th>
+                        <th width="5%"><?= $this->base->text('id', 'table') ?></th>
+                        <th width="65%"><?= $this->base->text('domain', 'table') ?></th>
+                        <th width="10%"><?= $this->base->text('method', 'table') ?></th>
+                        <th width="10%"><?= $this->base->text('provider', 'table') ?></th>
+                        <th width="10%"><?= $this->base->text('status', 'table') ?></th>
+                        <th width="10%" class="text-center"><?= $this->base->text('action', 'table') ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,13 +57,13 @@
 										</span>
 									<?php endif ?>
 								</td>
-								<td><a href="<?= base_url() . 'admin/ssl/view/' . $item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> Manage</a></td>
+                                <td><a href="<?= base_url() . 'admin/ssl/view/' . $item['key'] ?>" class="btn <?= $btn[1] ?> rounded btn-sm"><em class="fa <?= $btn[0] ?> me-2"></em> <?= $this->base->text('manage', 'button') ?></a></td>
 							</tr>
 							<?php $count += 1; ?>
 						<?php endforeach; ?>
 					<?php else : ?>
 						<tr>
-							<td colspan="5" class="text-center">Nothing to show</td>
+                            <td colspan="5" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 						</tr>
 					<?php endif ?>
 				</tbody>

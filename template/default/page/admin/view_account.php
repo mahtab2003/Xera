@@ -9,22 +9,22 @@
 			<div class="card">
 				<div class="pt-2 px-3 pb-0">
 					<div class="d-grid mb-2">
-						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= base_url() ?>admin/account/view/<?= $id ?>?login=true" target="_blank" <?php else : ?> href="#" disabled class="btn btn-primary rounded disabled" <?php endif ?> class="btn btn-primary rounded"><i class="fa fa-globe me-2"></i> Control Panel</a>
+                        <a <?php if ($data['account_status'] === 'active') : ?>href="<?= base_url() ?>admin/account/view/<?= $id ?>?login=true" target="_blank" <?php else : ?> href="#" disabled class="btn btn-primary rounded disabled" <?php endif ?> class="btn btn-primary rounded"><i class="fa fa-globe me-2"></i> <?= $this->base->text('control_panel', 'button') ?></a>
 					</div>
 					<div class="d-grid mb-2">
-						<a <?php if ($data['account_status'] === 'active') : ?>href="<?= $this->account->create_fm_link($data['account_username'], $data['account_password']) ?>" target="_blank" <?php else : ?> class="disabled btn btn-yellow rounded" href="#" disabled <?php endif ?> class="btn btn-green rounded"><i class="fa fa-file me-2"></i> File Manager</a>
+                        <a <?php if ($data['account_status'] === 'active') : ?>href="<?= $this->account->create_fm_link($data['account_username'], $data['account_password']) ?>" target="_blank" <?php else : ?> class="disabled btn btn-yellow rounded" href="#" disabled <?php endif ?> class="btn btn-green rounded"><i class="fa fa-file me-2"></i> <?= $this->base->text('file_manager', 'button') ?></a>
 					</div>
 					<?php if ($data['account_status'] === 'active') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>admin/account/settings/<?= $id ?>" class="btn btn-yellow rounded"><i class="fa fa-cogs me-2"></i> Settings</a>
+                            <a href="<?= base_url() ?>admin/account/settings/<?= $id ?>" class="btn btn-yellow rounded"><i class="fa fa-cogs me-2"></i> <?= $this->base->text('settings', 'button') ?></a>
 						</div>
 					<?php elseif ($data['account_status'] === 'suspended' or $data['account_status'] === 'deactivated') : ?>
 						<div class="d-grid mb-2">
-							<a href="<?= base_url() ?>admin/account/view/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><i class="fa fa-cog me-2"></i> Reactivate</a>
+                            <a href="<?= base_url() ?>admin/account/view/<?= $id ?>?reactivate=true" class="btn btn-green rounded"><i class="fa fa-cog me-2"></i> <?= $this->base->text('reactivate', 'button') ?></a>
 						</div>
 					<?php else : ?>
 						<div class="d-grid mb-2">
-							<a href="#" class="btn btn-yellow disabled rounded"><i class="fa fa-cogs me-2"></i> Settings</a>
+                            <a href="#" class="btn btn-yellow disabled rounded"><i class="fa fa-cogs me-2"></i> <?= $this->base->text('settings', 'button') ?></a>
 						</div>
 					<?php endif ?>
 				</div>
@@ -62,25 +62,25 @@
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">Account Details</div>
+                    <div class="card-title"><?= $this->base->text('account_details', 'heading') ?></div>
 						</div>
 						<table class="table card-table">
 							<tbody>
 								<tr>
 									<td width="30%">
-										<strong>Username</strong>
+                                        <strong><?= $this->base->text('username', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= $data['account_username'] ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Password</strong>
+                                        <strong><?= $this->base->text('password', 'table') ?></strong>
 									</td>
 									<td class="d-flex justify-content-between">
 										<code id="passwordHide1" class="">***************</code>
@@ -92,13 +92,13 @@
 											<?php endif ?>
 										</code>
 										<a class="btn btn-outline-primary btn-sm trigger" data-hide="passwordHide1" data-show="passwordShow1">
-											Show/Hide
+                                            <?= $this->base->text('show_hide', 'label') ?>
 										</a>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Status</strong>
+                                        <strong><?= $this->base->text('status', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] == 'pending' or $data['account_status'] == 'deactivating' or $data['account_status'] == 'reactivating') : ?>
@@ -118,49 +118,49 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>Main Domain</strong>
+                                        <strong><?= $this->base->text('main_domain', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= $data['account_main'] ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>cPanel Domain</strong>
+                                        <strong><?= $this->base->text('cpanel_domain', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= $this->mofh->get_cpanel() ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Website IP</strong>
+                                        <strong><?= $this->base->text('website_ip', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= gethostbyname($data['account_main']) ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Created on</strong>
+                                        <strong><?= $this->base->text('created_on', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= date('d-m-Y', $data['account_time']) ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
@@ -171,25 +171,25 @@
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">FTP Details</div>
+                    <div class="card-title"><?= $this->base->text('ftp_details', 'heading') ?></div>
 						</div>
 						<table class="table card-table">
 							<tbody>
 								<tr>
 									<td width="30%">
-										<strong>Username</strong>
+                                        <strong><?= $this->base->text('username', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= $data['account_username'] ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Password</strong>
+                                        <strong><?= $this->base->text('password', 'table') ?></strong>
 									</td>
 									<td class="d-flex justify-content-between">
 										<code id="passwordHide2" class="">***************</code>
@@ -201,31 +201,31 @@
 											<?php endif ?>
 										</code>
 										<a class="btn btn-outline-primary btn-sm trigger" data-hide="passwordHide2" data-show="passwordShow2">
-											Show/Hide
+                                            <?= $this->base->text('show_hide', 'label') ?>
 										</a>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Hostname</strong>
+                                        <strong><?= $this->base->text('hostname', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											ftpupload.net
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Port</strong>
+                                        <strong><?= $this->base->text('port', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											21
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
@@ -236,25 +236,25 @@
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">MySQL Details</div>
+                    <div class="card-title"><?= $this->base->text('mysql_details', 'heading') ?></div>
 						</div>
 						<table class="table card-table">
 							<tbody>
 								<tr>
 									<td width="30%">
-										<strong>Username</strong>
+                                        <strong><?= $this->base->text('username', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= $data['account_username'] ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Password</strong>
+                                        <strong><?= $this->base->text('password', 'table') ?></strong>
 									</td>
 									<td class="d-flex justify-content-between">
 										<code id="passwordHide3" class="">***************</code>
@@ -266,43 +266,43 @@
 											<?php endif ?>
 										</code>
 										<a class="btn btn-outline-primary btn-sm trigger" data-hide="passwordHide3" data-show="passwordShow3">
-											Show/Hide
+                                            <?= $this->base->text('show_hide', 'label') ?>
 										</a>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Hostname</strong>
+                                        <strong><?= $this->base->text('hostname', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= str_replace('cpanel', $data['account_sql'], $this->mofh->get_cpanel()) ?>
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Port</strong>
+                                        <strong><?= $this->base->text('port', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											3306
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Database Name</strong>
+                                        <strong><?= $this->base->text('database_name', 'table') ?></strong>
 									</td>
 									<td>
 										<?php if ($data['account_status'] === 'active') : ?>
 											<?= $data['account_username'] ?>_xxx
 										<?php else : ?>
-											Loading
+                                            <?= $this->base->text('loading', 'label') ?>
 										<?php endif ?>
 									</td>
 								</tr>
@@ -313,13 +313,13 @@
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">Account Domains</div>
+                    <div class="card-title"><?= $this->base->text('account_domains', 'heading') ?></div>
 						</div>
 						<table class="table card-table table-transparent">
 							<thead>
 								<tr>
-									<th width="90%">Domain</th>
-									<th width="10%">Action</th>
+                                    <th width="90%"><?= $this->base->text('domain', 'table') ?></th>
+                                    <th width="10%"><?= $this->base->text('action', 'table') ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -341,16 +341,16 @@
 										<?php endforeach ?>
 									<?php elseif ($domains === false) : ?>
 										<tr>
-											<td colspan="2" class="text-center">Nothing to show</td>
+                                            <td colspan="2" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 										</tr>
 									<?php else : ?>
 										<tr>
-											<td colspan="2" class="text-center">Nothing to show</td>
+                                        <td colspan="2" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 										</tr>
 									<?php endif ?>
 								<?php else : ?>
 									<tr>
-										<td colspan="2" class="text-center">Nothing to show</td>
+                                    <td colspan="2" class="text-center"><?= $this->base->text('nothing_to_show', 'paragraph') ?></td>
 									</tr>
 								<?php endif ?>
 							</tbody>

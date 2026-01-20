@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xml:lang="en">
+<html lang="<?= get_cookie('lang') === 'Traditional-Chinese' ? 'zh-Hant' : 'en' ?>" xml:lang="<?= get_cookie('lang') === 'Traditional-Chinese' ? 'zh-Hant' : 'en' ?>">
 
 <head>
 	<meta charset="utf-8" />
@@ -22,6 +22,11 @@
 <body class="border-top-wide border-primary d-flex flex-column theme-<?= get_cookie('theme') ?? 'light' ?>">
 	<div class="page page-center">
 		<div class="container-tight py-4">
-			<div class="text-center mb-4">
-				<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/logo.png" height="36" alt=""></a>
-			</div>
+		<div class="text-center mb-4">
+			<a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url() ?>assets/<?= $this->base->get_template() ?>/img/logo.png" height="36" alt=""></a>
+		</div>
+		<div class="text-center mb-2">
+			<a href="<?= base_url() ?>u/set_lang?code=english" class="text-muted me-2">English</a>
+			<span class="text-muted">|</span>
+			<a href="<?= base_url() ?>u/set_lang?code=Traditional-Chinese" class="text-muted ms-2">繁體中文</a>
+		</div>

@@ -9,6 +9,15 @@
 			</a>
 		</h1>
 		<div class="navbar-nav flex-row order-md-last">
+			<div class="nav-item dropdown me-2">
+				<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open language menu">
+					<span class="d-none d-xl-block ps-2">EN | 繁中</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+					<a href="<?= base_url() ?>u/set_lang?code=english" class="dropdown-item">English</a>
+					<a href="<?= base_url() ?>u/set_lang?code=Traditional-Chinese" class="dropdown-item">繁體中文</a>
+				</div>
+			</div>
 			<div class="nav-item">
 				<div class="d-none d-md-flex me-2">
 					<a href="<?= base_url() ?>upgrade" class="btn btn-yellow"><em class="fa fa-arrow-circle-up me-md-2"></em> <?= $this->base->text('go_premium', 'heading') ?></a>
