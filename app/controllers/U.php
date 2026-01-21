@@ -108,7 +108,7 @@ class U extends CI_Controller
 							}
 							else
 							{
-								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'success')]));
+								$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'error')]));
 								redirect('register');
 							}
 						}
@@ -154,7 +154,7 @@ class U extends CI_Controller
 						}
 						else
 						{
-							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'success')]));
+							$this->session->set_flashdata('msg', json_encode([0, $this->base->text('user_exists', 'error')]));
 							redirect('register');
 						}
 					}
@@ -1892,3 +1892,4 @@ class U extends CI_Controller
 }
 
 ?>
+
