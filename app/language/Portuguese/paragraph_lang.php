@@ -10,7 +10,7 @@ $lang['cpanel_login'] = 'Estamos redirecionando você para o cPanel.';
 $lang['account_created'] = 'Tudo foi configurado corretamente.';
 $lang['search_note'] = 'O resultado da pesquisa será exibido aqui assim que um nome de domínio for pesquisado.';
 $lang['search_error'] = 'Desculpe! este nome de domínio não está associado a nenhuma de nossas contas de hospedagem.';
-$lang['oops_note'] = 'Sua conta está pendente';
+$lang['oops_note'] = 'Oops! Algo deu errado';
 $lang['user_inactive_note'] = 'Você precisa ativar sua conta antes de começar a usar nossos serviços, por favor, verifique sua caixa de entrada de email.';
 $lang['err_404_note'] = 'Desculpe, mas a página que você está procurando não foi encontrada.';
 $lang['err_500_note'] = 'Desculpe, mas o serviço não está disponível no momento.';
@@ -22,7 +22,7 @@ $lang['account_suspended'] = 'Esta conta de hospedagem está suspensa devido ao 
 $lang['account_deactivated'] = 'Esta conta de hospedagem está desativada e será completamente removida em 30 dias.';
 $lang['account_note'] = 'Alguns dos recursos de hospedagem podem não funcionar. Pode levar até 72 horas para a conta de hospedagem funcionar corretamente.';
 $lang['no_reply_found'] = 'Nenhuma resposta encontrada.';
-$lang['ticket_closed'] = 'O chamado foi fechado. Clique';
+$lang['ticket_closed'] = 'O bilhete foi fechado. Clique';
 $lang['to_reopen'] = 'para reabrir.';
 $lang['delete_msg'] = 'Excluir o certificado aqui removerá o certificado da lista na área do cliente.
 <ul>
