@@ -141,9 +141,11 @@ CREATE TABLE `is_user` (
 	`user_password` varchar(100) NOT NULL,
 	`user_key` varchar(16) NOT NULL,
 	`user_rec` varchar(32) NOT NULL,
-	`user_status` varchar(8) NOT NULL,
-	`user_oauth` varchar(8) NOT NULL DEFAULT 'disabled',
-	`user_date` varchar(20) NOT NULL
+        `user_status` varchar(8) NOT NULL,
+        `user_oauth` varchar(8) NOT NULL DEFAULT 'disabled',
+        `user_2fa_status` varchar(10) NOT NULL DEFAULT 'disabled',
+        `user_2fa_secret` varchar(64) NULL,
+        `user_date` varchar(20) NOT NULL
 );
 
 -- Create new table `is_admin`
@@ -157,8 +159,10 @@ CREATE TABLE `is_admin` (
 	`admin_password` varchar(100) NOT NULL,
 	`admin_key` varchar(16) NOT NULL,
 	`admin_rec` varchar(32) NOT NULL,
-	`admin_status` varchar(8) NOT NULL,
-	`admin_date` varchar(20) NOT NULL
+        `admin_status` varchar(8) NOT NULL,
+        `admin_2fa_status` varchar(10) NOT NULL DEFAULT 'disabled',
+        `admin_2fa_secret` varchar(64) NULL,
+        `admin_date` varchar(20) NOT NULL
 );
 
 -- Create new table `is_email`
@@ -167,9 +171,9 @@ DROP TABLE IF EXISTS `is_email`;
 
 CREATE TABLE `is_email` (
 	`email_id` varchar(50) NOT NULL,
-	`email_subject` varchar(200) NOT NULL,
-	`email_content` varchar(10000) NOT NULL,
-	`email_for` varchar(8) NOT NULL,
+        `email_subject` varchar(200) NOT NULL,
+        `email_content` longtext NOT NULL,
+        `email_for` varchar(8) NOT NULL,
 	`email_doc` varchar(500) NOT NULL
 );
 

@@ -1,6 +1,12 @@
 {
     "require": {
         "infinityfree/mofh-client": "^0.7.1",
-        "infinityfree/acmecore": "3.1.0"
+        "infinityfree/acmecore": "3.1.0",
+        "spomky-labs/otphp": "^11.2"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.0"
+        }
     }
 }
